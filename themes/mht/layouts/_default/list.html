@@ -1,0 +1,11 @@
+{{ define "main" }}
+  <div class="latest-posts">
+    <h2 class="latest-posts-title">Posts</h2>
+    {{ range .Pages.ByPublishDate.Reverse }}
+      <a class="latest-post" href="{{ .RelPermalink }}">
+        <h3 class="latest-post-title">{{ .Title }}</h3>
+        <span class="latest-post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+      </a>
+    {{ end }}
+  </div>
+{{ end }}

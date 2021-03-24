@@ -1,0 +1,22 @@
+.footer {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 20px 0;
+  
+  .footer-links {
+    display: flex;
+
+    .footer-link {
+      display: inline-block;
+      padding: 2px;
+      margin: 5px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      color: #888;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

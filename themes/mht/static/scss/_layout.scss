@@ -1,0 +1,11 @@
+body {
+  font-family: $font-primary;
+  background-color: $bg;
+  color: $white;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}

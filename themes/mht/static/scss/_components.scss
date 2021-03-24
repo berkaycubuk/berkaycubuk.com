@@ -1,0 +1,91 @@
+.post {
+  margin: 100px 0;
+
+  &-title {
+    margin-bottom: 50px;
+  }
+
+  &-content {
+
+    p {
+      margin: 20px 0;
+    }
+
+    a {
+      color: #7c7c7c;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #fff;
+        color: #000;
+      }
+    }
+
+    img {
+      margin: 20px 0;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+  }
+}
+
+.latest-posts {
+  display: flex;
+  flex-direction: column;
+  margin: 100px 0;
+
+  &-title {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+
+    .title-link {
+      font-size: 1rem;
+      text-decoration: none;
+      font-weight: normal;
+      color: #999;
+      margin-left: 6px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .latest-post {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    padding: 5px;
+    text-decoration: none;
+    color: #666;
+    transition: padding-left 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+    &-title {
+      color: #fefefe;
+      transition: color 0.2s ease-in-out;
+    }
+
+    &-date {
+      margin-left: 10px;
+      font-size: 0.9rem;
+      color: #ccc;
+      transition: color 0.2s ease-in-out;
+    }
+
+    &:hover {
+      padding-left: 10px;
+      background-color: #fff;
+      .latest-post-title {
+        color: #000;
+      }
+
+      .latest-post-date {
+        color: #222;
+      }
+    }
+  }
+}
