@@ -1,4 +1,7 @@
 baseURL = "http://example.org/"
 languageCode = "en-us"
 title = "Berkay Çubuk"
-theme= "mht"
+theme = "mht"
+
+[params]
+  description = "Berkay Çubuk"
