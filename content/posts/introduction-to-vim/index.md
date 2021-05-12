@@ -20,7 +20,7 @@ After installing Vim, just open up your terminal and type vim. You should see so
 
 On your first try with Vim, you'll probably have a hard time exiting from it. But don't worry, I'm here to help you. Just type **:q** . This will close Vim without saving anything. If you tried to write something, you'd see an error to suppress it use **:q!**
 
-If you want to save and exit, you can use **:wq **That command writes and quit Vim.
+If you want to save and exit, you can use **:wq** That command writes and quit Vim.
 
 ## Let's start
 
@@ -28,7 +28,7 @@ Vim has three different modes. Normal, Insert, and Visual mode. In the **normal 
 
 To move your cursor up, press **k**,
 
-go down with** j**,
+go down with **j**,
 
 go left with **h**,
 
