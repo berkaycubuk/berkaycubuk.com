@@ -1,7 +1,13 @@
 {{ define "main" }}
-<section class="container">
+<section class="bg-primary p-5">
+  <div class="container">
+      <h1 class="text-white">‍{{ .Title }}</h1>
+      <div class="text-white">{{ .Date.Format "Jan 02, 2006" }}</div>
+  </div>
+</section>
+
+<section class="container my-4">
   <div class="post">
-    <h1 class="post-title">{{ .Title }}</h1>
     <div class="post-content">
       {{ .Content }}
     </div>

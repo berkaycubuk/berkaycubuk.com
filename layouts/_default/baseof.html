@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     {{- partial "head.html" . -}}
-    <body>
+    <body class="d-flex flex-column min-vh-100">
 
       <!-- header -->
       {{- partial "header.html" . -}}
       <!-- /header -->
 
       <!-- main -->
-      <main>
+      <main class="flex-fill">
       {{- block "main" . }}{{- end }}
       </main>
       <!-- /main -->

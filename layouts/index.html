@@ -1,19 +1,69 @@
 {{ define "main" }}
+
+<!-- welcome -->
 <section class="bg-primary p-5">
   <div class="container">
-      <h1 class="text-white">‍Hi, I'm Berkay Çubuk. <br /><br />I can build things from scratch.</h1>
+      <h1 class="text-white">‍Hi, I'm Berkay Çubuk.<br /><br />I can build things from scratch.</h1>
   </div>
 </section>
+<!-- /welcome -->
 
+<!-- services -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="mb-4">Services</h2>
+    <div class="row">
+
+      <div class="col-lg-4">
+        <div class="p-4 rounded shadow">
+          <div class="mx-auto w-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+            </svg>
+          </div>
+          <h4 class="text-center">E-commerce Websites</h4>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="p-4 rounded shadow">
+          <div class="mx-auto w-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z" />
+            </svg>
+          </div>
+          <h4 class="text-center">Web Applications</h4>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="p-4 rounded shadow">
+          <div class="mx-auto w-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h4 class="text-center">Custom Development</h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- /services -->
+
+<!-- latest-posts -->
 <section class="container mt-4">
   <div class="latest-posts">
-  <h2 class="latest-posts-title">Latest Posts <a class="title-link" href="{{ .Site.BaseURL }}posts">See all</a></h2>
-  {{ range first 5 ( where .Site.Pages "Type" "posts")  }}
-    <a class="latest-post" href="{{ .RelPermalink }}">
-      <h3 class="latest-post-title">{{ .Title }}</h3>
-      <span class="latest-post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
-    </a>
-  {{ end }}
+    <h2 class="mb-4">Latest Posts <a class="fs-6 title-link" href="{{ .Site.BaseURL }}posts">See all</a></h2>
+    {{ range first 5 ( where .Site.Pages "Type" "posts")  }}
+      <a class="d-block shadow p-4 my-2" style="text-decoration: none;" href="{{ .RelPermalink }}">
+        <h3 class="latest-post-title">{{ .Title }}</h3>
+        <span class="latest-post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+      </a>
+    {{ end }}
   </div>
 </section>
+<!-- /latest-posts -->
+
 {{ end }}
