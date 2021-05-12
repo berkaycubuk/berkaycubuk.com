@@ -5,7 +5,7 @@ date: 2021-04-11T13:08:21+03:00
 ---
 
 ## Phobos
-I hope in the near future I'll be releasing it. More details will come.
+{{< myiframe "https://www.youtube.com/embed/JxeL7Xg-gOI" >}}
 
 ## Kafemio
 Kafemio is a web application to help cafes. With Kafemio they can track orders, stocks and analytics.
