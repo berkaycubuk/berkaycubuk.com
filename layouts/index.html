@@ -1,14 +1,19 @@
 {{ define "main" }}
-    <div class="welcome">
-        <h1>Computer Engineer, who can talk with computers & websites 👨‍💻</h1>
-    </div>
-    <div class="latest-posts">
-    <h2 class="latest-posts-title">Latest Posts <a class="title-link" href="{{ .Site.BaseURL }}posts">See all</a></h2>
-    {{ range first 5 ( where .Site.Pages "Type" "posts")  }}
-      <a class="latest-post" href="{{ .RelPermalink }}">
-        <h3 class="latest-post-title">{{ .Title }}</h3>
-        <span class="latest-post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
-      </a>
-    {{ end }}
-    </div>
+<section class="bg-primary p-5">
+  <div class="container">
+      <h1 class="text-white">‍Hi, I'm Berkay Çubuk. <br /><br />I can build things from scratch.</h1>
+  </div>
+</section>
+
+<section class="container mt-4">
+  <div class="latest-posts">
+  <h2 class="latest-posts-title">Latest Posts <a class="title-link" href="{{ .Site.BaseURL }}posts">See all</a></h2>
+  {{ range first 5 ( where .Site.Pages "Type" "posts")  }}
+    <a class="latest-post" href="{{ .RelPermalink }}">
+      <h3 class="latest-post-title">{{ .Title }}</h3>
+      <span class="latest-post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+    </a>
+  {{ end }}
+  </div>
+</section>
 {{ end }}

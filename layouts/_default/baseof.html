@@ -2,12 +2,25 @@
 <html>
     {{- partial "head.html" . -}}
     <body>
-      <div class="container">
-        {{- partial "header.html" . -}}
-        <div id="content">
-        {{- block "main" . }}{{- end }}
-        </div>
-        {{- partial "footer.html" . -}}
-      </div>
+
+      <!-- header -->
+      {{- partial "header.html" . -}}
+      <!-- /header -->
+
+      <!-- main -->
+      <main>
+      {{- block "main" . }}{{- end }}
+      </main>
+      <!-- /main -->
+
+      <!-- footer -->
+      {{- partial "footer.html" . -}}
+      <!-- /footer -->
+
+      <!-- Scripts -->
+      <script src="{{ .Site.BaseURL }}/js/bootstrap.min.js"></script>
+
+      <!-- Additional scripts -->
+      {{- block "scripts" . }}{{- end }}
     </body>
 </html>
