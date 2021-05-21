@@ -1,0 +1,41 @@
+/* || GENERAL STYLES */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #1b2228;
+}
+
+header {
+
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+
+}
+
+/* || UTILITES */
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Welcome */
+.welcome {
+
+}
+
+.welcome-title {
+    color: #f1f1f1;
+}
+
+.welcome-description {
+    color: #f1f1f1;
+}

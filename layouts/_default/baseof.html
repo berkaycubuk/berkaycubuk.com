@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     {{- partial "head.html" . -}}
-    <body class="d-flex flex-column min-vh-100">
+    <body class="container">
 
       <!-- header -->
       {{- partial "header.html" . -}}
       <!-- /header -->
 
       <!-- main -->
-      <main class="flex-fill">
+      <main>
       {{- block "main" . }}{{- end }}
       </main>
       <!-- /main -->
@@ -16,9 +16,6 @@
       <!-- footer -->
       {{- partial "footer.html" . -}}
       <!-- /footer -->
-
-      <!-- Scripts -->
-      <script src="{{ .Site.BaseURL }}/js/bootstrap.min.js"></script>
 
       <!-- Additional scripts -->
       {{- block "scripts" . }}{{- end }}
