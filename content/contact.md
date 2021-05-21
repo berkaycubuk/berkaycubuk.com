@@ -10,6 +10,4 @@ Github: https://github.com/berkaycubuk
 
 Twitter: https://twitter.com/brkycubuk
 
-Instagram: https://instagram.com/berkaycubuk
-
 LinkedIn: https://linkedin.com/in/berkaycubuk

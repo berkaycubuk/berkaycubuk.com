@@ -2,9 +2,9 @@
 <section class="container mt-4">
   <h2 class="mb-4">Posts</h2>
   {{ range .Pages.ByPublishDate.Reverse }}
-    <a class="d-block shadow p-4 my-2" style="text-decoration: none;" href="{{ .RelPermalink }}">
-      <h3 class="latest-post-title">{{ .Title }}</h3>
-      <span class="latest-post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+    <a class="latest-post" href="{{ .RelPermalink }}">
+      <h3>{{ .Title }}</h3>
+      <span>{{ .Date.Format "Jan 02, 2006" }}</span>
     </a>
   {{ end }}
 </section>
