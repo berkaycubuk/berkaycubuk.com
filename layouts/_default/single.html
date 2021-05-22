@@ -1,16 +1,10 @@
 {{ define "main" }}
-<section class="p-5">
-  <div class="container">
-      <h1>{{ .Title }}</h1>
-      <div>{{ .Date.Format "Jan 02, 2006" }}</div>
-  </div>
+<section>
+  <h1>{{ .Title }}</h1>
+  <div>{{ .Date.Format "Jan 02, 2006" }}</div>
 </section>
 
-<section class="container my-4">
-  <div class="post">
-    <div class="post-content">
-      {{ .Content }}
-    </div>
-  </div>
+<section>
+  {{ .Content }}
 </section>
 {{ end }}

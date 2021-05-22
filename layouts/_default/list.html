@@ -1,5 +1,5 @@
 {{ define "main" }}
-<section class="container mt-4">
+<section>
   <h2 class="mb-4">Posts</h2>
   {{ range .Pages.ByPublishDate.Reverse }}
     <a class="latest-post" href="{{ .RelPermalink }}">
