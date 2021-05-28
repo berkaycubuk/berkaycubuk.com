@@ -173,6 +173,10 @@ footer {
 
 }
 
+.post-content img {
+    max-width: 100%;
+}
+
 /* || RESPONSIVE */
 
 @media only screen and (max-width: 850px) {

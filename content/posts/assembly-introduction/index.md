@@ -19,26 +19,26 @@ Assembly code is converted to **executable machine code** with an **assembler**.
 - Allows us to work with hardware specific jobs
 
 ## Simple example to print "Hello World" in assembly
+```asm
+.MODEL SMALL                          ;select your model (your project estimated size)
 
-    .MODEL SMALL                          ;select your model (your project estimated size)
-    
-    .STACK 64                             ;reserve 64 bytes of uninitialized storage
-    
-    .DATA                                 ;data segment
-      MESSAGE DB "Hello World", "$"       ;message variable with string we want to print out
-    
-    .CODE                                 ;code segment
-      MOV AX, @DATA                       ;required code block for small model
-      MOV DS, AX
-    
-      MOV AH, 09H                         ;09H for interrupt to display string
-      LEA DX, MESSAGE                     ;display the message
-      INT 21H                             ;interrupt 21H
-    
-      MOV AX, 4C00H                       ;terminate with return code (same as 4CH)
-      INT 21H                             ;interrupt 21H
-    END                                   ;exit
-    
+.STACK 64                             ;reserve 64 bytes of uninitialized storage
+
+.DATA                                 ;data segment
+  MESSAGE DB "Hello World", "$"       ;message variable with string we want to print out
+
+.CODE                                 ;code segment
+  MOV AX, @DATA                       ;required code block for small model
+  MOV DS, AX
+
+  MOV AH, 09H                         ;09H for interrupt to display string
+  LEA DX, MESSAGE                     ;display the message
+  INT 21H                             ;interrupt 21H
+
+  MOV AX, 4C00H                       ;terminate with return code (same as 4CH)
+  INT 21H                             ;interrupt 21H
+END                                   ;exit
+```
 
 Now we have to setup some sort of code enviorement to run this code. I'd like to go with DOSBox. Visit [dosbox.com](https://www.dosbox.com/download.php?main=1) to download latest version. And then we need to install assembler, for this I prefer Turbo Assembler (TASM).
 

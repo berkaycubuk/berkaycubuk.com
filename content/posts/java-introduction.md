@@ -42,24 +42,23 @@ Also we have **JDK** and **JRE**.
 Before start programming you have to setup your enviorement. It's different for each operating system so you can take quick look on the web.
 
 Start with something well known:
+```java
+public class FirstApp { // also your filename => FirstApp.java
 
-    public class FirstApp { // also your filename => FirstApp.java
-    
-      public static void main(String[] args) {  // standart structure for main function
-        // do what you want
-    
-        System.out.println("Hello World!");  // print string to the console
-    
-      }
-    
-    }
-    
-    
+  public static void main(String[] args) {  // standart structure for main function
+    // do what you want
+
+    System.out.println("Hello World!");  // print string to the console
+
+  }
+
+}
+```
 
 Output will be like:
-
-    > Hello World!
-    
+```shell
+> Hello World!
+```
 
 OK, looks cool but how did I compile and run that 🤔 If you want to learn the core concept, open your terminal and run `javac FirstApp.java`. This command will create **FirstApp.class** file. To run the program just type `java FirstApp`. That's how we compile and run java application, but in reality that's not efficent. To make it better we use IDE's. There are good alternatives such as [Eclipse](https://www.eclipse.org/downloads/), [Intellij IDEA](https://www.jetbrains.com/idea/), [Netbeans](https://netbeans.org/)...
 

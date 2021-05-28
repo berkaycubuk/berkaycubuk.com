@@ -10,40 +10,40 @@ With jump instructions we can control the program flow. There are different type
 ### Unconditional jumps
 
 With `JMP` command we can move to another point in the program.
-
-    JMP label   ;syntax of JMP instruction
-    
+```asm
+JMP label   ;syntax of JMP instruction
+```
 
 In order to run jump instruction we should have a label. Labels are simple checkpoints to describe it to computer. We can simply declare label with adding **":"** to the end. Like other languages we cannot start with a number. Here are examples for labels:
-
-    label1: MOV AX, 1
-    label2: MOV AX, 2
-    
+```asm
+label1: MOV AX, 1
+label2: MOV AX, 2
+```
 
 Now we can try what we learned on example:
+```asm
+.MODEL SMALL
 
-    .MODEL SMALL
-    
-    .STACK 64
-    
-    .CODE
-      MOV AX, 5               ;set AX to 5
-      MOV BX, 2               ;set BX to 2
-    
-      JMP label1              ;go to label1
-    
-      label2: JMP label3      ;go to label3
-    
-      label1:
-      ADD AX, BX              ;add BX to AX and store it in AX
-      JMP label2              ;go to label2
-    
-      label3:
-      MOV AX, 4C00H           ;terminate
-      INT 21H
-    
-    END                       ;exit
-    
+.STACK 64
+
+.CODE
+  MOV AX, 5               ;set AX to 5
+  MOV BX, 2               ;set BX to 2
+
+  JMP label1              ;go to label1
+
+  label2: JMP label3      ;go to label3
+
+  label1:
+  ADD AX, BX              ;add BX to AX and store it in AX
+  JMP label2              ;go to label2
+
+  label3:
+  MOV AX, 4C00H           ;terminate
+  INT 21H
+
+END                       ;exit
+```
 
 ### Short Conditional Jumps
 
@@ -60,31 +60,31 @@ InstructionDescriptionConditionJE, JZJump if equal (zero)ZF = 1JG, JNLEJump if g
 #### Jump instructions for unsigned numbers
 InstructionDescriptionConditionJE, JZJump if equal (zero)ZF = 1JA, JNBEJump if above (not below or equal)CF = 0 and ZF = 0JB, JNAE, JCJump if below (not above or equal, carry)CF = 1JAE, JNB, JNCJump if above or equal (not below, not carry)CF = 0JBE, JNAJump if below or equal (not above)CF = 1 or ZF = 1
 Ok, that's look complicated. I want to give you an example to make it understandable.
+```asm
+.MODEL SMALL
 
-    .MODEL SMALL
-    
-    .STACK 64
-    
-    .CODE
-      MOV AL, 25
-      MOV BL, 10
-      CMP AL, BL      ;compare AL with BL (I'll explain it later...)
-      JE equal        ;if AL = BL, go to equal label
-      MOV CL, "N"     ;if it's run here that means AL <> BL
-      JMP stop        ;go to stop and move 'N' to CL
-    
-      equal:          ;if it's come here
-      MOV CL, "Y"     ;move 'Y' to CL
-    
-      stop:
-      MOV AH, 02H     ;set interrupt
-      MOV DL, CL      ;set interrupt message
-      INT 21H
-    
-      MOV AX, 4C00H   ;terminate
-      INT 21H
-    
-    END               ;exit
-    
+.STACK 64
+
+.CODE
+  MOV AL, 25
+  MOV BL, 10
+  CMP AL, BL      ;compare AL with BL (I'll explain it later...)
+  JE equal        ;if AL = BL, go to equal label
+  MOV CL, "N"     ;if it's run here that means AL <> BL
+  JMP stop        ;go to stop and move 'N' to CL
+
+  equal:          ;if it's come here
+  MOV CL, "Y"     ;move 'Y' to CL
+
+  stop:
+  MOV AH, 02H     ;set interrupt
+  MOV DL, CL      ;set interrupt message
+  INT 21H
+
+  MOV AX, 4C00H   ;terminate
+  INT 21H
+
+END               ;exit
+```
 
 With this program we can compare 2 integers and tell the user are they equal or not. If you look carefully you'll see `CMP` command, it's comparing 2 integers. If they are equal we move the flow to equal label, if not we are not changing the flow.

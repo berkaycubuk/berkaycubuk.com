@@ -6,11 +6,11 @@ date_updated: 2021-02-11T19:06:15.000Z
 ---
 
 Interrupts are simply set of procedures. We're using interrupts with `INT` command. Before running an interrupt we have to store some data on stack to tell interrupt what we want to do.
-
-      MOV AH, 09H   ;function number for outputing string to the monitor
-      LEA DX, STR   ;store the string that we want to display
-      INT 21H       ;run interrupt
-    
+```asm
+  MOV AH, 09H   ;function number for outputing string to the monitor
+  LEA DX, STR   ;store the string that we want to display
+  INT 21H       ;run interrupt
+```
 
 This is an axample interrupt to display string.
 
@@ -111,40 +111,40 @@ These interrupts are just examples, there are ton of interrupts we can use.
 ## Example Code
 
 I want to show you how to use interrupts with a simple example. In this example I want to type some string and display it.
+```asm
+.MODEL SMALL
 
-    .MODEL SMALL
-    
-    .STACK 64
-    
-    .DATA
-      MESSAGE DB 'Type your string:', '$'  ;welcome message
-      USER_INPUT DB 80 DUP('$')            ;user input we want to store
-      NEWLINE DB 10,13,'$'                 ;move to new line after typing
-    
-    .CODE
-      MOV AX, @DATA                         ;required stuff
-      MOV DS, AX
-    
-      LEA SI, USER_INPUT
-    
-      MOV AH, 09H
-      LEA DX, MESSAGE                      ;display welcome message
-      INT 21H
-    
-      MOV AH, 0AH                          ;get pressed key
-      MOV DX, SI
-      INT 21H
-    
-      MOV AH, 09H                          ;display new line
-      LEA DX, NEWLINE
-      INT 21H
-    
-      MOV AH, 09H                          ;display typed string
-      LEA DX, USER_INPUT+2
-      INT 21H
-    
-      MOV AH, 4CH                          ;terminate program
-      INT 21H
-    
-    END                                    ;exit
-    
+.STACK 64
+
+.DATA
+  MESSAGE DB 'Type your string:', '$'  ;welcome message
+  USER_INPUT DB 80 DUP('$')            ;user input we want to store
+  NEWLINE DB 10,13,'$'                 ;move to new line after typing
+
+.CODE
+  MOV AX, @DATA                         ;required stuff
+  MOV DS, AX
+
+  LEA SI, USER_INPUT
+
+  MOV AH, 09H
+  LEA DX, MESSAGE                      ;display welcome message
+  INT 21H
+
+  MOV AH, 0AH                          ;get pressed key
+  MOV DX, SI
+  INT 21H
+
+  MOV AH, 09H                          ;display new line
+  LEA DX, NEWLINE
+  INT 21H
+
+  MOV AH, 09H                          ;display typed string
+  LEA DX, USER_INPUT+2
+  INT 21H
+
+  MOV AH, 4CH                          ;terminate program
+  INT 21H
+
+END                                    ;exit
+```
