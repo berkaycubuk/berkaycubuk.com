@@ -1,0 +1,11 @@
+header h1 {
+  color: var(--color-orange-bright);
+}
+
+header nav a {
+  margin-right: 10px;
+}
+
+header nav a:last-child {
+  margin-right: 0;
+}

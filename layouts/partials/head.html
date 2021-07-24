@@ -25,5 +25,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}/css/prism.css" />
-    <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}/css/main.css" />
+
+    {{ with .OutputFormats.Get "rss" -}}
+      {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
 </head>

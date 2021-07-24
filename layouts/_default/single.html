@@ -1,7 +1,10 @@
 {{ define "main" }}
 <section>
   <h1>{{ .Title }}</h1>
-  <div>{{ .Date.Format "Jan 02, 2006" }}</div>
+  {{ if isset .Params "show_date" | and (eq .Params.show_date false) }}
+  {{ else }}
+  <p>{{ .Date.Format "Jan 02, 2006" }}</p>
+  {{ end }}
 </section>
 
 <section class="post-content">

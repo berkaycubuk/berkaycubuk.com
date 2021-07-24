@@ -1,16 +1,11 @@
 {{ define "main" }}
 
-    {{ partial "welcome.html" }}
-
-    {{ partial "services.html" }}
-
     <!-- latest-posts -->
-    <section class="latest-posts">
-        <h2 class="mb-4">Latest Posts <a href="{{ .Site.BaseURL }}posts">See all</a></h2>
-        {{ range first 5 ( where .Site.Pages "Type" "posts")  }}
-          <a class="latest-post" href="{{ .RelPermalink }}">
-            <h3>{{ .Title }}</h3>
-            <span>{{ .Date.Format "Jan 02, 2006" }}</span>
+    <section class="recent-articles">
+        <h2>Recent Articles</h2>
+        {{ range first 6 (where .Site.RegularPages.ByDate.Reverse "Type" "blog") }}
+          <a href="{{ .RelPermalink }}">
+            {{ .Title }} <span class="comment">// {{ .Date.Format "2006-01-02" }}</span>
           </a>
         {{ end }}
     </section>
