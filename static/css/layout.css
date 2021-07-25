@@ -1,0 +1,19 @@
+body {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+@media (max-width: 960px) {
+  body {
+    width: calc(100% - 20px);
+  }
+}
