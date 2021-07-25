@@ -16,11 +16,11 @@ h1 {
 }
 
 h2 {
-  color: var(--color-purple-bright);
+  color: var(--color-green-bright);
 }
 
 h3, h4, h5, h6 {
-  color: var(--color-green-bright);
+  color: var(--color-purple-bright);
 }
 
 a {

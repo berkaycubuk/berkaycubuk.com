@@ -1,14 +1,20 @@
 {{ define "main" }}
 
-    <!-- latest-posts -->
+    {{- partial "welcome.html" -}}
+
+    {{- partial "projects.html" -}}
+
     <section class="recent-articles">
         <h2>Recent Articles</h2>
+        <p>I generally write about tech and programming.</p>
         {{ range first 6 (where .Site.RegularPages.ByDate.Reverse "Type" "blog") }}
-          <a href="{{ .RelPermalink }}">
+        <a href="{{ .RelPermalink }}">
             {{ .Title }} <span class="comment">// {{ .Date.Format "2006-01-02" }}</span>
-          </a>
+        </a>
         {{ end }}
+        <a href="/blog">
+            See my all articles
+        </a>
     </section>
-    <!-- /latest-posts -->
 
 {{ end }}

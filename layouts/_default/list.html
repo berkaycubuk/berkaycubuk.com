@@ -1,6 +1,6 @@
 {{ define "main" }}
 <section class="recent-articles">
-  <h2>{{ .Title }}</h2>
+  <h1>{{ .Title }}</h1>
   {{ range .Pages.ByPublishDate.Reverse }}
     <a href="{{ .RelPermalink }}">
       {{ .Title }} <span class="comment">// {{ .Date.Format "2006-01-02" }}</span>
