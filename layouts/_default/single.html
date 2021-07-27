@@ -3,7 +3,7 @@
   <h1>{{ .Title }}</h1>
   {{ if isset .Params "show_date" | and (eq .Params.show_date false) }}
   {{ else }}
-  <p>{{ .Date.Format "Jan 02, 2006" }}</p>
+  <p class="comment">// Created at: {{ .Date.Format "Jan 02, 2006" }}</p>
   {{ end }}
 </section>
 
