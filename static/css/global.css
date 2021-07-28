@@ -48,6 +48,17 @@ hr {
   border: none;
 }
 
+pre {
+  padding: 10px;
+  background-color: var(--color-dark1);
+  overflow: auto;
+}
+
+code {
+  font-style: italic;
+  color: var(--color-gray);
+}
+
 .comment {
   color: var(--color-gray);
 }

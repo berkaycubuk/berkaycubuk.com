@@ -1,6 +1,7 @@
 baseURL = "https://berkaycubuk.com/"
 languageCode = "en-us"
 title = "Berkay Çubuk"
+enableEmoji = true
 
 [params]
   description = "Computer Engineer, who can talk with computers & websites"
