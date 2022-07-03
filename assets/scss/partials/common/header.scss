@@ -1,0 +1,41 @@
+.header {
+    position: relative;
+    height: 120px; 
+    z-index: 99;
+    background-color: rgba(0, 0, 0, .81);
+}
+
+.header-container {
+    max-width: 1400px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Prata';
+    color: #F2CCB7;
+    background-color: #A80000;
+}
+
+.header-nav {
+    display: flex;
+    gap: 25px;
+
+    &-item {
+        font-size: 24px;
+        font-family: 'Inter';
+        color: #fff;
+    }
+}

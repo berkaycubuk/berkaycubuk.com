@@ -1,0 +1,32 @@
+.footer {
+    background-color: #000;
+}
+
+.footer-container {
+    max-width: 1400px;
+    width: 100%;
+    min-height: 250px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-copyright {
+    font-size: 24px;
+    font-family: 'Inter';
+    color: #fff;
+}
+
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 18px;
+
+    &-item {
+        font-size: 24px;
+        font-family: 'Inter';
+        color: #fff;
+    }
+}

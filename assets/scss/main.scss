@@ -1,4 +1,5 @@
 @import "variables.scss";
+@import "globals.scss";
 
 /* Common */
 @import "partials/common/header.scss";
@@ -6,4 +7,5 @@
 /* End Common */
 
 /* Home */
+@import "partials/home/welcome.scss";
 /* End Home */

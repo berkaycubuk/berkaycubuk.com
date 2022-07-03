@@ -1,0 +1,52 @@
+.welcome {
+    position: relative;
+    height: calc(100vh - $size-header-height);
+    background-color: #000;
+}
+
+.welcome-container {
+    position: relative;
+    max-width: 1400px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 1;
+}
+
+.welcome-title {
+    margin-top: 156px;
+    font-size: 60px;
+    font-family: 'Inter';
+    color: #fff;
+}
+
+.welcome-paragraph {
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: ligher;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.welcome-button {
+    cursor: pointer;
+    font-size: 24px;
+    font-family: 'Inter';
+    padding: 16px 40px;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.welcome-cover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
