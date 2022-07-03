@@ -1,0 +1,42 @@
+.about {
+    background-color: #000000;
+}
+
+.about-container {
+    max-width: $size-screen-xl;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 248px;
+    padding-bottom: 386px;
+}
+
+.about-title {
+    font-family: 'Inter';
+    font-size: 80px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 80px;
+}
+
+.about-paragraph {
+    font-family: 'Inter';
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 70px;
+    color: #ffffff;
+    margin-bottom: 80px;
+}
+
+.about-links {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.about-link {
+    font-family: 'Inter';
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 70px;
+    color: #ffffff;
+}
