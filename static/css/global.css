@@ -1,13 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap');
-
 * {
-  font-family: 'Inconsolata', monospace;
   color: var(--color-fg);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', sans-serif;
 }
 
 h1 {
@@ -25,8 +20,7 @@ h3, h4, h5, h6 {
 
 a {
   text-decoration: none;
-  font-family: 'Inconsolata', monospace;
-  color: var(--color-blue-bright);
+  /*color: var(--color-blue-bright); */
 }
 
 a:hover {
@@ -34,8 +28,7 @@ a:hover {
 }
 
 p {
-  font-family: 'Inconsolata', monospace;
-  color: var(--color-fg);
+  /*color: var(--color-fg);*/
 }
 
 img {

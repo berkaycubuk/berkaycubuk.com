@@ -1,10 +1,12 @@
 {{ define "main" }}
-<section class="recent-articles">
-  <h1>{{ .Title }}</h1>
-  {{ range .Pages.ByPublishDate.Reverse }}
-    <a href="{{ .RelPermalink }}">
-      {{ .Title }} <span class="comment">// {{ .Date.Format "2006-01-02" }}</span>
-    </a>
-  {{ end }}
+<section class="my-8">
+  <h1 class="sm:text-4xl text-2xl text-blue-400 font-semibold mb-4">{{ .Title }}</h1>
+  <div class="flex flex-col gap-2">
+    {{ range .Pages.ByPublishDate.Reverse }}
+      <a href="{{ .RelPermalink }}">
+        {{ .Title }} <span class="text-zinc-400">// {{ .Date.Format "2006-01-02" }}</span>
+      </a>
+    {{ end }}
+  </div>
 </section>
 {{ end }}

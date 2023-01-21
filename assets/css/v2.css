@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    a {
+        @apply text-blue-400;
+    }
+
+    p {
+        @apply text-zinc-400 text-lg;
+    }
+}
