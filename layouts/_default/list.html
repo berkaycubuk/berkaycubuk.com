@@ -3,7 +3,7 @@
   <h1 class="sm:text-4xl text-2xl text-blue-400 font-semibold mb-4">{{ .Title }}</h1>
   <div class="flex flex-col gap-2">
     {{ range .Pages.ByPublishDate.Reverse }}
-      <a href="{{ .RelPermalink }}">
+      <a href="{{ .RelPermalink }}" class="inline-block w-fit">
         {{ .Title }} <span class="text-zinc-400">// {{ .Date.Format "2006-01-02" }}</span>
       </a>
     {{ end }}

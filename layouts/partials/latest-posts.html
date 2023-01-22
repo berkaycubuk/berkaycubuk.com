@@ -1,9 +1,9 @@
 <section class="my-6">
-    <h2 class="sm:text-3xl text-xl text-zinc-300 font-semibold mb-2">Latest Posts</h2>
+    <h2>Latest Posts</h2>
     <p class="mb-2 text-zinc-400">I generally write about tech and programming.</p>
     <div class="flex flex-col gap-2">
         {{ range first 6 (where .Site.RegularPages.ByDate.Reverse "Type" "blog") }}
-        <a href="{{ .RelPermalink }}" class="text-blue-400">
+        <a href="{{ .RelPermalink }}" class="inline-block w-fit text-blue-400">
             {{ .Title }} <span class="text-zinc-500">// {{ .Date.Format "2006-01-02" }}</span>
         </a>
         {{ end }}

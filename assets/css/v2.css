@@ -3,11 +3,30 @@
 @tailwind utilities;
 
 @layer components {
+    * {
+        @apply text-zinc-400;
+    }
     a {
         @apply text-blue-400;
     }
 
     p {
-        @apply text-zinc-400 text-lg;
+        @apply text-zinc-400 text-lg mb-6;
+    }
+
+    h1 {
+        @apply text-2xl sm:text-4xl text-blue-400 font-semibold mb-4;
+    }
+
+    h2 {
+        @apply text-xl sm:text-3xl text-zinc-300 font-semibold mt-14 mb-6;
+    }
+
+    h3 {
+        @apply text-lg sm:text-2xl text-zinc-300 font-semibold mt-10 mb-2;
+    }
+
+    strong {
+        @apply text-zinc-300;
     }
 }
