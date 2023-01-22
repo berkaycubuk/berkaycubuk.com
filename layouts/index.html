@@ -4,17 +4,6 @@
 
     {{- partial "projects.html" -}}
 
-    <section class="recent-articles">
-        <h2>Recent Articles</h2>
-        <p>I generally write about tech and programming.</p>
-        {{ range first 6 (where .Site.RegularPages.ByDate.Reverse "Type" "blog") }}
-        <a href="{{ .RelPermalink }}">
-            {{ .Title }} <span class="comment">// {{ .Date.Format "2006-01-02" }}</span>
-        </a>
-        {{ end }}
-        <a href="/blog">
-            See my all articles
-        </a>
-    </section>
+    {{- partial "latest-posts.html" . -}}
 
 {{ end }}

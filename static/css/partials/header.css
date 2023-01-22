@@ -6,6 +6,7 @@ header .title {
   color: var(--color-yellow-bright);
 }
 
+/*
 header nav a {
   margin-right: 10px;
 }
@@ -13,3 +14,4 @@ header nav a {
 header nav a:last-child {
   margin-right: 0;
 }
+*/

@@ -1,0 +1,24 @@
+{
+  "name": "berkaycubuk.com",
+  "version": "1.0.0",
+  "description": "Welcome to my personal website repository. It's 100% open-source so you can steal it without asking me :^)",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npx tailwindcss -i ./assets/css/v2.css -o ./static/css/v2.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berkaycubuk/berkaycubuk.com.git"
+  },
+  "keywords": [],
+  "author": "Berkay Çubuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/berkaycubuk/berkaycubuk.com/issues"
+  },
+  "homepage": "https://github.com/berkaycubuk/berkaycubuk.com#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
+}
