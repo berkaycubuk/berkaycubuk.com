@@ -1,11 +1,14 @@
-<header class="py-4 px-6 my-4 bg-zinc-800 rounded-xl">
-    <div class="flex sm:flex-row flex-col sm:gap-0 gap-4 justify-between items-center">
-        <a href="/" class="text-zinc-200 hover:text-blue-400 text-lg md:text-xl font-bold">Berkay Çubuk</a>
-        <nav class="flex items-center gap-[26px]">
-            <a href="/" class="text-zinc-300 hover:text-blue-400 font-semibold">Home</a>
-            <a href="/blog" class="text-zinc-300 hover:text-blue-400 font-semibold">Blog</a>
-            <a href="/about" class="text-zinc-300 hover:text-blue-400 font-semibold">About</a>
-            <a href="/contact" class="text-zinc-300 hover:text-blue-400 font-semibold">Contact</a>
-        </nav>
+<header class="w-full py-6 fixed top-0 left-0 bg-[#0f0f0f]">
+    <div class="container mx-auto px-4">
+        <div class="flex sm:flex-row flex-col sm:gap-0 gap-4 justify-between items-center">
+            <a href="/" class="text-xl md:text-xl font-medium">{{ .Site.Title }}</a>
+            <nav class="flex items-center gap-[30px]">
+                {{ range .Site.Menus.main }}
+                <a href="{{ .URL }}" class="">{{ .Name }}</a>
+                {{ end }}
+            </nav>
+        </div>
     </div>
 </header>
+
+<div style="height: 120px;"></div>

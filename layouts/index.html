@@ -1,9 +1,13 @@
 {{ define "main" }}
 
-    {{- partial "welcome.html" -}}
+    {{- partial "welcome.html" . -}}
 
-    {{- partial "projects.html" -}}
+    <div style="height: 200px;"></div>
 
-    {{- partial "latest-posts.html" . -}}
+    {{- partial "projects.html" . -}}
+
+    <div style="height: 200px;"></div>
+
+    {{- partial "work.html" . -}}
 
 {{ end }}

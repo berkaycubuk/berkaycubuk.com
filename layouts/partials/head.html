@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ $title := print .Title " - " .Site.Title }}
     {{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
-    <title>🐧 {{ $title }}</title>
+    <title>{{ $title }}</title>
     <meta property="og:title" content="{{ $title }}">
     <meta name="twitter:title" content="{{ $title }}">
     <meta itemprop="name" content="{{ $title }}">
@@ -25,8 +25,10 @@
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}/css/v2.css" />
+    <!--
     <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}/css/prism.css" />
     <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}/css/main.css" />
+    -->
 
     {{ with .OutputFormats.Get "rss" -}}
       {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}

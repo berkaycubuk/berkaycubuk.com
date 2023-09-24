@@ -3,7 +3,7 @@ module.exports = {
   content: ["./layouts/**/*.html"],
   theme: {
     fontFamily: {
-      'sans': ['Inter', 'sans-serif'],
+      'sans': ['Arial', 'sans-serif'],
     },
     extend: {},
   },

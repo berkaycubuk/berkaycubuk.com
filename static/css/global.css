@@ -5,9 +5,11 @@ a {
   text-decoration: none;
 }
 
+/*
 a:hover {
   color: var(--color-red);
 }
+*/
 
 img {
   max-width: 100%;

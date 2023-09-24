@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     {{- partial "head.html" . -}}
-    <body class="bg-zinc-900">
+    <body class="flex flex-col min-h-screen text-white bg-[#0f0f0f] container mx-auto">
 
       <!-- header -->
       {{- partial "header.html" . -}}
       <!-- /header -->
 
       <!-- main -->
-      <main>
+      <main style="flex: 1;" class="px-4">
       {{- block "main" . }}{{- end }}
       </main>
       <!-- /main -->
