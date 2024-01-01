@@ -7,7 +7,7 @@
   {{ .Content }}
   </div>
 
-  <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-4">
+  <div class="grid grid-cols-1 mt-10 gap-4">
 
     {{ range .Pages.ByPublishDate.Reverse }}
     <a href="{{ .RelPermalink }}" class="p-6 h-fit rounded-2xl bg-stone-900 hover:bg-stone-800 transition-colors">

@@ -3,10 +3,10 @@ languageCode = "en-us"
 title = "Berkay Çubuk"
 enableEmoji = true
 
-[[menus.main]]
-  name = 'Services'
-  url = '/services'
-  weight = 1
+#[[menus.main]]
+#  name = 'Services'
+#  url = '/services'
+#  weight = 1
 [[menus.main]]
   name = 'Work'
   url = '/work'
@@ -19,13 +19,13 @@ enableEmoji = true
   name = 'About'
   url = '/about'
   weight = 4
-[[menus.main]]
-  name = 'Contact'
-  url = '/contact'
-  weight = 5
+#[[menus.main]]
+#  name = 'Contact'
+#  url = '/contact'
+#  weight = 5
 
 [params]
-  description = "I offer web based software development solutions for your problems."
+  description = "I solve problems"
   linkedin = 'https://www.linkedin.com/in/berkaycubuk/'
   twitter = 'https://twitter.com/brkycubuk'
   youtube = 'https://www.youtube.com/@berkaycubuk'
