@@ -21,7 +21,9 @@
         <img class="rounded-xl mt-2" src="{{ .Params.Image }}" />
         {{ end }}
 
+        {{ if .Date }}
         <div class="mt-2 text-stone-500">{{ .Date.Format "Jan 02, 2006" }}</div>
+        {{ end }}
     </a>
     {{ end }}
 

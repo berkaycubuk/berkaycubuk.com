@@ -8,8 +8,8 @@ enableEmoji = true
 #  url = '/services'
 #  weight = 1
 [[menus.main]]
-  name = 'Work'
-  url = '/work'
+  name = 'Projects'
+  url = '/projects'
   weight = 2
 [[menus.main]]
   name = 'Blog'

@@ -3,8 +3,7 @@
 
 				<h1 class="sm:text-4xl text-2xl mb-4">{{ .Title }}</h1>
 
-				{{ if isset .Params "show_date" | and (eq .Params.show_date false) }}
-				{{ else }}
+				{{ if .Date }}
 				<p class="text-zinc-400 text-base">{{ .Date.Format "Jan 02, 2006" }}</p>
 				{{ end }}
 
