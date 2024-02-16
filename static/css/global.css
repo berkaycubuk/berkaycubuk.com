@@ -1,0 +1,37 @@
+h1, h2, h3, h4, h5, h6 {
+}
+
+a {
+  text-decoration: none;
+}
+
+/*
+a:hover {
+  color: var(--color-red);
+}
+*/
+
+img {
+  max-width: 100%;
+}
+
+hr {
+  height: 1px;
+  background-color: var(--color-fg);
+  border: none;
+}
+
+pre {
+  padding: 10px;
+  background-color: var(--color-dark1);
+  overflow: auto;
+}
+
+code {
+  font-style: italic;
+  color: var(--color-gray);
+}
+
+.comment {
+  color: var(--color-gray);
+}

@@ -1,0 +1,9 @@
+.recent-articles a {
+  display: block;
+  width: fit-content;
+  margin: 0.2em 0;
+  font-size: 1.2rem;
+}
+
+.recent-articles a span {
+}

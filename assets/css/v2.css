@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content p {
+				@apply my-5 text-stone-100;
+}
+
+.content ul {
+				@apply my-5 list-disc list-inside;
+}
+
+.content ul li {
+				@apply my-2;
+}
+
+.content a {
+		@apply text-blue-400;
+}
+
+.content a:hover {
+		text-decoration: underline;
+}
+
+.content h3 {
+		@apply my-8 text-xl font-bold;
+}
+
+.content blockquote {
+		padding-left: 18px;
+		border-left: 3px solid #a8a29e;
+}
+
+.content blockquote p {
+		font-style: italic;
+		@apply text-stone-400;
+}
+
+.content hr {
+		margin: 40px 0;
+}

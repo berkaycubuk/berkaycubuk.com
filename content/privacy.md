@@ -1,1 +1,8 @@
-LS0tDQp0aXRsZTogIlByaXZhY3kiDQpkZXNjcmlwdGlvbjogIlByaXZhY3kiDQpkYXRlOiAyMDIxLTAzLTIzVDIxOjQ2OjQwKzAzOjAwDQpzaG93X2RhdGU6IGZhbHNlDQotLS0NCg0KVGhpcyB3ZWJzaXRlIGRvZXMgbm90IGNvbGxlY3QgdmlzaXRvciBkYXRhLiBJdCdzIDEwMCUgb3Blbi1zb3VyY2UgYW5kIGZyZWUgc29mdHdhcmUgbGljZW5zZWQgdW5kZXIgW0dQTC0zLjAgTGljZW5zZV0oaHR0cHM6Ly9naXRodWIuY29tL2JlcmtheWN1YnVrL2JlcmtheWN1YnVrLmNvbS9ibG9iL21haW4vTElDRU5TRSkuIFlvdSBjYW4gY2hlY2tvdXQgW3RoZSBwcm9qZWN0IHJlcG9dKGh0dHBzOi8vZ2l0aHViLmNvbS9iZXJrYXljdWJ1ay9iZXJrYXljdWJ1ay5jb20pIHRvIHNlZSBhbGwgdGhlIGNvZGUuDQoNCi0tIFRFU1QgTUVTU0FHRSAtLQ==
+---
+title: "Privacy"
+description: "Privacy"
+date: 2021-03-23T21:46:40+03:00
+show_date: false
+---
+
+This website does not collect visitor data. It's 100% open-source and free software licensed under [GPL-3.0 License](https://github.com/berkaycubuk/berkaycubuk.com/blob/main/LICENSE). You can checkout [the project repo](https://github.com/berkaycubuk/berkaycubuk.com) to see all the code.

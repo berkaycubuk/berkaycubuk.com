@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{- partial "head.html" . -}}
+    <body class="flex flex-col min-h-screen text-white bg-[#0f0f0f] max-w-[800px] mx-auto">
+
+      <!-- header -->
+      {{- partial "header.html" . -}}
+      <!-- /header -->
+
+      <!-- main -->
+      <main style="flex: 1;" class="px-4">
+      {{- block "main" . }}{{- end }}
+      </main>
+      <!-- /main -->
+
+      <!-- footer -->
+      {{- partial "footer.html" . -}}
+      <!-- /footer -->
+
+      <!-- Additional scripts -->
+      {{- block "scripts" . }}{{- end }}
+
+      <!-- Scripts -->
+      <script src="{{ .Site.BaseURL }}js/prism.js"></script>
+    </body>
+</html>
