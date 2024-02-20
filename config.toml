@@ -25,7 +25,7 @@ enableEmoji = true
 #  weight = 5
 
 [params]
-  description = "I solve problems"
+  description = "Problem Solver"
   linkedin = 'https://www.linkedin.com/in/berkaycubuk/'
   twitter = 'https://twitter.com/brkycubuk'
   youtube = 'https://www.youtube.com/@berkaycubuk'
