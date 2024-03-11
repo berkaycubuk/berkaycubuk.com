@@ -1,5 +1,6 @@
 ---
 title: "Emojy"
+website: "emojy.netlify.app"
 ---
 
 Website: [github](https://github.com/berkaycubuk/emojy-vscode-extension)

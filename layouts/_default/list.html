@@ -13,8 +13,8 @@
     <a href="{{ .RelPermalink }}" class="p-6 h-fit rounded-2xl bg-stone-900 hover:bg-stone-800 transition-colors">
         <div class="text-xl font-medium">{{ .Title }}</div>
 
-        {{ if isset .Params "Description" }}
-        <p class="text-stone-500 mt-2">{{ .Params.Description }}</p>
+        {{ if isset .Params "website" }}
+        <p class="text-stone-500 mt-2">{{ .Params.website }}</p>
         {{ end }}
 
         {{ if isset .Params "Image" }}
