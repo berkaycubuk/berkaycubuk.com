@@ -1,13 +1,44 @@
-<header>
-	<div class="container mx-auto px-4 py-8 flex justify-between">
+<header class="relative">
+	<div class="container mx-auto px-4 py-8 flex md:gap-0 gap-4 items-center justify-between">
 		<a class="font-bold text-xl" href="/">
 			Berkay Çubuk
 		</a>
-		<nav class="flex gap-6 items-center text-md">
+		<nav class="hidden md:flex gap-6 items-center text-md">
 			<a href="/projects">Projects</a>
 			<a href="/blog">Blog</a>
 			<a href="/about">About</a>
 			<a class="block w-fit px-3 py-2 bg-blue-600 text-white text-sm font rounded-lg" href="">Book a Call</a>
 		</nav>
+		<div class="md:hidden cursor-pointer" onclick="toggleMenu()">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+		</div>
+	</div>
+
+	<div id="mobile-menu" class="w-full top-22 left-0 absolute md:hidden bg-white transition-all duration-500">
+		<div class="container mx-auto px-4 py-8">
+			<nav class="flex flex-col gap-4 text-xl">
+				<a href="/projects">Projects</a>
+				<a href="/blog">Blog</a>
+				<a href="/about">About</a>
+				<a class="block w-fit px-3 py-2 bg-blue-600 text-white text-md font rounded-lg" href="">Book a Call</a>
+			</nav>
+		</div>
 	</div>
 </header>
+
+<script is:inline>
+const mobileMenu = document.getElementById("mobile-menu")
+
+function toggleMenu() {
+	const bottomClass = "left-0"
+	const topClass = "-left-full"
+	const isOpen = mobileMenu.classList.contains(bottomClass)
+	if (isOpen) {
+		mobileMenu.classList.remove(bottomClass)
+		mobileMenu.classList.add(topClass)
+	} else {
+		mobileMenu.classList.remove(topClass)
+		mobileMenu.classList.add(bottomClass)
+	}
+}
+</script>
