@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import CTA from '../../components/CTA.astro'
+
+const blogEntries = await getCollection('projects')
+---
+
+<Layout title="Projects" description="">
+
+	<section class="py-20">
+		<h1 class="text-5xl font-bold text-neutral-900 mb-6">Projects</h1>
+
+		<div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-8 mt-20">
+			{blogEntries.map((entry: any) => (
+				<a href={`/projects/${entry.slug}`} class="block p-8 rounded-xl bg-white">
+					<img class="mb-4 rounded" src="https://images.unsplash.com/photo-1597138804456-e7dca7f59d54?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+					<h2 class="text-xl font-medium text-neutral-900">{entry.data.title}</h2>
+				</a>
+			))}
+		</div>
+	</section>
+
+	<CTA />
+
+</Layout>

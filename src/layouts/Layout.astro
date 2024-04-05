@@ -19,9 +19,9 @@ import Footer from '../components/Footer.astro'
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>{`${title}${title ? ' - ' : ''}Berkay Çubuk`}</title>
 	</head>
-	<body class="bg-neutral-100">
+	<body class="flex flex-col min-h-screen bg-neutral-100">
 		<Header />
-		<div class="container mx-auto px-4">
+		<div class="container mx-auto px-4 flex-1">
 			<slot />
 		</div>
 		<Footer />

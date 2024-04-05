@@ -1,0 +1,3 @@
+<div class="prose">
+	<slot />
+</div>
