@@ -11,12 +11,16 @@ const blogEntries = await getCollection('blog')
 	<section class="py-20">
 		<h1 class="text-5xl font-bold text-neutral-900 mb-6">Blog</h1>
 
-		<div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-8 mt-20">
-			{blogEntries.map((entry: any) => (
+		<div class="grid lg:grid-cols-3 sm:grid-cols-2 md:gap-8 gap-4 mt-20">
+			{blogEntries.sort((a, b) => b.data.date - a.data.date).map((entry: any) => (
 				<a href={`/blog/${entry.slug}`} class="block p-8 rounded-xl bg-white">
-					<img class="mb-4 rounded" src="https://images.unsplash.com/photo-1597138804456-e7dca7f59d54?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+					{entry.data.thumbnail ?
+					<img class="mb-4 rounded" src={entry.data.thumbnail} />
+					: 
+					<div></div>
+					}
 					<h2 class="text-xl font-medium text-neutral-900 mb-1">{entry.data.title}</h2>
-					<div class="text-sm text-neutral-600 font-light">{entry.data.publishedDate.toDateString()}</div>
+					<div class="text-sm text-neutral-600 font-light">{entry.data.date.toDateString()}</div>
 				</a>
 			))}
 		</div>

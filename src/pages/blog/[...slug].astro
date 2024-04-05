@@ -20,7 +20,7 @@ const { Content } = await entry.render()
 	<section class="py-20">
 		<h1 class="text-5xl font-bold text-neutral-900 mb-5">{entry.data.title}</h1>
 
-		<div class="text-lg font-light text-neutral-600 mb-10">{entry.data.publishedDate.toDateString()}</div>
+		<div class="text-lg font-light text-neutral-600 mb-10">{entry.data.date.toDateString()}</div>
 
 		<Prose>
 			<Content />
