@@ -1,0 +1,44 @@
+<script>
+	let waitlistForm = document.querySelector('#waitlist-form')
+	let emailInput = document.querySelector('#email-input')
+	let captchaContainer = document.querySelector('#captcha-container')
+
+	emailInput.addEventListener('input', (e) => {
+		const value = e.target.value
+
+		if (value != '') {
+			captchaContainer.style.display = 'block'
+			return
+		}
+	})
+
+	waitlistForm.addEventListener('submit', (e) => {
+		let captcha = document.querySelector('#g-recaptcha-response')
+		if (captcha.value == '') {
+			e.preventDefault()
+			alert('Please check the recaptcha!')
+		}
+	})
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<section class="container mx-auto flex lg:flex-row flex-col items-center gap-16 px-6 pt-20 md:pt-40 pb-20">
+	<div class="flex-1 flex flex-col gap-6">
+		<h1 class="sm:text-6xl text-4xl font-bold text-neutral-900">Simplified Hugo</h1>
+		<p class="text-xl leading-relaxed font-light text-neutral-700">Learning Hugo can be hard, and I gone through that stage too! Now I am giving away what I learned after using Hugo for bunch of projects. Simplified Hugo is the book you're looking for if you want to learn all the stuff that you need to build a website from scratch.</p>
+		<p class="text-xl leading-relaxed font-light text-neutral-700">In my weekends and nights, I'm writing this book and planning to release it when it's ready. If you want to be notified when it's available, feel free to join the waitlist.</p>
+		<div>
+			<form id="waitlist-form" method="POST" action="https://staticninja.com/api/form-submit/S2ktlIduJTUL" class="flex md:flex-row flex-col gap-4 items-center">
+				<input id="email-input" class="px-3 py-2 rounded outline-none border border-neutral-200 w-full md:w-auto" type="email" name="email" placeholder="Email address" required />
+				<div id="captcha-container" style="display: none;">
+				<div class="g-recaptcha" data-sitekey="6LcFwywpAAAAAEn2gMJR1TtKXMtssRqJBC48fbH-"></div>
+				</div>
+				<button class="block md:w-fit w-full text-center px-5 py-2 bg-blue-600 text-white text-lg rounded">Join the waitlist</button>
+			</form>
+		</div>
+	</div>
+	<div class="flex-1">
+		<img alt="Berkay Çubuk" class="ml-auto w-full max-w-[450px] rotate-6" src="/images/simplified-hugo-book-slim.png" />
+	</div>
+</section>

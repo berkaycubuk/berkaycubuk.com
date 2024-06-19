@@ -1,58 +1,42 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Hero from '../components/simplified-hugo/Hero.astro'
+import Intro from '../components/simplified-hugo/Intro.astro'
+import Why from '../components/simplified-hugo/Why.astro'
+import Sample from '../components/simplified-hugo/Sample.astro'
+import FAQ from '../components/simplified-hugo/FAQ.astro'
 ---
 
-<script>
-	let waitlistForm = document.querySelector('#waitlist-form')
-	let emailInput = document.querySelector('#email-input')
-	let captchaContainer = document.querySelector('#captcha-container')
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>Simplified Hugo</title>
 
-	emailInput.addEventListener('input', (e) => {
-		const value = e.target.value
+		<script async src="https://analytics.bizmovo.com/script.js" data-website-id="3b8e1917-dc75-4ca0-bfe0-09e18537470d"></script>
+	</head>
+	<body class="flex flex-col min-h-screen bg-neutral-100">
+		<Hero />
 
-		if (value != '') {
-			captchaContainer.style.display = 'block'
-			return
-		}
-	})
+		<Intro />
 
-	waitlistForm.addEventListener('submit', (e) => {
-		let captcha = document.querySelector('#g-recaptcha-response')
-		if (captcha.value == '') {
-			e.preventDefault()
-			alert('Please check the recaptcha!')
-		}
-	})
-</script>
+		<Why />
 
-<Layout title="Simplified Hugo" description="">
+		<Sample />
 
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+		<FAQ />
+	</body>
+</html>
 
-	<section class="flex lg:flex-row flex-col items-center gap-16 py-8">
-		<div class="flex-1 flex flex-col gap-6">
-			<h1 class="sm:text-6xl text-4xl font-bold text-neutral-900">Simplified Hugo</h1>
-			<p class="text-xl leading-relaxed font-light text-neutral-700">Learning Hugo can be hard, and I gone through that stage too! Now I am giving away what I learned after using Hugo for bunch of projects. Simplified Hugo is the book you're looking for if you want to learn all the stuff that you need to build a website from scratch.</p>
-			<p class="text-xl leading-relaxed font-light text-neutral-700">In my weekends and nights, I'm writing this book and planning to release it when it's ready. If you want to be notified when it's available, feel free to join the waitlist.</p>
-			<div>
-				<form id="waitlist-form" method="POST" action="https://staticninja.com/api/form-submit/S2ktlIduJTUL" class="flex md:flex-row flex-col gap-4 items-center">
-					<input id="email-input" class="px-3 py-2 rounded outline-none border border-neutral-200 w-full md:w-auto" type="email" name="email" placeholder="Email address" required />
-					<div id="captcha-container" style="display: none;">
-					<div class="g-recaptcha" data-sitekey="6LcFwywpAAAAAEn2gMJR1TtKXMtssRqJBC48fbH-"></div>
-					</div>
-					<button class="block md:w-fit w-full text-center px-5 py-2 bg-blue-600 text-white text-lg rounded">Join</button>
-				</form>
-			</div>
-		</div>
-		<div class="flex-1">
-			<img alt="Berkay Çubuk" class="ml-auto w-full max-w-[600px]" class="rounded-xl" src="/images/simplified-hugo-book.png" />
-		</div>
-	</section>
+<style is:global>
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
 
-	<section class="py-10">
-
-		<iframe src="https://www.youtube.com/embed/J4JL4q7saBM?si=rzJehoGJmfy57j0E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="max-w-[800px] h-[460px] w-full mx-auto"></iframe>
-
-	</section>
-
-</Layout>
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+</style>
