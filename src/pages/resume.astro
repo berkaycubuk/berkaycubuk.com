@@ -3,19 +3,19 @@ const email = "berkay@berkaycubuk.com"
 const socials = [
 	{
 		name: 'LinkedIn',
-		link: '/',
+		link: 'https://www.linkedin.com/in/berkaycubuk/',
 	},
 	{
 		name: 'GitHub',
-		link: '/',
+		link: 'https://github.com/berkaycubuk',
 	},
 	{
 		name: 'Website',
-		link: '/',
+		link: 'https://berkaycubuk.com',
 	},
 	{
 		name: 'YouTube',
-		link: '/',
+		link: 'https://www.youtube.com/@berkaycubuk',
 	},
 ]
 ---
@@ -47,13 +47,13 @@ const socials = [
 						if (index != 0) {
 							return (
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dot"><circle cx="12.1" cy="12.1" r="1"/></svg>
-								<a href={item.link} class="flex items-center gap-2 font-light underline">
+								<a href={item.link} target="_blank" class="flex items-center gap-2 font-light underline">
 								{item.name}
 								</a>
 							)
 						}
 						return (
-							<a href={item.link} class="flex items-center gap-2 font-light underline">
+							<a href={item.link} target="_blank" class="flex items-center gap-2 font-light underline">
 							{item.name}
 							</a>
 						)
@@ -81,7 +81,7 @@ const socials = [
 									<ul class="font-light text-sm text-neutral-500 mt-1">
 										<li class="flex items-center">
 											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dot"><circle cx="12.1" cy="12.1" r="1"/></svg>
-											Developed custom projects for client needs.
+											Developed custom projects for client all over the world.
 										</li>
 										<li class="flex items-center">
 											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dot"><circle cx="12.1" cy="12.1" r="1"/></svg>
@@ -90,6 +90,10 @@ const socials = [
 										<li class="flex items-center">
 											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dot"><circle cx="12.1" cy="12.1" r="1"/></svg>
 											Learned to communicate effectively and split the problem into smaller chunks.
+										</li>
+										<li class="flex items-center">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dot"><circle cx="12.1" cy="12.1" r="1"/></svg>
+											Had a chance to experience team management for different projects.
 										</li>
 									</ul>
 								</div>
