@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
+import { Image } from 'astro:assets'
 
 const projects = await getCollection('projects')
 ---
@@ -29,7 +30,16 @@ const projects = await getCollection('projects')
 				) : ''}
 			</div>
 			<a href={'/projects/' + project.slug} class="hover:scale-105 transition-all duration-300 hover:shadow-lg">
+				<Image
+					src={project.data.image}
+					alt={project.data.title}
+					width="600"
+					height="300"
+					class="rounded w-full"
+				/>
+				<!--
 				<img class="rounded" src={project.data.image} alt={project.data.title}>
+				-->
 			</a>
 		</div>
 		))}
