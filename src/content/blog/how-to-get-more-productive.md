@@ -10,7 +10,7 @@ For myself, I'm currently a student (btw, I don't like university education 😕
 
 Ok, but how to create more?
 
-Well, as I understood, you have to force yourself to create something every day. Currently, I'm writing on my [blog](https://berkaycubuk.com/i-decided-to-write-everyday/) every morning, and I feel better. I started to post more on my social media accounts, and they're not food or travel photos. I'm trying to showcase my work and create value for other people. As a result, I started to get more followers (you can check out the [contact](https://berkaycubuk.com/contact/) page to follow me 😉).
+Well, as I understood, you have to force yourself to create something every day. Currently, I'm writing on my blog every morning, and I feel better. I started to post more on my social media accounts, and they're not food or travel photos. I'm trying to showcase my work and create value for other people. As a result, I started to get more followers (you can check out the [contact](https://berkaycubuk.com/contact/) page to follow me 😉).
 
 Try to find a place with productive people for me; I'm traveling around [IndieHackers](https://www.indiehackers.com/), [ProductHunt](https://www.producthunt.com/), Twitter, and Instagram. For Twitter and Instagram, you have to limit yourself to specific people because a lot of people are just doing nothing, and your time is valuable, so be careful.
 
