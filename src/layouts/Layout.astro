@@ -21,16 +21,16 @@ import Footer from '../components/Footer.astro'
 		<title>{`${title}${title ? ' - ' : ''}Berkay Çubuk`}</title>
 
 		<meta property="og:title" content={`${title}${title ? ' - ' : ''}Berkay Çubuk`} />
-		<meta name="og:description" content={description} />
+		<meta property="og:description" content={description} />
 
 		{image ?
-			<meta name="og:image" content={image} />
-			<meta name="twitter:image" content={image} />
+			<meta property="og:image" content={image} />
+			<meta property="twitter:image" content={image} />
 		: ''
 		}
 
 		<meta property="twitter:title" content={`${title}${title ? ' - ' : ''}Berkay Çubuk`} />
-		<meta name="twitter:description" content={description} />
+		<meta property="twitter:description" content={description} />
 
 		<link rel="sitemap" href="/sitemap-index.xml" />
 
