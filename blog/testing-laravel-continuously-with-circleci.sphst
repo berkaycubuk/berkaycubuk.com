@@ -81,7 +81,7 @@ workflows:
 
 Understanding this config took some time for me, but I'll explain what I understood.
 
-[According to CircleCI](https://circleci.com/orbs/#:~:text=An%20orb%20is%20a%20reusable%20package%20of%20YAML%20configuration%20that%20condenses%20repeated%20pieces%20of%20config%20into%20a%20single%20line%20of%20code.): an orb is a reusable package of YAML configuration that condenses repeated pieces of config into a single line of code.
+<a href="https://circleci.com/orbs/#:~:text=An%20orb%20is%20a%20reusable%20package%20of%20YAML%20configuration%20that%20condenses%20repeated%20pieces%20of%20config%20into%20a%20single%20line%20of%20code.">According to CircleCI</a>: an orb is a reusable package of YAML configuration that condenses repeated pieces of config into a single line of code.
 
 If you will be doing browser testing, this circleci/browser-tools orb is amazing.
 

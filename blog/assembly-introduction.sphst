@@ -43,41 +43,47 @@ title2 Simple example to print "Hello World" in assembly
 END                                   ;exit
 ```
 
-Now we have to setup some sort of code enviorement to run this code. I'd like to go with DOSBox. Visit [dosbox.com](https://www.dosbox.com/download.php?main=1) to download latest version. And then we need to install assembler, for this I prefer Turbo Assembler (TASM).
+Now we have to setup some sort of code enviorement to run this code. I'd like to go with DOSBox. Visit <a href="https://www.dosbox.com/download.php?main=1">dosbox.com</a> to download latest version. And then we need to install assembler, for this I prefer Turbo Assembler (TASM).
 
-For more detailed enviorement setup guide you can visit [this blog post](https://mccshreyas.wordpress.com/2017/03/27/how-to-install-and-configure-tasm-on-windows-7810/).
+For more detailed enviorement setup guide you can visit <a href="https://mccshreyas.wordpress.com/2017/03/27/how-to-install-and-configure-tasm-on-windows-7810/">this blog post</a>.
 
 To run the program open your DOSBox and type `edit example.asm`. With this command emulator will open it's code editor. In here you can write your code. When you feel ready you can go top left and click to save and then click exit.
 
-![dosbox-screenshot-1](/images/assembly-introduction/dosbox-screenshot-1.png)
+image /images/assembly-introduction/dosbox-screenshot-1.png
+    alt dosbox-screenshot-1
 
-![dosbox-screenshot-2](/images/assembly-introduction/dosbox-screenshot-2.png)
+image /images/assembly-introduction/dosbox-screenshot-2.png
+    alt dosbox-screenshot-2
 
 After all we have to convert our code into machine code, in enviorement setup we installed TASM to do that.
 
 In terminal type `tasm example.asm`. With this command your asm file will be converted into obj file.
 
-![dosbox-screenshot-3](/images/assembly-introduction/dosbox-screenshot-3.png)
+image /images/assembly-introduction/dosbox-screenshot-3.png
+    alt dosbox-screenshot-3
 
 After we can run `tlink example.obj` to make it executable.
 
-![dosbox-screenshot-4](/images/assembly-introduction/dosbox-screenshot-4.png)
+image /images/assembly-introduction/dosbox-screenshot-4.png
+    alt dosbox-screenshot-4
 
 Now if you run `dir` command you should see your **example.exe** file.
 
-![dosbox-screenshot-5](/images/assembly-introduction/dosbox-screenshot-5.png)
+image /images/assembly-introduction/dosbox-screenshot-5.png
+    alt dosbox-screenshot-5
 
 To run that just type `example` and there we go, we have our *"Hello World"* printed.
 
-![dosbox-screenshot-6](/images/assembly-introduction/dosbox-screenshot-6.png)
+image /images/assembly-introduction/dosbox-screenshot-6.png
+    alt dosbox-screenshot-6
 
 title4 References
 
-- [Wikipedia](https://en.wikipedia.org/wiki/Assembly_language)
-- [Tutorials Point](https://www.tutorialspoint.com/assembly_programming/assembly_introduction.htm)
-- [C-Jump](http://www.c-jump.com/CIS77/ASM/Stack/lecture.html)
-- [Stackoverflow](https://stackoverflow.com/questions/5364270/concept-of-mov-ax-cs-and-mov-ds-ax)
-- [MCCshreyas](https://mccshreyas.wordpress.com/2017/03/27/how-to-install-and-configure-tasm-on-windows-7810/)
+- <a href="https://en.wikipedia.org/wiki/Assembly_language">Wikipedia</a>
+- <a href="https://www.tutorialspoint.com/assembly_programming/assembly_introduction.htm">Tutorials Point</a>
+- <a href="http://www.c-jump.com/CIS77/ASM/Stack/lecture.html">C-Jump</a>
+- <a href="https://stackoverflow.com/questions/5364270/concept-of-mov-ax-cs-and-mov-ds-ax">Stackoverflow</a>
+- <a href="https://mccshreyas.wordpress.com/2017/03/27/how-to-install-and-configure-tasm-on-windows-7810/">MCCshreyas</a>
 
 </div>
 

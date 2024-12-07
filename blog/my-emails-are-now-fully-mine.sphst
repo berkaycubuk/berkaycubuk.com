@@ -19,7 +19,7 @@ title2 Tools I'm using
 - OpenDKIM: validate mails to send popular sites
 - OpenSSL: free SSL certificate
 
-To setup all these stuff I used [Luke Smith's](https://lukesmith.xyz/) [emailwiz](https://github.com/LukeSmithxyz/emailwiz) script. It's simple to install, you just have to follow the installation steps.
+To setup all these stuff I used <a href="https://lukesmith.xyz/">Luke Smith's</a> <a href="https://github.com/LukeSmithxyz/emailwiz">emailwiz</a> script. It's simple to install, you just have to follow the installation steps.
 
 title2 But why? Why not use Gmail?
 

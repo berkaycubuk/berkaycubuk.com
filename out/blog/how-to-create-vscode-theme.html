@@ -18,23 +18,23 @@
 <h2>What is theme?</h2>
 <p>Themes are simply customized color palettes for editors. They define colors in json file so, you can download and use it on your editor.</p>
 <h2>What is required to get started?</h2>
-<p>- [VS Code](https://code.visualstudio.com/) - [Node](https://nodejs.org/en/)</p>
+<p>- <a href="https://code.visualstudio.com/">VS Code</a> - <a href="https://nodejs.org/en/">Node</a></p>
 <p>If you installed these programs, we can move to installing required packages.</p>
 <p>We have to install some packages to start with theme boilerplate.</p>
 <p>npm i -g yo generator-code</p>
 <p>Now we have VS Code extension generator. To start developing, run:</p>
 <p>yo code</p>
 <p>After running it, you should see something like this:</p>
-<p>![yo-code-screenshot-1](/images/how-to-create-vscode-theme/yo-code-screenshot-1.png)</p>
+<img src="/images/how-to-create-vscode-theme/yo-code-screenshot-1.png" alt="yo-code-screenshot-1" />
 <p>Select **New Color Theme** and hit enter.</p>
 <p>In this tutorial we build our theme from scratch so, pick **No, start fresh**</p>
-<p>![yo-code-screenshot-2](/images/how-to-create-vscode-theme/yo-code-screenshot-2.png)</p>
+<img src="/images/how-to-create-vscode-theme/yo-code-screenshot-2.png" alt="yo-code-screenshot-2" />
 <p>Answer the questions:</p>
-<p>![yo-code-screenshot-3](/images/how-to-create-vscode-theme/yo-code-screenshot-3.png)</p>
+<img src="/images/how-to-create-vscode-theme/yo-code-screenshot-3.png" alt="yo-code-screenshot-3" />
 <p>Now yeoman should create a new folder named as your theme name.</p>
 <p>Open your theme folder with VS Code to get started.</p>
 <p>You should see this:</p>
-<p>![screenshot-4](/images/how-to-create-vscode-theme/screenshot-4.png)</p>
+<img src="/images/how-to-create-vscode-theme/screenshot-4.png" alt="screenshot-4" />
 <p>Your will work with json file to edit theme.</p>
 <p>In the **colors** you can edit background, foreground and active colors. Just type something you want and it'll autofill for you.</p>
 <p>Inside the **tokenColors** as you can guess we'll work with syntax highlighting. You can edit colors for general or specific languages.</p>
@@ -45,17 +45,17 @@
 <h2>How to find token names?</h2>
 <p>VS Code give us token viewer tool. To run it type `Ctrl+Shift+P` and search for **Developer: Inspect Editor Tokens and Scopes**.</p>
 <p>After, just click the text you want to see. It'll show you what tokens it have.</p>
-<p>![screenshot-5](/images/how-to-create-vscode-theme/screenshot-5.png)</p>
+<img src="/images/how-to-create-vscode-theme/screenshot-5.png" alt="screenshot-5" />
 <h2>How to change colors?</h2>
 <p>With inspect editor find your token and search it inside theme json file. If you can't find it no worries you can easly add your own token.</p>
 <p>For this example I'll go with the public syntax. To find it I'll search for **storage.modifier**. You can also search it specific for php.</p>
-<p>![screenshot-6](/images/how-to-create-vscode-theme/screenshot-6.png)</p>
+<img src="/images/how-to-create-vscode-theme/screenshot-6.png" alt="screenshot-6" />
 <p>To change the color just edit **foreground**.</p>
-<p>![screenshot-7](/images/how-to-create-vscode-theme/screenshot-7.png)</p>
+<img src="/images/how-to-create-vscode-theme/screenshot-7.png" alt="screenshot-7" />
 <p>As you can see all **storage.modifier** tokens are changed.</p>
 <h2>Further more</h2>
 <p>VS Code shared articles on their website about publishing your own theme.</p>
-<p>[Visit VS Code's website](https://code.visualstudio.com/api/extension-guides/color-theme) to read more.</p>
+<a href="https://code.visualstudio.com/api/extension-guides/color-theme">Visit VS Code's website</a> to read more.
 <p>Watch my video tutorial ☝</p>
 </div>
 </main>

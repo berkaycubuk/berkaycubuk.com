@@ -10,11 +10,11 @@ date 28.07.2021
 
 This simple guide will explain how to install Arch Linux on Bios systems. Methods and commands will probably change in time but the concept is not.
 
-!! Disclaimer: If you're super new to the linux, maybe you should start with [Manjaro](https://manjaro.org/). Because do not apply these instructions to your production machine unless you know what you're doing. Also do not 100% trust what I shared here, always take [Arch Wiki](https://wiki.archlinux.org/title/Installation_guide) as a guide.
+!! Disclaimer: If you're super new to the linux, maybe you should start with <a href="https://manjaro.org/">Manjaro</a>. Because do not apply these instructions to your production machine unless you know what you're doing. Also do not 100% trust what I shared here, always take <a href="https://wiki.archlinux.org/title/Installation_guide">Arch Wiki</a> as a guide.
 
 title2 Downloading and writing Arch on a usb drive
 
-First of all we need to download latest version from [archlinux.org](https://archlinux.org/download/). Arch linux uses rolling releases, that means unlike Debian systems there'll be only one version. New updates and patches will be added to the top of the main release. That's why Arch linux is getting updates more often.
+First of all we need to download latest version from <a href="https://archlinux.org/download/">archlinux.org</a>. Arch linux uses rolling releases, that means unlike Debian systems there'll be only one version. New updates and patches will be added to the top of the main release. That's why Arch linux is getting updates more often.
 
 And then write the image to your usb drive. If you can choose your writing mode, choose dd (a.k.a disk destroyer :grinning:).
 
@@ -22,7 +22,8 @@ title2 Running Arch installation medium
 
 Plug your usb drive into the installation device and boot from the usb. You should see a warm welcoming black terminal.
 
-![lsblk result](/images/installing-arch-on-bios-systems/arch_welcome.png)
+image /images/installing-arch-on-bios-systems/arch_welcome.png
+    alt lsblk result
 
 If you're not using english keyboard you should first set your keyboard layout. Find your layout by ls'ing deeper `/user/share/kbd/keymaps`.
 I'm using Turkish Q keyboard and I found mine with:
@@ -63,7 +64,8 @@ To check your disks:
 
 Every device has it's own disks and labels, you have to find yours (Probably the big one).
 
-![lsblk result](/images/installing-arch-on-bios-systems/lsblk_result.jpg)
+image /images/installing-arch-on-bios-systems/lsblk_result.jpg
+    alt lsblk result
 
 And start partitioning. I'll use graphical version of fdisk:
 ```asm

@@ -13,7 +13,7 @@
 <div class="container-slim">
 <h1>Serving Multiple Sites in One Object Storage with Nginx</h1>
 <p>date 03.08.2024</p>
-<p>In [Static Ninja](https://staticninja.com), I'm working on a system that will allow people to upload their static sites and host them with a unique subdomain. The most secure and efficient way I found is using object storage to store the site contents and reverse proxying them with Nginx. This may not be the best way to do it, but perfect for my budget and scale.</p>
+<p>In <a href="https://staticninja.com">Static Ninja</a>, I'm working on a system that will allow people to upload their static sites and host them with a unique subdomain. The most secure and efficient way I found is using object storage to store the site contents and reverse proxying them with Nginx. This may not be the best way to do it, but perfect for my budget and scale.</p>
 <p>When I tried to develop a proof of concept, the first thing I encountered is the object storage does not work the way I wanted. It does not work like a normal filesystem that we can easily re route the user to index.html when a certain folder visited. I need to use Nginx, because I'll be serving all the sites under the same domain with different subdomains. So, using a reverse proxy, technically I can do it. But making it real took lots of my time, and currently I'm happy to report that I made it :^)</p>
 <p>Here is the Nginx configuration I'm using for each subdomain:</p>
 <p>```asm server { server_name subdomain.domain.tld;</p>

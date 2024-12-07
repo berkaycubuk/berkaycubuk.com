@@ -14,13 +14,13 @@
 <h1>"Installing Arch on Bios Systems"</h1>
 <p>date 28.07.2021</p>
 <p>This simple guide will explain how to install Arch Linux on Bios systems. Methods and commands will probably change in time but the concept is not.</p>
-<p>!! Disclaimer: If you're super new to the linux, maybe you should start with [Manjaro](https://manjaro.org/). Because do not apply these instructions to your production machine unless you know what you're doing. Also do not 100% trust what I shared here, always take [Arch Wiki](https://wiki.archlinux.org/title/Installation_guide) as a guide.</p>
+<p>!! Disclaimer: If you're super new to the linux, maybe you should start with <a href="https://manjaro.org/">Manjaro</a>. Because do not apply these instructions to your production machine unless you know what you're doing. Also do not 100% trust what I shared here, always take <a href="https://wiki.archlinux.org/title/Installation_guide">Arch Wiki</a> as a guide.</p>
 <h2>Downloading and writing Arch on a usb drive</h2>
-<p>First of all we need to download latest version from [archlinux.org](https://archlinux.org/download/). Arch linux uses rolling releases, that means unlike Debian systems there'll be only one version. New updates and patches will be added to the top of the main release. That's why Arch linux is getting updates more often.</p>
+<p>First of all we need to download latest version from <a href="https://archlinux.org/download/">archlinux.org</a>. Arch linux uses rolling releases, that means unlike Debian systems there'll be only one version. New updates and patches will be added to the top of the main release. That's why Arch linux is getting updates more often.</p>
 <p>And then write the image to your usb drive. If you can choose your writing mode, choose dd (a.k.a disk destroyer :grinning:).</p>
 <h2>Running Arch installation medium</h2>
 <p>Plug your usb drive into the installation device and boot from the usb. You should see a warm welcoming black terminal.</p>
-<p>![lsblk result](/images/installing-arch-on-bios-systems/arch_welcome.png)</p>
+<img src="/images/installing-arch-on-bios-systems/arch_welcome.png" alt="lsblk result" />
 <p>If you're not using english keyboard you should first set your keyboard layout. Find your layout by ls'ing deeper `/user/share/kbd/keymaps`. I'm using Turkish Q keyboard and I found mine with: ```asm # ls /usr/share/kbd/keymaps/i386/qwerty ```asm</p>
 <p>To load your keyboard layout: ```asm # loadkeys layout-name For my keyboard: # loadkeys trq ```asm</p>
 <p>Next step, check internet connection. See your enabled network interfaces: ```asm # ip link ```asm</p>
@@ -31,7 +31,7 @@
 <h3>Partition the disk</h3>
 <p>To check your disks: ```asm # lsblk ```asm</p>
 <p>Every device has it's own disks and labels, you have to find yours (Probably the big one).</p>
-<p>![lsblk result](/images/installing-arch-on-bios-systems/lsblk_result.jpg)</p>
+<img src="/images/installing-arch-on-bios-systems/lsblk_result.jpg" alt="lsblk result" />
 <p>And start partitioning. I'll use graphical version of fdisk: ```asm You should type your disk name, mine is sda # cfdisk /dev/sda ```asm</p>
 <p>We're working with BIOS device so we just need to create boot and swap partitions.</p>
 <p>For swap partition I'll set the size 12G because I like to give it the 150% of the ram size and I have 8 GB for this machine. But there are not strict rules, everybody uses their own way. It's should be primary and for type we'll pick Linux swap / Solaris (or just swap).</p>

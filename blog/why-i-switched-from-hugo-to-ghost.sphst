@@ -14,43 +14,50 @@ HUGO is the perfect static site generator I have ever seen, it's fast, relaible 
 
 title2 What is Ghost?
 
-I started to use [Ghost](https://ghost.org). Ghost is MVC with headless feature. That means I can use it like [Wordpress](https://wordpress.org) or like content api. It gives you content management, themes and bunch of integrations. For now I'm using the default theme come with Ghost but I'm planning to build my own frontend and connect it to [Ghost content API](https://ghost.org/docs/content-api/).
+I started to use <a href="https://ghost.org">Ghost</a>. Ghost is MVC with headless feature. That means I can use it like <a href="https://wordpress.org">Wordpress</a> or like content api. It gives you content management, themes and bunch of integrations. For now I'm using the default theme come with Ghost but I'm planning to build my own frontend and connect it to <a href="https://ghost.org/docs/content-api/">Ghost content API</a>.
 
 title2 How to run Ghost?
 
-Ghost is open-source, that means you can see the [source code](https://github.com/TryGhost/Ghost). It's written with Node.js so, you can run it on your local machine, servers or on their paid hosting server. Before I used simple hosting to serve my HUGO website but right now I'm using droplet (cheapest one (5$/m) 🙂) from [Digital Ocean(You can get free 100$ credit for 60 days)](https://m.do.co/c/217fc00c5e4d). Also, Digital Ocean have Ghost installer in the marketplace and that's super awesome for beginners or who want to taste Ghost in minutes.
+Ghost is open-source, that means you can see the <a href="https://github.com/TryGhost/Ghost">source code</a>. It's written with Node.js so, you can run it on your local machine, servers or on their paid hosting server. Before I used simple hosting to serve my HUGO website but right now I'm using droplet (cheapest one (5$/m) 🙂) from <a href="https://m.do.co/c/217fc00c5e4d">Digital Ocean(You can get free 100$ credit for 60 days)</a>. Also, Digital Ocean have Ghost installer in the marketplace and that's super awesome for beginners or who want to taste Ghost in minutes.
 
-If you don't want to manage servers or updates Ghost.org have [different plans](https://ghost.org/pricing/) to help you.
+If you don't want to manage servers or updates Ghost.org have <a href="https://ghost.org/pricing/">different plans</a> to help you.
 
 title2 How it's look like?
 
 To understand Ghost, I'll share screenshots with you.
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-post-page.png)
+image /images/why-i-switched-from-hugo-to-ghost/ghost-post-page.png
+    alt 
 
 Post Editor
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-posts-page.png)
+image /images/why-i-switched-from-hugo-to-ghost/ghost-posts-page.png
+    alt 
 
 Posts Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-pages-page.png)
+image /images/why-i-switched-from-hugo-to-ghost/ghost-pages-page.png
+    alt 
 
 Pages Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-tags-page.png)
+image /images/why-i-switched-from-hugo-to-ghost/ghost-tags-page.png
+    alt 
 
 Tags Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-staff-page.png)
+image /images/why-i-switched-from-hugo-to-ghost/ghost-staff-page.png
+    alt 
 
 Staff Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-settings-page.png)
+image /images/why-i-switched-from-hugo-to-ghost/ghost-settings-page.png
+    alt 
 
 Settings Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-design-page.png)
+image /images/why-i-switched-from-hugo-to-ghost/ghost-design-page.png
+    alt 
 
 Design Page
 

@@ -12,13 +12,15 @@ Vim is a magical text editor. It's a cross-platform editor so, it's available on
 
 title2 Installation
 
-You can download Vim from its [official website](https://www.vim.org/download.php). Installation progress will not be covered in this article.
+You can download Vim from its <a href="https://www.vim.org/download.php">official website</a>. Installation progress will not be covered in this article.
 
 After installing Vim, just open up your terminal and type vim. You should see something like that:
-![](/images/introduction-to-vim/vim-welcome-screen.png)
+image /images/introduction-to-vim/vim-welcome-screen.png
+    alt 
 title2 I can't exit from Vim!
 
-![via GIPHY](https://media.giphy.com/media/5Zesu5VPNGJlm/giphy.gif)
+image https://media.giphy.com/media/5Zesu5VPNGJlm/giphy.gif
+    alt via GIPHY
 
 On your first try with Vim, you'll probably have a hard time exiting from it. But don't worry, I'm here to help you. Just type **:q** . This will close Vim without saving anything. If you tried to write something, you'd see an error to suppress it use **:q!**
 

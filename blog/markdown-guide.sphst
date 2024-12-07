@@ -59,7 +59,8 @@ MarkdownHTML`- First item``<ul><li>First item</li></ul>``* First item``<ul><li>F
 title3 Images
 
 We can display images with markdown.
-MarkdownHTML`![alt text](image url)``<img src="image url" alt="alt text" />`
+MarkdownHTML`image image url
+    alt alt text``<img src="image url" alt="alt text" />`
 title3 Code
 
 We can display code blocks with unique syntax highligting.
@@ -74,11 +75,11 @@ To define language you can add the language name after the first ```asm
     
 
 title3 Links
-MarkdownHTML`Go to [Google](https://google.com)``Go to <a href="https://google.com">Google</a>`
+MarkdownHTML`Go to <a href="https://google.com">Google</a>``Go to <a href="https://google.com">Google</a>`
 title4 References
 
-- [https://en.wikipedia.org/wiki/Markdown](https://en.wikipedia.org/wiki/Markdown)
-- [https://www.markdownguide.org/basic-syntax/](https://www.markdownguide.org/basic-syntax/)
+- <a href="https://en.wikipedia.org/wiki/Markdown">https://en.wikipedia.org/wiki/Markdown</a>
+- <a href="https://www.markdownguide.org/basic-syntax/">https://www.markdownguide.org/basic-syntax/</a>
 
 </div>
 

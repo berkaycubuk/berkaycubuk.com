@@ -12,7 +12,7 @@ Express.js (aka Express) is a Node.js web application framework. With Express yo
 
 title2 Installation
 
-If you want to developer javascript based applications you should [install Node.js](https://nodejs.org/en/) on your computer. After installing Node.js you can test it with this command:
+If you want to developer javascript based applications you should <a href="https://nodejs.org/en/">install Node.js</a> on your computer. After installing Node.js you can test it with this command:
 
     node -v
     

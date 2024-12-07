@@ -18,8 +18,8 @@ Themes are simply customized color palettes for editors. They define colors in j
 
 title2 What is required to get started?
 
-- [VS Code](https://code.visualstudio.com/)
-- [Node](https://nodejs.org/en/)
+- <a href="https://code.visualstudio.com/">VS Code</a>
+- <a href="https://nodejs.org/en/">Node</a>
 
 If you installed these programs, we can move to installing required packages.
 
@@ -35,17 +35,20 @@ Now we have VS Code extension generator. To start developing, run:
 
 After running it, you should see something like this:
 
-![yo-code-screenshot-1](/images/how-to-create-vscode-theme/yo-code-screenshot-1.png)
+image /images/how-to-create-vscode-theme/yo-code-screenshot-1.png
+    alt yo-code-screenshot-1
 
 Select **New Color Theme** and hit enter.
 
 In this tutorial we build our theme from scratch so, pick **No, start fresh**
 
-![yo-code-screenshot-2](/images/how-to-create-vscode-theme/yo-code-screenshot-2.png)
+image /images/how-to-create-vscode-theme/yo-code-screenshot-2.png
+    alt yo-code-screenshot-2
 
 Answer the questions:
 
-![yo-code-screenshot-3](/images/how-to-create-vscode-theme/yo-code-screenshot-3.png)
+image /images/how-to-create-vscode-theme/yo-code-screenshot-3.png
+    alt yo-code-screenshot-3
 
 Now yeoman should create a new folder named as your theme name.
 
@@ -53,7 +56,8 @@ Open your theme folder with VS Code to get started.
 
 You should see this:
 
-![screenshot-4](/images/how-to-create-vscode-theme/screenshot-4.png)
+image /images/how-to-create-vscode-theme/screenshot-4.png
+    alt screenshot-4
 
 Your will work with json file to edit theme.
 
@@ -75,7 +79,8 @@ VS Code give us token viewer tool. To run it type `Ctrl+Shift+P` and search for 
 
 After, just click the text you want to see. It'll show you what tokens it have.
 
-![screenshot-5](/images/how-to-create-vscode-theme/screenshot-5.png)
+image /images/how-to-create-vscode-theme/screenshot-5.png
+    alt screenshot-5
 
 title2 How to change colors?
 
@@ -83,11 +88,13 @@ With inspect editor find your token and search it inside theme json file. If you
 
 For this example I'll go with the public syntax. To find it I'll search for **storage.modifier**. You can also search it specific for php.
 
-![screenshot-6](/images/how-to-create-vscode-theme/screenshot-6.png)
+image /images/how-to-create-vscode-theme/screenshot-6.png
+    alt screenshot-6
 
 To change the color just edit **foreground**.
 
-![screenshot-7](/images/how-to-create-vscode-theme/screenshot-7.png)
+image /images/how-to-create-vscode-theme/screenshot-7.png
+    alt screenshot-7
 
 As you can see all **storage.modifier** tokens are changed.
 
@@ -95,7 +102,7 @@ title2 Further more
 
 VS Code shared articles on their website about publishing your own theme.
 
-[Visit VS Code's website](https://code.visualstudio.com/api/extension-guides/color-theme) to read more.
+<a href="https://code.visualstudio.com/api/extension-guides/color-theme">Visit VS Code's website</a> to read more.
 
 Watch my video tutorial ☝
 

@@ -10,7 +10,7 @@ date 22.04.2024
 
 Here is another shiny tech switch blog post.
 
-I'm using Hugo for a long time and loved the speed and simplicity of it. But it's time for a change and experimentation. I switched made the switch to [Astro](https://astro.build).
+I'm using Hugo for a long time and loved the speed and simplicity of it. But it's time for a change and experimentation. I switched made the switch to <a href="https://astro.build">Astro</a>.
 
 title2 My reasons
 
