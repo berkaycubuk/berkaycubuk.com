@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+    <head>
+        <title>Introduction to Vim</title>
+<meta name="viewport" content="width=device-width">
+<meta property="og:title" content="Introduction to Vim" />
+<meta property="twitter:title" content="Introduction to Vim" />
+        <link rel="stylesheet" href="/style.css" />
+
+    </head>
+    <body>
+        <header class="header"> <div class="header-brand">Berkay Çubuk</div> <nav class="header-nav"> <a href="/">Home</a> <a href="/blog">Blog</a> <a href="/about">About</a> <!-- <a href="/resume">Resume</a> --> </nav> </header>
+<main>
+<div class="container-slim">
+<h1>Introduction to Vim</h1>
+<p>date 26.02.2021</p>
+<p>Vim is a magical text editor. It's a cross-platform editor so, it's available on most platforms.</p>
+<h2>Installation</h2>
+<p>You can download Vim from its [official website](https://www.vim.org/download.php). Installation progress will not be covered in this article.</p>
+<p>After installing Vim, just open up your terminal and type vim. You should see something like that: ![](/images/introduction-to-vim/vim-welcome-screen.png)</p>
+<h2>I can't exit from Vim!</h2>
+<p>![via GIPHY](https://media.giphy.com/media/5Zesu5VPNGJlm/giphy.gif)</p>
+<p>On your first try with Vim, you'll probably have a hard time exiting from it. But don't worry, I'm here to help you. Just type **:q** . This will close Vim without saving anything. If you tried to write something, you'd see an error to suppress it use **:q!**</p>
+<p>If you want to save and exit, you can use **:wq** That command writes and quit Vim.</p>
+<h2>Let's start</h2>
+<p>Vim has three different modes. Normal, Insert, and Visual mode. In the **normal mode**, we can move around the editor with keys.</p>
+<p>To move your cursor up, press **k**,</p>
+<p>go down with **j**,</p>
+<p>go left with **h**,</p>
+<p>and go right with **l**.</p>
+<p>As I said before, we have three different modes. When you launched Vim, it starts with normal mode. You can go to **insert mode** with** i**. Now you can insert texts into your document. Insert mode works like your old editors. You can do the same things in this mode. Ok, what if I want to go back to normal mode? Simple, just press **Esc** and you're in normal mode.</p>
+<h2>Walking char to char is cool but how can I jump?</h2>
+<p>If you want to move word to word you have some shortcuts:</p>
+<p>**w** => jump forwards to the start of a word</p>
+<p>**b** => jump backwards to the start of a word</p>
+<p>**gg** => go to first line</p>
+<p>**G** => go to last line</p>
+<h2>How to remember all these shortcuts?</h2>
+<p>Well, you can't remember all these shortcuts and commands. You have to start using them to make it muscle memory. Also, for the start you don't need all, if you learn some basic commands, you can do the similar things like your IDE.</p>
+</div>
+</main>
+<footer>
+<p>Built with <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a>. <a href="mailto:berkay@berkaycubuk.com">Contact with me</a></p>
+</footer>
+
+    </body>
+</html>

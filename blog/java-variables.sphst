@@ -1,0 +1,105 @@
+import header.sphst
+
+<main>
+
+<div class="container-slim">
+
+title Java Variables
+date 19.11.2020
+
+
+Variables are important pieces in programming. We are using them to store data values. In java, we have different types of variables:
+
+- `int`
+- `float`
+- `char`
+- `boolean`
+- `byte`
+- `short`
+- `long`
+- `double`
+- `String` (I don't know why it's capital 😥)
+
+title2 How to create or declare variables
+
+First specify the type and give it a name and then assign it a value.
+```asm
+variable_type variable_name = value;
+```asm
+
+For example:
+```asm
+String userName = "Berkay";
+int likeCount = 5;
+```asm
+
+Also, you can declare a variable without value.
+```asm
+char c;
+c = 'b';
+```asm
+
+If you assign it new value, it will update itself.
+```asm
+String country = "Turkey";
+
+System.out.println(country); // Turkey
+
+country = "England";
+
+System.out.println(country); // England
+```asm
+
+Let's learn the types with examples.
+
+title2 Numbers
+```asm
+int number1 = 10;
+double number2 = 4.5;
+// you have to cast float
+float number3 = (float) 4.5;
+number3 = 4.5f; // this is shorter way
+```asm
+
+title2 Characters and Strings
+```asm
+char character = 'c';
+String string = "string";
+```asm
+
+title2 Boolean
+
+Boolean type only accepts `true` or `false`.
+```asm
+boolean bool = false;
+bool = true;
+```asm
+
+title2 Extra 😉
+
+You can merge strings with `+`. Let's see it in action.
+```asm
+public class MyClass {
+
+  public static void main(String args[]) {
+
+    String fileName = "index";
+    String fileExt = "html";
+
+    System.out.println("Your file => " + fileName + "." + fileExt);
+
+  }
+
+}
+```asm
+
+Output:
+```asm
+> Your file => index.html
+```asm
+
+</div>
+
+</main>
+
+import footer.sphst

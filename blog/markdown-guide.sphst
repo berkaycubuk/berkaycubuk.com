@@ -1,0 +1,87 @@
+import header.sphst
+
+<main>
+
+<div class="container-slim">
+
+title Markdown Guide
+date 16.11.2020
+
+
+title2 What is Markdown?
+
+Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by **John Gruber** and **Aaron Swartz**.
+
+It's basically helping us to create rich structured and lighweight text files without special software or editor. You can create your own markdown document with a notepad or any text editor. To create markdown file you have to give it **.md** extension.
+
+title2 Markdown Basics
+
+title3 Headings
+
+We have 6 different headings in HTML. First one the biggest, last one is the smallest. We're using `#` to start using heading. To change it's level we can add more `#`.
+MarkdownDescriptionHTML equivalent`# Heading 1`Biggest heading`<h1>Heading 1</h1>``## Heading 2`2. heading and going smaller`<h2>Heading 2</h2>``### Heading 3 `3. heading`<h3>Heading 3</h3>``#### Heading 4`4. heading`<h4>Heading 4</h4>``##### Heading 5`5. heading`<h5>Heading 5</h5>``###### Heading 6`Smallest heading`<h6>Heading 6</h6>`
+*Please make sure you give enough space between # and the heading name.*
+
+title3 Paragraphs
+
+Just type what you want to display as paragraph.
+MarkdownDescriptionHTML equivalent`Paragraph 🙂`Simple paragraph in markdown`<p>Paragraph 🙂</p>`
+title3 Bold
+
+We can make some part of text **bold**.
+MarkdownHTML equivalent`Text with **bold** text``Text with <strong>bold</strong> text``Test with __bold__ text``Text with <strong>bold</strong> text`
+In HTML, you can also use `<b></b>` for bold.
+
+title3 Italic
+MarkdownHTML equivalent`Text with *italic* text``Text with <i>italic</i> text``Text with _italic_ text``Text with <i>italic</i> text`
+In HTML, you can also user `<em></em>` for italic.
+
+title3 Blockquotes
+MarkdownHTML equivalent`> Happiness depends upon ourselves.``<blockquote>Happiness depends upon ourselves.</blockquote>`
+title3 Lists
+
+We can organize items using lists.
+
+title4 Ordered Lists
+MarkdownHTML`1. First item``<ol><li>First item</li></ol>`
+I don't like this explanation so the next one will be better.
+
+    ## Popular code editors
+    
+    1. VsCode
+    2. Vim
+    3. Sublime Text
+    4. Atom
+    
+
+title4 Unordered Lists
+MarkdownHTML`- First item``<ul><li>First item</li></ul>``* First item``<ul><li>First item</li></ul>``+ First item``<ul><li>First item</li></ul>`
+title3 Images
+
+We can display images with markdown.
+MarkdownHTML`![alt text](image url)``<img src="image url" alt="alt text" />`
+title3 Code
+
+We can display code blocks with unique syntax highligting.
+MarkdownHTML```asm
+To define language you can add the language name after the first ```asm
+
+    ```asm
+    
+    echo "Hello World";
+    
+    ```asm
+    
+
+title3 Links
+MarkdownHTML`Go to [Google](https://google.com)``Go to <a href="https://google.com">Google</a>`
+title4 References
+
+- [https://en.wikipedia.org/wiki/Markdown](https://en.wikipedia.org/wiki/Markdown)
+- [https://www.markdownguide.org/basic-syntax/](https://www.markdownguide.org/basic-syntax/)
+
+</div>
+
+</main>
+
+import footer.sphst

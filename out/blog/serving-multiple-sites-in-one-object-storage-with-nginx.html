@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+    <head>
+        <title>Serving Multiple Sites in One Object Storage with Nginx</title>
+<meta name="viewport" content="width=device-width">
+<meta property="og:title" content="Serving Multiple Sites in One Object Storage with Nginx" />
+<meta property="twitter:title" content="Serving Multiple Sites in One Object Storage with Nginx" />
+        <link rel="stylesheet" href="/style.css" />
+
+    </head>
+    <body>
+        <header class="header"> <div class="header-brand">Berkay Çubuk</div> <nav class="header-nav"> <a href="/">Home</a> <a href="/blog">Blog</a> <a href="/about">About</a> <!-- <a href="/resume">Resume</a> --> </nav> </header>
+<main>
+<div class="container-slim">
+<h1>Serving Multiple Sites in One Object Storage with Nginx</h1>
+<p>date 03.08.2024</p>
+<p>In [Static Ninja](https://staticninja.com), I'm working on a system that will allow people to upload their static sites and host them with a unique subdomain. The most secure and efficient way I found is using object storage to store the site contents and reverse proxying them with Nginx. This may not be the best way to do it, but perfect for my budget and scale.</p>
+<p>When I tried to develop a proof of concept, the first thing I encountered is the object storage does not work the way I wanted. It does not work like a normal filesystem that we can easily re route the user to index.html when a certain folder visited. I need to use Nginx, because I'll be serving all the sites under the same domain with different subdomains. So, using a reverse proxy, technically I can do it. But making it real took lots of my time, and currently I'm happy to report that I made it :^)</p>
+<p>Here is the Nginx configuration I'm using for each subdomain:</p>
+<p>```asm server { server_name subdomain.domain.tld;</p>
+<p>listen 80;</p>
+<p>error_page 404 = @fallback-2;</p>
+<p>location / { rewrite /[^/]*\.\w+$  "/sitefolder${uri}?" break; rewrite /\w+$      "/sitefolder${uri}/index.html?" break; rewrite /$         "/sitefolder${uri}index.html?" break; rewrite ^          "/sitefolder${uri}?" break;</p>
+<p>proxy_pass https://bucketaddress; proxy_intercept_errors on; index index.html; proxy_set_header Host bucketaddress; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; }</p>
+<p>location @fallback-2 { error_page 404 /404;</p>
+<p>rewrite ^/sitefolder/(.*)/index.html$  "/sitefolder/$1.html" break; proxy_intercept_errors on; proxy_pass https://bucketaddress; }</p>
+<p>location = /404 { proxy_pass https://bucketaddress/404.html; proxy_set_header Host bucketaddress; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; } } ```asm</p>
+<p>For context, I store all the sites in separate folders, in the example config's site the folder I'm using is `sitefolder`.</p>
+<p>I'm using Linode's object storage and I think this configuration should work with all other object storages. They claim it's S3 compatible, so you probably will make it work.</p>
+</div>
+</main>
+<footer>
+<p>Built with <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a>. <a href="mailto:berkay@berkaycubuk.com">Contact with me</a></p>
+</footer>
+
+    </body>
+</html>

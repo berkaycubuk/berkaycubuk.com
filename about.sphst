@@ -1,0 +1,19 @@
+import header.sphst
+
+<main>
+
+<div class="container-slim">
+
+title About me
+
+I'm a software engineer who enjoys technology.
+
+I currently live in Turkey, and working as a Blockhain Engineer.
+
+Fun fact about this site: I know it looks ugly, but the fun part is I built it using my own markup language called <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a> :^)
+
+</div>
+
+</main>
+
+import footer.sphst

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+    <head>
+        <title>"Installing Arch on Bios Systems"</title>
+<meta name="viewport" content="width=device-width">
+<meta property="og:title" content=""Installing Arch on Bios Systems"" />
+<meta property="twitter:title" content=""Installing Arch on Bios Systems"" />
+        <link rel="stylesheet" href="/style.css" />
+
+    </head>
+    <body>
+        <header class="header"> <div class="header-brand">Berkay Çubuk</div> <nav class="header-nav"> <a href="/">Home</a> <a href="/blog">Blog</a> <a href="/about">About</a> <!-- <a href="/resume">Resume</a> --> </nav> </header>
+<main>
+<div class="container-slim">
+<h1>"Installing Arch on Bios Systems"</h1>
+<p>date 28.07.2021</p>
+<p>This simple guide will explain how to install Arch Linux on Bios systems. Methods and commands will probably change in time but the concept is not.</p>
+<p>!! Disclaimer: If you're super new to the linux, maybe you should start with [Manjaro](https://manjaro.org/). Because do not apply these instructions to your production machine unless you know what you're doing. Also do not 100% trust what I shared here, always take [Arch Wiki](https://wiki.archlinux.org/title/Installation_guide) as a guide.</p>
+<h2>Downloading and writing Arch on a usb drive</h2>
+<p>First of all we need to download latest version from [archlinux.org](https://archlinux.org/download/). Arch linux uses rolling releases, that means unlike Debian systems there'll be only one version. New updates and patches will be added to the top of the main release. That's why Arch linux is getting updates more often.</p>
+<p>And then write the image to your usb drive. If you can choose your writing mode, choose dd (a.k.a disk destroyer :grinning:).</p>
+<h2>Running Arch installation medium</h2>
+<p>Plug your usb drive into the installation device and boot from the usb. You should see a warm welcoming black terminal.</p>
+<p>![lsblk result](/images/installing-arch-on-bios-systems/arch_welcome.png)</p>
+<p>If you're not using english keyboard you should first set your keyboard layout. Find your layout by ls'ing deeper `/user/share/kbd/keymaps`. I'm using Turkish Q keyboard and I found mine with: ```asm # ls /usr/share/kbd/keymaps/i386/qwerty ```asm</p>
+<p>To load your keyboard layout: ```asm # loadkeys layout-name For my keyboard: # loadkeys trq ```asm</p>
+<p>Next step, check internet connection. See your enabled network interfaces: ```asm # ip link ```asm</p>
+<p>I always prefer using ethernet because I don't really know how to connect wifi (I can't see my wifi adapter in the interfaces list) :sweat_smile: To check your internet connection ping your favourite website: ```asm # ping berkaycubuk.com ```asm</p>
+<p>If you receive packages you're connected.</p>
+<h3>Update the system clock</h3>
+<p>Before installing we need to configure our target device. First update system clock: ```asm # timedatectl set-ntp true ```asm</p>
+<h3>Partition the disk</h3>
+<p>To check your disks: ```asm # lsblk ```asm</p>
+<p>Every device has it's own disks and labels, you have to find yours (Probably the big one).</p>
+<p>![lsblk result](/images/installing-arch-on-bios-systems/lsblk_result.jpg)</p>
+<p>And start partitioning. I'll use graphical version of fdisk: ```asm You should type your disk name, mine is sda # cfdisk /dev/sda ```asm</p>
+<p>We're working with BIOS device so we just need to create boot and swap partitions.</p>
+<p>For swap partition I'll set the size 12G because I like to give it the 150% of the ram size and I have 8 GB for this machine. But there are not strict rules, everybody uses their own way. It's should be primary and for type we'll pick Linux swap / Solaris (or just swap).</p>
+<p>The next partition will be the root partition. You can give it the remaining space. It'll be primary as well, but this time type will be Linux.</p>
+<p>After checking everything we can write it.</p>
+<p>!! Important: When you write the changes your disk will be formatted and your personal files will be deleted.</p>
+<p>Now you should see your changes with  `lsblk`. Ok, we can format the partitions for our needs.</p>
+<p>To format root partition: ```asm # mkfs.ext4 /dev/root_partition ```asm</p>
+<p>To format swap partition: ```asm # mkswap /dev/swap_partition ```asm</p>
+<h3>Mount the file systems</h3>
+<p>We can mount the partitions we just created.</p>
+<p>Mount the swap with: ```asm # swapon /dev/swap_partition ```asm</p>
+<p>Mount the root volume with: ```asm # mount /dev/root_partition /mnt ```asm</p>
+<h3>Install essential packages</h3>
+<p>We managed to survive :grinning: now we can install the core packages and a text editor to configure things later. ```asm If you're not feeling comfortable with vim you can choose nano # pacstrap /mnt base linux linux-firmware base-devel vim ```asm</p>
+<h3>Fstab</h3>
+<p>We have to generate fstabl file to tell the system where are our partitions. To do that run: ```asm # genfstab -U /mnt >> /mnt/etc/fstab ```asm</p>
+<p>You can check the result from `/mnt/etc/fstab` file.</p>
+<h3>Chroot</h3>
+<p>For this time we're running from the usb drive we plugged to the system. Now we have a base install to we can switch to the target machine. ```asm # arch-chroot /mnt ```asm</p>
+<h3>Time zone and locale</h3>
+<p>We can set our timezone with: ```asm # ln -sf /usr/share/zoneinfo/Region/City /etc/localtime For me: # ln -sf /usr/share/zoneinfo/Europe/Istanbul /etc/localtime ```asm</p>
+<p>Set the hardware clock to UTC: ```asm # hwclock --systohc ```asm</p>
+<p>Select the system language by uncommenting your_language.UTF-8 from `/etc/locale.gen`. After that run ```asm # locale-gen ```asm</p>
+<p>Create new file `/etc/locale.conf` and set LANG variable: ```asm LANG=en_US.UTF-8 ```asm</p>
+<p>Also, if you want you can make your keyboard layout permanent by creating new file ``/etc/vconsole.conf` and set KEYMAP variable: ```asm KEYMAP=trq ```asm</p>
+<h3>Network</h3>
+<p>Create a new file to set hostname `/etc/hostname` and fill it with the name you want. And create a new file `/etc/hosts` and fill it with: ```asm 127.0.0.1      localhost ::1            localhost 127.0.1.1      hostname.localdomain      hostname ```asm</p>
+<h3>Set root password</h3>
+<p>Right now we're using the root user and we have to set a password for it to login after the reboot. Run `passwd` to set your password.</p>
+<h3>Bootloader stuff</h3>
+<p>Now we can install the bootloader and other stuff we want to have when we rebooted the system. ```asm # pacman -S grub networkmanager network-manager-applet dialog wireless_tools wpa_supplicant os-prober mtools dosfstools linux-headers ```asm</p>
+<p>Run this to install grub: ```asm # grub-install --target=i386-pc /dev/sda ```asm</p>
+<p>Run this to create grub config: ```asm # grub-mkconfig -o /boot/grub/grub.cfg ```asm</p>
+<p>Now we have successfully installed bootloader</p>
+<h3>Exit installation</h3>
+<p>Just type `exit` to exit and unmount all with: ```asm # umount -a ```asm</p>
+<p>Ok, we can reboot the system now with `reboot` command. If you're on your lucky day you should see the login page. Login with the root username and the password you created before.</p>
+<h3>Hard part is over now configure and setup thing we want</h3>
+<p>Right now, we don't have internet connection. I will enable and start the NetworkManager ```asm # systemctl enable NetworkManager # systemctl start NetworkManager ```asm After that, if you have a ethernet cable connected now you can use the internet. If you want to use wifi now you can do that with: ```asm # nmtui ```asm</p>
+<h3>Create new user</h3>
+<p>We can use root for all the time but it's not ideal, so I'll set up new user for the daily use. ```asm # useradd -m -G wheel berkay And I'll set password for the user # passwd berkay ```asm</p>
+<p>We added user to wheel group that means the user can use the magical `sudo` command. But the sudo command is not enabled.</p>
+<p>Open the `/etc/sudoers` file and go all the way down to `# %wheel ALL=(ALL) ALL` and uncomment it. ```asm To open sudoers file run # EDITOR=vim visudo ```asm</p>
+<p>Now we can exit and login to our newly created user.</p>
+<h3>Video Driver</h3>
+<p>I don't know do we need it but it doesn't hurt: ```asm If you are using Intel # sudo pacman -S xf86-video-intel If you are using AMD # sudo pacman -S xf86-video-amdgpu For the Nvidia # sudo pacman -S nvidia nvidia-utils ```asm</p>
+<h3>Display Server</h3>
+<p>We'll install Xorg for our display server: ```asm # sudo pacman -S xorg-server xorg-xinit ```asm</p>
+<h3>Window Manager</h3>
+<p>I like window managers so why not? ```asm # sudo pacman -S i3-gaps i3status dmenu rxvt-unicode picom ```asm</p>
+<h3>Fonts</h3>
+<p>Also we need some fonts to display: ```asm # sudo pacman -S ttf-linux-libertine noto-fonts-emoji ```asm</p>
+<h3>.xinitrc</h3>
+<p>We need create a new file called `.xinitrc` to define what to when we run `startx` to enter GUI mode. ```asm picom & exec i3 ```asm</p>
+<p>If you're having issue with the keyboard layout you can also add: ```asm setxkbmap -layout layout_name & ```asm</p>
+<h3>Run your xinit</h3>
+<p>We set up everything to start. You'll just need to run `startx` to enter your newly configured setup.</p>
+<h2>Conlusion</h2>
+<p>You just installed Arch linux. We only did the base stuff, you can start to configure it to your taste.</p>
+</div>
+</main>
+<footer>
+<p>Built with <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a>. <a href="mailto:berkay@berkaycubuk.com">Contact with me</a></p>
+</footer>
+
+    </body>
+</html>

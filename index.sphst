@@ -1,0 +1,15 @@
+import header.sphst
+
+<main>
+
+<div class="container-slim">
+
+title Berkay's Space on the Internet
+
+Hi there, this is my website where I write and share things.
+
+</div>
+
+</main>
+
+import footer.sphst
