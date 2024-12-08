@@ -8,6 +8,7 @@ title Blog
 
     <div class="blog-items">
 
+        <a href="/blog/my-new-project-sophist">My New Project: Sophist</a>
         <a href="/blog/11-months-11-products">11-months-11-products</a>
         <a href="/blog/adding-contact-form-to-static-sites">adding-contact-form-to-static-sites</a>
         <a href="/blog/assembly-interrupts">assembly-interrupts</a>
