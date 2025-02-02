@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Power of Programming";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title Power of Programming
-date 01.02.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>01.02.2021</div>`);
+
+_.html(`
 We're living in a world of information with the power of the internet. Right now, you can learn whatever you want from the internet, and that's crazy!
 I want to give you an example:
 
@@ -26,5 +33,4 @@ If you're doing nothing in your free time or don't know what to do, please consi
 </div>
 
 </main>
-
-import footer.sphst
+`);

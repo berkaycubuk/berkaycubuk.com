@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "How to filter your business ideas?";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title How to filter your business ideas?
-date 11.02.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>11.02.2021</div>`);
+
+_.html(`
 I started to read a book called **The Personal MBA, **it's written by** Josh Kaufman**. And he's sharing a method to filter your business ideas. I want to share it with you.
 
 There are ten questions, and you have to give them **points from 0 to 10**. It's crucial to provide points carefully. You don't want to give them more than they're. 0 is the worst, no one wants that, and 10 is the perfect everybody wants that. Ok, let's move to questions:
@@ -37,5 +44,4 @@ Now you have to give each question a point. Don't forget to be honest with yours
 </div>
 
 </main>
-
-import footer.sphst
+`);

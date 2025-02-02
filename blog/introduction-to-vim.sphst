@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Introduction to Vim";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title Introduction to Vim
-date 26.02.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>26.02.2021</div>`);
+
+_.html(`
 Vim is a magical text editor. It's a cross-platform editor so, it's available on most platforms.
 
 title2 Installation
@@ -59,5 +66,4 @@ Well, you can't remember all these shortcuts and commands. You have to start usi
 </div>
 
 </main>
-
-import footer.sphst
+`);

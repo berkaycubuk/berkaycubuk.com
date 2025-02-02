@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "How to Create VsCode Theme";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title How to Create VsCode Theme
-date 20.12.2020
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>20.12.2020</div>`);
+
+_.html(`
 VS Code is popular code editor around developers. It has it's own marketplace so, you can easly customize your editor.
 
 Recently I developed my first VS Code theme and extension. I want to share with you how I did and how you can build your own.
@@ -69,13 +76,13 @@ Please take a look at the default code to understand it better.
 
 title2 How to see the theme in real time?
 
-In VS Code press `f5` to run debug mode. You should see another VS Code with your theme.
+In VS Code press f5 to run debug mode. You should see another VS Code with your theme.
 
 When you make changes it'll automaticly update itself.
 
 title2 How to find token names?
 
-VS Code give us token viewer tool. To run it type `Ctrl+Shift+P` and search for **Developer: Inspect Editor Tokens and Scopes**.
+VS Code give us token viewer tool. To run it type Ctrl+Shift+P and search for **Developer: Inspect Editor Tokens and Scopes**.
 
 After, just click the text you want to see. It'll show you what tokens it have.
 
@@ -109,5 +116,4 @@ Watch my video tutorial ☝
 </div>
 
 </main>
-
-import footer.sphst
+`);

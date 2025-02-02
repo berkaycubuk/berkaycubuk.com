@@ -1,23 +1,34 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Adding Contact Form to Static Sites";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title Adding Contact Form to Static Sites
-date 09.06.2024
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
+
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>09.06.2024</div>`);
+
+_.html(`<p>
 Recently I added a contact form to this website and I want to share how I did it.
 
 When using static site generators we don't have access to a backend so we need a third party service to get the form submissions. So, I built one to achieve it. I built my own because I want control it's privacy and customization.
 
 You can find the contact page's source code in GitHub: https://github.com/berkaycubuk/berkaycubuk.com/blob/main/src/pages/contact.astro
+</p>`);
 
-title2 Creating the form HTML
+_.h2('Creating the form HTML');
 
+_.html(`<p>
 The process is same for all the static site generators. Create a contact page (or just use your index page) and create your form like this:
+</p>
 
-```html
+<pre>
 <form method="POST" action="https://staticninja.com/api/form-submit/[KEY]" class="flex flex-col gap-2">
     <div class="flex flex-col gap-1">
         <label class="text-sm text-neutral-800">Email</label>
@@ -31,14 +42,17 @@ The process is same for all the static site generators. Create a contact page (o
         <button class="px-4 py-2 bg-neutral-900 text-white">Submit</button>
     </div>
 </form>
-```
+</pre>
 
-You can customize it's style add new fields etc.. Important part is the `action` attribute of the `<form>`. When the user submits the form, it will do a POST request to the address that defined in the action. Just copy pasting the code will not work, you need to change the `[KEY]` to your <a href="https://staticninja.com/forms">Static Ninja Forms</a> key. 
+<p>
+You can customize it's style add new fields etc.. Important part is the action attribute of the < form >. When the user submits the form, it will do a POST request to the address that defined in the action. Just copy pasting the code will not work, you need to change the [KEY] to your <a href="https://staticninja.com/forms">Static Ninja Forms</a> key. 
 
 You can get it by creating an account and creating a new form on it. After that it'll give you a key to use. And that's just it. Whem the form gets submitted, you can see the submissions on the dashboard of Static Ninja Forms.
+</p>`);
 
-title2 Creating the form from Static Ninja Forms
+_.h2('Creating the form from Static Ninja Forms');
 
+_.html(`<p>
 First create an account. Don't worry it comes with a free plan and it's enough for your personal projects.
 
 image /images/adding-contact-form-to-static-sites/static-ninja-forms.png
@@ -63,9 +77,11 @@ When you click to form details, you can find your key. Place that key into your 
 
 image /images/adding-contact-form-to-static-sites/form-details.png
     alt Form details page
+</p>`);
 
-title2 Adding Google reCAPTCHA to prevent spam
+_.h2('Adding Google reCAPTCHA to prevent spam');
 
+_.html(`<p>
 This will not block people to type randomly to the forms but at least can block programmatic submissions.
 
 To use it on your form, go to https://www.google.com/recaptcha/about/ and go to **admin console**.
@@ -92,7 +108,7 @@ image /images/adding-contact-form-to-static-sites/ninja-form-settings.png
 
 Lastly, update your form HTML code to include the new captcha.
 
-```html
+<pre>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <form method="POST" action="https://staticninja.com/api/form-submit/[KEY]" class="flex flex-col gap-2">
@@ -111,10 +127,7 @@ Lastly, update your form HTML code to include the new captcha.
         <button class="px-4 py-2 bg-neutral-900 text-white">Submit</button>
     </div>
 </form>
-```
+</pre>
+</p>`);
 
-</div>
-
-</main>
-
-import footer.sphst
+_.html(`</main></div>`);

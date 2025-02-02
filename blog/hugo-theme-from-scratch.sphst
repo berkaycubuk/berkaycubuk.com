@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Hugo Theme From Scratch";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title "Hugo Theme From Scratch"
-date 14.12.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>14.12.2021</div>`);
+
+_.html(`
 You can watch my "Hugo Theme From Scratch" video on YouTube.
 
 I recorded a video after a long time and I forget to increase the font size :^)
@@ -17,5 +24,4 @@ I recorded a video after a long time and I forget to increase the font size :^)
 </div>
 
 </main>
-
-import footer.sphst
+`);

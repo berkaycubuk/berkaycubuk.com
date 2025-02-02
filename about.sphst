@@ -1,19 +1,19 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+_.head('<title>About me</title>');
 
-<div class="container-slim">
+const { Header } = await _.import('./components/header.js');
 
-title About me
+_.html(Header());
 
-I'm a software engineer who enjoys technology.
+_.html(`<main><div class="container-slim">`);
 
-I currently live in Turkey, and working as a Blockhain Engineer.
+_.h1(`About me`);
 
-Fun fact about this site: I know it looks ugly, but the fun part is I built it using my own markup language called <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a> :^)
+_.html(`<p>I'm a software engineer who enjoys technology.</p>`);
 
-</div>
+_.html(`<p>I currently live in Turkey, and working as a Blockhain Engineer.</p>`);
 
-</main>
+_.html(`<p>Fun fact about this site: I know it looks ugly, but the fun part is I built it using my own markup language called <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a> :^)</p>`);
 
-import footer.sphst
+_.html(`</div></main>`);

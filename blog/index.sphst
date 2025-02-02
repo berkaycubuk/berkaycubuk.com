@@ -1,11 +1,18 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Blog";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title Blog
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
+
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`
     <div class="blog-items">
 
         <a href="/blog/my-new-project-sophist">My New Project: Sophist</a>
@@ -47,5 +54,4 @@ title Blog
 </div>
 
 </main>
-
-import footer.sphst
+`);

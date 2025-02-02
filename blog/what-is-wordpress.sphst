@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "What is Wordpress?";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title What is Wordpress?
-date 12.02.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>12.02.2021</div>`);
+
+_.html(`
 Wordpress is an **open-source** website builder. With Wordpress you can create blogs, e-commerce shops, landing pages and more... It has a marketplace for extensions and themes.
 
 title3 Is it really open-source?
@@ -31,5 +38,4 @@ To find beautiful themes, I suggest <a href="https://themeforest.net/">themefore
 </div>
 
 </main>
-
-import footer.sphst
+`);

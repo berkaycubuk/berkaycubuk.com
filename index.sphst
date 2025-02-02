@@ -1,15 +1,17 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Berkay's Space on the Internet";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title Berkay's Space on the Internet
+const { Header } = await _.import('./components/header.js');
 
-Hi there, this is my website where I write and share things.
+_.html(Header());
 
-</div>
+_.html(`<main><div>`);
 
-</main>
+_.h1(title);
 
-import footer.sphst
+_.html(`<p>Hi there, this is my website where I write and share things.</p>`);
+
+_.html(`</div></main>`);

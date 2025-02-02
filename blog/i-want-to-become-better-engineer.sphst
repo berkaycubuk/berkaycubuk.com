@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "I want to become better engineer";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title "I want to become better engineer"
-date 2024-01-09
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>2024-01-09</div>`);
+
+_.html(`
 In Wikipedia, engineer is described <a href="https://en.wikipedia.org/wiki/Engineer">like this</a>:
 > "Engineers, as practitioners of engineering, are professionals who invent, design, analyze, build and test machines, complex systems, structures, gadgets and materials to fulfill functional objectives and requirements while considering the limitations imposed by practicality, regulation, safety and cost."
 
@@ -29,5 +36,4 @@ title3 References:
 </div>
 
 </main>
-
-import footer.sphst
+`);

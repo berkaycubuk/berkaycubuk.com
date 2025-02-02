@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "My New Project: Sophist";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title My New Project: Sophist
+const { Header } = await _.import('./components/header.js');
 
-date 08.12.2024
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>08.12.2024</div>`);
+
+_.html(`
 I worked with lots of static site generators, and now trying to build my own. While doing that I also develop a new language to structure the content.
 I think this is an advantage compared to other solutions. This language is called Sophist, and it focused on static website building.
 
@@ -32,5 +39,4 @@ I want to add variables and looping. Also there are missing core features like l
 </div>
 
 </main>
-
-import footer.sphst
+`);

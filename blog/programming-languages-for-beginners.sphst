@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Programming Languages for Beginners";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title Programming Languages for Beginners
-date 02.02.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>02.02.2021</div>`);
+
+_.html(`
 A lot of people want to start programming but usually, they don't know where to start. I would like to share my thoughts with you.
 
 title3 **Python** 🐍
@@ -53,5 +60,4 @@ Here are good resources to start learning programming:
 </div>
 
 </main>
-
-import footer.sphst
+`);

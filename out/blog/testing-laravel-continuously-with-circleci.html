@@ -1,56 +1,167 @@
-<!DOCTYPE html>
+<html>
     <head>
-        <title>Testing Laravel Continuously with CircleCI</title>
-<meta name="viewport" content="width=device-width">
-<meta property="og:title" content="Testing Laravel Continuously with CircleCI" />
-<meta property="twitter:title" content="Testing Laravel Continuously with CircleCI" />
-        <link rel="stylesheet" href="/style.css" />
-
+      <link rel="stylesheet" href="/style.css">
+<title>Testing Laravel Continuously with CircleCI</title>
     </head>
     <body>
-        <header class="header"> <div class="header-brand">Berkay Çubuk</div> <nav class="header-nav"> <a href="/">Home</a> <a href="/blog">Blog</a> <a href="/about">About</a> <!-- <a href="/resume">Resume</a> --> </nav> </header>
-<main>
-<div class="container-slim">
+      <header class="header">
+      <div class="header-brand">Berkay Çubuk</div>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </header>
+<main><div>
 <h1>Testing Laravel Continuously with CircleCI</h1>
-<p>date 31.07.2024</p>
-<p>As developer we all know tests are important, but when it comes to really doing it, I think personally I need to get better at it.</p>
-<p>I'm working on Static Ninja, and shipping features continuously. In order to prevent system down, it should be tested before the deployment. I can just run the tests locally (which I do), but when a new team member joins, we have to make sure it tested even we tested locally.</p>
-<p>GitHub actions are my best friend in terms of free cloud computing for tasks like testing, deployment etc. But, why not do testing on another service and use GitHub credits on the deployment? I never used CircleCI before, so I gave it a chance and running Static Ninja tests on it. To be honest, to make my testing script work took time and not that smooth, but I managed to make it work.</p>
-<p>Here is the config I'm using:</p>
-<p>```asm # Use the latest 2.1 version of CircleCI pipeline process engine. # See: https://circleci.com/docs/configuration-reference version: 2.1</p>
-<p>orbs: browser-tools: circleci/browser-tools@1.4.8</p>
-<p># Define a job to be invoked later in a workflow. # See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs jobs: build: docker: - image: cimg/php:8.3.9-browsers</p>
-<p>steps: - checkout - when: condition: equal: [ main, << pipeline.git.branch >> ] steps: - browser-tools/install-browser-tools - run: name: "Prepare env" command: | sudo apt update sudo docker-php-ext-install zip</p>
-<p>- run: name: "Create env file" command: | mv .env.testing .env</p>
-<p>- restore_cache: keys: - v1-dependencies-{{ checksum "composer.json" }} - v1-dependencies-</p>
-<p>- run: name: "Install dependencies" command: composer install -n --prefer-dist</p>
-<p>- save_cache: key: v1-dependencies-{{ checksum "composer.json" }} paths: - ./vendor</p>
-<p>- run: name: "Generate app key" command: php artisan key:generate</p>
-<p>- run: name: "Run unit tests" command: ./vendor/bin/phpunit tests/Unit</p>
-<p># Orchestrate jobs using workflows # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows workflows: test: jobs: - build ```asm</p>
-<p>Understanding this config took some time for me, but I'll explain what I understood.</p>
+<div>31.07.2024</div>
+
+As developer we all know tests are important, but when it comes to really doing it, I think personally I need to get better at it.
+
+I'm working on Static Ninja, and shipping features continuously. In order to prevent system down, it should be tested before the deployment. I can just run the tests locally (which I do), but when a new team member joins, we have to make sure it tested even we tested locally.
+
+GitHub actions are my best friend in terms of free cloud computing for tasks like testing, deployment etc. But, why not do testing on another service and use GitHub credits on the deployment? I never used CircleCI before, so I gave it a chance and running Static Ninja tests on it. To be honest, to make my testing script work took time and not that smooth, but I managed to make it work.
+
+Here is the config I'm using:
+
+<pre>
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/configuration-reference
+version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.4.8
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.3.9-browsers
+
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - browser-tools/install-browser-tools
+            - run:
+                name: "Prepare env"
+                command: |
+                  sudo apt update
+                  sudo docker-php-ext-install zip
+
+            - run:
+                name: "Create env file"
+                command: |
+                  mv .env.testing .env
+
+            - restore_cache:
+                keys:
+                  - v1-dependencies-{{ checksum "composer.json" }}
+                  - v1-dependencies-
+
+            - run:
+                name: "Install dependencies"
+                command: composer install -n --prefer-dist
+
+            - save_cache:
+                key: v1-dependencies-{{ checksum "composer.json" }}
+                paths:
+                  - ./vendor
+
+            - run:
+                name: "Generate app key"
+                command: php artisan key:generate
+
+            - run:
+                name: "Run unit tests"
+                command: ./vendor/bin/phpunit tests/Unit
+
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
+workflows:
+  test:
+    jobs:
+      - build
+</pre>
+
+Understanding this config took some time for me, but I'll explain what I understood.
+
 <a href="https://circleci.com/orbs/#:~:text=An%20orb%20is%20a%20reusable%20package%20of%20YAML%20configuration%20that%20condenses%20repeated%20pieces%20of%20config%20into%20a%20single%20line%20of%20code.">According to CircleCI</a>: an orb is a reusable package of YAML configuration that condenses repeated pieces of config into a single line of code.
-<p>If you will be doing browser testing, this circleci/browser-tools orb is amazing.</p>
-<p>```asm orbs: browser-tools: circleci/browser-tools@1.4.8 ```asm</p>
-<p>In the jobs section, this is similiar to the GitHub Actions, we just define the actions and the system to execute it.</p>
-<p>```asm jobs: build: docker: - image: cimg/php:8.3.9-browsers ```asm</p>
-<p>cimg/php:8.3.9-browsers docker image is what we want, I think it comes with browser features as well with this one.</p>
-<p>```asm steps: - checkout - when: condition: equal: [ main, << pipeline.git.branch >> ] steps: - browser-tools/install-browser-tools - run: name: "Prepare env" command: | sudo apt update sudo docker-php-ext-install zip</p>
-<p>- run: name: "Create env file" command: | mv .env.testing .env</p>
-<p>- restore_cache: keys: - v1-dependencies-{{ checksum "composer.json" }} - v1-dependencies-</p>
-<p>- run: name: "Install dependencies" command: composer install -n --prefer-dist</p>
-<p>- save_cache: key: v1-dependencies-{{ checksum "composer.json" }} paths: - ./vendor</p>
-<p>- run: name: "Generate app key" command: php artisan key:generate</p>
-<p>- run: name: "Run unit tests" command: ./vendor/bin/phpunit tests/Unit ```asm</p>
-<p>In the steps, that strange when condition thing is added by me, may be there is a better way to do that. Basically I just wanted to make sure tests only executed when main branch changed, not the other ones. In my scale, executing this tests on all of the branches is expensive.</p>
-<p>In order to make tests work, I prepared a special env file called .env.testing and while the system builds project, it renames it to .env.</p>
-<p>You might ask, where did you setup the database? I'm using SQLite for testing and for production so there is no additional setup needed, good luck doing that with a MySQL database.</p>
-<p>There are some steps about cache, to be honest, I don't really understood how they work, but they probably about caching the vendor packages.</p>
+
+If you will be doing browser testing, this circleci/browser-tools orb is amazing.
+
+<pre>
+orbs:
+  browser-tools: circleci/browser-tools@1.4.8
+</pre>
+
+In the jobs section, this is similiar to the GitHub Actions, we just define the actions and the system to execute it.
+
+<pre>
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.3.9-browsers
+</pre>
+
+cimg/php:8.3.9-browsers docker image is what we want, I think it comes with browser features as well with this one.
+
+<pre>
+steps:
+  - checkout
+  - when:
+      condition:
+        equal: [ main, << pipeline.git.branch >> ]
+      steps:
+        - browser-tools/install-browser-tools
+        - run:
+            name: "Prepare env"
+            command: |
+              sudo apt update
+              sudo docker-php-ext-install zip
+
+        - run:
+            name: "Create env file"
+            command: |
+              mv .env.testing .env
+
+        - restore_cache:
+            keys:
+              - v1-dependencies-{{ checksum "composer.json" }}
+              - v1-dependencies-
+
+        - run:
+            name: "Install dependencies"
+            command: composer install -n --prefer-dist
+
+        - save_cache:
+            key: v1-dependencies-{{ checksum "composer.json" }}
+            paths:
+              - ./vendor
+
+        - run:
+            name: "Generate app key"
+            command: php artisan key:generate
+
+        - run:
+            name: "Run unit tests"
+            command: ./vendor/bin/phpunit tests/Unit
+</pre>
+
+In the steps, that strange when condition thing is added by me, may be there is a better way to do that. Basically I just wanted to make sure tests only executed when main branch changed, not the other ones. In my scale, executing this tests on all of the branches is expensive.
+
+In order to make tests work, I prepared a special env file called .env.testing and while the system builds project, it renames it to .env.
+
+You might ask, where did you setup the database? I'm using SQLite for testing and for production so there is no additional setup needed, good luck doing that with a MySQL database.
+
+There are some steps about cache, to be honest, I don't really understood how they work, but they probably about caching the vendor packages.
+
 </div>
+
 </main>
-<footer>
-<p>Built with <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a>. <a href="mailto:berkay@berkaycubuk.com">Contact with me</a></p>
-</footer>
 
     </body>
-</html>
+  </html>

@@ -1,58 +1,129 @@
-<!DOCTYPE html>
+<html>
     <head>
-        <title>Adding Contact Form to Static Sites</title>
-<meta name="viewport" content="width=device-width">
-<meta property="og:title" content="Adding Contact Form to Static Sites" />
-<meta property="twitter:title" content="Adding Contact Form to Static Sites" />
-        <link rel="stylesheet" href="/style.css" />
-
+      <link rel="stylesheet" href="/style.css">
+<title>Adding Contact Form to Static Sites</title>
     </head>
     <body>
-        <header class="header"> <div class="header-brand">Berkay Çubuk</div> <nav class="header-nav"> <a href="/">Home</a> <a href="/blog">Blog</a> <a href="/about">About</a> <!-- <a href="/resume">Resume</a> --> </nav> </header>
-<main>
-<div class="container-slim">
+      <header class="header">
+      <div class="header-brand">Berkay Çubuk</div>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </header>
+<main><div>
 <h1>Adding Contact Form to Static Sites</h1>
-<p>date 09.06.2024</p>
-<p>Recently I added a contact form to this website and I want to share how I did it.</p>
-<p>When using static site generators we don't have access to a backend so we need a third party service to get the form submissions. So, I built one to achieve it. I built my own because I want control it's privacy and customization.</p>
-<p>You can find the contact page's source code in GitHub: https://github.com/berkaycubuk/berkaycubuk.com/blob/main/src/pages/contact.astro</p>
-<h2>Creating the form HTML</h2>
-<p>The process is same for all the static site generators. Create a contact page (or just use your index page) and create your form like this:</p>
-<p>```html <form method="POST" action="https://staticninja.com/api/form-submit/[KEY]" class="flex flex-col gap-2"> <div class="flex flex-col gap-1"> <label class="text-sm text-neutral-800">Email</label> <input class="p-2 rounded border border-neutral-300 outline-none" type="email" name="email" /> </div> <div class="flex flex-col gap-1"> <label class="text-sm text-neutral-800">Message</label> <textarea class="p-2 rounded border border-neutral-300 outline-none"></textarea> </div> <div> <button class="px-4 py-2 bg-neutral-900 text-white">Submit</button> </div> </form> ```</p>
-<p>You can customize it's style add new fields etc.. Important part is the `action` attribute of the `<form>`. When the user submits the form, it will do a POST request to the address that defined in the action. Just copy pasting the code will not work, you need to change the `[KEY]` to your <a href="https://staticninja.com/forms">Static Ninja Forms</a> key.</p>
-<p>You can get it by creating an account and creating a new form on it. After that it'll give you a key to use. And that's just it. Whem the form gets submitted, you can see the submissions on the dashboard of Static Ninja Forms.</p>
-<h2>Creating the form from Static Ninja Forms</h2>
-<p>First create an account. Don't worry it comes with a free plan and it's enough for your personal projects.</p>
-<img src="/images/adding-contact-form-to-static-sites/static-ninja-forms.png" alt="Static Ninja Forms" />
-<p>Signing up is easy, it will require you to verify your email address after creating the account.</p>
-<img src="/images/adding-contact-form-to-static-sites/signup.png" alt="Static Ninja Forms Registration" />
-<p>In the Forms page you can see all of your forms and can create a new one by clicking to **New form** button on top right.</p>
-<img src="/images/adding-contact-form-to-static-sites/forms.png" alt="Forms page" />
-<p>Just give it a name and make it active. If you want, it supports Google reCAPTCHA v2 (we will cover that at the end if you want to use it).</p>
-<img src="/images/adding-contact-form-to-static-sites/new-form.png" alt="New form page" />
-<p>When you click to form details, you can find your key. Place that key into your form and you're ready to collect submissions.</p>
-<img src="/images/adding-contact-form-to-static-sites/form-details.png" alt="Form details page" />
-<h2>Adding Google reCAPTCHA to prevent spam</h2>
-<p>This will not block people to type randomly to the forms but at least can block programmatic submissions.</p>
-<p>To use it on your form, go to https://www.google.com/recaptcha/about/ and go to **admin console**.</p>
-<p>After logging in to the admin console, you can click to the plus icon on the top right.</p>
-<img src="/images/adding-contact-form-to-static-sites/captcha-dashboard.png" alt="reCAPTCHA dashboard" />
-<p>It may look different from yours. Static Ninja Forms only supports v2 for now, so please select it.</p>
-<img src="/images/adding-contact-form-to-static-sites/new-captcha.png" alt="New captcha" />
-<p>Now go to the captcha settings and find your keys.</p>
-<img src="/images/adding-contact-form-to-static-sites/captcha-details.png" alt="Captcha settings" />
-<p>Site key will be publicly available and placed to your HTML code. Secret key is private and you need to place it to the Static Ninja Forms dashboard, so the server can confirm the captcha. Make sure to select **Enable Google reCAPTCHA v2**.</p>
-<img src="/images/adding-contact-form-to-static-sites/ninja-form-settings.png" alt="Static Ninja Forms Form Settings" />
-<p>Lastly, update your form HTML code to include the new captcha.</p>
-<p>```html <script src="https://www.google.com/recaptcha/api.js" async defer></script></p>
-<form method="POST" action="https://staticninja.com/api/form-submit/[KEY]" class="flex flex-col gap-2"> <div class="flex flex-col gap-1"> <label class="text-sm text-neutral-800">Email</label> <input class="p-2 rounded border border-neutral-300 outline-none" type="email" name="email" /> </div> <div class="flex flex-col gap-1"> <label class="text-sm text-neutral-800">Message</label> <textarea class="p-2 rounded border border-neutral-300 outline-none"></textarea> </div>
-<div class="g-recaptcha" data-sitekey="[SITE_KEY]"></div>
-<div> <button class="px-4 py-2 bg-neutral-900 text-white">Submit</button> </div> </form> ```
-</div>
-</main>
-<footer>
-<p>Built with <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a>. <a href="mailto:berkay@berkaycubuk.com">Contact with me</a></p>
-</footer>
+<div>09.06.2024</div>
+<p>
+Recently I added a contact form to this website and I want to share how I did it.
 
+When using static site generators we don't have access to a backend so we need a third party service to get the form submissions. So, I built one to achieve it. I built my own because I want control it's privacy and customization.
+
+You can find the contact page's source code in GitHub: https://github.com/berkaycubuk/berkaycubuk.com/blob/main/src/pages/contact.astro
+</p>
+<h2>Creating the form HTML</h2>
+<p>
+The process is same for all the static site generators. Create a contact page (or just use your index page) and create your form like this:
+</p>
+
+<pre>
+<form method="POST" action="https://staticninja.com/api/form-submit/[KEY]" class="flex flex-col gap-2">
+    <div class="flex flex-col gap-1">
+        <label class="text-sm text-neutral-800">Email</label>
+        <input class="p-2 rounded border border-neutral-300 outline-none" type="email" name="email" />
+    </div>
+    <div class="flex flex-col gap-1">
+        <label class="text-sm text-neutral-800">Message</label>
+        <textarea class="p-2 rounded border border-neutral-300 outline-none"></textarea>
+    </div>
+    <div>
+        <button class="px-4 py-2 bg-neutral-900 text-white">Submit</button>
+    </div>
+</form>
+</pre>
+
+<p>
+You can customize it's style add new fields etc.. Important part is the action attribute of the < form >. When the user submits the form, it will do a POST request to the address that defined in the action. Just copy pasting the code will not work, you need to change the [KEY] to your <a href="https://staticninja.com/forms">Static Ninja Forms</a> key. 
+
+You can get it by creating an account and creating a new form on it. After that it'll give you a key to use. And that's just it. Whem the form gets submitted, you can see the submissions on the dashboard of Static Ninja Forms.
+</p>
+<h2>Creating the form from Static Ninja Forms</h2>
+<p>
+First create an account. Don't worry it comes with a free plan and it's enough for your personal projects.
+
+image /images/adding-contact-form-to-static-sites/static-ninja-forms.png
+    alt Static Ninja Forms
+
+Signing up is easy, it will require you to verify your email address after creating the account.
+
+image /images/adding-contact-form-to-static-sites/signup.png
+    alt Static Ninja Forms Registration
+
+In the Forms page you can see all of your forms and can create a new one by clicking to **New form** button on top right.
+
+image /images/adding-contact-form-to-static-sites/forms.png
+    alt Forms page
+
+Just give it a name and make it active. If you want, it supports Google reCAPTCHA v2 (we will cover that at the end if you want to use it).
+
+image /images/adding-contact-form-to-static-sites/new-form.png
+    alt New form page
+
+When you click to form details, you can find your key. Place that key into your form and you're ready to collect submissions.
+
+image /images/adding-contact-form-to-static-sites/form-details.png
+    alt Form details page
+</p>
+<h2>Adding Google reCAPTCHA to prevent spam</h2>
+<p>
+This will not block people to type randomly to the forms but at least can block programmatic submissions.
+
+To use it on your form, go to https://www.google.com/recaptcha/about/ and go to **admin console**.
+
+After logging in to the admin console, you can click to the plus icon on the top right.
+
+image /images/adding-contact-form-to-static-sites/captcha-dashboard.png
+    alt reCAPTCHA dashboard
+
+It may look different from yours. Static Ninja Forms only supports v2 for now, so please select it.
+
+image /images/adding-contact-form-to-static-sites/new-captcha.png
+    alt New captcha
+
+Now go to the captcha settings and find your keys.
+
+image /images/adding-contact-form-to-static-sites/captcha-details.png
+    alt Captcha settings
+
+Site key will be publicly available and placed to your HTML code. Secret key is private and you need to place it to the Static Ninja Forms dashboard, so the server can confirm the captcha. Make sure to select **Enable Google reCAPTCHA v2**.
+
+image /images/adding-contact-form-to-static-sites/ninja-form-settings.png
+    alt Static Ninja Forms Form Settings
+
+Lastly, update your form HTML code to include the new captcha.
+
+<pre>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<form method="POST" action="https://staticninja.com/api/form-submit/[KEY]" class="flex flex-col gap-2">
+    <div class="flex flex-col gap-1">
+        <label class="text-sm text-neutral-800">Email</label>
+        <input class="p-2 rounded border border-neutral-300 outline-none" type="email" name="email" />
+    </div>
+    <div class="flex flex-col gap-1">
+        <label class="text-sm text-neutral-800">Message</label>
+        <textarea class="p-2 rounded border border-neutral-300 outline-none"></textarea>
+    </div>
+
+    <div class="g-recaptcha" data-sitekey="[SITE_KEY]"></div>
+
+    <div>
+        <button class="px-4 py-2 bg-neutral-900 text-white">Submit</button>
+    </div>
+</form>
+</pre>
+</p>
+</main></div>
     </body>
-</html>
+  </html>

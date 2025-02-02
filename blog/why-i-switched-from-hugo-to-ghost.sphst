@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "I switched from HUGO to Ghost, but why?";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title I switched from HUGO to Ghost, but why?
-date 27.01.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>27.01.2021</div>`);
+
+_.html(`
 For a long time I used just plain HTML & CSS for my website, it's doing the job but then I switched to Gatsby (tried it because it's popular) and then HUGO. 
 
 HUGO is the perfect static site generator I have ever seen, it's fast, relaible and easy to use. But,right now I'm not using HUGO because I found something super awesome and I want to share with you.
@@ -70,5 +77,4 @@ Do I like Ghost? absolutely! Do I like HUGO? Yes! But for my needs I've chosen G
 </div>
 
 </main>
-
-import footer.sphst
+`);

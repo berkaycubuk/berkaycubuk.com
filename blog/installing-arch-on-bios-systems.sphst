@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Installing Arch on Bios Systems";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title "Installing Arch on Bios Systems"
-date 28.07.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>28.07.2021</div>`);
+
+_.html(`
 This simple guide will explain how to install Arch Linux on Bios systems. Methods and commands will probably change in time but the concept is not.
 
 !! Disclaimer: If you're super new to the linux, maybe you should start with <a href="https://manjaro.org/">Manjaro</a>. Because do not apply these instructions to your production machine unless you know what you're doing. Also do not 100% trust what I shared here, always take <a href="https://wiki.archlinux.org/title/Installation_guide">Arch Wiki</a> as a guide.
@@ -25,42 +32,42 @@ Plug your usb drive into the installation device and boot from the usb. You shou
 image /images/installing-arch-on-bios-systems/arch_welcome.png
     alt lsblk result
 
-If you're not using english keyboard you should first set your keyboard layout. Find your layout by ls'ing deeper `/user/share/kbd/keymaps`.
+If you're not using english keyboard you should first set your keyboard layout. Find your layout by ls'ing deeper/user/share/kbd/keymaps.
 I'm using Turkish Q keyboard and I found mine with:
-```asm
+<pre>
 # ls /usr/share/kbd/keymaps/i386/qwerty
-```asm
+</pre>
 
 To load your keyboard layout:
-```asm
+<pre>
 # loadkeys layout-name
 For my keyboard:
 # loadkeys trq
-```asm
+</pre>
 
 Next step, check internet connection. See your enabled network interfaces:
-```asm
+<pre>
 # ip link
-```asm
+</pre>
 
 I always prefer using ethernet because I don't really know how to connect wifi (I can't see my wifi adapter in the interfaces list) :sweat_smile: To check your internet connection ping your favourite website:
-```asm
+<pre>
 # ping berkaycubuk.com
-```asm
+</pre>
 
 If you receive packages you're connected.
 
 title3 Update the system clock
 Before installing we need to configure our target device. First update system clock:
-```asm
+<pre>
 # timedatectl set-ntp true
-```asm
+</pre>
 
 title3 Partition the disk
 To check your disks:
-```asm
+<pre>
 # lsblk
-```asm
+</pre>
 
 Every device has it's own disks and labels, you have to find yours (Probably the big one).
 
@@ -68,10 +75,10 @@ image /images/installing-arch-on-bios-systems/lsblk_result.jpg
     alt lsblk result
 
 And start partitioning. I'll use graphical version of fdisk:
-```asm
+<pre>
 You should type your disk name, mine is sda
 # cfdisk /dev/sda
-```asm
+</pre>
 
 We're working with BIOS device so we just need to create boot and swap partitions.
 
@@ -83,191 +90,191 @@ After checking everything we can write it.
 
 !! Important: When you write the changes your disk will be formatted and your personal files will be deleted.
 
-Now you should see your changes with  `lsblk`. Ok, we can format the partitions for our needs.
+Now you should see your changes with lsblk. Ok, we can format the partitions for our needs.
 
 To format root partition:
-```asm
+<pre>
 # mkfs.ext4 /dev/root_partition
-```asm
+</pre>
 
 To format swap partition:
-```asm
+<pre>
 # mkswap /dev/swap_partition
-```asm
+</pre>
 
 title3 Mount the file systems
 
 We can mount the partitions we just created.
 
 Mount the swap with:
-```asm
+<pre>
 # swapon /dev/swap_partition
-```asm
+</pre>
 
 Mount the root volume with:
-```asm
+<pre>
 # mount /dev/root_partition /mnt
-```asm
+</pre>
 
 title3 Install essential packages
 We managed to survive :grinning: now we can install the core packages and a text editor to configure things later.
-```asm
+<pre>
 If you're not feeling comfortable with vim you can choose nano
 # pacstrap /mnt base linux linux-firmware base-devel vim
-```asm
+</pre>
 
 title3 Fstab
 We have to generate fstabl file to tell the system where are our partitions. To do that run:
-```asm
+<pre>
 # genfstab -U /mnt >> /mnt/etc/fstab
-```asm
+</pre>
 
-You can check the result from `/mnt/etc/fstab` file.
+You can check the result from /mnt/etc/fstab file.
 
 title3 Chroot
 For this time we're running from the usb drive we plugged to the system. Now we have a base install to we can switch to the target machine.
-```asm
+<pre>
 # arch-chroot /mnt
-```asm
+</pre>
 
 title3 Time zone and locale
 We can set our timezone with:
-```asm
+<pre>
 # ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 For me:
 # ln -sf /usr/share/zoneinfo/Europe/Istanbul /etc/localtime
-```asm
+</pre>
 
 Set the hardware clock to UTC:
-```asm
+<pre>
 # hwclock --systohc
-```asm
+</pre>
 
-Select the system language by uncommenting your_language.UTF-8 from `/etc/locale.gen`. After that run
-```asm
+Select the system language by uncommenting your_language.UTF-8 from /etc/locale.gen. After that run
+<pre>
 # locale-gen
-```asm
+</pre>
 
-Create new file `/etc/locale.conf` and set LANG variable:
-```asm
+Create new file /etc/locale.conf and set LANG variable:
+<pre>
 LANG=en_US.UTF-8
-```asm
+</pre>
 
-Also, if you want you can make your keyboard layout permanent by creating new file ``/etc/vconsole.conf` and set KEYMAP variable:
-```asm
+Also, if you want you can make your keyboard layout permanent by creating new file /etc/vconsole.conf and set KEYMAP variable:
+<pre>
 KEYMAP=trq
-```asm
+</pre>
 
 title3 Network
-Create a new file to set hostname `/etc/hostname` and fill it with the name you want. And create a new file `/etc/hosts` and fill it with:
-```asm
+Create a new file to set hostname /etc/hostname and fill it with the name you want. And create a new file /etc/hosts and fill it with:
+<pre>
 127.0.0.1      localhost
 ::1            localhost
 127.0.1.1      hostname.localdomain      hostname
-```asm
+</pre>
 
 title3 Set root password
 Right now we're using the root user and we have to set a password for it to login after the reboot.
-Run `passwd` to set your password.
+Run passwd to set your password.
 
 title3 Bootloader stuff
 Now we can install the bootloader and other stuff we want to have when we rebooted the system.
-```asm
+<pre>
 # pacman -S grub networkmanager network-manager-applet dialog wireless_tools wpa_supplicant os-prober mtools dosfstools linux-headers
-```asm
+</pre>
 
 Run this to install grub:
-```asm
+<pre>
 # grub-install --target=i386-pc /dev/sda
-```asm
+</pre>
 
 Run this to create grub config:
-```asm
+<pre>
 # grub-mkconfig -o /boot/grub/grub.cfg
-```asm
+</pre>
 
 Now we have successfully installed bootloader
 
 title3 Exit installation
-Just type `exit` to exit and unmount all with:
-```asm
+Just type exit to exit and unmount all with:
+<pre>
 # umount -a
-```asm
+</pre>
 
-Ok, we can reboot the system now with `reboot` command. If you're on your lucky day you should see the login page. Login with the root username and the password you created before.
+Ok, we can reboot the system now with reboot command. If you're on your lucky day you should see the login page. Login with the root username and the password you created before.
 
 title3 Hard part is over now configure and setup thing we want
 Right now, we don't have internet connection. I will enable and start the NetworkManager
-```asm
+<pre>
 # systemctl enable NetworkManager
 # systemctl start NetworkManager
-```asm
+</pre>
 After that, if you have a ethernet cable connected now you can use the internet. If you want to use wifi now you can do that with:
-```asm
+<pre>
 # nmtui
-```asm
+</pre>
 
 title3 Create new user
 We can use root for all the time but it's not ideal, so I'll set up new user for the daily use.
-```asm
+<pre>
 # useradd -m -G wheel berkay
 And I'll set password for the user
 # passwd berkay
-```asm
+</pre>
 
-We added user to wheel group that means the user can use the magical `sudo` command. But the sudo command is not enabled.
+We added user to wheel group that means the user can use the magical sudo command. But the sudo command is not enabled.
 
-Open the `/etc/sudoers` file and go all the way down to `# %wheel ALL=(ALL) ALL` and uncomment it.
-```asm
+Open the /etc/sudoers file and go all the way down to # %wheel ALL=(ALL) ALL and uncomment it.
+<pre>
 To open sudoers file run
 # EDITOR=vim visudo
-```asm
+</pre>
 
 Now we can exit and login to our newly created user.
 
 title3 Video Driver
 I don't know do we need it but it doesn't hurt:
-```asm
+<pre>
 If you are using Intel
 # sudo pacman -S xf86-video-intel
 If you are using AMD
 # sudo pacman -S xf86-video-amdgpu
 For the Nvidia
 # sudo pacman -S nvidia nvidia-utils
-```asm
+</pre>
 
 title3 Display Server
 We'll install Xorg for our display server:
-```asm
+<pre>
 # sudo pacman -S xorg-server xorg-xinit
-```asm
+</pre>
 
 title3 Window Manager
 I like window managers so why not?
-```asm
+<pre>
 # sudo pacman -S i3-gaps i3status dmenu rxvt-unicode picom
-```asm
+</pre>
 
 title3 Fonts
 Also we need some fonts to display:
-```asm
+<pre>
 # sudo pacman -S ttf-linux-libertine noto-fonts-emoji
-```asm
+</pre>
 
 title3 .xinitrc
-We need create a new file called `.xinitrc` to define what to when we run `startx` to enter GUI mode.
-```asm
+We need create a new file called .xinitrc to define what to when we run startx to enter GUI mode.
+<pre>
 picom &
 exec i3
-```asm
+</pre>
 
 If you're having issue with the keyboard layout you can also add:
-```asm
+<pre>
 setxkbmap -layout layout_name &
-```asm
+</pre>
 
 title3 Run your xinit
-We set up everything to start. You'll just need to run `startx` to enter your newly configured setup.
+We set up everything to start. You'll just need to run startx to enter your newly configured setup.
 
 title2 Conlusion
 You just installed Arch linux. We only did the base stuff, you can start to configure it to your taste.
@@ -275,5 +282,4 @@ You just installed Arch linux. We only did the base stuff, you can start to conf
 </div>
 
 </main>
-
-import footer.sphst
+`);

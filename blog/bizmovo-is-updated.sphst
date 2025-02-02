@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Bizmovo is updated";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title Bizmovo is updated
-date 24.07.2024
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>24.07.2024</div>`);
+
+_.html(`
 <a href="https://bizmovo.com">Bizmovo</a> is my web development studio and also my test board. I test my ideas on it and re-iterate all the time. Yesterday, I again itereated it into it's core goal, service business. And I'm going to stick with it.
 
 This time I did not designed the site, I bought a HTML template and applied it to the site backend. Currently, it looks amazing and gives me confidence and trust (I hope visitors think like that as well :^) ).
@@ -21,5 +28,4 @@ If you're looking for projects like this, feel free to schedule a call with me t
 </div>
 
 </main>
-
-import footer.sphst
+`);

@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "My e-mails are now fully mine";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title "My e-mails are now fully mine"
-date 27.07.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>27.07.2021</div>`);
+
+_.html(`
 Recently I managed to run my own mail server. It was a good thing to learn how e-mails work and also good to take back your privacy. Right now I can send and receive e-mails without asking Google, Microsoft or Yahoo.
 
 title2 Tools I'm using
@@ -38,5 +45,4 @@ ProtonMail look's secure than the gmail. But, the issue continues, you're still 
 </div>
 
 </main>
-
-import footer.sphst
+`);

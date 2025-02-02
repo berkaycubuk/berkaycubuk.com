@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Hugo vs Astro: A Comprehensive Comparison";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title "Hugo vs Astro: A Comprehensive Comparison"
-date 06.08.2024
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>06.08.2024</div>`);
+
+_.html(`
 When it comes to building static websites, developers often find themselves weighing different frameworks to determine which one best meets their needs. Among the many options available, Hugo and Astro stand out as two powerful yet distinct tools. Today, we'll explore the features, performance, and usability of Hugo and Astro, helping you decide which one might be the best fit for your next project.
 
 title2 What is Static Site Generation
@@ -91,5 +98,4 @@ I hope this comparison helps you make an informed decision. Feel free to explore
 </div>
 
 </main>
-
-import footer.sphst
+`);

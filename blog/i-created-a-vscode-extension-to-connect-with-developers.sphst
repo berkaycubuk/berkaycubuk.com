@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "I created a VsCode extension to connect with developers!";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title I created a VsCode extension to connect with developers!
-date 25.02.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>25.02.2021</div>`);
+
+_.html(`
 Yesterday, I released my most complicated extension to the VsCode marketplace. The core concept of **Codemate** is connecting with developers.
 
 title2 What is used to create Codemate?
@@ -52,5 +59,4 @@ You can download the extension from <a href="https://marketplace.visualstudio.co
 </div>
 
 </main>
-
-import footer.sphst
+`);

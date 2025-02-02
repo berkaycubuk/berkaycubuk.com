@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "What is SEO?";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title What is SEO?
-date 30.01.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>30.01.2021</div>`);
+
+_.html(`
 **Search Engine Optimization (SEO)** is making information more understandable and reachable for the internet.
 
 To understand it better we have to know how websites are created. They're created with code, million lines of code! For a normal person, code is just big chunk of words & symbols. For search engines it different, it's information to display on your browser.
@@ -29,5 +36,4 @@ There is something we need talk about, when you do improvements on your SEO you 
 </div>
 
 </main>
-
-import footer.sphst
+`);

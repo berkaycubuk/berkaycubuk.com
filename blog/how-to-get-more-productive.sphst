@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "How to get more productive";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title How to get more productive
-date 03.02.2021
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>03.02.2021</div>`);
+
+_.html(`
 In today's world, getting distracted is super easy. Also, for a big chunk of young people, doing something is worthless. And I want to disagree with that. We're human because we can do whatever we want. We can build softwares, buildings, and new technologies. To move humanity forward, we have to do.
 
 For myself, I'm currently a student (btw, I don't like university education 😕), and because of the pandemic, we have online lessons. I don't have to go to school every day, and I don't have to go by bus with all the people on it. For me, things are going well, and I can code more, learn more and create more.
@@ -23,5 +30,4 @@ Also, don't care too much about what other people tell you. You know yourself be
 </div>
 
 </main>
-
-import footer.sphst
+`);

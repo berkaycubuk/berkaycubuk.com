@@ -1,13 +1,20 @@
-import header.sphst
+_.headLinkCSS('/style.css');
 
-<main>
+const title = "Testing Laravel Continuously with CircleCI";
 
-<div class="container-slim">
+_.head('<title>' + title + '</title>');
 
-title Testing Laravel Continuously with CircleCI
-date 31.07.2024
+const { Header } = await _.import('./components/header.js');
 
+_.html(Header());
 
+_.html(`<main><div>`);
+
+_.h1(title);
+
+_.html(`<div>31.07.2024</div>`);
+
+_.html(`
 As developer we all know tests are important, but when it comes to really doing it, I think personally I need to get better at it.
 
 I'm working on Static Ninja, and shipping features continuously. In order to prevent system down, it should be tested before the deployment. I can just run the tests locally (which I do), but when a new team member joins, we have to make sure it tested even we tested locally.
@@ -16,7 +23,7 @@ GitHub actions are my best friend in terms of free cloud computing for tasks lik
 
 Here is the config I'm using:
 
-```asm
+<pre>
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
@@ -77,7 +84,7 @@ workflows:
   test:
     jobs:
       - build
-```asm
+</pre>
 
 Understanding this config took some time for me, but I'll explain what I understood.
 
@@ -85,23 +92,23 @@ Understanding this config took some time for me, but I'll explain what I underst
 
 If you will be doing browser testing, this circleci/browser-tools orb is amazing.
 
-```asm
+<pre>
 orbs:
   browser-tools: circleci/browser-tools@1.4.8
-```asm
+</pre>
 
 In the jobs section, this is similiar to the GitHub Actions, we just define the actions and the system to execute it.
 
-```asm
+<pre>
 jobs:
   build:
     docker:
       - image: cimg/php:8.3.9-browsers
-```asm
+</pre>
 
 cimg/php:8.3.9-browsers docker image is what we want, I think it comes with browser features as well with this one.
 
-```asm
+<pre>
 steps:
   - checkout
   - when:
@@ -141,7 +148,7 @@ steps:
         - run:
             name: "Run unit tests"
             command: ./vendor/bin/phpunit tests/Unit
-```asm
+</pre>
 
 In the steps, that strange when condition thing is added by me, may be there is a better way to do that. Basically I just wanted to make sure tests only executed when main branch changed, not the other ones. In my scale, executing this tests on all of the branches is expensive.
 
@@ -154,5 +161,4 @@ There are some steps about cache, to be honest, I don't really understood how th
 </div>
 
 </main>
-
-import footer.sphst
+`);

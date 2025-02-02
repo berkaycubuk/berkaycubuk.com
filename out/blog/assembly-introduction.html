@@ -1,52 +1,99 @@
-<!DOCTYPE html>
+<html>
     <head>
-        <title>Introduction to the Assembly Language</title>
-<meta name="viewport" content="width=device-width">
-<meta property="og:title" content="Introduction to the Assembly Language" />
-<meta property="twitter:title" content="Introduction to the Assembly Language" />
-        <link rel="stylesheet" href="/style.css" />
-
+      <link rel="stylesheet" href="/style.css">
+<title>Introduction to the Assembly Language</title>
     </head>
     <body>
-        <header class="header"> <div class="header-brand">Berkay Çubuk</div> <nav class="header-nav"> <a href="/">Home</a> <a href="/blog">Blog</a> <a href="/about">About</a> <!-- <a href="/resume">Resume</a> --> </nav> </header>
-<main>
-<div class="container-slim">
+      <header class="header">
+      <div class="header-brand">Berkay Çubuk</div>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </header>
+<main><div>
 <h1>Introduction to the Assembly Language</h1>
-<p>date 13.11.2020</p>
+<div>13.11.2020</div>
 <h2>What is Assembly language?</h2>
-<p>Assembly Language is **low-level** programming language which is used to program computers. It's depends on the machine code instructions, so</p>
-<p>every assembly language is designed for exactly one specific computer architecture.</p>
-<p>Assembly code is converted to **executable machine code** with an **assembler**. Computers will execute these machine codes to run our programs.</p>
+<p>
+Assembly Language is **low-level** programming language which is used to program computers. It's depends on the machine code instructions, so
+
+every assembly language is designed for exactly one specific computer architecture.
+
+Assembly code is converted to **executable machine code** with an **assembler**. Computers will execute these machine codes to run our programs.
+</p>
 <h4>Some advantages of assembly language:</h4>
-<p>- Requires less memory and execution time - Allows us to work with hardware specific jobs</p>
+<p>
+- Requires less memory and execution time
+- Allows us to work with hardware specific jobs
+</p>
 <h2>Simple example to print "Hello World" in assembly</h2>
-<p>```asm .MODEL SMALL                          ;select your model (your project estimated size)</p>
-<p>.STACK 64                             ;reserve 64 bytes of uninitialized storage</p>
-<p>.DATA                                 ;data segment MESSAGE DB "Hello World", "$"       ;message variable with string we want to print out</p>
-<p>.CODE                                 ;code segment MOV AX, @DATA                       ;required code block for small model MOV DS, AX</p>
-<p>MOV AH, 09H                         ;09H for interrupt to display string LEA DX, MESSAGE                     ;display the message INT 21H                             ;interrupt 21H</p>
-<p>MOV AX, 4C00H                       ;terminate with return code (same as 4CH) INT 21H                             ;interrupt 21H END                                   ;exit ```</p>
-<p>Now we have to setup some sort of code enviorement to run this code. I'd like to go with DOSBox. Visit <a href="https://www.dosbox.com/download.php?main=1">dosbox.com</a> to download latest version. And then we need to install assembler, for this I prefer Turbo Assembler (TASM).</p>
-<p>For more detailed enviorement setup guide you can visit <a href="https://mccshreyas.wordpress.com/2017/03/27/how-to-install-and-configure-tasm-on-windows-7810/">this blog post</a>.</p>
-<p>To run the program open your DOSBox and type `edit example.asm`. With this command emulator will open it's code editor. In here you can write your code. When you feel ready you can go top left and click to save and then click exit.</p>
-<img src="/images/assembly-introduction/dosbox-screenshot-1.png" alt="dosbox-screenshot-1" />
-<img src="/images/assembly-introduction/dosbox-screenshot-2.png" alt="dosbox-screenshot-2" />
-<p>After all we have to convert our code into machine code, in enviorement setup we installed TASM to do that.</p>
-<p>In terminal type `tasm example.asm`. With this command your asm file will be converted into obj file.</p>
-<img src="/images/assembly-introduction/dosbox-screenshot-3.png" alt="dosbox-screenshot-3" />
-<p>After we can run `tlink example.obj` to make it executable.</p>
-<img src="/images/assembly-introduction/dosbox-screenshot-4.png" alt="dosbox-screenshot-4" />
-<p>Now if you run `dir` command you should see your **example.exe** file.</p>
-<img src="/images/assembly-introduction/dosbox-screenshot-5.png" alt="dosbox-screenshot-5" />
-<p>To run that just type `example` and there we go, we have our *"Hello World"* printed.</p>
-<img src="/images/assembly-introduction/dosbox-screenshot-6.png" alt="dosbox-screenshot-6" />
+<pre>
+.MODEL SMALL                          ;select your model (your project estimated size)
+
+.STACK 64                             ;reserve 64 bytes of uninitialized storage
+
+.DATA                                 ;data segment
+  MESSAGE DB "Hello World", "$"       ;message variable with string we want to print out
+
+.CODE                                 ;code segment
+  MOV AX, @DATA                       ;required code block for small model
+  MOV DS, AX
+
+  MOV AH, 09H                         ;09H for interrupt to display string
+  LEA DX, MESSAGE                     ;display the message
+  INT 21H                             ;interrupt 21H
+
+  MOV AX, 4C00H                       ;terminate with return code (same as 4CH)
+  INT 21H                             ;interrupt 21H
+END                                   ;exit
+</pre>
+
+<p>
+Now we have to setup some sort of code enviorement to run this code. I'd like to go with DOSBox. Visit <a href="https://www.dosbox.com/download.php?main=1">dosbox.com</a> to download latest version. And then we need to install assembler, for this I prefer Turbo Assembler (TASM).
+
+For more detailed enviorement setup guide you can visit <a href="https://mccshreyas.wordpress.com/2017/03/27/how-to-install-and-configure-tasm-on-windows-7810/">this blog post</a>.
+
+To run the program open your DOSBox and type 'edit example.asm'. With this command emulator will open it's code editor. In here you can write your code. When you feel ready you can go top left and click to save and then click exit.
+
+image /images/assembly-introduction/dosbox-screenshot-1.png
+    alt dosbox-screenshot-1
+
+image /images/assembly-introduction/dosbox-screenshot-2.png
+    alt dosbox-screenshot-2
+
+After all we have to convert our code into machine code, in enviorement setup we installed TASM to do that.
+
+In terminal type 'tasm example.asm'. With this command your asm file will be converted into obj file.
+
+image /images/assembly-introduction/dosbox-screenshot-3.png
+    alt dosbox-screenshot-3
+
+After we can run 'tlink example.obj' to make it executable.
+
+image /images/assembly-introduction/dosbox-screenshot-4.png
+    alt dosbox-screenshot-4
+
+Now if you run 'dir' command you should see your **example.exe** file.
+
+image /images/assembly-introduction/dosbox-screenshot-5.png
+    alt dosbox-screenshot-5
+
+To run that just type 'example' and there we go, we have our *"Hello World"* printed.
+
+image /images/assembly-introduction/dosbox-screenshot-6.png
+    alt dosbox-screenshot-6
+</p>
 <h4>References</h4>
-<p>- <a href="https://en.wikipedia.org/wiki/Assembly_language">Wikipedia</a> - <a href="https://www.tutorialspoint.com/assembly_programming/assembly_introduction.htm">Tutorials Point</a> - <a href="http://www.c-jump.com/CIS77/ASM/Stack/lecture.html">C-Jump</a> - <a href="https://stackoverflow.com/questions/5364270/concept-of-mov-ax-cs-and-mov-ds-ax">Stackoverflow</a> - <a href="https://mccshreyas.wordpress.com/2017/03/27/how-to-install-and-configure-tasm-on-windows-7810/">MCCshreyas</a></p>
+
+- <a href="https://en.wikipedia.org/wiki/Assembly_language">Wikipedia</a>
+- <a href="https://www.tutorialspoint.com/assembly_programming/assembly_introduction.htm">Tutorials Point</a>
+- <a href="http://www.c-jump.com/CIS77/ASM/Stack/lecture.html">C-Jump</a>
+- <a href="https://stackoverflow.com/questions/5364270/concept-of-mov-ax-cs-and-mov-ds-ax">Stackoverflow</a>
+- <a href="https://mccshreyas.wordpress.com/2017/03/27/how-to-install-and-configure-tasm-on-windows-7810/">MCCshreyas</a>
 </div>
 </main>
-<footer>
-<p>Built with <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a>. <a href="mailto:berkay@berkaycubuk.com">Contact with me</a></p>
-</footer>
 
     </body>
-</html>
+  </html>
