@@ -1,8 +1,8 @@
+const fm = _.frontmatter({
+    title: "Introduction to the Assembly Language",
+});
+
 _.headLinkCSS('/style.css');
-
-const title = "Introduction to the Assembly Language";
-
-_.head('<title>' + title + '</title>');
 
 const { Header } = await _.import('./components/header.js');
 
@@ -10,7 +10,7 @@ _.html(Header());
 
 _.html(`<main><div>`);
 
-_.h1(title);
+_.h1(fm.title);
 
 _.html(`<div>13.11.2020</div>`);
 

@@ -1,8 +1,8 @@
+const fm = _.frontmatter({
+    title: "I switched from HUGO to Ghost, but why?",
+});
+
 _.headLinkCSS('/style.css');
-
-const title = "I switched from HUGO to Ghost, but why?";
-
-_.head('<title>' + title + '</title>');
 
 const { Header } = await _.import('./components/header.js');
 
@@ -10,7 +10,7 @@ _.html(Header());
 
 _.html(`<main><div>`);
 
-_.h1(title);
+_.h1(fm.title);
 
 _.html(`<div>27.01.2021</div>`);
 

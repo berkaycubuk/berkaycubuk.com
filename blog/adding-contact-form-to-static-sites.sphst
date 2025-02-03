@@ -1,8 +1,8 @@
+const fm = _.frontmatter({
+    title: "Adding Contact Form to Static Sites",
+});
+
 _.headLinkCSS('/style.css');
-
-const title = "Adding Contact Form to Static Sites";
-
-_.head('<title>' + title + '</title>');
 
 const { Header } = await _.import('./components/header.js');
 
@@ -10,7 +10,7 @@ _.html(Header());
 
 _.html(`<main><div>`);
 
-_.h1(title);
+_.h1(fm.title);
 
 _.html(`<div>09.06.2024</div>`);
 

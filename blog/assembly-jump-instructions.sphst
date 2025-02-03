@@ -1,8 +1,8 @@
+const fm = _.frontmatter({
+    title: "Assembly Jump Instructions",
+});
+
 _.headLinkCSS('/style.css');
-
-const title = "Assembly Jump Instructions";
-
-_.head('<title>' + title + '</title>');
 
 const { Header } = await _.import('./components/header.js');
 
@@ -10,7 +10,7 @@ _.html(Header());
 
 _.html(`<main><div>`);
 
-_.h1(title);
+_.h1(fm.title);
 
 _.html(`<div>15.11.2020</div>`);
 

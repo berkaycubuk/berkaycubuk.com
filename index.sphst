@@ -1,8 +1,8 @@
+const fm = _.frontmatter({
+    title: "Berkay's Space on the Internet",
+});
+
 _.headLinkCSS('/style.css');
-
-const title = "Berkay's Space on the Internet";
-
-_.head('<title>' + title + '</title>');
 
 const { Header } = await _.import('./components/header.js');
 
@@ -10,7 +10,7 @@ _.html(Header());
 
 _.html(`<main><div>`);
 
-_.h1(title);
+_.h1(fm.title);
 
 _.html(`<p>Hi there, this is my website where I write and share things.</p>`);
 

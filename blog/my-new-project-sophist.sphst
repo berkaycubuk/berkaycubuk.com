@@ -1,8 +1,8 @@
+const fm = _.frontmatter({
+    title: "My New Project: Sophist",
+});
+
 _.headLinkCSS('/style.css');
-
-const title = "My New Project: Sophist";
-
-_.head('<title>' + title + '</title>');
 
 const { Header } = await _.import('./components/header.js');
 
@@ -10,7 +10,7 @@ _.html(Header());
 
 _.html(`<main><div>`);
 
-_.h1(title);
+_.h1(fm.title);
 
 _.html(`<div>08.12.2024</div>`);
 

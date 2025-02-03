@@ -1,8 +1,8 @@
+const fm = _.frontmatter({
+    title: "How to filter your business ideas?",
+});
+
 _.headLinkCSS('/style.css');
-
-const title = "How to filter your business ideas?";
-
-_.head('<title>' + title + '</title>');
 
 const { Header } = await _.import('./components/header.js');
 
@@ -10,7 +10,7 @@ _.html(Header());
 
 _.html(`<main><div>`);
 
-_.h1(title);
+_.h1(fm.title);
 
 _.html(`<div>11.02.2021</div>`);
 
