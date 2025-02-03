@@ -1,6 +1,8 @@
-_.headLinkCSS('/style.css');
+const fm = _.frontmatter({
+    title: "About me"
+});
 
-_.head('<title>About me</title>');
+await _.import('./main.css');
 
 const { Header } = await _.import('./components.js');
 
@@ -8,12 +10,14 @@ _.html(Header());
 
 _.html(`<main><div class="container-slim">`);
 
-_.h1(`About me`);
+_.h1(fm.title);
 
-_.html(`<p>I'm a software engineer who enjoys technology.</p>`);
+_.markdown(`
+I'm a software engineer who enjoys technology.
 
-_.html(`<p>I currently live in Turkey, and working as a Blockhain Engineer.</p>`);
+I currently live in Turkey, and working as a Blockhain Engineer.
 
-_.html(`<p>Fun fact about this site: I know it looks ugly, but the fun part is I built it using my own markup language called <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a> :^)</p>`);
+Fun fact about this site: I know it looks ugly, but the fun part is I built it using my own markup language called <a href="https://github.com/berkaycubuk/sophist" target="_blank">Sophist</a> :^)
+`);
 
 _.html(`</div></main>`);

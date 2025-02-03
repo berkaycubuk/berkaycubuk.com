@@ -2,7 +2,7 @@ const fm = _.frontmatter({
     title: "Berkay's Space on the Internet",
 });
 
-_.headLinkCSS('/style.css');
+await _.import('./main.css');
 
 const { Header } = await _.import('./components.js');
 
@@ -12,6 +12,6 @@ _.html(`<main><div>`);
 
 _.h1(fm.title);
 
-_.html(`<p>Hi there, this is my website where I write and share things.</p>`);
+_.markdown(`Hi there, this is my website where I write and share things.`);
 
 _.html(`</div></main>`);
