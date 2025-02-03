@@ -2,7 +2,7 @@ import header.sphst
 
 <main>
 
-<div class="container-slim">
+<div class="container">
 
 title Java Variables
 date 19.11.2020

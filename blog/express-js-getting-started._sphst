@@ -2,7 +2,7 @@ import header.sphst
 
 <main>
 
-<div class="container-slim">
+<div class="container">
 
 title Express.js, a Node.js web application framework
 date 22.02.2021

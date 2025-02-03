@@ -2,7 +2,7 @@ import header.sphst
 
 <main>
 
-<div class="container-slim">
+<div class="container">
 
 title Continue to Express.js
 date 23.02.2021

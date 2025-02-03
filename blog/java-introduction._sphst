@@ -2,7 +2,7 @@ import header.sphst
 
 <main>
 
-<div class="container-slim">
+<div class="container">
 
 title Introduction to Java
 date 17.11.2020

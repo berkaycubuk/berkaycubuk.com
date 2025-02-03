@@ -2,13 +2,13 @@ const fm = _.frontmatter({
     title: "How to filter your business ideas?",
 });
 
-_.headLinkCSS('/style.css');
+await _.import('../main.css');
 
 const { Header } = await _.import('../components.js');
 
 _.html(Header());
 
-_.html(`<main><div>`);
+_.html(`<main><div class="container">`);
 
 _.h1(fm.title);
 

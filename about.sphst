@@ -8,7 +8,7 @@ const { Header } = await _.import('./components.js');
 
 _.html(Header());
 
-_.html(`<main><div class="container-slim">`);
+_.html(`<main><div class="container">`);
 
 _.h1(fm.title);
 
