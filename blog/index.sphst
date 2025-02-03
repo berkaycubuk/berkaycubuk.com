@@ -23,7 +23,7 @@ files.forEach(file => {
     if (!file.frontmatter.title) {
         return;
     }
-    _.html(`<a href="/blog/${file.url}">${file.frontmatter.title}</a>`);
+    _.html(`<a href="/blog/${file.url}">${file.frontmatter.title}</a><br/>`);
 });
 
 _.html(`</div>`);
