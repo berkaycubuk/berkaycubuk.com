@@ -4,7 +4,7 @@ const fm = _.frontmatter({
 
 _.headLinkCSS('/style.css');
 
-const { Header } = await _.import('./components/header.js');
+const { Header } = await _.import('../components.js');
 
 _.html(Header());
 

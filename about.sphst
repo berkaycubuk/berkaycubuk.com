@@ -2,7 +2,7 @@ _.headLinkCSS('/style.css');
 
 _.head('<title>About me</title>');
 
-const { Header } = await _.import('./components/header.js');
+const { Header } = await _.import('./components.js');
 
 _.html(Header());
 

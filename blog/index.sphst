@@ -1,20 +1,20 @@
+const fm = _.frontmatter({
+    title: "Blog",
+});
+
 _.headLinkCSS('/style.css');
 
-const title = "Blog";
-
-_.head('<title>' + title + '</title>');
-
-const { Header } = await _.import('./components/header.js');
+const { Header } = await _.import('../components.js');
 
 _.html(Header());
 
 _.html(`<main><div>`);
 
-_.h1(title);
+_.h1(fm.title);
 
 const files = await _.getFiles('./')
 
-_.html(`<div class="blog-items">`);
+_.html(`<div class="blog-items" style="display: flex; flex-direction: column; gap: 10px;">`);
 
 files.forEach(file => {
     if (!file.frontmatter) {
@@ -23,7 +23,7 @@ files.forEach(file => {
     if (!file.frontmatter.title) {
         return;
     }
-    _.html(`<a href="/blog/${file.url}">${file.frontmatter.title}</a><br/>`);
+    _.html(`<a href="/blog/${file.url}">${file.frontmatter.title}</a>`);
 });
 
 _.html(`</div>`);
