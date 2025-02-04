@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Assembly Interrupts",
+    date: '14.11.2020',
 });
 
 await _.import('../main.css');

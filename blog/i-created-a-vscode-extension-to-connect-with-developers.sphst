@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "I created a VsCode extension to connect with developers!",
+    date: '25.02.2021',
 });
 
 await _.import('../main.css');

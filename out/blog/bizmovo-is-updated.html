@@ -1,19 +1,67 @@
 <html>
     <head>
       <title>Bizmovo is updated</title>
-      <style>.container {
+      <style>* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
+}
+
+.header-inner {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header-brand {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 10px;
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #555;
+}
+
+.header-nav a:hover {
+    color: #000;
+}
+
+.blog-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.blog-item a {
+    text-decoration: none;
+    color: #555;
+}
+
+.blog-item a:hover {
+    color: #000;
+}
+
+.content-date {
+    margin-bottom: 10px;
 }</style>
     </head>
     <body>
-      <header class="header"><div class="container">
+      <header class="header"><div class="container header-inner">
       <div class="header-brand">Berkay Çubuk</div>
       <nav class="header-nav">
         <a href="/">Home</a>
         <a href="/blog">Blog</a>
-        <a href="/about">About</a>
+        <a href="/about.html">About</a>
       </nav>
     </div></header>
 <main><div class="container">

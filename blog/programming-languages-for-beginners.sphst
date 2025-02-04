@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Programming Languages for Beginners",
+    date: '02.02.2021',
 });
 
 await _.import('../main.css');

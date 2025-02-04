@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "I want to become better engineer",
+    date: '09.01.2024',
 });
 
 await _.import('../main.css');

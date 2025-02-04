@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Serving Multiple Sites in One Object Storage with Nginx",
+    date: '03.08.2024',
 });
 
 await _.import('../main.css');

@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Testing Laravel Continuously with CircleCI",
+    date: '31.07.2024',
 });
 
 await _.import('../main.css');

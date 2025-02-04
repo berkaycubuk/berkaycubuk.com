@@ -1,10 +1,11 @@
 const fm = _.frontmatter({
     title: "What is Wordpress?",
+    date: '12.02.2021',
 });
 
 await _.import('../main.css');
 
-const { Header } = await _.import('../components.js');
+const { Header, Date } = await _.import('../components.js');
 
 _.html(Header());
 
@@ -12,7 +13,7 @@ _.html(`<main><div class="container">`);
 
 _.h1(fm.title);
 
-_.html(`<div>12.02.2021</div>`);
+_.html(Date(fm.date));
 
 _.html(`
 Wordpress is an **open-source** website builder. With Wordpress you can create blogs, e-commerce shops, landing pages and more... It has a marketplace for extensions and themes.

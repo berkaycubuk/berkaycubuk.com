@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Installing Arch on Bios Systems",
+    date: '28.07.2021',
 });
 
 await _.import('../main.css');

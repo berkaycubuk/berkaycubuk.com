@@ -1,0 +1,103 @@
+<html>
+    <head>
+      <title>Sophist Is Getting Better and Fun</title>
+      <style>* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header-inner {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header-brand {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 10px;
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #555;
+}
+
+.header-nav a:hover {
+    color: #000;
+}
+
+.blog-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.blog-item a {
+    text-decoration: none;
+    color: #555;
+}
+
+.blog-item a:hover {
+    color: #000;
+}
+
+.content-date {
+    margin-bottom: 10px;
+}</style>
+    </head>
+    <body>
+      <header class="header"><div class="container header-inner">
+      <div class="header-brand">Berkay Çubuk</div>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div></header>
+<main><div class="container">
+<h1>Sophist Is Getting Better and Fun</h1>
+<div class="content-date">04.02.2025</div>
+<p>Recently I rewrote Sophist from scratch with a different method. This time I used the power and simplicity of
+JavaScript, so every Sophist file is basically JavaScript with additional powers. This way it is much simpler
+to both develop a Sophist site and develop the Sophist itself.</p>
+<p>On the tech side, this time I used Deno and loving it. And thanks to simplicity, I managed to add a local web server
+that comes with Sophist.</p>
+<h2>Some examples</h2>
+<pre><code class="language-javascript">// sample.sphst file
+
+const message = &quot;This is basically JavaScript!&quot;;
+console.log(message);
+
+// H2 &lt;h2&gt; element
+_.h2(&quot;This is heading 2&quot;);
+
+// It even comes with frontmatter
+const fm = _.frontmatter({
+    title: &quot;Hello world&quot;,
+});
+
+_.h1(fm.title)
+
+// Markdown? Yeah we have it!
+_.markdown(&#39;### Markdown supported here!&#39;);
+</code></pre>
+<p><code>_</code> is a special object that comes with functions. Element like functions (h1, h2, html, etc..) are directly
+printed into the html output in the order you call them. So it makes it so much easy and fun to build a web page.</p>
+<p>Make sure to check the source code of this site to see Sophist in action =&gt; <a href="https://github.com/berkaycubuk/sophist" target="_blank">github.com/berkaycubuk/sophist</a></p>
+<h2>How to use it in terminal?</h2>
+<p>When you run <code>sophist .</code> basically it will search all the sophist files and generate an output in a folder called out.</p>
+<p>If you run <code>sophist serve .</code> you can see your site locally in action on port 8000.</p>
+
+</div></main>
+    </body>
+  </html>

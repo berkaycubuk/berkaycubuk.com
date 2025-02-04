@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "I switched from HUGO to Ghost, but why?",
+    date: '27.01.2021',
 });
 
 await _.import('../main.css');

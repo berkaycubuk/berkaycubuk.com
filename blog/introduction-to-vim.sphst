@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Introduction to Vim",
+    date: '26.02.2021',
 });
 
 await _.import('../main.css');

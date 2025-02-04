@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "This Year\'s Goal: 11 Months 11 Products",
+    date: '25.01.2023',
 });
 
 await _.import('../main.css');

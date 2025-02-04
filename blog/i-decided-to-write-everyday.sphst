@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "📝 I decided to write every day",
+    date: '29.01.2021',
 });
 
 await _.import('../main.css');

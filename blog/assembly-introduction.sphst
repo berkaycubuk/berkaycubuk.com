@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Introduction to the Assembly Language",
+    date: '13.11.2020',
 });
 
 await _.import('../main.css');

@@ -1,52 +1,100 @@
 <html>
     <head>
       <title>Blog</title>
-      <style>.container {
+      <style>* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
+}
+
+.header-inner {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header-brand {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 10px;
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #555;
+}
+
+.header-nav a:hover {
+    color: #000;
+}
+
+.blog-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.blog-item a {
+    text-decoration: none;
+    color: #555;
+}
+
+.blog-item a:hover {
+    color: #000;
+}
+
+.content-date {
+    margin-bottom: 10px;
 }</style>
     </head>
     <body>
-      <header class="header"><div class="container">
+      <header class="header"><div class="container header-inner">
       <div class="header-brand">Berkay Çubuk</div>
       <nav class="header-nav">
         <a href="/">Home</a>
         <a href="/blog">Blog</a>
-        <a href="/about">About</a>
+        <a href="/about.html">About</a>
       </nav>
     </div></header>
 <main><div class="container">
 <h1>Blog</h1>
-<div class="blog-items" style="display: flex; flex-direction: column; gap: 10px;">
-<a href="/blog/hugo-theme-from-scratch">Hugo Theme From Scratch</a>
-<a href="/blog/assembly-jump-instructions">Assembly Jump Instructions</a>
-<a href="/blog/testing-laravel-continuously-with-circleci">Testing Laravel Continuously with CircleCI</a>
-<a href="/blog/what-is-seo">What is SEO?</a>
-<a href="/blog/i-decided-to-write-everyday">📝 I decided to write every day</a>
-<a href="/blog/how-to-get-more-productive">How to get more productive</a>
-<a href="/blog/i-created-a-vscode-extension-to-connect-with-developers">I created a VsCode extension to connect with developers!</a>
-<a href="/blog/programming-languages-for-beginners">Programming Languages for Beginners</a>
-<a href="/blog/assembly-introduction">Introduction to the Assembly Language</a>
-<a href="/blog/my-emails-are-now-fully-mine">My e-mails are now fully mine</a>
-<a href="/blog/how-to-filter-your-business-ideas">How to filter your business ideas?</a>
-<a href="/blog/index">Blog</a>
-<a href="/blog/bizmovo-is-updated">Bizmovo is updated</a>
-<a href="/blog/11-months-11-products">This Year's Goal: 11 Months 11 Products</a>
-<a href="/blog/what-is-domain-and-why-its-important">What is domain and why it's important</a>
-<a href="/blog/installing-arch-on-bios-systems">Installing Arch on Bios Systems</a>
-<a href="/blog/what-is-wordpress">What is Wordpress?</a>
-<a href="/blog/adding-contact-form-to-static-sites">Adding Contact Form to Static Sites</a>
-<a href="/blog/switching-to-astro-from-hugo">Switching to Astro from Hugo</a>
-<a href="/blog/serving-multiple-sites-in-one-object-storage-with-nginx">Serving Multiple Sites in One Object Storage with Nginx</a>
-<a href="/blog/my-new-project-sophist">My New Project: Sophist</a>
-<a href="/blog/why-i-switched-from-hugo-to-ghost">I switched from HUGO to Ghost, but why?</a>
-<a href="/blog/hugo-vs-astro">Hugo vs Astro: A Comprehensive Comparison</a>
-<a href="/blog/power-of-programming">Power of Programming</a>
-<a href="/blog/introduction-to-vim">Introduction to Vim</a>
-<a href="/blog/how-to-create-vscode-theme">How to Create VsCode Theme</a>
-<a href="/blog/assembly-interrupts">Assembly Interrupts</a>
-<a href="/blog/i-want-to-become-better-engineer">I want to become better engineer</a>
+<div class="blog-items">
+<div class="blog-item"><a href="/blog/sophist-is-getting-better-and-fun.html">Sophist Is Getting Better and Fun - <b style="font-size: 14px;">04.02.2025</b></a></div>
+<div class="blog-item"><a href="/blog/my-new-project-sophist.html">My New Project: Sophist - <b style="font-size: 14px;">08.12.2024</b></a></div>
+<div class="blog-item"><a href="/blog/hugo-vs-astro.html">Hugo vs Astro: A Comprehensive Comparison - <b style="font-size: 14px;">06.08.2024</b></a></div>
+<div class="blog-item"><a href="/blog/serving-multiple-sites-in-one-object-storage-with-nginx.html">Serving Multiple Sites in One Object Storage with Nginx - <b style="font-size: 14px;">03.08.2024</b></a></div>
+<div class="blog-item"><a href="/blog/testing-laravel-continuously-with-circleci.html">Testing Laravel Continuously with CircleCI - <b style="font-size: 14px;">31.07.2024</b></a></div>
+<div class="blog-item"><a href="/blog/bizmovo-is-updated.html">Bizmovo is updated - <b style="font-size: 14px;">24.07.2024</b></a></div>
+<div class="blog-item"><a href="/blog/adding-contact-form-to-static-sites.html">Adding Contact Form to Static Sites - <b style="font-size: 14px;">09.06.2024</b></a></div>
+<div class="blog-item"><a href="/blog/switching-to-astro-from-hugo.html">Switching to Astro from Hugo - <b style="font-size: 14px;">22.04.2024</b></a></div>
+<div class="blog-item"><a href="/blog/i-want-to-become-better-engineer.html">I want to become better engineer - <b style="font-size: 14px;">09.01.2024</b></a></div>
+<div class="blog-item"><a href="/blog/11-months-11-products.html">This Year's Goal: 11 Months 11 Products - <b style="font-size: 14px;">25.01.2023</b></a></div>
+<div class="blog-item"><a href="/blog/hugo-theme-from-scratch.html">Hugo Theme From Scratch - <b style="font-size: 14px;">14.12.2021</b></a></div>
+<div class="blog-item"><a href="/blog/installing-arch-on-bios-systems.html">Installing Arch on Bios Systems - <b style="font-size: 14px;">28.07.2021</b></a></div>
+<div class="blog-item"><a href="/blog/my-emails-are-now-fully-mine.html">My e-mails are now fully mine - <b style="font-size: 14px;">27.07.2021</b></a></div>
+<div class="blog-item"><a href="/blog/introduction-to-vim.html">Introduction to Vim - <b style="font-size: 14px;">26.02.2021</b></a></div>
+<div class="blog-item"><a href="/blog/i-created-a-vscode-extension-to-connect-with-developers.html">I created a VsCode extension to connect with developers! - <b style="font-size: 14px;">25.02.2021</b></a></div>
+<div class="blog-item"><a href="/blog/what-is-wordpress.html">What is Wordpress? - <b style="font-size: 14px;">12.02.2021</b></a></div>
+<div class="blog-item"><a href="/blog/how-to-filter-your-business-ideas.html">How to filter your business ideas? - <b style="font-size: 14px;">11.02.2021</b></a></div>
+<div class="blog-item"><a href="/blog/how-to-get-more-productive.html">How to get more productive - <b style="font-size: 14px;">03.02.2021</b></a></div>
+<div class="blog-item"><a href="/blog/programming-languages-for-beginners.html">Programming Languages for Beginners - <b style="font-size: 14px;">02.02.2021</b></a></div>
+<div class="blog-item"><a href="/blog/power-of-programming.html">Power of Programming - <b style="font-size: 14px;">01.02.2021</b></a></div>
+<div class="blog-item"><a href="/blog/what-is-seo.html">What is SEO? - <b style="font-size: 14px;">30.01.2021</b></a></div>
+<div class="blog-item"><a href="/blog/i-decided-to-write-everyday.html">📝 I decided to write every day - <b style="font-size: 14px;">29.01.2021</b></a></div>
+<div class="blog-item"><a href="/blog/why-i-switched-from-hugo-to-ghost.html">I switched from HUGO to Ghost, but why? - <b style="font-size: 14px;">27.01.2021</b></a></div>
+<div class="blog-item"><a href="/blog/how-to-create-vscode-theme.html">How to Create VsCode Theme - <b style="font-size: 14px;">20.12.2020</b></a></div>
+<div class="blog-item"><a href="/blog/what-is-domain-and-why-its-important.html">What is domain and why it's important - <b style="font-size: 14px;">14.12.2020</b></a></div>
+<div class="blog-item"><a href="/blog/assembly-jump-instructions.html">Assembly Jump Instructions - <b style="font-size: 14px;">15.11.2020</b></a></div>
+<div class="blog-item"><a href="/blog/assembly-interrupts.html">Assembly Interrupts - <b style="font-size: 14px;">14.11.2020</b></a></div>
+<div class="blog-item"><a href="/blog/assembly-introduction.html">Introduction to the Assembly Language - <b style="font-size: 14px;">13.11.2020</b></a></div>
 </div>
 </div></main>
     </body>

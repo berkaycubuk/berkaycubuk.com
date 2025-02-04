@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "What is domain and why it's important",
+    date: '14.12.2020',
 });
 
 await _.import('../main.css');

@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Bizmovo is updated",
+    date: '24.07.2024',
 });
 
 await _.import('../main.css');

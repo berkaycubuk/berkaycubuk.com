@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Hugo Theme From Scratch",
+    date: '14.12.2021',
 });
 
 await _.import('../main.css');

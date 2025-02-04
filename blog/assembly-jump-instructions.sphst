@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Assembly Jump Instructions",
+    date: '15.11.2020',
 });
 
 await _.import('../main.css');

@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Adding Contact Form to Static Sites",
+    date: '09.06.2024',
 });
 
 await _.import('../main.css');

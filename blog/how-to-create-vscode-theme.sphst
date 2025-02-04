@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "How to Create VsCode Theme",
+    date: '20.12.2020',
 });
 
 await _.import('../main.css');

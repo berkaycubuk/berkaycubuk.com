@@ -1,5 +1,6 @@
 const fm = _.frontmatter({
     title: "Power of Programming",
+    date: '01.02.2021',
 });
 
 await _.import('../main.css');
