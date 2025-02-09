@@ -1,0 +1,25 @@
+const fm = _.frontmatter({
+    title: "Building My AI Developer Intern",
+    date: '09.02.2025',
+});
+
+await _.import('../main.css');
+
+const { Header, Date } = await _.import('../components.js');
+
+_.html(Header());
+
+_.html(`<main><div class="container">`);
+
+_.h1(fm.title);
+
+_.html(Date(fm.date));
+
+_.markdown(`
+Cursor looks promising, but I want something that I can trust with for the privacy of my data. This is important because I want to improve my day-to-day work
+with AI. So, I just started to build my own Cursor like thing. Currently just plugged it into Gemini-2.0-flash to see is it works or not.
+`);
+
+_.html(`<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="en" dir="ltr">Started to build my own AI code intern that I can control which llm it use and privacy of the data. Cursor composer like diff is the next goal. <a href="https://t.co/BfTp1oh7jx">pic.twitter.com/BfTp1oh7jx</a></p>&mdash; Berkay Çubuk (@brkycubuk) <a href="https://twitter.com/brkycubuk/status/1888628582068465889?ref_src=twsrc%5Etfw">February 9, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`);
+
+_.html(`</div></main>`);
