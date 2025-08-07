@@ -1,0 +1,37 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+import IndexLayout from '../../layouts/IndexLayout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+<IndexLayout title={post.data.title}>
+  <div class="p-8">
+    <h1 class="text-4xl font-bold text-black mb-4">{post.data.title}</h1>
+
+    <article class="prose prose-lg prose-black font-light">
+      <Content />
+    </article>
+
+    <hr class="my-4 border-gray-400" />
+
+    <ul class="flex flex-col gap-4 mt-8 list-disc list-inside text-lg">
+      <li>
+        <a href="/projects" class="italic text-blue-700 font-light hover:font-normal">Things I built</a>
+      </li>
+      <li>
+        <a href="/about" class="italic text-blue-700 font-light hover:font-normal">Who the f*ck I am?</a>
+      </li>
+    </ul>
+  </div>
+</IndexLayout>

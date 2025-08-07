@@ -1,0 +1,21 @@
+{
+  "name": "berkaycubuk.com",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:berkaycubuk/berkaycubuk.com.git",
+  "author": "Berkay Çubuk <berkay@berkaycubuk.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "astro": "^5.12.8",
+    "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16"
+  }
+}
