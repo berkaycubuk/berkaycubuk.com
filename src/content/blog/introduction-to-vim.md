@@ -1,6 +1,6 @@
 ---
 title: Introduction to Vim
-date: 26.02.2021
+date: 2021-02-26
 date_updated: 2021-02-26T10:30:26.000Z
 excerpt: Vim is a magical text editor. It's a cross-platform editor so, it's available on most platforms.
 ---

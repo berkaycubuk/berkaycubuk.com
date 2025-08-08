@@ -1,6 +1,6 @@
 ---
 title: Introduction to Java
-date: 17.11.2020
+date: 2020-11-17
 date_updated: 2021-02-11T19:07:33.000Z
 ---
 

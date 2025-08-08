@@ -1,6 +1,6 @@
 ---
 title: Markdown Guide
-date: 16.11.2020
+date: 2020-11-16
 date_updated: 2021-02-11T19:07:08.000Z
 ---
 

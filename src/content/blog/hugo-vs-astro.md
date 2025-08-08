@@ -1,6 +1,6 @@
 ---
 title: "Hugo vs Astro: A Comprehensive Comparison"
-date: 06.08.2024
+date: 2024-08-06
 ---
 
 When it comes to building static websites, developers often find themselves weighing different frameworks to determine which one best meets their needs. Among the many options available, Hugo and Astro stand out as two powerful yet distinct tools. Today, we'll explore the features, performance, and usability of Hugo and Astro, helping you decide which one might be the best fit for your next project.

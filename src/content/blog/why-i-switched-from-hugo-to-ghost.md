@@ -1,6 +1,6 @@
 ---
 title: I switched from HUGO to Ghost, but why?
-date: 27.01.2021
+date: 2021-01-27
 date_updated: 2021-02-11T19:13:51.000Z
 ---
 

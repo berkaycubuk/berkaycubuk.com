@@ -1,6 +1,6 @@
 ---
 title: What is Wordpress?
-date: 12.02.2021
+date: 2021-02-12
 date_updated: 2021-02-12T07:58:47.000Z
 excerpt: Wordpress is an open-source website builder. With Wordpress you can create blogs, e-commerce shops, landing pages and more...
 ---

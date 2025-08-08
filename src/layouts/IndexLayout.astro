@@ -5,6 +5,9 @@ const { title } = Astro.props;
 ---
 <BaseLayout title={title}>
   <div class="max-w-[800px] mx-auto">
+    <header class="px-8 py-6">
+      <a class="font-bold text-lg hover:text-blue-600" href="/">Berkay's Space on the Internet</a>
+    </header>
     <slot />
   </div>
 </BaseLayout>

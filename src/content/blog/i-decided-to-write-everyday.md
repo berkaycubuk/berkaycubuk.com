@@ -1,6 +1,6 @@
 ---
 title: 📝 I decided to write every day
-date: 29.01.2021
+date: 2021-01-29
 date_updated: 2021-01-29T17:50:21.000Z
 tags: General
 ---

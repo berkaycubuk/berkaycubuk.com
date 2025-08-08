@@ -1,6 +1,6 @@
 ---
 title: I created a VsCode extension to connect with developers!
-date: 25.02.2021
+date: 2021-02-25
 date_updated: 2021-02-25T06:08:53.000Z
 excerpt: Yesterday, I released my most complicated extension to the VsCode marketplace. The core concept of Codemate is connecting with developers.
 ---

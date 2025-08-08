@@ -1,6 +1,6 @@
 ---
 title: "My e-mails are now fully mine"
-date: 27.07.2021
+date: 2021-07-27
 ---
 
 Recently I managed to run my own mail server. It was a good thing to learn how e-mails work and also good to take back your privacy. Right now I can send and receive e-mails without asking Google, Microsoft or Yahoo.

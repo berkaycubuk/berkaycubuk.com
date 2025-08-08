@@ -1,6 +1,6 @@
 ---
 title: Java Variables
-date: 19.11.2020
+date: 2020-11-19
 date_updated: 2021-02-11T19:08:29.000Z
 ---
 

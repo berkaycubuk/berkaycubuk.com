@@ -1,6 +1,6 @@
 ---
 title: What is domain and why it's important
-date: 14.12.2020
+date: 2020-12-14
 date_updated: 2021-02-11T19:09:04.000Z
 ---
 

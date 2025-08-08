@@ -1,6 +1,6 @@
 ---
 title: What is SEO?
-date: 30.01.2021
+date: 2021-01-30
 date_updated: 2021-02-11T19:14:36.000Z
 excerpt: Search Engine Optimization (SEO) is making information more understandable and reachable for the internet.
 ---

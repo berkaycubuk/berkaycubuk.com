@@ -1,6 +1,6 @@
 ---
 title: Java Comments
-date: 18.11.2020
+date: 2020-11-18
 date_updated: 2021-02-11T19:08:01.000Z
 ---
 

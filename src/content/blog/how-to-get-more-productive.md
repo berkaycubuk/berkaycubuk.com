@@ -1,6 +1,6 @@
 ---
 title: How to get more productive
-date: 03.02.2021
+date: 2021-02-03
 date_updated: 2021-02-11T19:16:23.000Z
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "I want to become better engineer"
-date: 09.01.2024
+date: 2024-01-09
 ---
 
 In Wikipedia, engineer is described [like this](https://en.wikipedia.org/wiki/Engineer):

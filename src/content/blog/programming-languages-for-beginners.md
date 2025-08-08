@@ -1,6 +1,6 @@
 ---
 title: Programming Languages for Beginners
-date: 02.02.2021
+date: 2021-02-02
 date_updated: 2021-02-11T19:15:34.000Z
 excerpt: A lot of people want to start programming but usually, they don't know where to start. I would like to share my thoughts with you.
 ---

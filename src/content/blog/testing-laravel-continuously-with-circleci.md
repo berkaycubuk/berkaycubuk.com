@@ -1,6 +1,6 @@
 ---
 title: Testing Laravel Continuously with CircleCI
-date: 31.07.2024
+date: 2024-07-31
 ---
 
 As developer we all know tests are important, but when it comes to really doing it, I think personally I need to get better at it.

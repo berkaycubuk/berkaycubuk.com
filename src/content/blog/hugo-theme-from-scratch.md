@@ -1,6 +1,6 @@
 ---
 title: "Hugo Theme From Scratch"
-date: 14.12.2021
+date: 2021-12-14
 draft: false
 ---
 

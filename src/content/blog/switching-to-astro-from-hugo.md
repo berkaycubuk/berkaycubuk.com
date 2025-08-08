@@ -1,6 +1,6 @@
 ---
 title: Switching to Astro from Hugo
-date: 22.04.2024
+date: 2024-04-22
 ---
 
 Here is another shiny tech switch blog post.

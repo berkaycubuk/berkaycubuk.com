@@ -1,6 +1,6 @@
 ---
 title: Power of Programming
-date: 01.02.2021
+date: 2021-02-01
 date_updated: 2021-02-11T19:15:06.000Z
 excerpt: We're living in a world of information with the power of the internet. Right now, you can learn whatever you want from the internet, and that's crazy!
 ---

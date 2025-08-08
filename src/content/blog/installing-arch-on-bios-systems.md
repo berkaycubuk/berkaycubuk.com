@@ -1,6 +1,6 @@
 ---
 title: "Installing Arch on Bios Systems"
-date: 28.07.2021
+date: 2021-07-28
 ---
 
 This simple guide will explain how to install Arch Linux on Bios systems. Methods and commands will probably change in time but the concept is not.
