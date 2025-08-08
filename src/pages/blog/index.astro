@@ -1,5 +1,9 @@
 ---
 import IndexLayout from '../../layouts/IndexLayout.astro';
+import { getCollection } from 'astro:content';
+import moment from 'moment';
+
+const blogPosts = await getCollection('blog');
 ---
 <IndexLayout title="Berkay's Space on the Internet">
   <div class="p-8">
@@ -11,12 +15,7 @@ import IndexLayout from '../../layouts/IndexLayout.astro';
     <hr class="my-4 border-gray-400" />
 
     <ul class="flex flex-col gap-4 my-4 list-disc list-inside text-lg">
-      <li>
-        <a href="/projects" class="italic text-blue-700 font-light hover:font-normal">Things I built</a>
-      </li>
-      <li>
-        <a href="/about" class="italic text-blue-700 font-light hover:font-normal">Who the f*ck I am?</a>
-      </li>
+      {blogPosts.sort((a, b) => moment(b.data.date) - moment(a.data.date)).map((post: any) => <li><a href={'/blog/' + post.slug} class="italic text-blue-700 font-light hover:font-normal">{post.data.title} - {post.data.date}</a></li>)}
     </ul>
 
     <hr class="my-4 border-gray-400" />
