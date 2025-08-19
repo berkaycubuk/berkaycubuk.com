@@ -6,7 +6,7 @@ const { title } = Astro.props;
 <BaseLayout title={title}>
   <div class="max-w-[800px] mx-auto">
     <header class="px-8 py-6 flex items-center justify-between">
-      <a class="font-bold text-lg hover:text-blue-600" href="/">Berkay's Space on the Internet</a>
+      <a class="flex items-center gap-2 font-bold text-lg hover:text-blue-600" href="/"><span id="secret-animation"></span>Berkay's Space on the Internet</a>
       <nav class="flex gap-4">
         <a class="hover:text-blue-600" href="/blog">Things I Wrote</a>
         <a class="hover:text-blue-600" href="/about">About</a>
@@ -15,3 +15,78 @@ const { title } = Astro.props;
     <slot />
   </div>
 </BaseLayout>
+
+<script>
+  const FREQUENCY = 440;
+
+  let note_context;
+  let note_node;
+  let gain_node;
+  let audioContextInitialized = false;
+
+  function initializeAudioContext() {
+    note_context = new AudioContext();
+    note_node = note_context.createOscillator();
+    gain_node = note_context.createGain();
+    note_node.frequency.value = FREQUENCY.toFixed(2);
+    gain_node.gain.value = 0;
+    note_node.connect(gain_node);
+    gain_node.connect(note_context.destination);
+    note_node.start();
+    audioContextInitialized = true;
+  }
+
+  function startNotePlaying() {
+    if (gain_node) {
+      gain_node.gain.setTargetAtTime(0.1, 0, 0.001)
+    }
+  }
+
+  function stopNotePlaying() {
+    if (gain_node) {
+      gain_node.gain.setTargetAtTime(0, 0, 0.001)
+    }
+  }
+
+  const specialAnimation = document.getElementById('secret-animation');
+  specialAnimation.addEventListener('click', (e) => {
+    e.preventDefault();
+    initializeAudioContext();
+  });
+
+  const message = [
+    1,0,1,0,1,0,0,0,
+    1,0,0,0,
+    1,1,1,0,1,0,0,0,
+    1,0,1,0,0,0,0,0,0,0,
+    1,0,1,0,1,0,0,0,
+    1,0,0,0,
+    1,0,1,0,1,0,1,1,1,0,0,0,
+    1,0,1,0,0,0,
+    1,1,1,0,1,0,1,1,1,0,1,1,1,0,0,0,
+    1,1,1,0,1,1,1,0,1,1,1,0,0,0,
+    1,0,1,1,1,0,1,0,0,0,
+    1,0,1,0,1,1,1,0,0,0,
+    1,1,1,0,1,1,1,0,0,0,0,0,0,0,
+    1,0,1,0,1,0,1,0,0,0,
+    1,0,1,0,0,0,
+    1,0,1,1,1,0,1,0,1,0,0,0,
+    1,0,1,1,1,0,0,0,
+    1,0,1,1,1,0,1,0,1
+  ];
+
+  let pointer = 0;
+
+  setInterval(() => {
+    specialAnimation.style.backgroundColor = message[pointer] == 1 ?  'red' : 'gray';
+    if (message[pointer] == 1) {
+      startNotePlaying();
+    } else {
+      stopNotePlaying();
+    }
+    pointer++;
+    if (pointer >= message.length) {
+      pointer = 0;
+    }
+  }, 300);
+</script>
