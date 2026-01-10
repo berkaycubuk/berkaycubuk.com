@@ -15,8 +15,11 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content } = await post.render();
+
+// Extract description from frontmatter or generate from content
+const description = post.data.description || post.body.split('\n').find(line => line.trim().length > 0)?.substring(0, 160) || post.data.title;
 ---
-<IndexLayout title={post.data.title}>
+<IndexLayout title={post.data.title} description={description} type="article">
   <div class="p-8">
     <h1 class="text-4xl font-bold text-black mb-4">{post.data.title}</h1>
 

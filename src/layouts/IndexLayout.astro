@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const { title } = Astro.props;
+const { title, description, image, type } = Astro.props;
 ---
-<BaseLayout title={title}>
+<BaseLayout title={title} description={description} image={image} type={type}>
   <div class="max-w-[800px] mx-auto">
     <header class="px-8 py-6 flex items-center justify-between">
       <a class="flex items-center gap-2 font-bold text-lg hover:text-blue-600" href="/"><span id="secret-animation"></span>Berkay's Space on the Internet</a>

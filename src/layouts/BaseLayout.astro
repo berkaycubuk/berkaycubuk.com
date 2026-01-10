@@ -1,14 +1,41 @@
 ---
 import '../styles/global.css'
 
-const { title } = Astro.props;
+const { title, description, image, type = 'website' } = Astro.props;
+
+// Default values
+const siteTitle = title || "Berkay's Space on the Internet";
+const siteDescription = description || "Hi, I'm Berkay and this is my space on the internet. I write, tinker and build things.";
+const siteUrl = 'https://berkaycubuk.com';
+const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
+const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.png`;
 ---
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
+    <meta name="description" content={siteDescription} />
+    <meta name="author" content="Berkay Cubuk" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={currentUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:site_name" content="Berkay's Space on the Internet" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={currentUrl} />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={siteDescription} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <title>{siteTitle}</title>
   </head>
   <body>
     <slot />
