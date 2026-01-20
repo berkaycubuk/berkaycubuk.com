@@ -1,17 +1,21 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
-import IndexLayout from '../../layouts/IndexLayout.astro';
+import BlogPost from '../layouts/BlogPost.astro';
+import IndexLayout from '../layouts/IndexLayout.astro';
 import moment from 'moment';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}));
+	const posts = await getCollection('writings');
+  return posts.map((post) => {
+    const fullPath = `${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}`;
+
+    return {
+      params: { slug: fullPath },
+      props: post,
+    }
+  });
 }
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<'writings'>;
 
 const post = Astro.props;
 const { Content } = await post.render();
@@ -33,10 +37,10 @@ const description = post.data.description || post.body.split('\n').find(line => 
 
     <ul class="flex flex-col gap-4 mt-8 list-disc list-inside text-lg">
       <li>
-        <a href="/projects" class="italic text-blue-700 font-light hover:font-normal">Things I built</a>
+        <a href="/projects" class="italic text-blue-700 font-light hover:font-normal">Projects</a>
       </li>
       <li>
-        <a href="/about" class="italic text-blue-700 font-light hover:font-normal">Who the f*ck I am?</a>
+        <a href="/about" class="italic text-blue-700 font-light hover:font-normal">About</a>
       </li>
     </ul>
   </div>

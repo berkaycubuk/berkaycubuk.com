@@ -1,0 +1,32 @@
+---
+import IndexLayout from '../layouts/IndexLayout.astro';
+import { getCollection } from 'astro:content';
+import moment from 'moment';
+
+const blogPosts = await getCollection('blog');
+---
+<IndexLayout title="Writings - Berkay's Space on the Internet" description="One of the greatest thing about humans is that we can express our thoughts and type them into text.">
+  <div class="p-8">
+    <h1 class="text-4xl font-bold text-black mb-4">Writings</h1>
+    <p class="text-lg font-light">
+    One of the greatest thing about humans is that we can express our thoughts and type them into text.
+    </p>
+
+    <hr class="my-4 border-gray-400" />
+
+    <ul class="flex flex-col gap-4 my-4 list-disc list-inside text-lg">
+{blogPosts.sort((a, b) => moment(b.data.date) - moment(a.data.date)).map((post: any) => <li><a href={moment(post.data.date).format('YYYY/MM/DD') + '/' + post.slug} class="italic text-blue-700 font-light hover:font-normal">{post.data.title} - {moment(post.data.date).format('MMM DD, YYYY')}</a></li>)}
+    </ul>
+
+    <hr class="my-4 border-gray-400" />
+
+    <ul class="flex flex-col gap-4 mt-8 list-disc list-inside text-lg">
+      <li>
+        <a href="/projects" class="italic text-blue-700 font-light hover:font-normal">Projects</a>
+      </li>
+      <li>
+        <a href="/about" class="italic text-blue-700 font-light hover:font-normal">About</a>
+      </li>
+    </ul>
+  </div>
+</IndexLayout>
