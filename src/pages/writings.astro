@@ -3,7 +3,7 @@ import IndexLayout from '../layouts/IndexLayout.astro';
 import { getCollection } from 'astro:content';
 import moment from 'moment';
 
-const blogPosts = await getCollection('blog');
+const blogPosts = await getCollection('writings');
 ---
 <IndexLayout title="Writings - Berkay's Space on the Internet" description="One of the greatest thing about humans is that we can express our thoughts and type them into text.">
   <div class="p-8">
