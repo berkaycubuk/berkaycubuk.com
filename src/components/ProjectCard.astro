@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  tags?: string[];
+  links?: { label: string; href: string }[];
+}
+
+const { title, description, tags = [], links = [] } = Astro.props;
+---
+<div class="border border-[var(--color-card-border)] rounded-xl p-5 bg-[var(--color-card-bg)] hover:border-[var(--color-accent)] transition-colors">
+  <h3 class="text-lg font-semibold text-[var(--color-text)]">{title}</h3>
+  <p class="mt-2 text-sm text-[var(--color-text-secondary)]">{description}</p>
+  {tags.length > 0 && (
+    <div class="mt-3 flex flex-wrap gap-2">
+      {tags.map(tag => (
+        <span class="text-xs px-2 py-0.5 rounded-full bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] border border-[var(--color-border)]">
+          {tag}
+        </span>
+      ))}
+    </div>
+  )}
+  {links.length > 0 && (
+    <div class="mt-3 flex flex-wrap gap-3">
+      {links.map(link => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+          {link.label} &rarr;
+        </a>
+      ))}
+    </div>
+  )}
+</div>

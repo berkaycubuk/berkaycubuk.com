@@ -1,0 +1,15 @@
+---
+const currentYear = new Date().getFullYear();
+---
+<footer class="px-6 py-8 max-w-[720px] mx-auto w-full">
+  <div class="border-t border-[var(--color-border)] pt-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--color-text-tertiary)]">
+      <span>&copy; {currentYear} Berkay Cubuk</span>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/berkaycubuk" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-text)] transition-colors">GitHub</a>
+        <a href="https://x.com/brkycubuk" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-text)] transition-colors">X</a>
+        <a href="mailto:berkay@berkaycubuk.com" class="hover:text-[var(--color-text)] transition-colors">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -20,6 +20,11 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={currentUrl} />
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={currentUrl} />
@@ -36,8 +41,17 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
     <meta name="twitter:image" content={socialImage} />
 
     <title>{siteTitle}</title>
+
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col">
     <slot />
   </body>
 </html>

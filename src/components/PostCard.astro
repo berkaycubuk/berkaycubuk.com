@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  href: string;
+  description?: string;
+  compact?: boolean;
+}
+
+const { title, date, href, description, compact = false } = Astro.props;
+---
+<a href={href} class="group block -mx-3 px-3 py-3 rounded-lg hover:bg-[var(--color-card-hover)] transition-colors">
+  <div class={`flex ${compact ? 'flex-row items-baseline justify-between gap-4' : 'flex-col gap-1'}`}>
+    <h3 class={`font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors ${compact ? 'text-base' : 'text-lg'}`}>
+      {title}
+    </h3>
+    <time class={`text-sm text-[var(--color-text-tertiary)] ${compact ? 'shrink-0' : ''}`}>
+      {date}
+    </time>
+  </div>
+  {description && !compact && (
+    <p class="mt-1 text-sm text-[var(--color-text-secondary)] line-clamp-2">{description}</p>
+  )}
+</a>

@@ -1,6 +1,5 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../layouts/BlogPost.astro';
 import IndexLayout from '../layouts/IndexLayout.astro';
 import moment from 'moment';
 
@@ -20,28 +19,30 @@ type Props = CollectionEntry<'writings'>;
 const post = Astro.props;
 const { Content } = await post.render();
 
-// Extract description from frontmatter or generate from content
 const description = post.data.description || post.body.split('\n').find(line => line.trim().length > 0)?.substring(0, 160) || post.data.title;
+const formattedDate = moment(post.data.date).format('MMM DD, YYYY');
+const isoDate = moment(post.data.date).toISOString();
 ---
 <IndexLayout title={post.data.title} description={description} type="article">
-  <div class="p-8">
-    <h1 class="text-4xl font-bold text-black mb-4">{post.data.title}</h1>
+  <div class="py-12">
+    <a href="/writings" class="inline-flex items-center text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors mb-8">
+      &larr; Back to writings
+    </a>
 
-    <div class="mb-4 text-gray-700">{moment(post.data.date).format('MMM DD, YYYY')}</div>
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)] mb-3">{post.data.title}</h1>
 
-    <article class="prose prose-lg prose-black font-light">
+    <time datetime={isoDate} class="text-sm text-[var(--color-text-tertiary)]">
+      {formattedDate}
+    </time>
+
+    <article class="prose prose-lg max-w-none mt-8">
       <Content />
     </article>
 
-    <hr class="my-4 border-gray-400" />
-
-    <ul class="flex flex-col gap-4 mt-8 list-disc list-inside text-lg">
-      <li>
-        <a href="/projects" class="italic text-blue-700 font-light hover:font-normal">Projects</a>
-      </li>
-      <li>
-        <a href="/about" class="italic text-blue-700 font-light hover:font-normal">About</a>
-      </li>
-    </ul>
+    <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
+      <a href="/writings" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+        &larr; All writings
+      </a>
+    </div>
   </div>
 </IndexLayout>

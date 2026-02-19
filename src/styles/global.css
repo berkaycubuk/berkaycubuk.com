@@ -1,10 +1,132 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+}
+
+:root {
+  --color-bg: #fafaf8;
+  --color-bg-secondary: #f3f3f0;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #888888;
+  --color-border: #e5e5e0;
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+  --color-card-bg: #ffffff;
+  --color-card-border: #e5e5e0;
+  --color-card-hover: #f9f9f6;
+  --color-selection-bg: #f97316;
+  --color-selection-text: #ffffff;
+  --color-prose-body: #374151;
+  --color-prose-headings: #1a1a1a;
+  --color-prose-links: #f97316;
+  --color-prose-bold: #1a1a1a;
+  --color-prose-code: #1a1a1a;
+  --color-prose-code-bg: #f3f3f0;
+  --color-prose-pre-bg: #1a1a1a;
+  --color-prose-pre-text: #f0f0ec;
+  --color-prose-hr: #e5e5e0;
+  --color-prose-quote-border: #f97316;
+  --color-prose-quote-text: #555555;
+}
+
+.dark {
+  --color-bg: #111111;
+  --color-bg-secondary: #1a1a1a;
+  --color-text: #f0f0ec;
+  --color-text-secondary: #a0a0a0;
+  --color-text-tertiary: #707070;
+  --color-border: #2a2a2a;
+  --color-accent: #fb923c;
+  --color-accent-hover: #f97316;
+  --color-card-bg: #181818;
+  --color-card-border: #2a2a2a;
+  --color-card-hover: #1e1e1e;
+  --color-selection-bg: #fb923c;
+  --color-selection-text: #111111;
+  --color-prose-body: #c0c0bc;
+  --color-prose-headings: #f0f0ec;
+  --color-prose-links: #fb923c;
+  --color-prose-bold: #f0f0ec;
+  --color-prose-code: #f0f0ec;
+  --color-prose-code-bg: #1a1a1a;
+  --color-prose-pre-bg: #0a0a0a;
+  --color-prose-pre-text: #f0f0ec;
+  --color-prose-hr: #2a2a2a;
+  --color-prose-quote-border: #fb923c;
+  --color-prose-quote-text: #a0a0a0;
+}
+
+::selection {
+  background-color: var(--color-selection-bg);
+  color: var(--color-selection-text);
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a {
+  transition: color 0.15s ease;
+}
+
+.prose {
+  --tw-prose-body: var(--color-prose-body);
+  --tw-prose-headings: var(--color-prose-headings);
+  --tw-prose-links: var(--color-prose-links);
+  --tw-prose-bold: var(--color-prose-bold);
+  --tw-prose-code: var(--color-prose-code);
+  --tw-prose-pre-bg: var(--color-prose-pre-bg);
+  --tw-prose-pre-code: var(--color-prose-pre-text);
+  --tw-prose-hr: var(--color-prose-hr);
+  --tw-prose-quotes: var(--color-prose-quote-text);
+  --tw-prose-quote-borders: var(--color-prose-quote-border);
+  --tw-prose-counters: var(--color-text-secondary);
+  --tw-prose-bullets: var(--color-text-tertiary);
+  --tw-prose-th-borders: var(--color-border);
+  --tw-prose-td-borders: var(--color-border);
+}
+
+.prose :where(code):not(:where(pre *)) {
+  background-color: var(--color-prose-code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose :where(code):not(:where(pre *))::before,
+.prose :where(code):not(:where(pre *))::after {
+  content: none;
+}
+
+.prose :where(a) {
+  text-decoration-color: var(--color-prose-links);
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.prose :where(a):hover {
+  color: var(--color-accent-hover);
+}
+
 #secret-animation {
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background-color: gray;
+  background-color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  flex-shrink: 0;
 }

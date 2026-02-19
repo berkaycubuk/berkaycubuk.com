@@ -2,24 +2,34 @@
 import IndexLayout from '../layouts/IndexLayout.astro';
 ---
 <IndexLayout title="About Berkay Cubuk" description="Software engineer working in blockchain industry. I write, tinker and build things.">
-  <div class="p-8">
-    <h1 class="text-4xl font-bold text-black mb-4">About me</h1>
-    <p class="text-lg font-light">
-    Hi, I'm Berkay and this is my space on the internet. I write, tinker and build things.
-    </p>
-    <hr class="my-4 border-gray-400" />
-    <p class="text-lg font-light">
-    I'm a software engineer who currently works in blockchain industry. Writing about yourself is always an issue :^)
-    Will write more when I know myself better.
+  <div class="py-12">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)] mb-3">About me</h1>
+    <p class="text-[var(--color-text-secondary)] mb-8">
+      Hi, I'm Berkay and this is my space on the internet.
     </p>
 
-    <ul class="flex flex-col gap-4 mt-8 list-disc list-inside text-lg">
-      <li>
-        <a href="/writings" class="italic text-blue-700 font-light hover:font-normal">Writings</a>
-      </li>
-      <li>
-        <a href="/projects" class="italic text-blue-700 font-light hover:font-normal">Projects</a>
-      </li>
-    </ul>
+    <div class="prose prose-lg max-w-none">
+      <p>
+        I'm a software engineer who currently works in the blockchain industry. I write, tinker and build things.
+      </p>
+      <p>
+        Writing about yourself is always an issue :^) Will write more when I know myself better.
+      </p>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
+      <h2 class="text-xl font-semibold text-[var(--color-text)] mb-4">Get in touch</h2>
+      <div class="flex flex-wrap gap-4">
+        <a href="https://github.com/berkaycubuk" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+          GitHub &rarr;
+        </a>
+        <a href="https://x.com/brkycubuk" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+          X &rarr;
+        </a>
+        <a href="mailto:berkay@berkaycubuk.com" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+          Email &rarr;
+        </a>
+      </div>
+    </div>
   </div>
 </IndexLayout>

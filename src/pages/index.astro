@@ -1,23 +1,34 @@
 ---
 import IndexLayout from '../layouts/IndexLayout.astro';
+import Hero from '../components/Hero.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+import moment from 'moment';
+
+const blogPosts = await getCollection('writings');
+const recentPosts = blogPosts
+  .sort((a, b) => moment(b.data.date).valueOf() - moment(a.data.date).valueOf())
+  .slice(0, 3);
 ---
 <IndexLayout title="Berkay's Space on the Internet">
-  <div class="p-8">
-    <h1 class="text-4xl font-bold text-black mb-4">Berkay's Space on the Internet</h1>
-    <p class="text-lg font-light">
-    Hi, I'm Berkay and this is my space on the internet. I write, tinker and build things.
-    </p>
+  <Hero />
 
-    <ul class="flex flex-col gap-4 mt-8 list-disc list-inside text-lg">
-      <li>
-        <a href="/writings" class="italic text-blue-700 font-light hover:font-normal">Writings</a>
-      </li>
-      <li>
-        <a href="/projects" class="italic text-blue-700 font-light hover:font-normal">Projects</a>
-      </li>
-      <li>
-        <a href="/about" class="italic text-blue-700 font-light hover:font-normal">About</a>
-      </li>
-    </ul>
-  </div>
+  <section class="pb-8">
+    <div class="flex items-baseline justify-between mb-6">
+      <h2 class="text-xl font-semibold text-[var(--color-text)]">Recent Writings</h2>
+      <a href="/writings" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+        View all &rarr;
+      </a>
+    </div>
+    <div class="flex flex-col">
+      {recentPosts.map((post: any) => (
+        <PostCard
+          title={post.data.title}
+          date={moment(post.data.date).format('MMM DD, YYYY')}
+          href={'/' + moment(post.data.date).format('YYYY/MM/DD') + '/' + post.slug}
+          compact
+        />
+      ))}
+    </div>
+  </section>
 </IndexLayout>
