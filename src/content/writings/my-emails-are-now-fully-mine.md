@@ -1,6 +1,7 @@
 ---
 title: "My e-mails are now fully mine"
 date: 2021-07-27
+description: "How I set up my own mail server with Postfix, Dovecot, and OpenDKIM to take back email privacy from Google and Microsoft."
 ---
 
 Recently I managed to run my own mail server. It was a good thing to learn how e-mails work and also good to take back your privacy. Right now I can send and receive e-mails without asking Google, Microsoft or Yahoo.

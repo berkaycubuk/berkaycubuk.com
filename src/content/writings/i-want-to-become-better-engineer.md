@@ -1,6 +1,7 @@
 ---
 title: "I want to become better engineer"
 date: 2024-01-09
+description: "Reflections on strengthening foundational software engineering skills, inspired by Jonathan Blow, and a plan to tackle harder technical problems."
 ---
 
 In Wikipedia, engineer is described [like this](https://en.wikipedia.org/wiki/Engineer):

@@ -2,6 +2,7 @@
 title: How to get more productive
 date: 2021-02-03
 date_updated: 2021-02-11T19:16:23.000Z
+description: "Practical tips on beating distractions and building a productive routine by writing daily, curating your feeds, and staying consistent."
 ---
 
 In today's world, getting distracted is super easy. Also, for a big chunk of young people, doing something is worthless. And I want to disagree with that. We're human because we can do whatever we want. We can build softwares, buildings, and new technologies. To move humanity forward, we have to do.

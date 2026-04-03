@@ -2,6 +2,7 @@
 title: Java Variables
 date: 2020-11-19
 date_updated: 2021-02-11T19:08:29.000Z
+description: "Learn how to declare and use Java variables including int, float, char, boolean, String, and other data types with examples."
 ---
 
 Variables are important pieces in programming. We are using them to store data values. In java, we have different types of variables:

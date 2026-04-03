@@ -9,8 +9,21 @@ const blogPosts = await getCollection('writings');
 const recentPosts = blogPosts
   .sort((a, b) => moment(b.data.date).valueOf() - moment(a.data.date).valueOf())
   .slice(0, 3);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Berkay's Space on the Internet",
+  "url": "https://berkaycubuk.com",
+  "author": {
+    "@type": "Person",
+    "name": "Berkay Cubuk",
+    "url": "https://berkaycubuk.com/about"
+  },
+  "description": "Hi, I'm Berkay and this is my space on the internet. I write, tinker and build things."
+};
 ---
-<IndexLayout title="Berkay's Space on the Internet">
+<IndexLayout title="Berkay's Space on the Internet" jsonLd={jsonLd}>
   <Hero />
 
   <section class="pb-8">

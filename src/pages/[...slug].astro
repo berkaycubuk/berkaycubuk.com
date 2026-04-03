@@ -22,8 +22,27 @@ const { Content } = await post.render();
 const description = post.data.description || post.body.split('\n').find(line => line.trim().length > 0)?.substring(0, 160) || post.data.title;
 const formattedDate = moment(post.data.date).format('MMM DD, YYYY');
 const isoDate = moment(post.data.date).toISOString();
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": description,
+  "datePublished": isoDate,
+  "dateModified": post.data.date_updated ? moment(post.data.date_updated).toISOString() : isoDate,
+  "author": {
+    "@type": "Person",
+    "name": "Berkay Cubuk",
+    "url": "https://berkaycubuk.com/about"
+  },
+  "url": `https://berkaycubuk.com/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/`,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://berkaycubuk.com/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/`
+  }
+};
 ---
-<IndexLayout title={post.data.title} description={description} type="article">
+<IndexLayout title={post.data.title} description={description} type="article" jsonLd={jsonLd}>
   <div class="py-12">
     <a href="/writings" class="inline-flex items-center text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors mb-8">
       &larr; Back to writings

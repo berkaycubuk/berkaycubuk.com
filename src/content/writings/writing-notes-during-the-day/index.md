@@ -1,6 +1,7 @@
 ---
 title: Writing notes during the day
 date: 2025-08-09
+description: "How daily note-taking on a typewriter became a thinking habit that clears my mind and inspires more public writing."
 ---
 
 I started to write daily notes 2 months ago when I bought my first typewriter. I wrote journals for the last 4 years and saw great value. Now I experiment with daily notes by typing things out

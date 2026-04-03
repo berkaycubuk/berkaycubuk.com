@@ -2,6 +2,7 @@
 title: Markdown Guide
 date: 2020-11-16
 date_updated: 2021-02-11T19:07:08.000Z
+description: "A beginner's guide to Markdown syntax covering headings, paragraphs, bold, and other formatting basics with HTML equivalents."
 ---
 
 ## What is Markdown?

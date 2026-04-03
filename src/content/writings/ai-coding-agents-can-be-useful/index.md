@@ -1,6 +1,7 @@
 ---
 title: AI Coding Agents can be Useful
 date: 2026-01-20
+description: "How I used Claude Code to build a personal todo app in Kotlin without knowing the language, plus tips on working with AI agents."
 ---
 
 AI is everywhere and looks like it will stick with us.

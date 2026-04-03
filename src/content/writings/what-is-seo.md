@@ -17,7 +17,7 @@ Ok, you made it magical, now give me an example:
     
 
 This code shown you when you search something.
-![](/images/what-is-seo/seo-description-screenshot.png)
+![SEO meta description shown in search results](/images/what-is-seo/seo-description-screenshot.png)
 If you make your website more SEO efficent, your website will have a better chance to listed on the top, and that's why people are hiring SEO experts.
 
 There is something we need talk about, when you do improvements on your SEO you won't see the results right after that, it takes some time. Because search engines need to index your new changes.

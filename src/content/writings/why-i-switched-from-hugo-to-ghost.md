@@ -2,6 +2,7 @@
 title: I switched from HUGO to Ghost, but why?
 date: 2021-01-27
 date_updated: 2021-02-11T19:13:51.000Z
+description: "Why I moved from Hugo to Ghost CMS, how Ghost works as both a traditional CMS and headless content API, and how to get started."
 ---
 
 For a long time I used just plain HTML & CSS for my website, it's doing the job but then I switched to Gatsby (tried it because it's popular) and then HUGO. 
@@ -22,31 +23,31 @@ If you don't want to manage servers or updates Ghost.org have [different plans](
 
 To understand Ghost, I'll share screenshots with you.
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-post-page.png)
+![Ghost post editor](/images/why-i-switched-from-hugo-to-ghost/ghost-post-page.png)
 
 Post Editor
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-posts-page.png)
+![Ghost posts page](/images/why-i-switched-from-hugo-to-ghost/ghost-posts-page.png)
 
 Posts Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-pages-page.png)
+![Ghost pages page](/images/why-i-switched-from-hugo-to-ghost/ghost-pages-page.png)
 
 Pages Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-tags-page.png)
+![Ghost tags page](/images/why-i-switched-from-hugo-to-ghost/ghost-tags-page.png)
 
 Tags Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-staff-page.png)
+![Ghost staff page](/images/why-i-switched-from-hugo-to-ghost/ghost-staff-page.png)
 
 Staff Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-settings-page.png)
+![Ghost settings page](/images/why-i-switched-from-hugo-to-ghost/ghost-settings-page.png)
 
 Settings Page
 
-![](/images/why-i-switched-from-hugo-to-ghost/ghost-design-page.png)
+![Ghost design page](/images/why-i-switched-from-hugo-to-ghost/ghost-design-page.png)
 
 Design Page
 

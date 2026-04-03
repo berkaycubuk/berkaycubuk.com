@@ -1,6 +1,7 @@
 ---
 title: "Installing Arch on Bios Systems"
 date: 2021-07-28
+description: "Step-by-step guide to installing Arch Linux on legacy BIOS systems, from creating a bootable USB to partitioning and setup."
 ---
 
 This simple guide will explain how to install Arch Linux on Bios systems. Methods and commands will probably change in time but the concept is not.

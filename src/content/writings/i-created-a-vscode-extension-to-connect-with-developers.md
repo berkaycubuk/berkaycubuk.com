@@ -34,8 +34,9 @@ I tried to keep it simple. Right now you can,
 - login with Github (it's more secure)
 - completely[ open source](https://github.com/berkaycubuk/codemate)
 
-![](/images/i-created-a-vscode-extension-to-connect-with-developers/codemate-video.gif)Codemate Extension
-![](/images/i-created-a-vscode-extension-to-connect-with-developers/codemate-video-2.gif)Login with Github
+![Codemate extension demo](/images/i-created-a-vscode-extension-to-connect-with-developers/codemate-video.gif)
+
+![Codemate login with Github demo](/images/i-created-a-vscode-extension-to-connect-with-developers/codemate-video-2.gif)
 ## What are the goals?
 
 - Reaching out more people

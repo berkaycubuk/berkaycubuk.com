@@ -3,6 +3,7 @@ title: What is Wordpress?
 date: 2021-02-12
 date_updated: 2021-02-12T07:58:47.000Z
 excerpt: Wordpress is an open-source website builder. With Wordpress you can create blogs, e-commerce shops, landing pages and more...
+description: "An introduction to WordPress, the open-source website builder, covering setup options, hosting, and useful tips for beginners."
 ---
 
 Wordpress is an **open-source** website builder. With Wordpress you can create blogs, e-commerce shops, landing pages and more... It has a marketplace for extensions and themes.

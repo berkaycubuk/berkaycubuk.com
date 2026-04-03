@@ -2,6 +2,7 @@
 title: Java Comments
 date: 2020-11-18
 date_updated: 2021-02-11T19:08:01.000Z
+description: "Learn the three types of Java comments: single-line, multi-line, and documentation comments with syntax examples."
 ---
 
 Comments, comments and comments. They're important part of our lives. With comments we can explain what we tried to do on our code.

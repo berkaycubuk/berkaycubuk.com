@@ -1,6 +1,7 @@
 ---
 title: Serving Multiple Sites in One Object Storage with Nginx
 date: 2024-08-03
+description: "How to serve multiple static sites from one object storage bucket using Nginx reverse proxy with subdomain-based routing."
 ---
 
 In [Static Ninja](https://staticninja.com), I'm working on a system that will allow people to upload their static sites and host them with a unique subdomain. The most secure and efficient way I found is using object storage to store the site contents and reverse proxying them with Nginx. This may not be the best way to do it, but perfect for my budget and scale.

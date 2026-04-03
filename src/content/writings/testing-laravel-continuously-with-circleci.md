@@ -1,6 +1,7 @@
 ---
 title: Testing Laravel Continuously with CircleCI
 date: 2024-07-31
+description: "How to set up continuous testing for a Laravel app using CircleCI, with a working config example and lessons learned."
 ---
 
 As developer we all know tests are important, but when it comes to really doing it, I think personally I need to get better at it.

@@ -1,6 +1,7 @@
 ---
 title: How Paper Tape Readers Work
 date: 2025-02-26
+description: "A quick look at how paper tape readers use photodiodes to convert holes in paper into data, inspired by Usagi Electric's build video."
 ---
 
 I just saw a video of <a href="https://youtu.be/xdyZEZTv-xg?si=0_15PewmKQkPkse9&t=976">Usagi Electric about building a paper tape reader from scratch!</a> So basically, paper tapes

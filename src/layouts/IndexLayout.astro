@@ -3,9 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const { title, description, image, type } = Astro.props;
+const { title, description, image, type, jsonLd } = Astro.props;
 ---
-<BaseLayout title={title} description={description} image={image} type={type}>
+<BaseLayout title={title} description={description} image={image} type={type} jsonLd={jsonLd}>
   <Header />
   <main class="flex-1 max-w-[720px] mx-auto w-full px-6">
     <slot />

@@ -12,6 +12,8 @@
     "deploy": "./deploy.sh"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.12.8",
     "moment": "^2.30.1",

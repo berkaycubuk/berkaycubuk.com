@@ -12,7 +12,7 @@ Vim is a magical text editor. It's a cross-platform editor so, it's available on
 You can download Vim from its [official website](https://www.vim.org/download.php). Installation progress will not be covered in this article.
 
 After installing Vim, just open up your terminal and type vim. You should see something like that:
-![](/images/introduction-to-vim/vim-welcome-screen.png)
+![Vim welcome screen in terminal](/images/introduction-to-vim/vim-welcome-screen.png)
 ## I can't exit from Vim!
 
 ![via GIPHY](https://media.giphy.com/media/5Zesu5VPNGJlm/giphy.gif)

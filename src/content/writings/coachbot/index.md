@@ -1,6 +1,7 @@
 ---
 title: "CoachBot: my Telegram health coach"
 date: 2026-02-22
+description: "I built CoachBot, a Telegram bot in Go that tracks food, workouts, and weight through natural conversation using an LLM API."
 ---
 
 I want to get healthier but I'm bad at keeping myself accountable. Tracking food, workouts, weight.. it all feels like a chore when you use those bloated apps. So I built my own thing.

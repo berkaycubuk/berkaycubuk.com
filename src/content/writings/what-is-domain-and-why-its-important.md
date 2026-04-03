@@ -2,6 +2,7 @@
 title: What is domain and why it's important
 date: 2020-12-14
 date_updated: 2021-02-11T19:09:04.000Z
+description: "Learn what a domain name is, why having a memorable one matters for your brand, and tips on where to buy one."
 ---
 
 ## What is domain?

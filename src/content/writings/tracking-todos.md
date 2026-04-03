@@ -1,6 +1,7 @@
 ---
 title: Tracking todos
 date: 2025-08-12
+description: "Why I ditched todo apps and switched to a simple notebook with dashes and plus signs to track tasks and shopping lists."
 ---
 
 Just like you I'm sick of tracking my todos, including shopping list. As an engineer I tend to use software for fixing problems but I think software is not enough yet for this problem. This is something I struggle with for years

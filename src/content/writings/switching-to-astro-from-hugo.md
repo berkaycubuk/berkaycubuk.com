@@ -1,6 +1,7 @@
 ---
 title: Switching to Astro from Hugo
 date: 2024-04-22
+description: "Why I migrated my site from Hugo to Astro, covering developer experience, component support, SSR capabilities, and the smooth migration."
 ---
 
 Here is another shiny tech switch blog post.

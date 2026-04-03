@@ -2,6 +2,7 @@
 title: Introduction to Java
 date: 2020-11-17
 date_updated: 2021-02-11T19:07:33.000Z
+description: "A beginner-friendly introduction to Java covering its platform editions (JSE, JEE, JME) and platform-independent architecture."
 ---
 
 ## What is Java?

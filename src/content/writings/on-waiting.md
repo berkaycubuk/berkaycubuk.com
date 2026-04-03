@@ -1,6 +1,7 @@
 ---
 title: On waiting
 date: 2025-08-10
+description: "A short reflection on how waiting disrupts focus and emotions, and a personal strategy to keep moving forward while you wait."
 ---
 
 Waiting someone or something is strange. If the waited is a human you love, it becomes hard and emotional. If the waited is an order of some sort, it becomes annoying.
