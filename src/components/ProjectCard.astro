@@ -23,7 +23,7 @@ const { title, description, tags = [], links = [] } = Astro.props;
   {links.length > 0 && (
     <div class="mt-3 flex flex-wrap gap-3">
       {links.map(link => (
-        <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+        <a href={link.href} {...(link.href.startsWith('/') ? {} : { target: "_blank", rel: "noopener noreferrer" })} class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
           {link.label} &rarr;
         </a>
       ))}
