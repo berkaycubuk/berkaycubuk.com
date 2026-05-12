@@ -4,7 +4,6 @@ import ThemeToggle from './ThemeToggle.astro';
 <header class="px-6 py-5 max-w-[720px] mx-auto w-full">
   <div class="flex items-center justify-between">
     <a class="flex items-center gap-2 font-semibold text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors" href="/">
-      <span id="secret-animation"></span>
       <span>Berkay Cubuk</span>
     </a>
     <div class="flex items-center gap-1">
@@ -17,80 +16,3 @@ import ThemeToggle from './ThemeToggle.astro';
     </div>
   </div>
 </header>
-
-<script>
-  const FREQUENCY = 440;
-
-  let note_context: AudioContext;
-  let note_node: OscillatorNode;
-  let gain_node: GainNode;
-  let audioContextInitialized = false;
-
-  function initializeAudioContext() {
-    note_context = new AudioContext();
-    note_node = note_context.createOscillator();
-    gain_node = note_context.createGain();
-    note_node.frequency.value = parseFloat(FREQUENCY.toFixed(2));
-    gain_node.gain.value = 0;
-    note_node.connect(gain_node);
-    gain_node.connect(note_context.destination);
-    note_node.start();
-    audioContextInitialized = true;
-  }
-
-  function startNotePlaying() {
-    if (gain_node) {
-      gain_node.gain.setTargetAtTime(0.1, 0, 0.001)
-    }
-  }
-
-  function stopNotePlaying() {
-    if (gain_node) {
-      gain_node.gain.setTargetAtTime(0, 0, 0.001)
-    }
-  }
-
-  const specialAnimation = document.getElementById('secret-animation');
-  specialAnimation?.addEventListener('click', (e) => {
-    e.preventDefault();
-    initializeAudioContext();
-  });
-
-  const message = [
-    1,0,1,0,1,0,0,0,
-    1,0,0,0,
-    1,1,1,0,1,0,0,0,
-    1,0,1,0,0,0,0,0,0,0,
-    1,0,1,0,1,0,0,0,
-    1,0,0,0,
-    1,0,1,0,1,0,1,1,1,0,0,0,
-    1,0,1,0,0,0,
-    1,1,1,0,1,0,1,1,1,0,1,1,1,0,0,0,
-    1,1,1,0,1,1,1,0,1,1,1,0,0,0,
-    1,0,1,1,1,0,1,0,0,0,
-    1,0,1,0,1,1,1,0,0,0,
-    1,1,1,0,1,1,1,0,0,0,0,0,0,0,
-    1,0,1,0,1,0,1,0,0,0,
-    1,0,1,0,0,0,
-    1,0,1,1,1,0,1,0,1,0,0,0,
-    1,0,1,1,1,0,0,0,
-    1,0,1,1,1,0,1,0,1
-  ];
-
-  let pointer = 0;
-
-  setInterval(() => {
-    if (specialAnimation) {
-      specialAnimation.style.backgroundColor = message[pointer] == 1 ? 'red' : 'var(--color-text-tertiary)';
-    }
-    if (message[pointer] == 1) {
-      startNotePlaying();
-    } else {
-      stopNotePlaying();
-    }
-    pointer++;
-    if (pointer >= message.length) {
-      pointer = 0;
-    }
-  }, 300);
-</script>
