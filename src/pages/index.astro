@@ -2,13 +2,17 @@
 import IndexLayout from '../layouts/IndexLayout.astro';
 import Hero from '../components/Hero.astro';
 import PostCard from '../components/PostCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 import moment from 'moment';
+import { projects } from '../data/projects';
 
 const blogPosts = await getCollection('writings');
 const recentPosts = blogPosts
   .sort((a, b) => moment(b.data.date).valueOf() - moment(a.data.date).valueOf())
   .slice(0, 3);
+
+const recentProjects = projects.slice(0, 2);
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -40,6 +44,25 @@ const jsonLd = {
           date={moment(post.data.date).format('MMM DD, YYYY')}
           href={'/' + moment(post.data.date).format('YYYY/MM/DD') + '/' + post.slug}
           compact
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="pb-8">
+    <div class="flex items-baseline justify-between mb-6">
+      <h2 class="text-xl font-semibold text-[var(--color-text)]">Recent Projects</h2>
+      <a href="/projects" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+        View all &rarr;
+      </a>
+    </div>
+    <div class="flex flex-col gap-4">
+      {recentProjects.map(project => (
+        <ProjectCard
+          title={project.title}
+          description={project.description}
+          tags={project.tags}
+          links={project.links}
         />
       ))}
     </div>
