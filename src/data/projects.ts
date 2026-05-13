@@ -17,7 +17,7 @@ export const projects: Project[] = [
   },
   {
     title: "CoachBot",
-    description: "Telegram bot that acts as a health coach. Track food, workouts, and weight through natural conversation.",
+    description: "Conversational AI health coach on Telegram. Logs meals, workouts and weight through natural chat — no forms, no app to install. Shows how a focused LLM tool replaces a clunky tracking app. Built solo in ~2 weeks.",
     tags: ["Go", "SQLite", "Telegram", "LLM"],
     links: [{ label: "Source", href: "https://github.com/berkaycubuk/coachbot" }],
   },

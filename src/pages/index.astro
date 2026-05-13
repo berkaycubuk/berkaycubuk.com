@@ -10,48 +10,77 @@ import { projects } from '../data/projects';
 const blogPosts = await getCollection('writings');
 const recentPosts = blogPosts
   .sort((a, b) => moment(b.data.date).valueOf() - moment(a.data.date).valueOf())
-  .slice(0, 3);
+  .slice(0, 5);
 
-const recentProjects = projects.slice(0, 2);
+const recentProjects = projects.slice(0, 3);
+
+const bookingUrl = "https://cal.com/berkaycubuk/discovery-call";
+
+const services = [
+  {
+    title: "Conversational bots",
+    body: "Telegram, Discord, or web. Stateful, tool-using, multi-user. Internal assistant, customer-facing concierge, or a niche coach that helps you to get better.",
+  },
+  {
+    title: "Internal AI automations",
+    body: "Automating note categorization, scheduling etc...",
+  },
+  {
+    title: "LLM-powered MVPs",
+    body: "Small, focused tools that prove an idea works before you commit to a full engineering hire or product build-out.",
+  },
+];
+
+const fitFor = [
+  "Indie founders adding an AI feature to a product that already has users.",
+  "Solo SaaS owners with one specific workflow worth automating.",
+  "Early teams who want a working prototype before hiring a full-time engineer.",
+];
+
+const process = [
+  { step: "1", title: "20-min discovery call", body: "Problem defined and potential solutions disgussed." },
+  { step: "2", title: "Proposal", body: "You get scoped and clearly defined proposal from me." },
+  { step: "3", title: "Build & ship", body: "You get constant updates about the progress. No surpises at the end." },
+  { step: "4", title: "Handoff", body: "Code, docs, deploy instructions etc.. everything will be delivered to you." },
+];
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Berkay's Space on the Internet",
+  "name": "Berkay Çubuk — AI tools for founders",
   "url": "https://berkaycubuk.com",
   "author": {
     "@type": "Person",
     "name": "Berkay Cubuk",
     "url": "https://berkaycubuk.com/about"
   },
-  "description": "Hi, I'm Berkay and this is my space on the internet. I write, tinker and build things."
+  "description": "I build small, focused AI tools for founders — Telegram bots, internal automations, LLM-powered MVPs. Shipped in weeks, built in Go."
 };
 ---
-<IndexLayout title="Berkay's Space on the Internet" jsonLd={jsonLd}>
+<IndexLayout
+  title="Berkay Çubuk — AI tools for founders"
+  description="I build small, focused AI tools for founders — Telegram bots, internal automations, LLM-powered MVPs. Shipped in weeks, built in Go."
+  jsonLd={jsonLd}
+>
   <Hero />
 
-  <section class="pb-8">
-    <div class="flex items-baseline justify-between mb-6">
-      <h2 class="text-xl font-semibold text-[var(--color-text)]">Recent Writings</h2>
-      <a href="/writings" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
-        View all &rarr;
-      </a>
-    </div>
-    <div class="flex flex-col">
-      {recentPosts.map((post: any) => (
-        <PostCard
-          title={post.data.title}
-          date={moment(post.data.date).format('MMM DD, YYYY')}
-          href={'/' + moment(post.data.date).format('YYYY/MM/DD') + '/' + post.slug}
-          compact
-        />
+  <!--
+  <section class="pb-12">
+    <h2 class="text-xl font-semibold text-[var(--color-text)] mb-4">Who this is for</h2>
+    <ul class="flex flex-col gap-2">
+      {fitFor.map(line => (
+        <li class="flex gap-3 text-[var(--color-text-secondary)]">
+          <span class="text-[var(--color-accent)] shrink-0">→</span>
+          <span>{line}</span>
+        </li>
       ))}
-    </div>
+    </ul>
   </section>
+  -->
 
-  <section class="pb-8">
+  <section id="work" class="pb-12 scroll-mt-20">
     <div class="flex items-baseline justify-between mb-6">
-      <h2 class="text-xl font-semibold text-[var(--color-text)]">Recent Projects</h2>
+      <h2 class="text-xl font-semibold text-[var(--color-text)]">Recent work</h2>
       <a href="/projects" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
         View all &rarr;
       </a>
@@ -63,6 +92,76 @@ const jsonLd = {
           description={project.description}
           tags={project.tags}
           links={project.links}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="pb-12">
+    <h2 class="text-xl font-semibold text-[var(--color-text)] mb-4">What I build</h2>
+    <div class="flex flex-col gap-4">
+      {services.map(s => (
+        <div class="border border-[var(--color-card-border)] rounded-xl p-5 bg-[var(--color-card-bg)]">
+          <h3 class="text-base font-semibold text-[var(--color-text)]">{s.title}</h3>
+          <p class="mt-2 text-sm text-[var(--color-text-secondary)]">{s.body}</p>
+        </div>
+      ))}
+    </div>
+    <!--
+    <p class="mt-4 text-sm text-[var(--color-text-tertiary)]">
+      All in Go — fast, single binary, no Python dependency hell, cheap to host.
+    </p>
+    -->
+  </section>
+
+  <section class="pb-12">
+    <h2 class="text-xl font-semibold text-[var(--color-text)] mb-4">How I work</h2>
+    <ol class="flex flex-col gap-4">
+      {process.map(p => (
+        <li class="flex gap-4">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-secondary)] text-sm font-medium flex items-center justify-center">
+            {p.step}
+          </span>
+          <div>
+            <h3 class="text-base font-semibold text-[var(--color-text)]">{p.title}</h3>
+            <p class="mt-1 text-sm text-[var(--color-text-secondary)]">{p.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="full-bleed bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)] my-12 py-16">
+    <div class="max-w-[720px] mx-auto px-6 text-center">
+      <p class="text-sm uppercase tracking-wider text-[var(--color-accent)] font-medium mb-3">
+        Let's talk
+      </p>
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)] mb-3">
+        Have a problem worth a<br />20-minute conversation?
+      </h2>
+      <p class="text-[var(--color-text-secondary)] mb-6 max-w-md mx-auto">
+        Grab a free 20-minute slot on my calendar. We'll talk through your problem and figure out if it's a fit.
+      </p>
+      <a href={bookingUrl} target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-3 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-medium rounded-lg transition-colors">
+        Book a call &rarr;
+      </a>
+    </div>
+  </section>
+
+  <section class="pb-8">
+    <div class="flex items-baseline justify-between mb-6">
+      <h2 class="text-xl font-semibold text-[var(--color-text)]">Recent writings</h2>
+      <a href="/writings" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+        View all &rarr;
+      </a>
+    </div>
+    <div class="flex flex-col">
+      {recentPosts.map((post: any) => (
+        <PostCard
+          title={post.data.title}
+          date={moment(post.data.date).format('MMM DD, YYYY')}
+          href={'/' + moment(post.data.date).format('YYYY/MM/DD') + '/' + post.slug}
+          compact
         />
       ))}
     </div>
