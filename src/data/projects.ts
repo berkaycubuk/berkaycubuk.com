@@ -7,6 +7,15 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "tarif.ist",
+    description: "Open-source multi-modal transit directions for Istanbul — metro, Marmaray, tram, funicular and İETT buses on a single map, with live disruption info and shareable routes.",
+    tags: ["TypeScript", "Vite", "Leaflet", "Tailwind CSS"],
+    links: [
+      { label: "Visit", href: "https://tarif.ist" },
+      { label: "Source", href: "https://github.com/berkaycubuk/tarif.ist" },
+    ],
+  },
+  {
     title: "Cellarium",
     description: "Artificial life simulator. Watch cells evolve in a bottle-shaped 2D environment.",
     tags: ["Go", "Ebiten", "WebAssembly"],
