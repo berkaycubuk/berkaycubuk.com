@@ -43,6 +43,8 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
 
     <title>{siteTitle}</title>
 
+    <script defer src="https://analytics.zambak.page/script.js" data-website-id="a48bf524-e96a-4e3d-9496-49f9ef6e4563"></script>
+
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <script is:inline>
