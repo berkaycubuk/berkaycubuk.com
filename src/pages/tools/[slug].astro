@@ -33,6 +33,14 @@ const description = tool.data.description || tool.data.title;
       <Content />
     </article>
 
+    <script define:vars={{ toolName: tool.data.title }}>
+      document.querySelectorAll('article a[href*="static.berkaycubuk.com/tool-binaries"]').forEach((link) => {
+        const filename = link.href.split('/').pop();
+        link.setAttribute('data-umami-event', `${toolName} download`);
+        link.setAttribute('data-umami-event-file', filename);
+      });
+    </script>
+
     <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
       <a href="/tools" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
         &larr; All tools
