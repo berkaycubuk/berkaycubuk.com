@@ -1,0 +1,26 @@
+---
+import IndexLayout from '../layouts/IndexLayout.astro';
+import ToolCard from '../components/ToolCard.astro';
+import { getCollection } from 'astro:content';
+
+const tools = await getCollection('tools');
+---
+<IndexLayout title="Tools - Berkay's Space on the Internet" description="Tools I've built to solve real problems.">
+  <div class="py-12">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)] mb-3">Tools</h1>
+    <p class="text-[var(--color-text-secondary)]">
+      Tools I've developed.
+    </p>
+
+    <div class="mt-8 flex flex-col">
+      {tools.map((tool: any) => (
+        <ToolCard
+          title={tool.data.title}
+          icon={tool.data.icon}
+          href={`/tools/${tool.slug}`}
+          description={tool.data.description}
+        />
+      ))}
+    </div>
+  </div>
+</IndexLayout>

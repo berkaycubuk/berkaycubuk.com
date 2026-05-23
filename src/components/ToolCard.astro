@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  icon: string;
+  href: string;
+  description?: string;
+}
+
+const { title, icon, href, description } = Astro.props;
+---
+<a href={href} class="group block -mx-3 px-3 py-4 rounded-lg hover:bg-[var(--color-card-hover)] transition-colors">
+  <div class="flex items-center gap-3">
+    <img src={icon} alt={`${title} icon`} class="w-20 h-20 shrink-0 rounded" />
+    <div class="flex flex-col gap-1">
+      <h3 class="font-medium text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
+        {title}
+      </h3>
+      {description && (
+        <p class="text-sm text-[var(--color-text-secondary)] line-clamp-2">{description}</p>
+      )}
+    </div>
+  </div>
+</a>

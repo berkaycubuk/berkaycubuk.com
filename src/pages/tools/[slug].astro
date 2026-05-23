@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import IndexLayout from '../../layouts/IndexLayout.astro';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  return tools.map((tool) => ({
+    params: { slug: tool.slug },
+    props: tool,
+  }));
+}
+
+const tool = Astro.props;
+const { Content } = await tool.render();
+
+const description = tool.data.description || tool.data.title;
+---
+<IndexLayout title={`${tool.data.title}`} description={description}>
+  <div class="py-12">
+    <a href="/tools" class="inline-flex items-center text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors mb-8">
+      &larr; Back to tools
+    </a>
+
+    <div class="flex items-center gap-3 mb-8">
+      <img src={tool.data.icon} alt={`${tool.data.title} icon`} class="w-24 h-24 rounded" />
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)]">{tool.data.title}</h1>
+        {tool.data.version && <p class="text-sm text-[var(--color-text-tertiary)] mt-1">v{tool.data.version}</p>}
+      </div>
+    </div>
+
+    <article class="prose prose-lg max-w-none">
+      <Content />
+    </article>
+
+    <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
+      <a href="/tools" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
+        &larr; All tools
+      </a>
+    </div>
+  </div>
+</IndexLayout>
