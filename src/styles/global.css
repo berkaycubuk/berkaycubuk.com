@@ -4,11 +4,11 @@
 @variant dark (&:where(.dark, .dark *));
 
 @font-face {
-  font-family: 'Inter';
+  font-family: 'DM Sans';
   font-style: normal;
-  font-weight: 300 700;
+  font-weight: 400 700;
   font-display: swap;
-  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  src: url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 }
 
 :root {
@@ -71,7 +71,7 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
   transition: background-color 0.2s ease, color 0.2s ease;

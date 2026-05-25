@@ -1,20 +1,108 @@
 ---
 const bookingUrl = "https://cal.com/berkaycubuk/discovery-call";
 ---
-<section class="py-10 sm:py-14">
-  <p class="text-[var(--color-accent)] font-medium mb-3">AI tools, shipped in weeks.</p>
-  <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--color-text)] mb-4">
-    I build small AI tools that solve problems.
-  </h1>
-  <p class="text-lg text-[var(--color-text-secondary)] max-w-lg mb-6">
-    Bots, automation and single binary go projects.
-  </p>
-  <div class="flex flex-wrap gap-3">
-    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-medium rounded-lg transition-colors text-sm">
-      Book a 20-min call
-    </a>
-    <a href="#work" class="px-5 py-2.5 border border-[var(--color-border)] hover:border-[var(--color-text-tertiary)] text-[var(--color-text)] font-medium rounded-lg transition-colors text-sm">
-      See recent work
-    </a>
+<section class="hero-section full-bleed relative overflow-hidden">
+  <div class="hero-glow"></div>
+
+  <div class="relative z-10 max-w-[1100px] mx-auto px-6 pt-20 pb-16 sm:pt-32 sm:pb-24 text-center">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/8 mb-8">
+      <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
+      <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-accent)]">For DTC brands</span>
+    </div>
+
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--color-text)] mb-6 leading-[1.05]">
+      Fewer apps. Fewer headaches.<br />
+      <span class="hero-gradient-text">More orders.</span>
+    </h1>
+
+    <p class="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-[600px] mx-auto mb-10 leading-relaxed">
+	  I replace your app-and-spreadsheet tangle with one custom system you own — built and shipped in 3 weeks.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+      <a
+        href={bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hero-cta-primary group"
+      >
+        Book a 20-min call
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+      <a href="#work" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors underline underline-offset-4 decoration-[var(--color-border)] hover:decoration-[var(--color-text-tertiary)]">
+        See recent work
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-0 sm:divide-x sm:divide-[var(--color-border)] max-w-[680px] mx-auto">
+      <div class="flex flex-col items-center gap-1 px-6">
+        <span class="text-2xl sm:text-3xl font-bold text-[var(--color-text)]">3 weeks</span>
+        <span class="text-xs text-[var(--color-text-tertiary)] uppercase tracking-wider">avg. delivery</span>
+      </div>
+      <div class="flex flex-col items-center gap-1 px-6">
+        <span class="text-2xl sm:text-3xl font-bold text-[var(--color-text)]">1 system</span>
+        <span class="text-xs text-[var(--color-text-tertiary)] uppercase tracking-wider">replaces your stack</span>
+      </div>
+      <div class="flex flex-col items-center gap-1 px-6">
+        <span class="text-2xl sm:text-3xl font-bold text-[var(--color-text)]">You own it</span>
+        <span class="text-xs text-[var(--color-text-tertiary)] uppercase tracking-wider">no lock-in, no SaaS fees</span>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  .hero-section {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(ellipse at center, rgba(251, 146, 60, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    animation: hero-pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes hero-pulse {
+    0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+  }
+
+  .hero-gradient-text {
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 40%, #ea580c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 0 0 rgba(251, 146, 60, 0.4);
+  }
+
+  .hero-cta-primary:hover {
+    background: var(--color-accent-hover);
+    box-shadow: 0 0 30px 4px rgba(251, 146, 60, 0.25);
+    transform: translateY(-1px);
+  }
+</style>

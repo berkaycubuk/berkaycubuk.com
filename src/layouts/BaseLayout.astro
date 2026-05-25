@@ -24,7 +24,7 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
@@ -43,7 +43,7 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
 
     <title>{siteTitle}</title>
 
-    <script defer src="https://analytics.zambak.page/script.js" data-website-id="a48bf524-e96a-4e3d-9496-49f9ef6e4563"></script>
+    {import.meta.env.PROD && <script defer src="https://analytics.zambak.page/script.js" data-website-id="a48bf524-e96a-4e3d-9496-49f9ef6e4563"></script>}
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
