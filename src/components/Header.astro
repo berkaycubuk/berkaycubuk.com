@@ -6,7 +6,9 @@ import ThemeToggle from './ThemeToggle.astro';
     <a class="flex items-center gap-2 font-semibold text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors" href="/">
       <span>Berkay Cubuk</span>
     </a>
-    <div class="flex items-center gap-1">
+
+    <!-- Desktop nav -->
+    <div class="hidden sm:flex items-center gap-1">
       <nav class="flex items-center gap-1">
         <a class="px-3 py-1.5 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/writings">Writings</a>
         <a class="px-3 py-1.5 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/projects">Projects</a>
@@ -15,5 +17,31 @@ import ThemeToggle from './ThemeToggle.astro';
       </nav>
       <ThemeToggle />
     </div>
+
+    <!-- Mobile hamburger -->
+    <div class="flex sm:hidden items-center gap-2">
+      <ThemeToggle />
+      <button id="mobile-menu-btn" class="p-2 rounded-lg text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" aria-label="Open menu">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
   </div>
+
+  <!-- Mobile menu -->
+  <nav id="mobile-menu" class="hidden sm:hidden mt-4 pb-2 border-t border-[var(--color-border)] pt-4 flex flex-col gap-1">
+    <a class="px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/writings">Writings</a>
+    <a class="px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/projects">Projects</a>
+    <a class="px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/tools">Tools</a>
+    <a class="px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/about">About</a>
+  </nav>
 </header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>
