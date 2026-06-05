@@ -1,0 +1,23 @@
+# Fabrika project manifest. Maps abstract verbs to concrete commands so the
+# tool stays stack-agnostic. Agents are NOT defined here — manage them in the UI.
+
+[project]
+name = "my-app"
+
+[verbs]                       # abstract verb -> concrete command, run in the repo
+# setup     = "npm install"
+# build     = "npm run build"
+# test      = "npm test"
+# lint      = "npm run lint -- --max-warnings 0"
+# typecheck = "tsc --noEmit"
+# verify    = "npm run test:acceptance"
+# e2e       = "npx playwright test"
+# run       = "npm run dev"
+
+[risk]                        # path globs -> tier; anything unmatched = low
+high   = ["**/auth/**", "**/payments/**", "migrations/**", "**/*.sql"]
+medium = ["src/api/**"]
+
+[autonomy]
+auto_merge = ["low"]          # tiers that merge without you
+escalate   = ["medium", "high"]
