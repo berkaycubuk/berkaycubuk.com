@@ -1,6 +1,6 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content';
-import IndexLayout from '../layouts/IndexLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import moment from 'moment';
 
 export async function getStaticPaths() {
@@ -23,6 +23,13 @@ const description = post.data.description || post.body.split('\n').find(line => 
 const formattedDate = moment(post.data.date).format('MMM DD, YYYY');
 const isoDate = moment(post.data.date).toISOString();
 
+const nav = [
+  { label: 'Writings', href: '/writings', active: true },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'About', href: '/about' },
+];
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -42,26 +49,502 @@ const jsonLd = {
   }
 };
 ---
-<IndexLayout title={post.data.title} description={description} type="article" jsonLd={jsonLd}>
-  <div class="py-12">
-    <a href="/writings" class="inline-flex items-center text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors mb-8">
-      &larr; Back to writings
-    </a>
+<BaseLayout title={post.data.title} description={description} type="article" jsonLd={jsonLd}>
+  <main id="stage" class="stage">
+    <header class="chrome">
+      <a href="/" class="floaty brand" data-role="brand">Berkay Çubuk</a>
+      <nav class="chrome">
+        {nav.map(n => (
+          <a href={n.href} class={`floaty nav-link ${n.active ? 'active' : ''}`} data-role="nav">{n.label}</a>
+        ))}
+      </nav>
+    </header>
 
-    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)] mb-3">{post.data.title}</h1>
+    <a href="/writings" class="floaty back" data-role="back">&larr; Writings</a>
 
-    <time datetime={isoDate} class="text-sm text-[var(--color-text-tertiary)]">
-      {formattedDate}
-    </time>
+    <h1 class="floaty post-title" data-role="title">{post.data.title}</h1>
+    <time datetime={isoDate} class="floaty post-date" data-role="date">{formattedDate}</time>
 
-    <article class="prose prose-lg max-w-none mt-8">
+    <article class="reading prose prose-lg">
       <Content />
+      <div class="reading-footer">
+        <a href="/writings">&larr; All writings</a>
+      </div>
     </article>
 
-    <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
-      <a href="/writings" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
-        &larr; All writings
-      </a>
-    </div>
-  </div>
-</IndexLayout>
+    <button id="theme-toggle" type="button" aria-label="Toggle dark mode" class="toggle">
+      <svg class="icon-sun" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+      <svg class="icon-moon" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    </button>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Monochrome palette — same language as the writings + home page. */
+  :global(html body) {
+    background-color: #ffffff;
+  }
+  :global(html.dark body) {
+    background-color: #111111;
+  }
+
+  .stage {
+    --fg: #000000;
+    --fg-dim: #666666;
+    position: relative;
+    flex: 1;
+    width: 100%;
+    overflow-x: hidden;
+    color: var(--fg);
+  }
+  :global(html.dark) .stage {
+    --fg: #f0f0f0;
+    --fg-dim: #8a8a8a;
+  }
+
+  /* Wrappers keep <header>/<nav> semantics but generate no box. */
+  .chrome {
+    display: contents;
+  }
+
+  .floaty {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    will-change: transform;
+  }
+  .stage.ready .floaty {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  .floaty.dragging {
+    cursor: grabbing;
+  }
+
+  /* Header chrome */
+  .brand {
+    font-family: 'Rock Salt', cursive;
+    font-weight: 400;
+    font-size: 15px;
+    white-space: nowrap;
+    color: var(--fg);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .brand:hover {
+    color: var(--fg-dim);
+  }
+  .nav-link {
+    font-size: 14px;
+    white-space: nowrap;
+    color: var(--fg-dim);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .nav-link:hover {
+    color: var(--fg);
+  }
+  .nav-link.active {
+    color: var(--fg);
+  }
+  .back {
+    font-size: 14px;
+    white-space: nowrap;
+    color: var(--fg-dim);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .back:hover {
+    color: var(--fg);
+  }
+
+  /* Floating post header */
+  .post-title {
+    margin: 0;
+    max-width: min(680px, calc(100vw - 48px));
+    font-size: clamp(1.6rem, 5vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: var(--fg);
+  }
+  .post-date {
+    font-size: 13px;
+    white-space: nowrap;
+    text-align: center;
+    color: var(--fg-dim);
+  }
+
+  /* Readable, static article column below the floating band. Kept scrollable
+     (not a drag surface) so touch scrolling keeps working while reading. */
+  .reading {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+  }
+  /* Content blocks are injected by <Content /> and don't carry this component's
+     scope id, so the scoped .floaty rule above can't reach them — restate the
+     positioning through :global() so each block floats and can be dragged. */
+  .reading > :global(.floaty) {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Spacing is driven by the JS stack, so drop the prose's own block margins
+       (they'd otherwise offset each absolutely-positioned block and overlap). */
+    margin: 0;
+    opacity: 0;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    will-change: transform;
+  }
+  .stage.ready .reading > :global(.floaty) {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  .reading > :global(.floaty.dragging) {
+    cursor: grabbing;
+  }
+  .reading-footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+  }
+  .reading-footer a {
+    font-size: 14px;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .reading-footer a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  /* Theme toggle — floats around the screen (fixed to the viewport, draggable),
+     starting bottom-right. JS sets left/top. */
+  .toggle {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 8px;
+    border: none;
+    background: none;
+    line-height: 0;
+    cursor: grab;
+    color: var(--fg);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    will-change: transform;
+    transition: color 0.15s ease;
+  }
+  .toggle:hover {
+    color: var(--fg-dim);
+  }
+  .toggle.dragging {
+    cursor: grabbing;
+  }
+  .toggle svg {
+    display: block;
+  }
+  :global(html.dark) .toggle .icon-moon {
+    display: none;
+  }
+  :global(html:not(.dark)) .toggle .icon-sun {
+    display: none;
+  }
+</style>
+
+<script>
+  const stage = document.getElementById('stage')!;
+  const reading = stage.querySelector<HTMLElement>('.reading')!;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // On touch ("mobile") devices, dragging the floating elements fights with
+  // scrolling — so disable drag + drift here and let the page scroll normally.
+  const noDrag = window.matchMedia('(pointer: coarse)').matches;
+
+  // Everything on the page floats and can be dragged — the same fluid motion as
+  // the home page. The chrome (brand, nav, back link, title, date) sits in a top
+  // band; each content block (paragraph, heading, list, code…) becomes its own
+  // draggable floaty, stacked in a readable column below.
+  function mkItem(el: HTMLElement, role: string) {
+    const content = role === 'content';
+    return {
+      el,
+      role,
+      ampX: reduceMotion ? 0 : (content ? 1.5 + Math.random() * 2.5 : 3 + Math.random() * 6),
+      ampY: reduceMotion ? 0 : (content ? 1.5 + Math.random() * 2.5 : 3 + Math.random() * 6),
+      speed: 0.00025 + Math.random() * 0.0004,
+      phase: Math.random() * Math.PI * 2,
+      fx: 0,
+      fy: 0,
+      anchorX: 0,
+      anchorY: 0,
+      dragging: false,
+    };
+  }
+
+  const items = Array.from(stage.querySelectorAll<HTMLElement>('.floaty'))
+    .map(el => mkItem(el, el.dataset.role || ''));
+
+  // Turn each top-level block the markdown rendered into a draggable floaty.
+  const contentItems = (Array.from(reading.children) as HTMLElement[]).map(el => {
+    el.classList.add('floaty');
+    el.dataset.role = 'content';
+    return mkItem(el, 'content');
+  });
+  items.push(...contentItems);
+
+  // The theme toggle floats around the screen too — fixed to the viewport so it
+  // never scrolls away, draggable, and drifting. Starts pinned bottom-right.
+  const toggle = document.getElementById('theme-toggle')!;
+  const toggleState = {
+    ampX: reduceMotion ? 0 : 3 + Math.random() * 5,
+    ampY: reduceMotion ? 0 : 3 + Math.random() * 5,
+    speed: 0.00025 + Math.random() * 0.0004,
+    phase: Math.random() * Math.PI * 2,
+    fx: 0,
+    fy: 0,
+    x: 0,
+    y: 0,
+    placed: false, // becomes true once the user drags it
+    dragging: false,
+  };
+
+  function placeToggle() {
+    if (toggleState.dragging || toggleState.placed) return;
+    const m = 28;
+    toggleState.x = window.innerWidth - m - toggle.offsetWidth;
+    toggleState.y = window.innerHeight - m - toggle.offsetHeight;
+    toggle.style.left = toggleState.x + 'px';
+    toggle.style.top = toggleState.y + 'px';
+  }
+
+  // Touch devices: re-enable native scrolling + text selection on the floaty
+  // elements (the .floaty rule disables them so dragging works on desktop).
+  if (noDrag) {
+    for (const it of [...items, { el: toggle }]) {
+      it.el.style.touchAction = 'auto';
+      it.el.style.cursor = 'auto';
+      it.el.style.setProperty('user-select', 'auto');
+      it.el.style.setProperty('-webkit-user-select', 'auto');
+    }
+  }
+
+  let zTop = 10;
+
+  function clamp(v: number, min: number, max: number) {
+    return Math.max(min, Math.min(max, v));
+  }
+
+  function byRole(role: string) {
+    return items.find(it => it.role === role);
+  }
+
+  function setAnchor(it: typeof items[number], x: number, y: number) {
+    if (it.dragging) return;
+    it.anchorX = x;
+    it.anchorY = y;
+    it.el.style.left = x + 'px';
+    it.el.style.top = y + 'px';
+  }
+
+  function layout() {
+    const w = stage.clientWidth;
+    const mobile = w < 640;
+    const pad = mobile ? 22 : 40;
+    const rowY = mobile ? 30 : 46;
+
+    const brand = byRole('brand');
+    const navItems = items.filter(it => it.role === 'nav');
+    const back = byRole('back');
+    const title = byRole('title');
+    const date = byRole('date');
+
+    if (brand) setAnchor(brand, pad + brand.el.offsetWidth / 2, rowY);
+
+    // Nav links flow in from the right edge. On mobile they drop to their own
+    // row so the (wide) handwritten brand doesn't overlap them.
+    const navY = mobile ? rowY + 36 : rowY;
+    let xr = w - pad;
+    for (let k = navItems.length - 1; k >= 0; k--) {
+      const it = navItems[k];
+      setAnchor(it, xr - it.el.offsetWidth / 2, navY);
+      xr -= it.el.offsetWidth + (mobile ? 12 : 22);
+    }
+
+    const backY = navY + (mobile ? 34 : 46);
+    if (back) setAnchor(back, pad + back.el.offsetWidth / 2, backY);
+
+    // Title + date centered above the article column. An explicit width is set so
+    // the absolutely-positioned box isn't shrink-wrapped to the space right of
+    // its left anchor — on mobile that let it use (nearly) the full width.
+    if (title) title.el.style.width = Math.min(680, w - 2 * pad) + 'px';
+    const titleTop = backY + (back ? back.el.offsetHeight / 2 : 0) + (mobile ? 40 : 66);
+    const titleY = titleTop + (title ? title.el.offsetHeight / 2 : 0);
+    if (title) setAnchor(title, w / 2, titleY);
+
+    const dateTop = titleY + (title ? title.el.offsetHeight / 2 : 0) + (mobile ? 16 : 20);
+    const dateY = dateTop + (date ? date.el.offsetHeight / 2 : 0);
+    if (date) setAnchor(date, w / 2, dateY);
+
+    const bandBottom = dateY + (date ? date.el.offsetHeight / 2 : 0) + (mobile ? 44 : 60);
+
+    // Stack each content block in a centered, readable column below the band.
+    const colW = Math.min(680, w - 2 * pad);
+    const gap = mobile ? 20 : 26;
+    let y = bandBottom;
+    contentItems.forEach((it, i) => {
+      it.el.style.width = colW + 'px';
+      // Give headings extra breathing room above them (the prose rhythm we
+      // dropped), except for the very first block.
+      const tag = it.el.tagName;
+      const isHeading = tag === 'H2' || tag === 'H3' || tag === 'H4';
+      if (isHeading && i > 0) y += mobile ? 18 : 30;
+      const h = it.el.offsetHeight;
+      setAnchor(it, w / 2, y + h / 2);
+      y += h + gap;
+    });
+    stage.style.minHeight = y + 80 + 'px';
+  }
+
+  layout();
+  placeToggle();
+  if (document.fonts?.ready) document.fonts.ready.then(layout);
+  window.addEventListener('load', layout);
+
+  // Continuous, organic drift — the "fluid" idle motion of the home page.
+  function frame(t: number) {
+    for (const it of items) {
+      if (!it.dragging) {
+        it.fx = Math.sin(t * it.speed + it.phase) * it.ampX;
+        it.fy = Math.cos(t * it.speed * 0.9 + it.phase) * it.ampY;
+      }
+      it.el.style.transform =
+        `translate(-50%, -50%) translate(${it.fx.toFixed(2)}px, ${it.fy.toFixed(2)}px)`;
+    }
+    if (!toggleState.dragging) {
+      toggleState.fx = Math.sin(t * toggleState.speed + toggleState.phase) * toggleState.ampX;
+      toggleState.fy = Math.cos(t * toggleState.speed * 0.9 + toggleState.phase) * toggleState.ampY;
+    }
+    toggle.style.transform = `translate(${toggleState.fx.toFixed(2)}px, ${toggleState.fy.toFixed(2)}px)`;
+    requestAnimationFrame(frame);
+  }
+  if (noDrag) {
+    // Static: keep the centering transform, skip the drift animation.
+    for (const it of items) it.el.style.transform = 'translate(-50%, -50%)';
+  } else {
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(() => stage.classList.add('ready'));
+
+  // Dragging via pointer events (works for mouse + touch). Disabled on touch
+  // devices so the page scrolls normally.
+  if (!noDrag) for (const it of items) {
+    let startPX = 0, startPY = 0, startAX = 0, startAY = 0, moved = false;
+
+    it.el.addEventListener('pointerdown', (e) => {
+      it.dragging = true;
+      moved = false;
+      startPX = e.clientX;
+      startPY = e.clientY;
+      startAX = it.anchorX;
+      startAY = it.anchorY;
+      it.el.classList.add('dragging');
+      it.el.style.zIndex = String(++zTop);
+      it.el.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    it.el.addEventListener('pointermove', (e) => {
+      if (!it.dragging) return;
+      const dx = e.clientX - startPX;
+      const dy = e.clientY - startPY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) moved = true;
+      it.anchorX = clamp(startAX + dx, 40, stage.clientWidth - 40);
+      it.anchorY = clamp(startAY + dy, 40, stage.scrollHeight - 40);
+      it.el.style.left = it.anchorX + 'px';
+      it.el.style.top = it.anchorY + 'px';
+    });
+
+    function end() {
+      if (!it.dragging) return;
+      it.dragging = false;
+      it.el.classList.remove('dragging');
+    }
+
+    it.el.addEventListener('pointerup', end);
+    it.el.addEventListener('pointercancel', end);
+
+    // A drag shouldn't also fire the link's navigation.
+    it.el.addEventListener('click', (e) => {
+      if (moved) e.preventDefault();
+    });
+  }
+
+  // Theme toggle — draggable within the viewport (fixed), click toggles theme.
+  // Dragging is disabled on touch devices; the click still toggles the theme.
+  {
+    let tsx = 0, tsy = 0, tax = 0, tay = 0, tmoved = false;
+
+    if (!noDrag) {
+      toggle.addEventListener('pointerdown', (e) => {
+        toggleState.dragging = true;
+        toggleState.placed = true; // stop auto-repositioning once moved
+        tmoved = false;
+        tsx = e.clientX;
+        tsy = e.clientY;
+        tax = toggleState.x;
+        tay = toggleState.y;
+        toggle.classList.add('dragging');
+        toggle.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      });
+
+      toggle.addEventListener('pointermove', (e) => {
+        if (!toggleState.dragging) return;
+        const dx = e.clientX - tsx;
+        const dy = e.clientY - tsy;
+        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) tmoved = true;
+        toggleState.x = clamp(tax + dx, 4, window.innerWidth - toggle.offsetWidth - 4);
+        toggleState.y = clamp(tay + dy, 4, window.innerHeight - toggle.offsetHeight - 4);
+        toggle.style.left = toggleState.x + 'px';
+        toggle.style.top = toggleState.y + 'px';
+      });
+
+      function tend() {
+        if (!toggleState.dragging) return;
+        toggleState.dragging = false;
+        toggle.classList.remove('dragging');
+      }
+
+      toggle.addEventListener('pointerup', tend);
+      toggle.addEventListener('pointercancel', tend);
+    }
+
+    toggle.addEventListener('click', () => {
+      if (tmoved) return;
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch { /* ignore */ }
+    });
+  }
+
+  // Re-place the floating band + toggle when the viewport size changes.
+  let resizeTimer: number | undefined;
+  window.addEventListener('resize', () => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => { layout(); placeToggle(); }, 150);
+  });
+</script>
