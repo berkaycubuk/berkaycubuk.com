@@ -1,169 +1,437 @@
 ---
-import IndexLayout from '../layouts/IndexLayout.astro';
-import Hero from '../components/Hero.astro';
-import PostCard from '../components/PostCard.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { getCollection } from 'astro:content';
-import moment from 'moment';
-import { projects } from '../data/projects';
-
-const blogPosts = await getCollection('writings');
-const recentPosts = blogPosts
-  .sort((a, b) => moment(b.data.date).valueOf() - moment(a.data.date).valueOf())
-  .slice(0, 5);
-
-const recentProjects = projects.slice(0, 3);
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const bookingUrl = "https://cal.com/berkaycubuk/discovery-call";
+const fabrikaUrl = "https://fabrika-ai.com";
 
-const services = [
-  {
-    title: "Order & inventory systems",
-    body: "Replace your Shopify-app + spreadsheet stack with one system that tracks orders, syncs inventory, and alerts you before stockouts.",
-  },
-  {
-    title: "Custom dashboards & reporting",
-    body: "Pull data from Shopify, ad platforms, and fulfillment into one real-time dashboard. No more copying numbers between tabs.",
-  },
-  {
-    title: "Workflow automation",
-    body: "Automate returns processing, customer tagging, fulfillment routing — whatever manual process is eating your team's hours.",
-  },
+// Each element floats freely and can be dragged anywhere. x/y are the initial
+// offsets (px) from the center of the stage, mirroring the Figma scatter; mx/my
+// are the offsets used on narrow (mobile) screens. Both are scaled to fit the
+// viewport and overridden once the user drags + drops.
+const links = [
+  { id: "writings", label: "Writings", href: "/writings", x: -88, y: 4, mx: -59, my: 0 },
+  { id: "book", label: "Book a call", href: bookingUrl, x: 100, y: 2, mx: 75, my: -2, external: true },
+  { id: "work", label: "Work", href: "/projects", x: -178, y: 90, mx: -105, my: 80 },
+  { id: "contact", label: "Contact", href: "mailto:berkay@berkaycubuk.com", x: 195, y: 95, mx: 123, my: 76 },
 ];
 
-const fitFor = [
-  "DTC brands spending hours on manual processes that should be automated.",
-  "Shopify store owners duct-taping 5+ apps to do what one tool should.",
-  "Growing teams who need custom software but don't want to hire a dev team.",
-];
+const signature = { id: "signature", x: -5, y: 210, mx: 0, my: 147 };
 
-const process = [
-  { step: "1", title: "20-min discovery call", body: "Problem defined and potential solutions disgussed." },
-  { step: "2", title: "Proposal", body: "You get scoped and clearly defined proposal from me." },
-  { step: "3", title: "Build & ship", body: "You get constant updates about the progress. No surpises at the end." },
-  { step: "4", title: "Handoff", body: "Code, docs, deploy instructions etc.. everything will be delivered to you." },
+// Social icons — also floating + draggable. Brand glyphs are single-path SVGs.
+// NOTE: GitHub + X are confirmed; LinkedIn + YouTube are best-guess handles.
+const socials = [
+  {
+    id: "github",
+    label: "GitHub",
+    href: "https://github.com/berkaycubuk",
+    x: 235, y: -173, mx: -84, my: 271,
+    path: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/berkaycubuk",
+    x: 283, y: -173, mx: -28, my: 271,
+    path: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z",
+  },
+  {
+    id: "x",
+    label: "X",
+    href: "https://x.com/brkycubuk",
+    x: 331, y: -173, mx: 28, my: 271,
+    path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
+  },
+  {
+    id: "youtube",
+    label: "YouTube",
+    href: "https://www.youtube.com/@berkaycubuk",
+    x: 379, y: -173, mx: 84, my: 271,
+    path: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
+  },
 ];
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Berkay Cubuk — Dashboards & Monitoring Software for Industrial IoT",
+  "name": "Berkay Cubuk",
   "url": "https://berkaycubuk.com",
   "author": {
     "@type": "Person",
     "name": "Berkay Cubuk",
     "url": "https://berkaycubuk.com/about"
   },
-  "description": "I help instrumentation, automation, and connected-hardware teams ship customer portals, fleet monitoring, and MQTT-to-anything data pipelines — in weeks, not quarters."
+  "description": "Berkay Cubuk — engineer, writer, and builder. Writings, work, and a way to get in touch."
 };
 ---
-<IndexLayout
-  title="Berkay Cubuk — Dashboards & Monitoring Software for Industrial IoT"
-  description="I help instrumentation, automation, and connected-hardware teams ship customer portals, fleet monitoring, and MQTT-to-anything data pipelines — in weeks, not quarters."
+<BaseLayout
+  title="Berkay Çubuk — Engineer, Writer & Builder"
+  description="Berkay Cubuk — engineer, writer, and builder. Writings, work, and a way to get in touch."
   jsonLd={jsonLd}
 >
-  <Hero />
-
-  <!--
-  <section class="pb-12">
-    <h2 class="text-xl font-semibold text-[var(--color-text)] mb-4">Who this is for</h2>
-    <ul class="flex flex-col gap-2">
-      {fitFor.map(line => (
-        <li class="flex gap-3 text-[var(--color-text-secondary)]">
-          <span class="text-[var(--color-accent)] shrink-0">→</span>
-          <span>{line}</span>
-        </li>
-      ))}
-    </ul>
-  </section>
-  -->
-
-  <section id="work" class="pb-12 scroll-mt-20">
-    <div class="flex items-baseline justify-between mb-6">
-      <h2 class="text-xl font-semibold text-[var(--color-text)]">Recent work</h2>
-      <a href="/projects" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
-        View all &rarr;
-      </a>
-    </div>
-    <div class="flex flex-col gap-4">
-      {recentProjects.map(project => (
-        <ProjectCard
-          title={project.title}
-          description={project.description}
-          tags={project.tags}
-          links={project.links}
-        />
-      ))}
-    </div>
-  </section>
-
-  <section class="pb-12">
-    <h2 class="text-xl font-semibold text-[var(--color-text)] mb-4">What I build</h2>
-    <div class="flex flex-col gap-4">
-      {services.map(s => (
-        <div class="border border-[var(--color-card-border)] rounded-xl p-5 bg-[var(--color-card-bg)]">
-          <h3 class="text-base font-semibold text-[var(--color-text)]">{s.title}</h3>
-          <p class="mt-2 text-sm text-[var(--color-text-secondary)]">{s.body}</p>
-        </div>
-      ))}
-    </div>
-    <!--
-    <p class="mt-4 text-sm text-[var(--color-text-tertiary)]">
-      All in Go — fast, single binary, no Python dependency hell, cheap to host.
+  <main id="stage" class="flex-1 relative overflow-hidden">
+    <p class="sr-only">
+      Hi, I'm Berkay Çubuk — a software engineer, writer, and builder. I'm currently
+      building Fabrika, a software factory to scale from sessions to tasks. Explore my
+      writings and work, book a call, or get in touch.
     </p>
-    -->
-  </section>
-
-  <section class="pb-12">
-    <h2 class="text-xl font-semibold text-[var(--color-text)] mb-4">How I work</h2>
-    <ol class="flex flex-col gap-4">
-      {process.map(p => (
-        <li class="flex gap-4">
-          <span class="shrink-0 w-7 h-7 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-secondary)] text-sm font-medium flex items-center justify-center">
-            {p.step}
-          </span>
-          <div>
-            <h3 class="text-base font-semibold text-[var(--color-text)]">{p.title}</h3>
-            <p class="mt-1 text-sm text-[var(--color-text-secondary)]">{p.body}</p>
-          </div>
-        </li>
-      ))}
-    </ol>
-  </section>
-
-  <section class="full-bleed bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)] my-12 py-16">
-    <div class="max-w-[720px] mx-auto px-6 text-center">
-      <p class="text-sm uppercase tracking-wider text-[var(--color-accent)] font-medium mb-3">
-        Let's talk
-      </p>
-      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)] mb-3">
-        Have a problem worth a<br />20-minute conversation?
-      </h2>
-      <p class="text-[var(--color-text-secondary)] mb-6 max-w-md mx-auto">
-        Grab a free 20-minute slot on my calendar. We'll talk through your problem and figure out if it's a fit.
-      </p>
-      <a href={bookingUrl} target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-3 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-medium rounded-lg transition-colors">
-        Book a call &rarr;
+    {links.map(link => (
+      <a
+        id={link.id}
+        href={link.href}
+        target={link.external ? "_blank" : undefined}
+        rel={link.external ? "noopener noreferrer" : undefined}
+        class="floaty link"
+        data-x={link.x}
+        data-y={link.y}
+        data-mx={link.mx}
+        data-my={link.my}
+      >
+        {link.label}
       </a>
-    </div>
-  </section>
+    ))}
+    <h1 id={signature.id} class="floaty signature" data-x={signature.x} data-y={signature.y} data-mx={signature.mx} data-my={signature.my}>
+      Berkay Çubuk
+    </h1>
 
-  <section class="pb-8">
-    <div class="flex items-baseline justify-between mb-6">
-      <h2 class="text-xl font-semibold text-[var(--color-text)]">Recent writings</h2>
-      <a href="/writings" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
-        View all &rarr;
+    <a
+      id="fabrika"
+      href={fabrikaUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="floaty card"
+      data-x="-300"
+      data-y="-179"
+      data-mx="0"
+      data-my="-151"
+    >
+      <span class="card-title">Building Fabrika</span>
+      <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 17 17 7" />
+        <path d="M8 7h9v9" />
+      </svg>
+      <span class="card-desc">Software factory to scale from sessions to tasks.</span>
+    </a>
+
+    {socials.map(social => (
+      <a
+        id={social.id}
+        href={social.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={social.label}
+        class="floaty social"
+        data-x={social.x}
+        data-y={social.y}
+        data-mx={social.mx}
+        data-my={social.my}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d={social.path} />
+        </svg>
       </a>
-    </div>
-    <div class="flex flex-col">
-      {recentPosts.map((post: any) => (
-        <PostCard
-          title={post.data.title}
-          date={moment(post.data.date).format('MMM DD, YYYY')}
-          href={'/' + moment(post.data.date).format('YYYY/MM/DD') + '/' + post.slug}
-          compact
-        />
-      ))}
-    </div>
-  </section>
-</IndexLayout>
+    ))}
+
+    <button
+      id="theme-toggle"
+      type="button"
+      aria-label="Toggle dark mode"
+      class="floaty toggle"
+      data-corner="br"
+    >
+      <svg class="icon-sun" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+      <svg class="icon-moon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    </button>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Figma palette by default (white canvas, black ink); inverts under .dark. */
+  :global(html body) {
+    background-color: #ffffff;
+  }
+  :global(html.dark body) {
+    background-color: #111111;
+  }
+
+  #stage {
+    --fg: #000000;
+    --fg-dim: #666666;
+    --card-bg: #f2f2f2;
+    --card-bg-hover: #ebebeb;
+    --card-desc: #333333;
+    color: var(--fg);
+  }
+  :global(html.dark) #stage {
+    --fg: #f0f0f0;
+    --fg-dim: #8a8a8a;
+    --card-bg: #1c1c1c;
+    --card-bg-hover: #242424;
+    --card-desc: #b4b4b4;
+  }
+
+  /* Visually hidden, but available to crawlers + screen readers. */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .floaty {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: grab;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    will-change: transform;
+  }
+
+  #stage.ready .floaty {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  .floaty.dragging {
+    cursor: grabbing;
+  }
+
+  .link {
+    font-size: 18px;
+    color: var(--fg);
+    transition: color 0.15s ease;
+  }
+
+  .link:hover {
+    color: var(--fg-dim);
+  }
+
+  .signature {
+    margin: 0;
+    font-family: 'Rock Salt', cursive;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--fg);
+  }
+
+  .card {
+    width: 263px;
+    padding: 18px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    white-space: normal;
+    text-align: left;
+    transition: background-color 0.15s ease;
+  }
+
+  .card:hover {
+    background-color: var(--card-bg-hover);
+  }
+
+  .card-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--fg);
+  }
+
+  .card-arrow {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    color: var(--fg);
+    transition: transform 0.15s ease;
+  }
+
+  .card:hover .card-arrow {
+    transform: translate(2px, -2px);
+  }
+
+  .card-desc {
+    display: block;
+    margin-top: 14px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--card-desc);
+  }
+
+  .social {
+    display: block;
+    line-height: 0;
+    color: var(--fg);
+    transition: color 0.15s ease;
+  }
+
+  .social:hover {
+    color: var(--fg-dim);
+  }
+
+  .toggle {
+    display: block;
+    padding: 0;
+    border: none;
+    background: none;
+    line-height: 0;
+    color: var(--fg);
+    transition: color 0.15s ease;
+  }
+
+  .toggle:hover {
+    color: var(--fg-dim);
+  }
+
+  .toggle svg {
+    display: block;
+  }
+
+  :global(html.dark) .toggle .icon-moon {
+    display: none;
+  }
+
+  :global(html:not(.dark)) .toggle .icon-sun {
+    display: none;
+  }
+</style>
+
+<script>
+  const stage = document.getElementById('stage')!;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const items = Array.from(stage.querySelectorAll<HTMLElement>('.floaty')).map(el => ({
+    el,
+    baseX: parseFloat(el.dataset.x || '0'),
+    baseY: parseFloat(el.dataset.y || '0'),
+    mobileX: parseFloat(el.dataset.mx || '0'),
+    mobileY: parseFloat(el.dataset.my || '0'),
+    corner: el.dataset.corner || null,
+    ampX: reduceMotion ? 0 : 3 + Math.random() * 6,
+    ampY: reduceMotion ? 0 : 3 + Math.random() * 6,
+    speed: 0.00025 + Math.random() * 0.0004,
+    phase: Math.random() * Math.PI * 2,
+    fx: 0,
+    fy: 0,
+    anchorX: 0,
+    anchorY: 0,
+    dragging: false,
+  }));
+
+  let zTop = 10;
+
+  function clamp(v: number, min: number, max: number) {
+    return Math.max(min, Math.min(max, v));
+  }
+
+  // Scatter each element around the center, scaled to fit the viewport. Narrow
+  // screens use a separate (mobile) scatter. Drag positions live only for the
+  // session — never persisted.
+  function layout() {
+    const w = stage.clientWidth;
+    const h = stage.clientHeight;
+    const mobile = w < 640;
+    const scale = mobile ? Math.min(1, w / 406) : Math.min(1, w / 760);
+    for (const it of items) {
+      if (it.corner === 'br') {
+        // Anchored to the bottom-right corner instead of the center scatter.
+        it.anchorX = w - 48;
+        it.anchorY = h - 48;
+      } else {
+        const bx = mobile ? it.mobileX : it.baseX;
+        const by = mobile ? it.mobileY : it.baseY;
+        it.anchorX = w / 2 + bx * scale;
+        it.anchorY = h / 2 + by * scale;
+      }
+      it.el.style.left = it.anchorX + 'px';
+      it.el.style.top = it.anchorY + 'px';
+    }
+  }
+
+  layout();
+
+  // Continuous, organic drift — the "fluid" idle motion.
+  function frame(t: number) {
+    for (const it of items) {
+      if (!it.dragging) {
+        it.fx = Math.sin(t * it.speed + it.phase) * it.ampX;
+        it.fy = Math.cos(t * it.speed * 0.9 + it.phase) * it.ampY;
+      }
+      it.el.style.transform =
+        `translate(-50%, -50%) translate(${it.fx.toFixed(2)}px, ${it.fy.toFixed(2)}px)`;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  requestAnimationFrame(() => stage.classList.add('ready'));
+
+  // Dragging via pointer events (works for mouse + touch).
+  for (const it of items) {
+    let startPX = 0, startPY = 0, startAX = 0, startAY = 0, moved = false;
+
+    it.el.addEventListener('pointerdown', (e) => {
+      it.dragging = true;
+      moved = false;
+      startPX = e.clientX;
+      startPY = e.clientY;
+      startAX = it.anchorX;
+      startAY = it.anchorY;
+      it.el.classList.add('dragging');
+      it.el.style.zIndex = String(++zTop);
+      it.el.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    it.el.addEventListener('pointermove', (e) => {
+      if (!it.dragging) return;
+      const dx = e.clientX - startPX;
+      const dy = e.clientY - startPY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) moved = true;
+      it.anchorX = clamp(startAX + dx, 40, stage.clientWidth - 40);
+      it.anchorY = clamp(startAY + dy, 40, stage.clientHeight - 40);
+      it.el.style.left = it.anchorX + 'px';
+      it.el.style.top = it.anchorY + 'px';
+    });
+
+    function end() {
+      if (!it.dragging) return;
+      it.dragging = false;
+      it.el.classList.remove('dragging');
+    }
+
+    it.el.addEventListener('pointerup', end);
+    it.el.addEventListener('pointercancel', end);
+
+    // A drag shouldn't also fire the element's action (navigation / toggle).
+    it.el.addEventListener('click', (e) => {
+      if (moved) { e.preventDefault(); return; }
+      if (it.el.id === 'theme-toggle') toggleTheme();
+    });
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch { /* ignore */ }
+  }
+
+  // Re-center un-dragged elements when the viewport size changes.
+  let resizeTimer: number | undefined;
+  window.addEventListener('resize', () => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(layout, 150);
+  });
+</script>
