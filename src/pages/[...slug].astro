@@ -456,8 +456,12 @@ const jsonLd = {
     let startPX = 0, startPY = 0, startAX = 0, startAY = 0, moved = false;
 
     it.el.addEventListener('pointerdown', (e) => {
-      it.dragging = true;
       moved = false;
+      // If the press starts on a link nested inside a content block, let it
+      // click through instead of starting a drag (else the block swallows it).
+      const link = (e.target as HTMLElement).closest('a');
+      if (link && link !== it.el) return;
+      it.dragging = true;
       startPX = e.clientX;
       startPY = e.clientY;
       startAX = it.anchorX;
