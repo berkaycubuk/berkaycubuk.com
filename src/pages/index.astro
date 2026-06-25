@@ -3,19 +3,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const bookingUrl = "https://cal.com/berkaycubuk/discovery-call";
 const fabrikaUrl = "https://fabrika-ai.com";
+const plantUrl = "https://plant.berkaycubuk.com";
 
 // Each element floats freely and can be dragged anywhere. x/y are the initial
 // offsets (px) from the center of the stage, mirroring the Figma scatter; mx/my
 // are the offsets used on narrow (mobile) screens. Both are scaled to fit the
 // viewport and overridden once the user drags + drops.
 const links = [
-  { id: "writings", label: "Writings", href: "/writings", x: -88, y: 4, mx: -59, my: 0 },
-  { id: "book", label: "Book a call", href: bookingUrl, x: 100, y: 2, mx: 75, my: -2, external: true },
-  { id: "work", label: "Work", href: "/projects", x: -178, y: 90, mx: -105, my: 80 },
-  { id: "contact", label: "Contact", href: "mailto:berkay@berkaycubuk.com", x: 195, y: 95, mx: 123, my: 76 },
+  { id: "writings", label: "Writings", href: "/writings", x: -88, y: 4, mx: -59, my: -95 },
+  { id: "book", label: "Book a call", href: bookingUrl, x: 100, y: 2, mx: 75, my: -97, external: true },
+  { id: "work", label: "Work", href: "/projects", x: -178, y: 90, mx: -105, my: -31 },
+  { id: "contact", label: "Contact", href: "mailto:berkay@berkaycubuk.com", x: 195, y: 95, mx: 123, my: -35 },
 ];
 
-const signature = { id: "signature", x: -5, y: 210, mx: 0, my: 147 };
+const signature = { id: "signature", x: -5, y: 210, mx: 0, my: 34 };
 
 // Social icons — also floating + draggable. Brand glyphs are single-path SVGs.
 // NOTE: GitHub + X are confirmed; LinkedIn + YouTube are best-guess handles.
@@ -24,28 +25,28 @@ const socials = [
     id: "github",
     label: "GitHub",
     href: "https://github.com/berkaycubuk",
-    x: 235, y: -173, mx: -84, my: 271,
+    corner: "bl", x: 0, y: 0, mx: -150, my: 125,
     path: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
   },
   {
     id: "linkedin",
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/berkaycubuk",
-    x: 283, y: -173, mx: -28, my: 271,
+    corner: "bl", x: 48, y: 0, mx: -150, my: 175,
     path: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z",
   },
   {
     id: "x",
     label: "X",
     href: "https://x.com/brkycubuk",
-    x: 331, y: -173, mx: 28, my: 271,
+    corner: "bl", x: 96, y: 0, mx: -150, my: 225,
     path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
   },
   {
     id: "youtube",
     label: "YouTube",
     href: "https://www.youtube.com/@berkaycubuk",
-    x: 379, y: -173, mx: 84, my: 271,
+    corner: "bl", x: 144, y: 0, mx: -150, my: 275,
     path: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
   },
 ];
@@ -102,7 +103,7 @@ const jsonLd = {
       data-x="-300"
       data-y="-179"
       data-mx="0"
-      data-my="-151"
+      data-my="-200"
     >
       <span class="card-title">Building Fabrika</span>
       <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -110,6 +111,35 @@ const jsonLd = {
         <path d="M8 7h9v9" />
       </svg>
       <span class="card-desc">Software factory to scale from sessions to tasks.</span>
+    </a>
+
+    <a
+      id="plant"
+      href={plantUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="floaty card plant-card"
+      data-x="300"
+      data-y="-179"
+      data-mx="0"
+      data-my="200"
+    >
+      <span class="card-title">Virtual Plant</span>
+      <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 17 17 7" />
+        <path d="M8 7h9v9" />
+      </svg>
+      <span class="plant-preview">
+        <iframe
+          src={plantUrl}
+          title="Live virtual tomato plant"
+          loading="lazy"
+          scrolling="no"
+          tabindex="-1"
+          aria-hidden="true"
+        ></iframe>
+      </span>
+      <span class="card-desc">A live tomato I keep alive over MQTT.</span>
     </a>
 
     {socials.map(social => (
@@ -120,6 +150,7 @@ const jsonLd = {
         rel="noopener noreferrer"
         aria-label={social.label}
         class="floaty social"
+        data-corner={social.corner}
         data-x={social.x}
         data-y={social.y}
         data-mx={social.mx}
@@ -270,6 +301,42 @@ const jsonLd = {
     color: var(--card-desc);
   }
 
+  /* Live preview of plant.berkaycubuk.com. The iframe is zoomed out (scaled
+     down) so more of the scene fits, and is pointer-inert so the whole card
+     stays draggable / clickable like the other floaties. */
+  .plant-preview {
+    display: block;
+    position: relative;
+    margin-top: 14px;
+    height: 150px;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: var(--fg-dim);
+  }
+
+  .plant-preview iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    border: 0;
+    transform: scale(0.5);
+    transform-origin: top left;
+    pointer-events: none;
+  }
+
+  /* Narrow screens: a 263px card is huge on a phone, so trim the plant card so
+     it clears the signature above and the socials to its left. */
+  @media (max-width: 640px) {
+    .plant-card {
+      width: 232px;
+    }
+    .plant-preview {
+      height: 96px;
+    }
+  }
+
   .social {
     display: block;
     line-height: 0;
@@ -349,6 +416,12 @@ const jsonLd = {
       if (it.corner === 'br') {
         // Anchored to the bottom-right corner instead of the center scatter.
         it.anchorX = w - 48;
+        it.anchorY = h - 48;
+      } else if (it.corner === 'bl' && !mobile) {
+        // Pinned to the bottom-left corner as a row; baseX is the per-icon
+        // offset from the left edge. On mobile these fall through to the
+        // scatter below and use their mx/my column positions instead.
+        it.anchorX = 48 + it.baseX;
         it.anchorY = h - 48;
       } else {
         const bx = mobile ? it.mobileX : it.baseX;
