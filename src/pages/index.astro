@@ -20,18 +20,19 @@ const jsonLd = {
     "name": "Berkay Cubuk",
     "url": "https://berkaycubuk.com/about"
   },
-  "description": "Berkay Cubuk — engineer, writer, and builder. Writings, work, and a way to get in touch."
+  "description": "Berkay Cubuk helps companies design and ship software for connected products and IoT — from firmware to cloud. Custom software engineering."
 };
 ---
 <BaseLayout
-  title="Berkay Çubuk — Engineer, Writer & Builder"
-  description="Berkay Cubuk — engineer, writer, and builder. Writings, work, and a way to get in touch."
+  title="Berkay Çubuk — IoT & Custom Software Engineer"
+  description="Berkay Cubuk helps companies design and ship software for connected products and IoT — from firmware to cloud. Custom software engineering, available for new work."
   jsonLd={jsonLd}
 >
   <main id="welcome" class="flex-1">
     <p class="sr-only">
-      Hi, I'm Berkay Çubuk — a software engineer, writer, and builder. Explore my
-      writings and work, book a call, or get in touch.
+      Hi, I'm Berkay Çubuk — I help companies design and ship software for
+      connected products and IoT, from firmware to cloud. Explore my work and
+      writings, book a call, or get in touch.
     </p>
 
     <div class="frame">
@@ -43,9 +44,9 @@ const jsonLd = {
 
       <!-- Masthead -->
       <div class="masthead">
-        <p class="eyebrow mono"><span class="dot"></span>ENGINEER, WRITER &amp; BUILDER</p>
-        <h1 class="title">Berkay&nbsp;Çubuk</h1>
-        <p class="lede">I build software, write, and keep a few systems alive.</p>
+        <p class="eyebrow mono"><span class="dot"></span>IoT &amp; CUSTOM SOFTWARE</p>
+        <h1 class="title">Berkay Çubuk</h1>
+        <p class="lede">I help companies design and ship software for connected products — from firmware to cloud.</p>
       </div>
 
       <!-- The print: Conway's Game of Life as a framed halftone plate -->
@@ -55,7 +56,12 @@ const jsonLd = {
         </div>
         <figcaption class="placard mono">
           <span>FIG.&nbsp;01<span class="cap-desc"> &middot; CONWAY&rsquo;S GAME OF LIFE</span></span>
-          <span class="dim">GEN&nbsp;<span id="gen">0000</span></span>
+          <span class="controls">
+            <button type="button" id="gol-toggle" class="ctrl">Pause</button>
+            <button type="button" id="gol-random" class="ctrl">Random</button>
+            <button type="button" id="gol-reset" class="ctrl">Reset</button>
+            <span class="gen dim">GEN&nbsp;<span id="gen">0000</span></span>
+          </span>
         </figcaption>
       </figure>
 
@@ -123,7 +129,7 @@ const jsonLd = {
     width: 100%;
     max-width: 1120px;
     margin: 0 auto;
-    padding: clamp(20px, 4vw, 44px);
+    padding: clamp(16px, 4vw, 44px);
     display: flex;
     flex-direction: column;
     gap: clamp(20px, 3.5vw, 40px);
@@ -148,6 +154,7 @@ const jsonLd = {
 
   /* --- Masthead --- */
   .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .title + .lede { margin-top: clamp(10px, 1.6vw, 20px); }
 
   .eyebrow {
     display: flex;
@@ -167,10 +174,11 @@ const jsonLd = {
     margin: 0;
     font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
     font-weight: 700;
-    font-size: clamp(52px, 11vw, 148px);
+    font-size: clamp(32px, 11vw, 148px);
     line-height: 0.9;
     letter-spacing: -0.035em;
     color: var(--ink);
+    overflow-wrap: break-word;
   }
 
   .lede {
@@ -211,9 +219,32 @@ const jsonLd = {
   .placard {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 14px;
     color: var(--ink);
   }
+  .controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+  }
+  .ctrl {
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 5px 9px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .ctrl:hover { border-color: var(--ink); }
+  .gen { margin-left: 4px; }
 
   /* --- Bottom rule --- */
   .bottombar {
@@ -282,6 +313,19 @@ const jsonLd = {
     .lede { font-size: 17px; }
     .cap-desc { display: none; }
   }
+
+  /* Very narrow screens (down to ~260px): tighten mono tracking and let the
+     top bar + bottom bar stack so nothing overflows. */
+  @media (max-width: 400px) {
+    .mono { font-size: 10px; letter-spacing: 0.12em; }
+    .ctrl { padding: 4px 7px; letter-spacing: 0.1em; }
+    .eyebrow { flex-wrap: wrap; }
+    .topbar, .bottombar {
+      flex-wrap: wrap;
+      gap: 6px 12px;
+    }
+    .toggle { width: 30px; height: 30px; }
+  }
 </style>
 
 <script>
@@ -321,7 +365,7 @@ const jsonLd = {
     }
   }
 
-  function seed() {
+  function seedPattern() {
     state = new Array(cols * rows).fill(false);
     if (cols < 40 || rows < 12) {
       state = state.map(() => Math.random() < 0.3);
@@ -336,6 +380,15 @@ const jsonLd = {
     ];
     for (const [gx, gy] of spots) stamp(GLIDER, gx, gy);
   }
+
+  function seedRandom() {
+    state = Array.from({ length: cols * rows }, () => Math.random() < 0.3);
+  }
+
+  // The active seeding strategy — reused by resize and auto-reseed so the board
+  // regenerates in whichever mode the user last chose.
+  let seedFn = seedPattern;
+  function reseed() { seedFn(); }
 
   function draw() {
     ctx.clearRect(0, 0, viewW, viewH);
@@ -384,7 +437,7 @@ const jsonLd = {
     canvas.height = Math.round(viewH * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     readColors();
-    seed();
+    reseed();
     draw();
   }
 
@@ -412,23 +465,53 @@ const jsonLd = {
 
   let sinceChange = 0;
   let prev = state.join('');
+  let playing = true;
+
+  function showGen() {
+    genEl.textContent = String(generation % 10000).padStart(4, '0');
+  }
 
   setInterval(() => {
+    if (!playing) return;
     step();
     draw();
     generation++;
-    genEl.textContent = String(generation % 10000).padStart(4, '0');
+    showGen();
 
     const now = state.join('');
     sinceChange = now === prev ? sinceChange + 1 : 0;
     prev = now;
     if (state.every(c => !c) || sinceChange > 3) {
-      seed();
+      reseed();
       draw();
       sinceChange = 0;
       prev = state.join('');
     }
   }, 130);
+
+  // --- Controls ---
+  const toggleBtn = document.getElementById('gol-toggle')!;
+
+  function setPlaying(on: boolean) {
+    playing = on;
+    toggleBtn.textContent = on ? 'Pause' : 'Play';
+  }
+
+  // Restart the board with the given seed strategy, zeroing the generation.
+  function restart(fn: () => void) {
+    seedFn = fn;
+    reseed();
+    generation = 0;
+    showGen();
+    sinceChange = 0;
+    prev = state.join('');
+    draw();
+    setPlaying(true);
+  }
+
+  toggleBtn.addEventListener('click', () => setPlaying(!playing));
+  document.getElementById('gol-random')!.addEventListener('click', () => restart(seedRandom));
+  document.getElementById('gol-reset')!.addEventListener('click', () => restart(seedPattern));
 
   // Theme toggle — re-reads ink/grid colors so the plate inverts with the page.
   document.getElementById('theme-toggle')!.addEventListener('click', () => {
