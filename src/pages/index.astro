@@ -2,53 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const bookingUrl = "https://cal.com/berkaycubuk/discovery-call";
-const fabrikaUrl = "https://fabrika-ai.com";
-const plantUrl = "https://plant.berkaycubuk.com";
 
-// Each element floats freely and can be dragged anywhere. x/y are the initial
-// offsets (px) from the center of the stage, mirroring the Figma scatter; mx/my
-// are the offsets used on narrow (mobile) screens. Both are scaled to fit the
-// viewport and overridden once the user drags + drops.
 const links = [
-  { id: "writings", label: "Writings", href: "/writings", x: -88, y: 4, mx: -59, my: -95 },
-  { id: "book", label: "Book a call", href: bookingUrl, x: 100, y: 2, mx: 75, my: -97, external: true },
-  { id: "work", label: "Work", href: "/projects", x: -178, y: 90, mx: -105, my: -31 },
-  { id: "contact", label: "Contact", href: "mailto:berkay@berkaycubuk.com", x: 195, y: 95, mx: 123, my: -35 },
-];
-
-const signature = { id: "signature", x: -5, y: 210, mx: 0, my: 34 };
-
-// Social icons — also floating + draggable. Brand glyphs are single-path SVGs.
-// NOTE: GitHub + X are confirmed; LinkedIn + YouTube are best-guess handles.
-const socials = [
-  {
-    id: "github",
-    label: "GitHub",
-    href: "https://github.com/berkaycubuk",
-    corner: "bl", x: 0, y: 0, mx: -150, my: 125,
-    path: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
-  },
-  {
-    id: "linkedin",
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/berkaycubuk",
-    corner: "bl", x: 48, y: 0, mx: -150, my: 175,
-    path: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z",
-  },
-  {
-    id: "x",
-    label: "X",
-    href: "https://x.com/brkycubuk",
-    corner: "bl", x: 96, y: 0, mx: -150, my: 225,
-    path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
-  },
-  {
-    id: "youtube",
-    label: "YouTube",
-    href: "https://www.youtube.com/@berkaycubuk",
-    corner: "bl", x: 144, y: 0, mx: -150, my: 275,
-    path: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
-  },
+  { label: "Writings", href: "/writings" },
+  { label: "Work", href: "/projects" },
+  { label: "Contact", href: "mailto:berkay@berkaycubuk.com" },
+  { label: "Book a call", href: bookingUrl, external: true },
 ];
 
 const jsonLd = {
@@ -69,442 +28,404 @@ const jsonLd = {
   description="Berkay Cubuk — engineer, writer, and builder. Writings, work, and a way to get in touch."
   jsonLd={jsonLd}
 >
-  <main id="stage" class="flex-1 relative overflow-hidden">
+  <main id="welcome" class="flex-1">
     <p class="sr-only">
-      Hi, I'm Berkay Çubuk — a software engineer, writer, and builder. I'm currently
-      building Fabrika, a software factory to scale from sessions to tasks. Explore my
+      Hi, I'm Berkay Çubuk — a software engineer, writer, and builder. Explore my
       writings and work, book a call, or get in touch.
     </p>
-    {links.map(link => (
-      <a
-        id={link.id}
-        href={link.href}
-        target={link.external ? "_blank" : undefined}
-        rel={link.external ? "noopener noreferrer" : undefined}
-        class="floaty link"
-        data-x={link.x}
-        data-y={link.y}
-        data-mx={link.mx}
-        data-my={link.my}
-      >
-        {link.label}
-      </a>
-    ))}
-    <h1 id={signature.id} class="floaty signature" data-x={signature.x} data-y={signature.y} data-mx={signature.mx} data-my={signature.my}>
-      Berkay Çubuk
-    </h1>
 
-    <a
-      id="fabrika"
-      href={fabrikaUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="floaty card"
-      data-x="-300"
-      data-y="-179"
-      data-mx="0"
-      data-my="-200"
-    >
-      <span class="card-title">Building Fabrika</span>
-      <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M7 17 17 7" />
-        <path d="M8 7h9v9" />
-      </svg>
-      <span class="card-desc">Software factory to scale from sessions to tasks.</span>
-    </a>
+    <div class="frame">
+      <!-- Top rule -->
+      <header class="topbar">
+        <span class="mono">B. ÇUBUK</span>
+        <span class="mono dim">PORTFOLIO — N&deg; 01</span>
+      </header>
 
-    <a
-      id="plant"
-      href={plantUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="floaty card plant-card"
-      data-x="300"
-      data-y="-179"
-      data-mx="0"
-      data-my="200"
-    >
-      <span class="card-title">Virtual Plant</span>
-      <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M7 17 17 7" />
-        <path d="M8 7h9v9" />
-      </svg>
-      <span class="plant-preview">
-        <iframe
-          src={plantUrl}
-          title="Live virtual tomato plant"
-          loading="lazy"
-          scrolling="no"
-          tabindex="-1"
-          aria-hidden="true"
-        ></iframe>
-      </span>
-      <span class="card-desc">A live tomato I keep alive over MQTT.</span>
-    </a>
+      <!-- Masthead -->
+      <div class="masthead">
+        <p class="eyebrow mono"><span class="dot"></span>ENGINEER, WRITER &amp; BUILDER</p>
+        <h1 class="title">Berkay&nbsp;Çubuk</h1>
+        <p class="lede">I build software, write, and keep a few systems alive.</p>
+      </div>
 
-    {socials.map(social => (
-      <a
-        id={social.id}
-        href={social.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={social.label}
-        class="floaty social"
-        data-corner={social.corner}
-        data-x={social.x}
-        data-y={social.y}
-        data-mx={social.mx}
-        data-my={social.my}
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d={social.path} />
-        </svg>
-      </a>
-    ))}
+      <!-- The print: Conway's Game of Life as a framed halftone plate -->
+      <figure class="plate">
+        <div class="plate-inner">
+          <canvas id="life"></canvas>
+        </div>
+        <figcaption class="placard mono">
+          <span>FIG.&nbsp;01 &middot; CONWAY&rsquo;S GAME OF LIFE</span>
+          <span class="dim">GEN&nbsp;<span id="gen">0000</span></span>
+        </figcaption>
+      </figure>
 
-    <button
-      id="theme-toggle"
-      type="button"
-      aria-label="Toggle dark mode"
-      class="floaty toggle"
-      data-corner="br"
-    >
-      <svg class="icon-sun" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-      <svg class="icon-moon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-      </svg>
-    </button>
+      <!-- Bottom rule: nav -->
+      <footer class="bottombar">
+        <nav class="nav">
+          {links.map(link => (
+            <a
+              href={link.href}
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+            >{link.label}</a>
+          ))}
+        </nav>
+        <button id="theme-toggle" type="button" aria-label="Toggle dark mode" class="toggle">
+          <svg class="icon-sun" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="icon-moon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </footer>
+    </div>
   </main>
 </BaseLayout>
 
 <style>
-  /* Figma palette by default (white canvas, black ink); inverts under .dark. */
-  :global(html body) {
-    background-color: #ffffff;
+  /* --- Palette: warm paper + ink, single red accent (inverts in dark) --- */
+  #welcome {
+    --paper: #e9e5db;
+    --ink: #16130f;
+    --ink-dim: #6f6a5f;
+    --line: rgba(22, 19, 15, 0.14);
+    --accent: #bf1b1b;
+    --grid-line: rgba(22, 19, 15, 0.10);
+    --alive: #16130f;
+
+    color: var(--ink);
+    background-color: var(--paper);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* Riso / newsprint grain */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
   }
-  :global(html.dark body) {
-    background-color: #111111;
+  :global(html.dark) #welcome {
+    --paper: #131210;
+    --ink: #e7e3d8;
+    --ink-dim: #8b8578;
+    --line: rgba(231, 227, 216, 0.16);
+    --accent: #e5433c;
+    --grid-line: rgba(231, 227, 216, 0.10);
+    --alive: #e7e3d8;
+    background-blend-mode: screen;
+  }
+  :global(html body) { background-color: #e9e5db; }
+  :global(html.dark body) { background-color: #131210; }
+
+  .frame {
+    flex: 1;
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 44px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3.5vw, 40px);
   }
 
-  #stage {
-    --fg: #000000;
-    --fg-dim: #666666;
-    --card-bg: #f2f2f2;
-    --card-bg-hover: #ebebeb;
-    --card-desc: #333333;
-    color: var(--fg);
+  .mono {
+    font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Menlo', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
   }
-  :global(html.dark) #stage {
-    --fg: #f0f0f0;
-    --fg-dim: #8a8a8a;
-    --card-bg: #1c1c1c;
-    --card-bg-hover: #242424;
-    --card-desc: #b4b4b4;
+  .dim { color: var(--ink-dim); }
+
+  /* --- Top rule --- */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ink);
   }
 
-  /* Visually hidden, but available to crawlers + screen readers. */
+  /* --- Masthead --- */
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    color: var(--ink);
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  .title {
+    margin: 0;
+    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(52px, 11vw, 148px);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+  }
+
+  .lede {
+    margin: 0;
+    max-width: 34ch;
+    font-size: clamp(16px, 2vw, 21px);
+    line-height: 1.45;
+    color: var(--ink-dim);
+  }
+
+  /* --- The plate (Game of Life print) --- */
+  .plate {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .plate-inner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 8;
+    padding: 10px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+  }
+  #life {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .placard {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    color: var(--ink);
+  }
+
+  /* --- Bottom rule --- */
+  .bottombar {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid var(--ink);
+  }
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(16px, 3vw, 34px);
+  }
+  .nav a {
+    font-size: 15px;
+    color: var(--ink);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.15s ease;
+  }
+  .nav a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -3px;
+    width: 100%; height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .nav a:hover { color: var(--ink); }
+  .nav a:hover::after { transform: scaleX(1); }
+
+  .toggle {
+    display: grid;
+    place-items: center;
+    width: 34px; height: 34px;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: none;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+    flex-shrink: 0;
+  }
+  .toggle:hover { border-color: var(--ink); }
+  .toggle svg { display: block; }
+  :global(html.dark) .toggle .icon-moon { display: none; }
+  :global(html:not(.dark)) .toggle .icon-sun { display: none; }
+
   .sr-only {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
   }
 
-  .floaty {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    cursor: grab;
-    white-space: nowrap;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: none;
-    will-change: transform;
-  }
-
-  #stage.ready .floaty {
-    opacity: 1;
-    transition: opacity 0.5s ease;
-  }
-
-  .floaty.dragging {
-    cursor: grabbing;
-  }
-
-  .link {
-    font-size: 18px;
-    color: var(--fg);
-    transition: color 0.15s ease;
-  }
-
-  .link:hover {
-    color: var(--fg-dim);
-  }
-
-  .signature {
-    margin: 0;
-    font-family: 'Rock Salt', cursive;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 1;
-    color: var(--fg);
-  }
-
-  .card {
-    width: 263px;
-    padding: 18px;
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    white-space: normal;
-    text-align: left;
-    transition: background-color 0.15s ease;
-  }
-
-  .card:hover {
-    background-color: var(--card-bg-hover);
-  }
-
-  .card-title {
-    display: block;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.2;
-    color: var(--fg);
-  }
-
-  .card-arrow {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    color: var(--fg);
-    transition: transform 0.15s ease;
-  }
-
-  .card:hover .card-arrow {
-    transform: translate(2px, -2px);
-  }
-
-  .card-desc {
-    display: block;
-    margin-top: 14px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.4;
-    color: var(--card-desc);
-  }
-
-  /* Live preview of plant.berkaycubuk.com. The iframe is zoomed out (scaled
-     down) so more of the scene fits, and is pointer-inert so the whole card
-     stays draggable / clickable like the other floaties. */
-  .plant-preview {
-    display: block;
-    position: relative;
-    margin-top: 14px;
-    height: 150px;
-    border-radius: 6px;
-    overflow: hidden;
-    background-color: var(--fg-dim);
-  }
-
-  .plant-preview iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    border: 0;
-    transform: scale(0.5);
-    transform-origin: top left;
-    pointer-events: none;
-  }
-
-  /* Narrow screens: a 263px card is huge on a phone, so trim the plant card so
-     it clears the signature above and the socials to its left. */
   @media (max-width: 640px) {
-    .plant-card {
-      width: 232px;
-    }
-    .plant-preview {
-      height: 96px;
-    }
-  }
-
-  .social {
-    display: block;
-    line-height: 0;
-    color: var(--fg);
-    transition: color 0.15s ease;
-  }
-
-  .social:hover {
-    color: var(--fg-dim);
-  }
-
-  .toggle {
-    display: block;
-    padding: 0;
-    border: none;
-    background: none;
-    line-height: 0;
-    color: var(--fg);
-    transition: color 0.15s ease;
-  }
-
-  .toggle:hover {
-    color: var(--fg-dim);
-  }
-
-  .toggle svg {
-    display: block;
-  }
-
-  :global(html.dark) .toggle .icon-moon {
-    display: none;
-  }
-
-  :global(html:not(.dark)) .toggle .icon-sun {
-    display: none;
+    .plate-inner { aspect-ratio: 4 / 3; }
+    .lede { font-size: 17px; }
   }
 </style>
 
 <script>
-  const stage = document.getElementById('stage')!;
+  const CELL = 14; // pixel size of each grid square
+  const canvas = document.getElementById('life') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+  const box = canvas.parentElement!;
+  const genEl = document.getElementById('gen')!;
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cols = 0, rows = 0, dpr = 1, generation = 0;
+  let state: boolean[] = [];
+  let aliveColor = '#16130f';
+  let gridColor = 'rgba(0,0,0,0.1)';
 
-  const items = Array.from(stage.querySelectorAll<HTMLElement>('.floaty')).map(el => ({
-    el,
-    baseX: parseFloat(el.dataset.x || '0'),
-    baseY: parseFloat(el.dataset.y || '0'),
-    mobileX: parseFloat(el.dataset.mx || '0'),
-    mobileY: parseFloat(el.dataset.my || '0'),
-    corner: el.dataset.corner || null,
-    ampX: reduceMotion ? 0 : 3 + Math.random() * 6,
-    ampY: reduceMotion ? 0 : 3 + Math.random() * 6,
-    speed: 0.00025 + Math.random() * 0.0004,
-    phase: Math.random() * Math.PI * 2,
-    fx: 0,
-    fy: 0,
-    anchorX: 0,
-    anchorY: 0,
-    dragging: false,
-  }));
-
-  let zTop = 10;
-
-  function clamp(v: number, min: number, max: number) {
-    return Math.max(min, Math.min(max, v));
+  function readColors() {
+    const s = getComputedStyle(document.getElementById('welcome')!);
+    aliveColor = s.getPropertyValue('--alive').trim() || aliveColor;
+    gridColor = s.getPropertyValue('--grid-line').trim() || gridColor;
   }
 
-  // Scatter each element around the center, scaled to fit the viewport. Narrow
-  // screens use a separate (mobile) scatter. Drag positions live only for the
-  // session — never persisted.
-  function layout() {
-    const w = stage.clientWidth;
-    const h = stage.clientHeight;
-    const mobile = w < 640;
-    const scale = mobile ? Math.min(1, w / 406) : Math.min(1, w / 760);
-    for (const it of items) {
-      if (it.corner === 'br') {
-        // Anchored to the bottom-right corner instead of the center scatter.
-        it.anchorX = w - 48;
-        it.anchorY = h - 48;
-      } else if (it.corner === 'bl' && !mobile) {
-        // Pinned to the bottom-left corner as a row; baseX is the per-icon
-        // offset from the left edge. On mobile these fall through to the
-        // scatter below and use their mx/my column positions instead.
-        it.anchorX = 48 + it.baseX;
-        it.anchorY = h - 48;
-      } else {
-        const bx = mobile ? it.mobileX : it.baseX;
-        const by = mobile ? it.mobileY : it.baseY;
-        it.anchorX = w / 2 + bx * scale;
-        it.anchorY = h / 2 + by * scale;
+  // Gosper glider gun — emits a glider every 30 generations, forever.
+  const GOSPER_GUN = [
+    [0,4],[0,5],[1,4],[1,5],
+    [10,4],[10,5],[10,6],[11,3],[11,7],[12,2],[12,8],[13,2],[13,8],
+    [14,5],[15,3],[15,7],[16,4],[16,5],[16,6],[17,5],
+    [20,2],[20,3],[20,4],[21,2],[21,3],[21,4],[22,1],[22,5],
+    [24,0],[24,1],[24,5],[24,6],[34,2],[34,3],[35,2],[35,3],
+  ];
+  const GLIDER = [[1,0],[2,1],[0,2],[1,2],[2,2]];
+
+  function stamp(pattern: number[][], ox: number, oy: number) {
+    for (const [px, py] of pattern) {
+      const x = ((ox + px) % cols + cols) % cols;
+      const y = ((oy + py) % rows + rows) % rows;
+      state[y * cols + x] = true;
+    }
+  }
+
+  function seed() {
+    state = new Array(cols * rows).fill(false);
+    if (cols < 40 || rows < 12) {
+      state = state.map(() => Math.random() < 0.3);
+      return;
+    }
+    stamp(GOSPER_GUN, 2, 2);
+    const spots = [
+      [Math.floor(cols * 0.6), Math.floor(rows * 0.2)],
+      [Math.floor(cols * 0.78), Math.floor(rows * 0.6)],
+      [Math.floor(cols * 0.32), Math.floor(rows * 0.72)],
+      [Math.floor(cols * 0.52), Math.floor(rows * 0.9)],
+    ];
+    for (const [gx, gy] of spots) stamp(GLIDER, gx, gy);
+  }
+
+  function draw() {
+    const w = cols * CELL, h = rows * CELL;
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.fillStyle = aliveColor;
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        if (state[y * cols + x]) ctx.fillRect(x * CELL, y * CELL, CELL, CELL);
       }
-      it.el.style.left = it.anchorX + 'px';
-      it.el.style.top = it.anchorY + 'px';
     }
+
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let x = 0; x <= cols; x++) {
+      const px = Math.round(x * CELL) + 0.5;
+      ctx.moveTo(px, 0); ctx.lineTo(px, h);
+    }
+    for (let y = 0; y <= rows; y++) {
+      const py = Math.round(y * CELL) + 0.5;
+      ctx.moveTo(0, py); ctx.lineTo(w, py);
+    }
+    ctx.stroke();
   }
 
-  layout();
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    cols = Math.max(1, Math.floor(box.clientWidth / CELL));
+    rows = Math.max(1, Math.floor(box.clientHeight / CELL));
+    const w = cols * CELL, h = rows * CELL;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    // Center the integer-cell grid inside the box.
+    canvas.style.margin = 'auto';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    readColors();
+    seed();
+    draw();
+  }
 
-  // Continuous, organic drift — the "fluid" idle motion.
-  function frame(t: number) {
-    for (const it of items) {
-      if (!it.dragging) {
-        it.fx = Math.sin(t * it.speed + it.phase) * it.ampX;
-        it.fy = Math.cos(t * it.speed * 0.9 + it.phase) * it.ampY;
+  function step() {
+    const next: boolean[] = new Array(cols * rows);
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        let n = 0;
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            if (dx === 0 && dy === 0) continue;
+            const nx = (x + dx + cols) % cols;
+            const ny = (y + dy + rows) % rows;
+            if (state[ny * cols + nx]) n++;
+          }
+        }
+        const i = y * cols + x;
+        next[i] = state[i] ? n === 2 || n === 3 : n === 3;
       }
-      it.el.style.transform =
-        `translate(-50%, -50%) translate(${it.fx.toFixed(2)}px, ${it.fy.toFixed(2)}px)`;
     }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-
-  requestAnimationFrame(() => stage.classList.add('ready'));
-
-  // Dragging via pointer events (works for mouse + touch).
-  for (const it of items) {
-    let startPX = 0, startPY = 0, startAX = 0, startAY = 0, moved = false;
-
-    it.el.addEventListener('pointerdown', (e) => {
-      it.dragging = true;
-      moved = false;
-      startPX = e.clientX;
-      startPY = e.clientY;
-      startAX = it.anchorX;
-      startAY = it.anchorY;
-      it.el.classList.add('dragging');
-      it.el.style.zIndex = String(++zTop);
-      it.el.setPointerCapture(e.pointerId);
-      e.preventDefault();
-    });
-
-    it.el.addEventListener('pointermove', (e) => {
-      if (!it.dragging) return;
-      const dx = e.clientX - startPX;
-      const dy = e.clientY - startPY;
-      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) moved = true;
-      it.anchorX = clamp(startAX + dx, 40, stage.clientWidth - 40);
-      it.anchorY = clamp(startAY + dy, 40, stage.clientHeight - 40);
-      it.el.style.left = it.anchorX + 'px';
-      it.el.style.top = it.anchorY + 'px';
-    });
-
-    function end() {
-      if (!it.dragging) return;
-      it.dragging = false;
-      it.el.classList.remove('dragging');
-    }
-
-    it.el.addEventListener('pointerup', end);
-    it.el.addEventListener('pointercancel', end);
-
-    // A drag shouldn't also fire the element's action (navigation / toggle).
-    it.el.addEventListener('click', (e) => {
-      if (moved) { e.preventDefault(); return; }
-      if (it.el.id === 'theme-toggle') toggleTheme();
-    });
+    state = next;
   }
 
-  function toggleTheme() {
+  resize();
+
+  let sinceChange = 0;
+  let prev = state.join('');
+
+  setInterval(() => {
+    step();
+    draw();
+    generation++;
+    genEl.textContent = String(generation % 10000).padStart(4, '0');
+
+    const now = state.join('');
+    sinceChange = now === prev ? sinceChange + 1 : 0;
+    prev = now;
+    if (state.every(c => !c) || sinceChange > 3) {
+      seed();
+      draw();
+      sinceChange = 0;
+      prev = state.join('');
+    }
+  }, 130);
+
+  // Theme toggle — re-reads ink/grid colors so the plate inverts with the page.
+  document.getElementById('theme-toggle')!.addEventListener('click', () => {
     const isDark = document.documentElement.classList.toggle('dark');
     try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch { /* ignore */ }
-  }
+    readColors();
+    draw();
+  });
 
-  // Re-center un-dragged elements when the viewport size changes.
   let resizeTimer: number | undefined;
   window.addEventListener('resize', () => {
     window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(layout, 150);
+    resizeTimer = window.setTimeout(() => {
+      resize();
+      prev = state.join('');
+      sinceChange = 0;
+    }, 150);
   });
 </script>
