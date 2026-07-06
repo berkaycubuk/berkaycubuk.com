@@ -15,19 +15,17 @@ const { Content } = await tool.render();
 
 const description = tool.data.description || tool.data.title;
 ---
-<IndexLayout title={`${tool.data.title}`} description={description}>
-  <div class="py-12">
-    <a href="/tools" class="inline-flex items-center text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors mb-8">
-      &larr; Back to tools
-    </a>
+<IndexLayout title={`${tool.data.title} — Berkay Çubuk`} description={description}>
+  <div class="py-14 measure">
+    <a href="/tools" class="mono ulink back">&larr; Tools</a>
 
-    <div class="flex items-center gap-3 mb-8">
-      <img src={tool.data.icon} alt={`${tool.data.title} icon`} class="w-24 h-24 rounded" />
+    <header class="tool-head">
+      <img src={tool.data.icon} alt={`${tool.data.title} icon`} class="icon" />
       <div>
-        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)]">{tool.data.title}</h1>
-        {tool.data.version && <p class="text-sm text-[var(--color-text-tertiary)] mt-1">v{tool.data.version}</p>}
+        <h1 class="page-title small">{tool.data.title}</h1>
+        {tool.data.version && <p class="mono ver">v{tool.data.version}</p>}
       </div>
-    </div>
+    </header>
 
     <article class="prose prose-lg max-w-none">
       <Content />
@@ -41,10 +39,32 @@ const description = tool.data.description || tool.data.title;
       });
     </script>
 
-    <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
-      <a href="/tools" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
-        &larr; All tools
-      </a>
+    <div class="foot">
+      <a href="/tools" class="mono ulink">&larr; All tools</a>
     </div>
   </div>
 </IndexLayout>
+
+<style>
+  .back { display: inline-block; color: var(--color-text-secondary); text-decoration: none; }
+  .tool-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 28px 0 8px;
+  }
+  .icon {
+    width: 88px;
+    height: 88px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+  .page-title.small { font-size: clamp(30px, 6vw, 52px); }
+  .ver { margin: 8px 0 0; color: var(--color-text-tertiary); }
+  .foot {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+  }
+  .foot a { color: var(--color-text); text-decoration: none; }
+</style>

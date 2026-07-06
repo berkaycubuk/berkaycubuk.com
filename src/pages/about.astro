@@ -1,53 +1,71 @@
 ---
 import IndexLayout from '../layouts/IndexLayout.astro';
 ---
-<IndexLayout title="About Berkay Cubuk" description="Software engineer working in blockchain industry. I write, tinker and build things.">
-  <div class="py-12">
-    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)] mb-3">About me</h1>
-    <p class="text-[var(--color-text-secondary)] mb-8">
-      Hi, I'm Berkay and this is my space on the internet.
-    </p>
+<IndexLayout title="About — Berkay Çubuk" description="IoT and custom software engineer. I help companies design and ship software for connected products.">
+  <div class="py-14">
+    <header class="masthead">
+      <p class="eyebrow mono"><span class="dot"></span>ABOUT</p>
+      <h1 class="page-title">About me</h1>
+      <p class="lede">Hi, I'm Berkay — I help companies design and ship software for connected products.</p>
+    </header>
 
-    <div class="prose prose-lg max-w-none">
+    <div class="prose prose-lg measure mt-10">
       <p>
-        I'm a problem solver. I write, tinker and build things.
+        I'm a problem solver. I design and build custom software — with a focus on
+        IoT and connected products — and I write and tinker along the way.
       </p>
       <p>
-		I work on my own to solve problems aroun the world mostly using software, and sometimes hardware.
+        I work independently, solving real problems for people and businesses
+        mostly through software, and sometimes hardware.
       </p>
-	<p>Projects I do:</p>
-	<ul>
-		<li>Custom IoT Dashboards</li>
-		<li>Websites</li>
-		<li>Dashboards</li>
-		<li>Blockchain</li>
-		<li>LLM integrations (deepseek, claude, gpt etc..)</li>
-	</ul>
+      <p>What I build:</p>
+      <ul>
+        <li>Custom IoT dashboards & device software</li>
+        <li>Web platforms and internal tools</li>
+        <li>LLM integrations (Claude, GPT, DeepSeek, etc.)</li>
+        <li>Blockchain applications</li>
+      </ul>
     </div>
 
-    <div class="mt-12 pt-8 border-t border-[var(--color-border)]">
-      <h2 class="text-xl font-semibold text-[var(--color-text)] mb-3">Working together</h2>
-      <p class="text-[var(--color-text-secondary)] mb-5">
-        If you have a problem worth a 20-minute conversation, grab a free slot on my calendar.
+    <section class="block">
+      <h2 class="mono block-label"><span class="dot"></span>WORKING TOGETHER</h2>
+      <p class="lede">
+        If you have a problem worth a 20-minute conversation, grab a free slot on
+        my calendar.
       </p>
-      <a href="https://cal.com/berkaycubuk/discovery-call" target="_blank" rel="noopener noreferrer" class="inline-block px-5 py-2.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-medium rounded-lg transition-colors text-sm">
+      <a href="https://cal.com/berkaycubuk/discovery-call" target="_blank" rel="noopener noreferrer" class="btn">
         Book a call &rarr;
       </a>
-    </div>
+    </section>
 
-    <div class="mt-10 pt-6 border-t border-[var(--color-border)]">
-      <h2 class="text-xl font-semibold text-[var(--color-text)] mb-4">Elsewhere</h2>
-      <div class="flex flex-wrap gap-4">
-        <a href="https://github.com/berkaycubuk" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
-          GitHub &rarr;
-        </a>
-        <a href="https://x.com/brkycubuk" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
-          X &rarr;
-        </a>
-        <a href="mailto:berkay@berkaycubuk.com" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
-          Email &rarr;
-        </a>
+    <section class="block">
+      <h2 class="mono block-label"><span class="dot"></span>ELSEWHERE</h2>
+      <div class="links">
+        <a href="https://github.com/berkaycubuk" target="_blank" rel="noopener noreferrer" class="mono ulink">GitHub</a>
+        <a href="https://x.com/brkycubuk" target="_blank" rel="noopener noreferrer" class="mono ulink">X</a>
+        <a href="mailto:berkay@berkaycubuk.com" class="mono ulink">Email</a>
       </div>
-    </div>
+    </section>
   </div>
 </IndexLayout>
+
+<style>
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .masthead .lede { margin-top: 6px; }
+
+  .block {
+    margin-top: 44px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-border);
+  }
+  .block-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 14px;
+    color: var(--color-text);
+  }
+  .block .lede { margin-bottom: 20px; }
+  .links { display: flex; flex-wrap: wrap; gap: 22px; }
+  .links a { color: var(--color-text); text-decoration: none; }
+</style>

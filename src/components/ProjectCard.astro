@@ -8,25 +8,64 @@ interface Props {
 
 const { title, description, tags = [], links = [] } = Astro.props;
 ---
-<div class="border border-[var(--color-card-border)] rounded-xl p-5 bg-[var(--color-card-bg)] hover:border-[var(--color-accent)] transition-colors">
-  <h3 class="text-lg font-semibold text-[var(--color-text)]">{title}</h3>
-  <p class="mt-2 text-sm text-[var(--color-text-secondary)]">{description}</p>
-  {tags.length > 0 && (
-    <div class="mt-3 flex flex-wrap gap-2">
-      {tags.map(tag => (
-        <span class="text-xs px-2 py-0.5 rounded-full bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] border border-[var(--color-border)]">
-          {tag}
-        </span>
-      ))}
-    </div>
-  )}
-  {links.length > 0 && (
-    <div class="mt-3 flex flex-wrap gap-3">
-      {links.map(link => (
-        <a href={link.href} {...(link.href.startsWith('/') ? {} : { target: "_blank", rel: "noopener noreferrer" })} class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors">
-          {link.label} &rarr;
-        </a>
-      ))}
-    </div>
-  )}
-</div>
+<article class="entry project">
+  <div class="meta">
+    {tags.length > 0 && (
+      <div class="tags mono">
+        {tags.map(tag => <span class="tag">{tag}</span>)}
+      </div>
+    )}
+  </div>
+  <div class="body">
+    <h3 class="title">{title}</h3>
+    <p class="desc">{description}</p>
+    {links.length > 0 && (
+      <div class="links">
+        {links.map(link => (
+          <a href={link.href} {...(link.href.startsWith('/') ? {} : { target: "_blank", rel: "noopener noreferrer" })} class="mono ulink">
+            {link.label} &rarr;
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .project {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 10px 32px;
+    padding: 30px 0;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    color: var(--color-text-tertiary);
+    font-size: 10px;
+    padding-top: 6px;
+  }
+  .title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+  }
+  .desc {
+    margin: 8px 0 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    max-width: 62ch;
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; }
+  .links a { color: var(--color-text); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .project { grid-template-columns: 1fr; gap: 12px; }
+    .tags { padding-top: 0; order: 2; margin-top: 4px; }
+    .body { order: 1; }
+  }
+</style>

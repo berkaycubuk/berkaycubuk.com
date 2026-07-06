@@ -11,58 +11,84 @@
   src: url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 }
 
+/* ============================================================================
+   Design system — "Swiss editorial × halftone". See /design.md.
+   Warm paper + ink, one red accent, hairline rules, mono labels.
+   ========================================================================== */
+
 :root {
-  --color-bg: #fafaf8;
-  --color-bg-secondary: #f3f3f0;
-  --color-text: #1a1a1a;
-  --color-text-secondary: #555555;
-  --color-text-tertiary: #888888;
-  --color-border: #e5e5e0;
-  --color-accent: #1a1a1a;
-  --color-accent-hover: #555555;
-  --color-card-bg: #ffffff;
-  --color-card-border: #e5e5e0;
-  --color-card-hover: #f9f9f6;
-  --color-selection-bg: #1a1a1a;
-  --color-selection-text: #ffffff;
-  --color-prose-body: #374151;
-  --color-prose-headings: #1a1a1a;
-  --color-prose-links: #1a1a1a;
-  --color-prose-bold: #1a1a1a;
-  --color-prose-code: #1a1a1a;
-  --color-prose-code-bg: #f3f3f0;
-  --color-prose-pre-bg: #1a1a1a;
-  --color-prose-pre-text: #f0f0ec;
-  --color-prose-hr: #e5e5e0;
-  --color-prose-quote-border: #555555;
-  --color-prose-quote-text: #555555;
+  /* Core palette */
+  --paper: #e9e5db;
+  --ink: #16130f;
+  --ink-dim: #6f6a5f;
+  --line: #d7d1c3;
+  --accent-red: #bf1b1b;
+
+  /* Type roles */
+  --font-display: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Menlo', monospace;
+
+  /* Semantic tokens (consumed across the site + Tailwind arbitrary values) */
+  --color-bg: var(--paper);
+  --color-bg-secondary: #e2ddd0;
+  --color-text: var(--ink);
+  --color-text-secondary: var(--ink-dim);
+  --color-text-tertiary: #8f8a7c;
+  --color-border: var(--line);
+  --color-accent: var(--ink);
+  --color-accent-hover: var(--ink-dim);
+  --color-card-bg: transparent;
+  --color-card-border: var(--line);
+  --color-card-hover: #e2ddd0;
+  --color-selection-bg: var(--ink);
+  --color-selection-text: var(--paper);
+
+  /* Prose */
+  --color-prose-body: #46423a;
+  --color-prose-headings: var(--ink);
+  --color-prose-links: var(--ink);
+  --color-prose-bold: var(--ink);
+  --color-prose-code: var(--ink);
+  --color-prose-code-bg: #ded8ca;
+  --color-prose-pre-bg: #16130f;
+  --color-prose-pre-text: #eae6db;
+  --color-prose-hr: var(--line);
+  --color-prose-quote-border: var(--ink);
+  --color-prose-quote-text: #555046;
 }
 
 .dark {
-  --color-bg: #111111;
-  --color-bg-secondary: #1a1a1a;
-  --color-text: #f0f0ec;
-  --color-text-secondary: #a0a0a0;
-  --color-text-tertiary: #707070;
-  --color-border: #2a2a2a;
-  --color-accent: #f0f0ec;
-  --color-accent-hover: #b0b0b0;
-  --color-card-bg: #181818;
-  --color-card-border: #2a2a2a;
-  --color-card-hover: #1e1e1e;
-  --color-selection-bg: #f0f0ec;
-  --color-selection-text: #111111;
-  --color-prose-body: #c0c0bc;
-  --color-prose-headings: #f0f0ec;
-  --color-prose-links: #f0f0ec;
-  --color-prose-bold: #f0f0ec;
-  --color-prose-code: #f0f0ec;
-  --color-prose-code-bg: #1a1a1a;
-  --color-prose-pre-bg: #0a0a0a;
-  --color-prose-pre-text: #f0f0ec;
-  --color-prose-hr: #2a2a2a;
-  --color-prose-quote-border: #a0a0a0;
-  --color-prose-quote-text: #a0a0a0;
+  --paper: #131210;
+  --ink: #e7e3d8;
+  --ink-dim: #8b8578;
+  --line: #2b2823;
+  --accent-red: #e5433c;
+
+  --color-bg: var(--paper);
+  --color-bg-secondary: #1b1916;
+  --color-text: var(--ink);
+  --color-text-secondary: var(--ink-dim);
+  --color-text-tertiary: #6f6a5f;
+  --color-border: var(--line);
+  --color-accent: var(--ink);
+  --color-accent-hover: var(--ink-dim);
+  --color-card-bg: transparent;
+  --color-card-border: var(--line);
+  --color-card-hover: #1b1916;
+  --color-selection-bg: var(--ink);
+  --color-selection-text: var(--paper);
+
+  --color-prose-body: #b8b3a6;
+  --color-prose-headings: var(--ink);
+  --color-prose-links: var(--ink);
+  --color-prose-bold: var(--ink);
+  --color-prose-code: var(--ink);
+  --color-prose-code-bg: #211e1a;
+  --color-prose-pre-bg: #0c0b0a;
+  --color-prose-pre-text: #eae6db;
+  --color-prose-hr: var(--line);
+  --color-prose-quote-border: var(--ink);
+  --color-prose-quote-text: #a09a8c;
 }
 
 ::selection {
@@ -76,13 +102,120 @@ body {
   color: var(--color-text);
   transition: background-color 0.2s ease, color 0.2s ease;
   overflow-x: clip;
+  /* Riso / newsprint grain across the whole surface. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
+  background-blend-mode: multiply;
 }
+.dark body { background-blend-mode: screen; }
 
 .full-bleed {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 }
+
+/* Shared page frame — matches the homepage: 1120px column with fluid gutters. */
+.shell {
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(16px, 4vw, 44px);
+  padding-right: clamp(16px, 4vw, 44px);
+}
+
+/* Comfortable reading measure for long-form prose inside the wide frame. */
+.measure { max-width: 720px; }
+
+/* ---- Shared design-system classes ------------------------------------- */
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: var(--color-text);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.page-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(48px, 11vw, 128px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--color-text);
+  overflow-wrap: break-word;
+}
+
+.lede {
+  margin: 0;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  max-width: 46ch;
+}
+
+/* Animated 1px underline that wipes in from the left. */
+.ulink {
+  position: relative;
+  text-decoration: none;
+  color: var(--color-text);
+}
+.ulink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+.ulink:hover::after { transform: scaleX(1); }
+
+/* Solid CTA button (ink fill, paper text) — the one loud element. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 18px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.btn:hover { opacity: 0.85; }
+
+/* Editorial index row — hairline-separated list entry (no filled cards). */
+.entry {
+  display: block;
+  padding: 22px 0;
+  border-top: 1px solid var(--color-border);
+  text-decoration: none;
+  color: var(--color-text);
+}
+.entry:last-child { border-bottom: 1px solid var(--color-border); }
 
 a {
   transition: color 0.15s ease;

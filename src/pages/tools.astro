@@ -5,14 +5,15 @@ import { getCollection } from 'astro:content';
 
 const tools = await getCollection('tools');
 ---
-<IndexLayout title="Tools - Berkay's Space on the Internet" description="Tools I've built to solve real problems.">
-  <div class="py-12">
-    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)] mb-3">Tools</h1>
-    <p class="text-[var(--color-text-secondary)]">
-      Tools I've developed.
-    </p>
+<IndexLayout title="Tools — Berkay Çubuk" description="Tools I've built to solve real problems.">
+  <div class="py-14">
+    <header class="masthead">
+      <p class="eyebrow mono"><span class="dot"></span>UTILITIES</p>
+      <h1 class="page-title">Tools</h1>
+      <p class="lede">Tools I've developed to solve real problems.</p>
+    </header>
 
-    <div class="mt-8 flex flex-col">
+    <div class="list">
       {tools.map((tool: any) => (
         <ToolCard
           title={tool.data.title}
@@ -24,3 +25,9 @@ const tools = await getCollection('tools');
     </div>
   </div>
 </IndexLayout>
+
+<style>
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .masthead .lede { margin-top: 6px; }
+  .list { margin-top: 40px; }
+</style>

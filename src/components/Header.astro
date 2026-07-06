@@ -1,27 +1,23 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
+const nav = [
+  { label: 'Writings', href: '/writings' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'About', href: '/about' },
+];
 ---
-<header class="px-6 py-5 max-w-[720px] mx-auto w-full">
-  <div class="flex items-center justify-between">
-    <a class="flex items-center gap-2 font-semibold text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors" href="/">
-      <span>Berkay Cubuk</span>
-    </a>
+<header class="site-header shell">
+  <div class="bar">
+    <a class="wordmark mono" href="/">Berkay&nbsp;Çubuk</a>
 
     <!-- Desktop nav -->
-    <div class="hidden sm:flex items-center gap-1">
-      <nav class="flex items-center gap-1">
-        <a class="px-3 py-1.5 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/writings">Writings</a>
-        <a class="px-3 py-1.5 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/projects">Projects</a>
-        <a class="px-3 py-1.5 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/tools">Tools</a>
-        <a class="px-3 py-1.5 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/about">About</a>
+    <div class="right">
+      <nav class="nav">
+        {nav.map(n => (
+          <a class="nav-link mono ulink" href={n.href}>{n.label}</a>
+        ))}
       </nav>
-      <ThemeToggle />
-    </div>
-
-    <!-- Mobile hamburger -->
-    <div class="flex sm:hidden items-center gap-2">
-      <ThemeToggle />
-      <button id="mobile-menu-btn" class="p-2 rounded-lg text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" aria-label="Open menu">
+      <button id="mobile-menu-btn" class="menu-btn" aria-label="Open menu">
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -30,18 +26,62 @@ import ThemeToggle from './ThemeToggle.astro';
   </div>
 
   <!-- Mobile menu -->
-  <nav id="mobile-menu" class="hidden sm:hidden mt-4 pb-2 border-t border-[var(--color-border)] pt-4 flex flex-col gap-1">
-    <a class="px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/writings">Writings</a>
-    <a class="px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/projects">Projects</a>
-    <a class="px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/tools">Tools</a>
-    <a class="px-3 py-2 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] transition-colors" href="/about">About</a>
+  <nav id="mobile-menu" class="mobile-menu hidden">
+    {nav.map(n => (
+      <a class="nav-link mono" href={n.href}>{n.label}</a>
+    ))}
   </nav>
 </header>
+
+<style>
+  .site-header { padding-top: 20px; padding-bottom: 14px; }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .wordmark {
+    color: var(--color-text);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+  .wordmark:hover { color: var(--color-text-secondary); }
+
+  .right { display: flex; align-items: center; gap: 22px; }
+  .nav { display: flex; align-items: center; gap: 22px; }
+  .nav-link { color: var(--color-text); text-decoration: none; }
+
+  .menu-btn {
+    display: none;
+    padding: 4px;
+    border: none;
+    background: none;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .mobile-menu {
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 14px;
+    padding-bottom: 6px;
+  }
+  .mobile-menu:not(.hidden) { display: flex; }
+  .mobile-menu .nav-link { padding: 8px 0; color: var(--color-text-secondary); }
+
+  @media (max-width: 640px) {
+    .nav { display: none; }
+    .menu-btn { display: inline-flex; }
+    .right { gap: 12px; }
+  }
+</style>
 
 <script>
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
-  });
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
 </script>

@@ -3,14 +3,15 @@ import IndexLayout from '../layouts/IndexLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/projects';
 ---
-<IndexLayout title="Projects - Berkay's Space on the Internet" description="Projects and things I built. I tinker and build things in software engineering and blockchain.">
-  <div class="py-12">
-    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-text)] mb-3">Projects</h1>
-    <p class="text-[var(--color-text-secondary)] mb-8">
-      Things I've built and am working on.
-    </p>
+<IndexLayout title="Projects — Berkay Çubuk" description="Projects and things I've built — IoT, custom software, web and blockchain.">
+  <div class="py-14">
+    <header class="masthead">
+      <p class="eyebrow mono"><span class="dot"></span>SELECTED WORK</p>
+      <h1 class="page-title">Projects</h1>
+      <p class="lede">Things I've built and am working on.</p>
+    </header>
 
-    <div class="flex flex-col gap-4">
+    <div class="list">
       {projects.map(project => (
         <ProjectCard
           title={project.title}
@@ -22,3 +23,9 @@ import { projects } from '../data/projects';
     </div>
   </div>
 </IndexLayout>
+
+<style>
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .masthead .lede { margin-top: 6px; }
+  .list { margin-top: 40px; }
+</style>

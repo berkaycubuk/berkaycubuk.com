@@ -7,7 +7,7 @@ const { title, description, image, type, jsonLd } = Astro.props;
 ---
 <BaseLayout title={title} description={description} image={image} type={type} jsonLd={jsonLd}>
   <Header />
-  <main class="flex-1 max-w-[720px] mx-auto w-full px-6">
+  <main class="flex-1 shell">
     <slot />
   </main>
   <Footer />
