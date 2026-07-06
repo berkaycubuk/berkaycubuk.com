@@ -54,7 +54,7 @@ const jsonLd = {
           <canvas id="life"></canvas>
         </div>
         <figcaption class="placard mono">
-          <span>FIG.&nbsp;01 &middot; CONWAY&rsquo;S GAME OF LIFE</span>
+          <span>FIG.&nbsp;01<span class="cap-desc"> &middot; CONWAY&rsquo;S GAME OF LIFE</span></span>
           <span class="dim">GEN&nbsp;<span id="gen">0000</span></span>
         </figcaption>
       </figure>
@@ -100,6 +100,7 @@ const jsonLd = {
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow-x: hidden;
     /* Riso / newsprint grain */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
     background-blend-mode: multiply;
@@ -180,17 +181,24 @@ const jsonLd = {
     color: var(--ink-dim);
   }
 
-  /* --- The plate (Game of Life print) --- */
+  /* --- The plate (Game of Life print) — breaks out full-bleed, wider than
+     the text column, for a distinct panoramic band. --- */
   .plate {
     margin: 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    /* Full-bleed: span the viewport width regardless of the frame's max-width. */
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 0 clamp(16px, 3vw, 40px);
+    box-sizing: border-box;
   }
   .plate-inner {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 8;
+    height: clamp(440px, 66vh, 780px);
     padding: 10px;
     border: 1px solid var(--ink);
     background: var(--paper);
@@ -270,8 +278,9 @@ const jsonLd = {
   }
 
   @media (max-width: 640px) {
-    .plate-inner { aspect-ratio: 4 / 3; }
+    .plate-inner { height: clamp(320px, 52vh, 420px); }
     .lede { font-size: 17px; }
+    .cap-desc { display: none; }
   }
 </style>
 
@@ -283,6 +292,7 @@ const jsonLd = {
   const genEl = document.getElementById('gen')!;
 
   let cols = 0, rows = 0, dpr = 1, generation = 0;
+  let cellW = CELL, cellH = CELL, viewW = 0, viewH = 0;
   let state: boolean[] = [];
   let aliveColor = '#16130f';
   let gridColor = 'rgba(0,0,0,0.1)';
@@ -328,13 +338,18 @@ const jsonLd = {
   }
 
   function draw() {
-    const w = cols * CELL, h = rows * CELL;
-    ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0, 0, viewW, viewH);
 
+    // Cells snap to rounded pixel boundaries so they tile seamlessly and align
+    // exactly with the grid lines.
     ctx.fillStyle = aliveColor;
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        if (state[y * cols + x]) ctx.fillRect(x * CELL, y * CELL, CELL, CELL);
+        if (state[y * cols + x]) {
+          const x0 = Math.round(x * cellW), x1 = Math.round((x + 1) * cellW);
+          const y0 = Math.round(y * cellH), y1 = Math.round((y + 1) * cellH);
+          ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+        }
       }
     }
 
@@ -342,27 +357,31 @@ const jsonLd = {
     ctx.lineWidth = 1;
     ctx.beginPath();
     for (let x = 0; x <= cols; x++) {
-      const px = Math.round(x * CELL) + 0.5;
-      ctx.moveTo(px, 0); ctx.lineTo(px, h);
+      let px = Math.round(x * cellW) + 0.5;
+      if (x === cols) px = viewW - 0.5; // pin the far edge exactly to the border
+      ctx.moveTo(px, 0); ctx.lineTo(px, viewH);
     }
     for (let y = 0; y <= rows; y++) {
-      const py = Math.round(y * CELL) + 0.5;
-      ctx.moveTo(0, py); ctx.lineTo(w, py);
+      let py = Math.round(y * cellH) + 0.5;
+      if (y === rows) py = viewH - 0.5;
+      ctx.moveTo(0, py); ctx.lineTo(viewW, py);
     }
     ctx.stroke();
   }
 
   function resize() {
     dpr = window.devicePixelRatio || 1;
-    cols = Math.max(1, Math.floor(box.clientWidth / CELL));
-    rows = Math.max(1, Math.floor(box.clientHeight / CELL));
-    const w = cols * CELL, h = rows * CELL;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    // Center the integer-cell grid inside the box.
-    canvas.style.margin = 'auto';
+    // The canvas fills the box exactly; cells are sized to divide it evenly so
+    // the grid meets all four edges with no leftover gap.
+    const rect = canvas.getBoundingClientRect();
+    viewW = Math.max(1, Math.round(rect.width));
+    viewH = Math.max(1, Math.round(rect.height));
+    cols = Math.max(1, Math.round(viewW / CELL));
+    rows = Math.max(1, Math.round(viewH / CELL));
+    cellW = viewW / cols;
+    cellH = viewH / rows;
+    canvas.width = Math.round(viewW * dpr);
+    canvas.height = Math.round(viewH * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     readColors();
     seed();
