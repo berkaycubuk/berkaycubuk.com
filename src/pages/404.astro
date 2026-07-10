@@ -1,0 +1,29 @@
+---
+import IndexLayout from '../layouts/IndexLayout.astro';
+import { pageTitle } from '../data/site';
+---
+<IndexLayout title={pageTitle('Page not found')} description="This page doesn't exist or has moved.">
+  <div class="py-14 measure">
+    <header class="nf-head">
+      <p class="eyebrow mono"><span class="dot"></span>ERROR — 404</p>
+      <h1 class="page-title">Page not found.</h1>
+      <p class="lede">The page you're looking for doesn't exist or has moved.</p>
+    </header>
+
+    <nav class="nf-links">
+      <a class="btn" href="/">&larr; Back to home</a>
+      <a class="mono ulink" href="/writings">Browse writings</a>
+      <a class="mono ulink" href="/projects">See projects</a>
+    </nav>
+  </div>
+</IndexLayout>
+
+<style>
+  .nf-head { margin-bottom: 32px; }
+  .nf-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+</style>

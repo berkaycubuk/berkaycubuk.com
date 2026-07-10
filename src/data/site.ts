@@ -8,6 +8,14 @@ export const SITE = {
   nameAscii: 'Berkay Cubuk',
   url: 'https://berkaycubuk.com',
 
+  // Public profiles, used as JSON-LD sameAs so search/AI engines can
+  // connect this site to the same person elsewhere
+  socials: [
+    'https://github.com/berkaycubuk',
+    'https://x.com/brkycubuk',
+    'https://linkedin.com/in/berkaycubuk',
+  ],
+
   // Site identity: RSS feed, og:site_name and the fallback <title>/description
   title: "Berkay Çubuk — Internal Tools, Dashboards & Automations",
   description:

@@ -2,7 +2,7 @@
 import { CollectionEntry, getCollection } from 'astro:content';
 import IndexLayout from '../layouts/IndexLayout.astro';
 import moment from 'moment';
-import { SITE } from '../data/site';
+import { SITE, pageTitle } from '../data/site';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('writings');
@@ -23,6 +23,7 @@ const { Content } = await post.render();
 const description = post.data.description || post.body.split('\n').find(line => line.trim().length > 0)?.substring(0, 160) || post.data.title;
 const formattedDate = moment(post.data.date).format('MMM DD, YYYY');
 const isoDate = moment(post.data.date).toISOString();
+const updatedIsoDate = post.data.date_updated ? moment(post.data.date_updated).toISOString() : isoDate;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -30,11 +31,12 @@ const jsonLd = {
   "headline": post.data.title,
   "description": description,
   "datePublished": isoDate,
-  "dateModified": post.data.date_updated ? moment(post.data.date_updated).toISOString() : isoDate,
+  "dateModified": updatedIsoDate,
   "author": {
     "@type": "Person",
     "name": SITE.nameAscii,
-    "url": `${SITE.url}/about`
+    "url": `${SITE.url}/about`,
+    "sameAs": SITE.socials
   },
   "url": `${SITE.url}/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/`,
   "mainEntityOfPage": {
@@ -43,7 +45,7 @@ const jsonLd = {
   }
 };
 ---
-<IndexLayout title={post.data.title} description={description} type="article" jsonLd={jsonLd}>
+<IndexLayout title={pageTitle(post.data.title)} description={description} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={updatedIsoDate}>
   <article class="py-14 measure">
     <a href="/writings" class="mono ulink back">&larr; Writings</a>
 

@@ -3,18 +3,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../data/site';
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": SITE.nameAscii,
-  "url": SITE.url,
-  "author": {
+// Answers must mirror the on-page FAQ section (N° 07) word for word.
+const faq = [
+  {
+    q: 'What does “fixed price” actually mean?',
+    a: 'The quote is the price. If you change the scope mid-project, the new work gets its own quote first, so you will never be surprise-billed.',
+  },
+  {
+    q: 'What fits in two weeks?',
+    a: 'A focused internal tool, a dashboard, or an automation with a clear job. Bigger systems are split into two-week deliveries, each with its own quote, so you see working software every two weeks instead of waiting until the end.',
+  },
+  {
+    q: 'What happens after delivery?',
+    a: 'The software is yours, documented, running and built to keep working without me. When you want more, the next round is scoped and quoted the same way.',
+  },
+  {
+    q: 'Can you work with what we already use?',
+    a: 'Yes. Most projects connect to the spreadsheets, databases and tools you already have rather than replacing them.',
+  },
+  {
+    q: 'How fast will you reply?',
+    a: 'Within one business day, usually much faster.',
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": SITE.nameAscii,
+    "url": SITE.url,
+    "author": {
+      "@type": "Person",
+      "name": SITE.nameAscii,
+      "url": `${SITE.url}/about`
+    },
+    "description": SITE.home.jsonLdDescription
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "Person",
     "name": SITE.nameAscii,
-    "url": `${SITE.url}/about`
+    "url": SITE.url,
+    "jobTitle": "Software Engineer",
+    "description": SITE.home.jsonLdDescription,
+    "email": "mailto:berkay@berkaycubuk.com",
+    "sameAs": SITE.socials
   },
-  "description": SITE.home.jsonLdDescription
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.map(({ q, a }) => ({
+      "@type": "Question",
+      "name": q,
+      "acceptedAnswer": { "@type": "Answer", "text": a }
+    }))
+  }
+];
 ---
 <BaseLayout
   title={SITE.home.title}

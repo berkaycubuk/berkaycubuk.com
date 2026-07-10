@@ -2,7 +2,7 @@
 import '../styles/global.css'
 import { SITE } from '../data/site';
 
-const { title, description, image, type = 'website', jsonLd } = Astro.props;
+const { title, description, image, type = 'website', jsonLd, publishDate, updateDate } = Astro.props;
 
 // Default values
 const siteTitle = title || SITE.title;
@@ -40,6 +40,8 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
     {!image && <meta property="og:image:height" content="630" />}
     <meta property="og:site_name" content={SITE.title} />
     <meta property="og:locale" content="en_US" />
+    {type === 'article' && publishDate && <meta property="article:published_time" content={publishDate} />}
+    {type === 'article' && updateDate && <meta property="article:modified_time" content={updateDate} />}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
