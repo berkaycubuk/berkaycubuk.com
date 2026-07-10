@@ -1,5 +1,6 @@
 ---
 import IndexLayout from '../layouts/IndexLayout.astro';
+import { pageTitle } from '../data/site';
 import { getCollection } from 'astro:content';
 import moment from 'moment';
 
@@ -7,7 +8,7 @@ const blogPosts = await getCollection('writings');
 const sortedPosts = blogPosts.sort((a, b) => moment(b.data.date).valueOf() - moment(a.data.date).valueOf());
 ---
 <IndexLayout
-  title="Writings — Berkay Çubuk"
+  title={pageTitle('Writings')}
   description="One of the greatest things about humans is that we can express our thoughts and type them into text."
 >
   <div class="py-14">

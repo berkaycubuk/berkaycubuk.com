@@ -2,6 +2,7 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import moment from 'moment';
+import { SITE } from '../data/site';
 
 export async function GET(context: any) {
   const posts = await getCollection('writings');
@@ -9,7 +10,7 @@ export async function GET(context: any) {
     (a, b) => moment(b.data.date).valueOf() - moment(a.data.date).valueOf()
   );
 
-  const site = (context.site?.toString() || 'https://berkaycubuk.com').replace(/\/$/, '');
+  const site = (context.site?.toString() || SITE.url).replace(/\/$/, '');
   const container = await AstroContainer.create();
 
   const items = await Promise.all(
@@ -30,8 +31,8 @@ export async function GET(context: any) {
   );
 
   return rss({
-    title: "Berkay's Space on the Internet",
-    description: "Hi, I'm Berkay and this is my space on the internet. I write, tinker and build things.",
+    title: SITE.title,
+    description: SITE.description,
     site: context.site,
     items,
   });

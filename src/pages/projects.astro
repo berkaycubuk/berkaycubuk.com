@@ -2,8 +2,9 @@
 import IndexLayout from '../layouts/IndexLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/projects';
+import { pageTitle } from '../data/site';
 ---
-<IndexLayout title="Projects — Berkay Çubuk" description="Projects and things I've built — IoT, custom software, web and blockchain.">
+<IndexLayout title={pageTitle('Projects')} description="Projects and things I've built — IoT, custom software, web and blockchain.">
   <div class="py-14">
     <header class="masthead">
       <p class="eyebrow mono"><span class="dot"></span>SELECTED WORK</p>

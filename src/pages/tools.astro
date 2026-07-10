@@ -1,11 +1,12 @@
 ---
 import IndexLayout from '../layouts/IndexLayout.astro';
 import ToolCard from '../components/ToolCard.astro';
+import { pageTitle } from '../data/site';
 import { getCollection } from 'astro:content';
 
 const tools = await getCollection('tools');
 ---
-<IndexLayout title="Tools — Berkay Çubuk" description="Tools I've built to solve real problems.">
+<IndexLayout title={pageTitle('Tools')} description="Tools I've built to solve real problems.">
   <div class="py-14">
     <header class="masthead">
       <p class="eyebrow mono"><span class="dot"></span>UTILITIES</p>

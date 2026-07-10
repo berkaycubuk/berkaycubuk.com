@@ -1,7 +1,8 @@
 ---
 import IndexLayout from '../layouts/IndexLayout.astro';
+import { pageTitle } from '../data/site';
 ---
-<IndexLayout title="About — Berkay Çubuk" description="IoT and custom software engineer. I help companies design and ship software for connected products.">
+<IndexLayout title={pageTitle('About')} description="IoT and custom software engineer. I help companies design and ship software for connected products.">
   <div class="py-14">
     <header class="masthead">
       <p class="eyebrow mono"><span class="dot"></span>ABOUT</p>

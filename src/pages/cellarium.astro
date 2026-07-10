@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
 ---
-<BaseLayout title="Cellarium - Berkay's Space on the Internet" description="Artificial life simulator. Watch cells evolve in a bottle-shaped 2D environment.">
+<BaseLayout title={`Cellarium - ${SITE.title}`} description="Artificial life simulator. Watch cells evolve in a bottle-shaped 2D environment.">
   <style is:global>
     body {
       margin: 0 !important;

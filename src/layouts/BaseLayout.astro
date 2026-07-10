@@ -1,12 +1,13 @@
 ---
 import '../styles/global.css'
+import { SITE } from '../data/site';
 
 const { title, description, image, type = 'website', jsonLd } = Astro.props;
 
 // Default values
-const siteTitle = title || "Berkay's Space on the Internet";
-const siteDescription = description || "Hi, I'm Berkay and this is my space on the internet. I write, tinker and build things.";
-const siteUrl = 'https://berkaycubuk.com';
+const siteTitle = title || SITE.title;
+const siteDescription = description || SITE.description;
+const siteUrl = SITE.url;
 const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
 const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.png`;
 ---
@@ -16,13 +17,13 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={siteDescription} />
-    <meta name="author" content="Berkay Cubuk" />
+    <meta name="author" content={SITE.nameAscii} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={currentUrl} />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="alternate" type="application/rss+xml" title="Berkay's Space on the Internet" href={`${siteUrl}/rss.xml`} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.title} href={`${siteUrl}/rss.xml`} />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,7 +36,7 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
     <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={siteDescription} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:site_name" content="Berkay's Space on the Internet" />
+    <meta property="og:site_name" content={SITE.title} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

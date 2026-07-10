@@ -2,6 +2,7 @@
 import { CollectionEntry, getCollection } from 'astro:content';
 import IndexLayout from '../layouts/IndexLayout.astro';
 import moment from 'moment';
+import { SITE } from '../data/site';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('writings');
@@ -32,13 +33,13 @@ const jsonLd = {
   "dateModified": post.data.date_updated ? moment(post.data.date_updated).toISOString() : isoDate,
   "author": {
     "@type": "Person",
-    "name": "Berkay Cubuk",
-    "url": "https://berkaycubuk.com/about"
+    "name": SITE.nameAscii,
+    "url": `${SITE.url}/about`
   },
-  "url": `https://berkaycubuk.com/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/`,
+  "url": `${SITE.url}/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/`,
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": `https://berkaycubuk.com/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/`
+    "@id": `${SITE.url}/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/`
   }
 };
 ---

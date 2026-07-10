@@ -1,30 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site';
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Berkay Cubuk",
-  "url": "https://berkaycubuk.com",
+  "name": SITE.nameAscii,
+  "url": SITE.url,
   "author": {
     "@type": "Person",
-    "name": "Berkay Cubuk",
-    "url": "https://berkaycubuk.com/about"
+    "name": SITE.nameAscii,
+    "url": `${SITE.url}/about`
   },
-  "description": "Berkay Cubuk helps companies design and ship software for connected products and IoT — from firmware to cloud. Custom software engineering."
+  "description": SITE.home.jsonLdDescription
 };
 ---
 <BaseLayout
-  title="Berkay Çubuk — IoT & Custom Software Engineer"
-  description="Berkay Cubuk helps companies design and ship software for connected products and IoT — from firmware to cloud. Custom software engineering, available for new work."
+  title={SITE.home.title}
+  description={SITE.home.description}
   jsonLd={jsonLd}
 >
   <main id="welcome" class="flex-1">
     <p class="sr-only">
-      Hi, I'm Berkay Çubuk — I help companies design and ship software for
-      connected products and IoT, from firmware to cloud. Explore my work and
-      writings, book a call, or get in touch.
+      Hi, I'm Berkay Çubuk. I build internal tools, dashboards and automations
+      for small companies. You work directly with me from the first scoping call
+      to handoff, and what I deliver keeps running without me.
     </p>
 
     <div class="frame">
@@ -36,9 +37,13 @@ const jsonLd = {
 
       <!-- Masthead -->
       <div class="masthead">
-        <p class="eyebrow mono"><span class="dot"></span>IoT &amp; CUSTOM SOFTWARE</p>
-        <h1 class="title">Berkay Çubuk</h1>
-        <p class="lede">I help companies design and ship software for connected products — from firmware to cloud.</p>
+        <p class="eyebrow mono"><span class="dot"></span>AVAILABLE FOR NEW WORK &mdash; Q3 2026</p>
+        <h1 class="title">Built to run without&nbsp;me.</h1>
+        <p class="lede">Internal tools, dashboards and automations. Fixed price, delivered in two weeks, and yours to keep. No retainer, no lock-in.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://cal.com/berkaycubuk/discovery-call" data-cal-link="berkaycubuk/discovery-call" target="_blank" rel="noopener noreferrer">Book a free 20-min scoping call</a>
+        </div>
+        <p class="cta-note mono dim">WE SCOPE ON THE CALL &middot; FIXED QUOTE WITHIN 24 HOURS</p>
       </div>
 
       <!-- The print: Conway's Game of Life as a framed halftone plate -->
@@ -57,11 +62,209 @@ const jsonLd = {
         </figcaption>
       </figure>
 
+      <!-- Services: the offer -->
+      <section class="section" id="services" aria-labelledby="services-title">
+        <header class="sec-head">
+          <span class="mono">N&deg; 02 &mdash; SERVICES</span>
+          <span class="mono dim">FROM $1,500 &middot; FIXED PRICE &middot; TWO WEEKS</span>
+        </header>
+        <h2 id="services-title" class="sec-title">Internal tools, dashboards &amp; automations for small companies.</h2>
+        <p class="sec-lede">Scoped in a free 20-minute call, quoted within 24 hours, delivered in two weeks. Projects typically start at $1,500 and the quote you get is the price you pay.</p>
+        <ol class="svc-list">
+          <li class="svc">
+            <span class="svc-no mono">01</span>
+            <h3 class="svc-name">Internal tools</h3>
+            <p class="svc-desc">Admin panels, back-office apps and the small custom systems your spreadsheets are straining to become.</p>
+          </li>
+          <li class="svc">
+            <span class="svc-no mono">02</span>
+            <h3 class="svc-name">Dashboards &amp; monitoring</h3>
+            <p class="svc-desc">Live views of your operations: sensors, machines and IoT fleets (MQTT a specialty), or plain business metrics.</p>
+          </li>
+          <li class="svc">
+            <span class="svc-no mono">03</span>
+            <h3 class="svc-name">Automations</h3>
+            <p class="svc-desc">The glue between systems you already use: syncs, reports, alerts and integrations that remove manual work.</p>
+          </li>
+        </ol>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://cal.com/berkaycubuk/discovery-call" data-cal-link="berkaycubuk/discovery-call" target="_blank" rel="noopener noreferrer">Book a free 20-min scoping call</a>
+        </div>
+      </section>
+
+      <!-- How it works: substantiate "two weeks, fixed price" -->
+      <section class="section" aria-labelledby="process-title">
+        <header class="sec-head">
+          <span class="mono" id="process-title">N&deg; 03 &mdash; HOW IT WORKS</span>
+          <span class="mono dim">CALL &rarr; QUOTE &rarr; BUILD &rarr; HANDOFF</span>
+        </header>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-no mono">01</span>
+            <h3 class="step-name">A 20-minute call</h3>
+            <p class="step-desc">You tell me what's slowing your team down. We define the scope together, on the call. Free, no obligation.</p>
+          </li>
+          <li class="step">
+            <span class="step-no mono">02</span>
+            <h3 class="step-name">Fixed quote in 24 hours</h3>
+            <p class="step-desc">One number, in writing. If the scope changes later, the new work gets its own quote. No surprise bills.</p>
+          </li>
+          <li class="step">
+            <span class="step-no mono">03</span>
+            <h3 class="step-name">Built in two weeks</h3>
+            <p class="step-desc">You see progress as it happens, and what lands is working software, not a deck or a prototype.</p>
+          </li>
+          <li class="step">
+            <span class="step-no mono">04</span>
+            <h3 class="step-name">Handoff</h3>
+            <p class="step-desc">Delivered documented and running. It keeps working without me, and you don't need a retainer to keep it alive.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Selected work: proof it ships and keeps running -->
+      <section class="section" aria-labelledby="work-title">
+        <header class="sec-head">
+          <span class="mono" id="work-title">N&deg; 04 &mdash; SELECTED WORK</span>
+          <span class="mono dim">SHIPPED &amp; RUNNING</span>
+        </header>
+        <ul class="work-list">
+          <li class="work">
+            <div class="work-main">
+              <h3 class="work-name">MQTT Studio</h3>
+              <span class="mono work-tag"><span class="dot"></span>LIVE SAAS</span>
+            </div>
+            <p class="work-desc">Hosted MQTT dashboards with the broker included. Companies monitor their device fleets on it today. Designed, built and operated solo.</p>
+            <a class="work-link mono" href="https://mqtt.studio" target="_blank" rel="noopener noreferrer">mqtt.studio &nearr;</a>
+          </li>
+          <li class="work">
+            <div class="work-main">
+              <h3 class="work-name">tarif.ist</h3>
+              <span class="mono work-tag dim">OPEN SOURCE</span>
+            </div>
+            <p class="work-desc">Multi-modal transit directions for Istanbul: metro, Marmaray, tram and buses on one map, with live disruption info.</p>
+            <a class="work-link mono" href="https://tarif.ist" target="_blank" rel="noopener noreferrer">tarif.ist &nearr;</a>
+          </li>
+          <li class="work">
+            <div class="work-main">
+              <h3 class="work-name">Fabrika</h3>
+              <span class="mono work-tag dim">OPEN SOURCE</span>
+            </div>
+            <p class="work-desc">A software factory that runs on your computer and orchestrates AI coding agents through a task board on a loop.</p>
+            <a class="work-link mono" href="https://fabrika-ai.com" target="_blank" rel="noopener noreferrer">fabrika-ai.com &nearr;</a>
+          </li>
+        </ul>
+        <a class="work-index mono ulink" href="/projects">FULL INDEX &rarr;</a>
+      </section>
+
+      <!-- What clients say -->
+      <section class="section" aria-labelledby="clients-title">
+        <header class="sec-head">
+          <span class="mono" id="clients-title">N&deg; 05 &mdash; WHAT CLIENTS SAY</span>
+          <span class="mono dim">VERBATIM CLIENT REVIEWS</span>
+        </header>
+        <ul class="quotes">
+          <li class="quote">
+            <div class="quote-head">
+              <p class="quote-by mono dim">STAR &middot; WEBSITE</p>
+              <p class="stars" aria-label="5 out of 5 stars">&starf;&starf;&starf;&starf;&starf;</p>
+            </div>
+            <blockquote class="quote-text">&ldquo;Love the website, it&rsquo;s exactly what I wanted. Delivered everything I asked and understood the style and flow of the site really well.&rdquo;</blockquote>
+          </li>
+          <li class="quote">
+            <div class="quote-head">
+              <p class="quote-by mono dim">EREN &middot; CUSTOM WEB APP</p>
+              <p class="stars" aria-label="5 out of 5 stars">&starf;&starf;&starf;&starf;&starf;</p>
+            </div>
+            <blockquote class="quote-text">&ldquo;I would highly recommend Berkay. He is very intelligent and good in his job&hellip; It been better than I thought. Don&rsquo;t think a second if he says yes I can take this project.&rdquo;</blockquote>
+          </li>
+          <li class="quote">
+            <div class="quote-head">
+              <p class="quote-by mono dim">STAR &middot; CUSTOM WEB APP</p>
+              <p class="stars" aria-label="5 out of 5 stars">&starf;&starf;&starf;&starf;&starf;</p>
+            </div>
+            <blockquote class="quote-text">&ldquo;Delivered what I asked for perfectly again!! Would highly recommend.&rdquo;</blockquote>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Who you're hiring -->
+      <section class="section" aria-labelledby="who-title">
+        <header class="sec-head">
+          <span class="mono" id="who-title">N&deg; 06 &mdash; WHO YOU&rsquo;RE HIRING</span>
+          <span class="mono dim">NO AGENCY LAYER</span>
+        </header>
+        <h2 class="sec-title">You work directly with&nbsp;me.</h2>
+        <p class="sec-lede">I&rsquo;m Berkay &Ccedil;ubuk, a software engineer. No handoffs, no juniors, no project managers: the person on the scoping call is the person who designs, builds, documents and delivers your software. I also run <a class="body-link" href="https://mqtt.studio" target="_blank" rel="noopener noreferrer">MQTT Studio</a>, a live SaaS companies use to monitor their device fleets, so I operate production software every day instead of just building it.</p>
+      </section>
+
+      <!-- Questions -->
+      <section class="section" aria-labelledby="faq-title">
+        <header class="sec-head">
+          <span class="mono" id="faq-title">N&deg; 07 &mdash; QUESTIONS</span>
+          <span class="mono dim">ASKED BEFORE BOOKING</span>
+        </header>
+        <dl class="faq">
+          <div class="faq-item">
+            <dt class="faq-q">What does &ldquo;fixed price&rdquo; actually mean?</dt>
+            <dd class="faq-a">The quote is the price. If you change the scope mid-project, the new work gets its own quote first, so you will never be surprise-billed.</dd>
+          </div>
+          <div class="faq-item">
+            <dt class="faq-q">What fits in two weeks?</dt>
+            <dd class="faq-a">A focused internal tool, a dashboard, or an automation with a clear job. Bigger systems are split into two-week deliveries, each with its own quote, so you see working software every two weeks instead of waiting until the end.</dd>
+          </div>
+          <div class="faq-item">
+            <dt class="faq-q">What happens after delivery?</dt>
+            <dd class="faq-a">The software is yours, documented, running and built to keep working without me. When you want more, the next round is scoped and quoted the same way.</dd>
+          </div>
+          <div class="faq-item">
+            <dt class="faq-q">Can you work with what we already use?</dt>
+            <dd class="faq-a">Yes. Most projects connect to the spreadsheets, databases and tools you already have rather than replacing them.</dd>
+          </div>
+          <div class="faq-item">
+            <dt class="faq-q">How fast will you reply?</dt>
+            <dd class="faq-a">Within one business day, usually much faster.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- Start a project -->
+      <section class="section" aria-labelledby="cta-title">
+        <header class="sec-head">
+          <span class="mono">N&deg; 08 &mdash; START A PROJECT</span>
+          <span class="mono dim">Q3 2026 &mdash; SLOTS OPEN</span>
+        </header>
+        <h2 id="cta-title" class="cta-title">Tell me what&rsquo;s slowing your team&nbsp;down.</h2>
+        <p class="sec-lede">One 20-minute call, a fixed quote within 24 hours, working software in two weeks.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://cal.com/berkaycubuk/discovery-call" data-cal-link="berkaycubuk/discovery-call" target="_blank" rel="noopener noreferrer">Book a free 20-min scoping call</a>
+          <a class="btn" href="mailto:berkay@berkaycubuk.com">berkay@berkaycubuk.com</a>
+        </div>
+        <p class="cta-note mono dim">NO PITCH, NO OBLIGATION &middot; REPLIES WITHIN ONE BUSINESS DAY</p>
+      </section>
+
     </div>
 
     <Footer />
   </main>
 </BaseLayout>
+
+<!-- Cal.com popup embed: booking opens in an overlay instead of leaving the page.
+     Buttons keep their href so booking still works if this script is blocked. -->
+<script is:inline>
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", { origin: "https://cal.com" });
+  Cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+
+  // Cal's own click listener opens the overlay but doesn't preventDefault on
+  // anchors, so the href would also navigate. Suppress navigation only once
+  // the embed is actually loaded; with the script blocked, links work as-is.
+  document.querySelectorAll("a[data-cal-link]").forEach(function (el) {
+    el.addEventListener("click", function (e) {
+      if (window.Cal && window.Cal.loaded) e.preventDefault();
+    });
+  });
+</script>
 
 <style>
   /* --- Palette: warm paper + ink, single red accent (inverts in dark) --- */
@@ -157,11 +360,13 @@ const jsonLd = {
 
   .lede {
     margin: 0;
-    max-width: 34ch;
+    max-width: 44ch;
     font-size: clamp(16px, 2vw, 21px);
     line-height: 1.45;
     color: var(--ink-dim);
   }
+  .masthead .cta-row { margin-top: clamp(6px, 1.2vw, 14px); }
+  .masthead .cta-note { margin-top: -4px; }
 
   /* --- The plate (Game of Life print) — breaks out full-bleed, wider than
      the text column, for a distinct panoramic band. --- */
@@ -174,7 +379,8 @@ const jsonLd = {
     width: 100vw;
     margin-left: 50%;
     transform: translateX(-50%);
-    padding: 0 clamp(16px, 3vw, 40px);
+    /* Vertical padding sets the plate apart from the masthead and services. */
+    padding: clamp(24px, 4.5vw, 64px) clamp(16px, 3vw, 40px);
     box-sizing: border-box;
   }
   .plate-inner {
@@ -220,6 +426,293 @@ const jsonLd = {
   .ctrl:hover { border-color: var(--ink); }
   .gen { margin-left: 4px; }
 
+  /* --- Editorial sections below the plate --- */
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2.6vw, 30px);
+    /* Generous air above each section — the frame gap alone reads cramped. */
+    padding-top: clamp(64px, 11vw, 160px);
+  }
+  .sec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--ink);
+    color: var(--ink);
+  }
+  .sec-title {
+    margin: 0;
+    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 4.6vw, 56px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    max-width: 24ch;
+    color: var(--ink);
+  }
+  .sec-lede {
+    margin: 0;
+    max-width: 58ch;
+    font-size: clamp(15px, 1.6vw, 18px);
+    line-height: 1.55;
+    color: var(--ink-dim);
+  }
+
+  /* Services index */
+  .svc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .svc {
+    display: grid;
+    grid-template-columns: 56px minmax(180px, 260px) 1fr;
+    gap: 10px clamp(16px, 3vw, 48px);
+    align-items: baseline;
+    padding: clamp(16px, 2.4vw, 26px) 0;
+    border-top: 1px solid var(--line);
+  }
+  .svc:first-child { border-top: none; padding-top: 4px; }
+  .svc-no { color: var(--accent); }
+  .svc-name {
+    margin: 0;
+    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(19px, 2.2vw, 26px);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .svc-desc {
+    margin: 0;
+    font-size: clamp(14px, 1.5vw, 16px);
+    line-height: 1.55;
+    color: var(--ink-dim);
+    max-width: 52ch;
+  }
+
+  /* Work ledger */
+  .work-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+  }
+  .work {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .work-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 14px;
+    flex-wrap: wrap;
+  }
+  .work-name {
+    margin: 0;
+    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(18px, 2vw, 23px);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .work-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+  }
+  .work-tag .dot { width: 6px; height: 6px; }
+  .work-desc {
+    margin: 0;
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-dim);
+  }
+  .work-link {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    align-self: flex-start;
+    padding-bottom: 2px;
+    transition: border-color 0.15s ease;
+  }
+  .work-link:hover { border-color: var(--ink); }
+  .work-index {
+    align-self: flex-end;
+    color: var(--ink-dim);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .work-index:hover { color: var(--ink); }
+
+  /* Process steps */
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .step-no { color: var(--accent); }
+  .step-name {
+    margin: 0;
+    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(17px, 1.8vw, 21px);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .step-desc {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-dim);
+  }
+
+  /* Testimonials */
+  .quotes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+  }
+  .quote {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: clamp(16px, 2vw, 22px);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .quote-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .stars {
+    margin: 0;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+  }
+  .quote-text {
+    margin: 0;
+    flex: 1;
+    font-size: clamp(15px, 1.6vw, 17px);
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .quote-by { margin: 0; font-size: 10px; }
+
+  /* FAQ */
+  .faq {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .faq-item {
+    display: grid;
+    grid-template-columns: minmax(220px, 340px) 1fr;
+    gap: 8px clamp(16px, 3vw, 48px);
+    padding: clamp(14px, 2vw, 22px) 0;
+    border-top: 1px solid var(--line);
+  }
+  .faq-item:first-child { border-top: none; padding-top: 4px; }
+  .faq-q {
+    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(16px, 1.7vw, 19px);
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .faq-a {
+    margin: 0;
+    font-size: clamp(14px, 1.5vw, 16px);
+    line-height: 1.55;
+    color: var(--ink-dim);
+    max-width: 58ch;
+  }
+
+  .body-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s ease;
+  }
+  .body-link:hover { text-decoration-color: var(--ink); }
+
+  .cta-note { margin: 0; font-size: 10px; }
+
+  /* CTA */
+  .cta-title {
+    margin: 0;
+    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(34px, 7.5vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    overflow-wrap: break-word;
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 14px;
+    padding-bottom: clamp(8px, 2vw, 20px);
+  }
+  .btn {
+    font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Menlo', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: none;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    padding: 14px 22px;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #f5f2ea;
+  }
+  .btn-primary:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+
   .sr-only {
     position: absolute;
     width: 1px; height: 1px;
@@ -230,10 +723,27 @@ const jsonLd = {
     border: 0;
   }
 
+  @media (max-width: 820px) {
+    .svc {
+      grid-template-columns: 40px 1fr;
+      grid-template-areas: "no name" "no desc";
+    }
+    .svc-no { grid-area: no; }
+    .svc-name { grid-area: name; }
+    .svc-desc { grid-area: desc; }
+    .work-list { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .quotes { grid-template-columns: 1fr; }
+    .faq-item { grid-template-columns: 1fr; }
+    .faq-a { max-width: none; }
+  }
+
   @media (max-width: 640px) {
     .plate-inner { height: clamp(320px, 52vh, 420px); }
     .lede { font-size: 17px; }
     .cap-desc { display: none; }
+    .btn { width: 100%; text-align: center; box-sizing: border-box; }
+    .steps { grid-template-columns: 1fr; }
   }
 
   /* Very narrow screens (down to ~260px): tighten mono tracking and let the

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import IndexLayout from '../../layouts/IndexLayout.astro';
+import { pageTitle } from '../../data/site';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -15,7 +16,7 @@ const { Content } = await tool.render();
 
 const description = tool.data.description || tool.data.title;
 ---
-<IndexLayout title={`${tool.data.title} — Berkay Çubuk`} description={description}>
+<IndexLayout title={pageTitle(tool.data.title)} description={description}>
   <div class="py-14 measure">
     <a href="/tools" class="mono ulink back">&larr; Tools</a>
 
