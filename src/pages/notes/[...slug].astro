@@ -1,0 +1,121 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+import IndexLayout from '../../layouts/IndexLayout.astro';
+import moment from 'moment';
+import { SITE, pageTitle, notePath } from '../../data/site';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map((note) => ({
+    params: { slug: notePath(note.data.date, note.slug).replace(/^\/notes\//, '') },
+    props: note,
+  }));
+}
+type Props = CollectionEntry<'notes'>;
+
+const note = Astro.props;
+const { Content } = await note.render();
+
+const description = (note.body || '').split('\n').find(line => line.trim().length > 0)?.substring(0, 160) || note.data.title;
+// Times display in Europe/Istanbul regardless of the build machine's timezone.
+const formattedDate = moment(note.data.date).utcOffset('+03:00').format('MMM DD, YYYY · HH:mm');
+const isoDate = moment(note.data.date).toISOString();
+
+const linkHost = note.data.link ? new URL(note.data.link).hostname.replace(/^www\./, '') : null;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": note.data.title,
+  "description": description,
+  "datePublished": isoDate,
+  "dateModified": isoDate,
+  "author": {
+    "@type": "Person",
+    "name": SITE.nameAscii,
+    "url": `${SITE.url}/about`,
+    "sameAs": SITE.socials
+  },
+  "url": `${SITE.url}${notePath(note.data.date, note.slug)}/`,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${SITE.url}${notePath(note.data.date, note.slug)}/`
+  }
+};
+---
+<IndexLayout title={pageTitle(note.data.title)} description={description} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={isoDate}>
+  <article class="py-14 measure">
+    <a href="/notes" class="mono ulink back">&larr; Notes</a>
+
+    <header class="note-head">
+      <time datetime={isoDate} class="mono date">{formattedDate}</time>
+      <h1 class="note-title">{note.data.title}</h1>
+      {(note.data.author || note.data.via) && (
+        <p class="mono byline">
+          {note.data.author && (
+            note.data.author_url
+              ? <>by <a href={note.data.author_url} target="_blank" rel="noopener noreferrer">{note.data.author}</a></>
+              : <>by {note.data.author}</>
+          )}
+          {note.data.author && note.data.via && ' · '}
+          {note.data.via && (
+            note.data.via_url
+              ? <>via <a href={note.data.via_url} target="_blank" rel="noopener noreferrer">{note.data.via}</a></>
+              : <>via {note.data.via}</>
+          )}
+        </p>
+      )}
+      {note.data.link && (
+        <a href={note.data.link} target="_blank" rel="noopener noreferrer" class="mono ulink ext">
+          ↗ {linkHost}
+        </a>
+      )}
+    </header>
+
+    <div class="prose prose-lg max-w-none">
+      <Content />
+    </div>
+
+    <div class="foot">
+      <a href="/notes" class="mono ulink">&larr; All notes</a>
+    </div>
+  </article>
+</IndexLayout>
+
+<style>
+  .back { display: inline-block; color: var(--color-text-secondary); text-decoration: none; }
+  .note-head { margin: 28px 0 32px; }
+  .date { color: var(--color-text-tertiary); }
+  .note-title {
+    margin: 12px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    overflow-wrap: break-word;
+  }
+  .byline {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+  }
+  .byline a {
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .byline a:hover { color: var(--color-text); }
+  .ext {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--color-text-secondary);
+  }
+  .foot {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+  }
+  .foot a { color: var(--color-text); text-decoration: none; }
+</style>

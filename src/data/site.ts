@@ -1,6 +1,8 @@
 // Single source of truth for site-wide names, titles and SEO copy.
 // Edit here and every page, meta tag, JSON-LD block and the RSS feed follow.
 
+import moment from 'moment';
+
 export const SITE = {
   // Person / brand
   name: 'Berkay Çubuk',
@@ -35,4 +37,10 @@ export const SITE = {
 // "About — Berkay Çubuk"-style titles for inner pages
 export function pageTitle(title: string): string {
   return `${title} — ${SITE.name}`;
+}
+
+// Notes live at /notes/YYYY/MM/DD/<slug>. The date is pinned to +03:00 so the
+// URL doesn't shift when the build runs on a machine in another timezone.
+export function notePath(date: Date, slug: string): string {
+  return `/notes/${moment(date).utcOffset('+03:00').format('YYYY/MM/DD')}/${slug}`;
 }

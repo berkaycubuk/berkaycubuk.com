@@ -1,0 +1,123 @@
+---
+import IndexLayout from '../layouts/IndexLayout.astro';
+import { pageTitle, notePath } from '../data/site';
+import { getCollection } from 'astro:content';
+import moment from 'moment';
+
+const notes = await getCollection('notes');
+const sortedNotes = notes.sort((a, b) => moment(b.data.date).valueOf() - moment(a.data.date).valueOf());
+const rendered = await Promise.all(
+  sortedNotes.map(async (note) => ({ note, Content: (await note.render()).Content }))
+);
+
+const linkHost = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+---
+<IndexLayout
+  title={pageTitle('Notes')}
+  description="Short notes on things I find worth sharing."
+>
+  <div class="py-14">
+    <header class="masthead">
+      <p class="eyebrow mono"><span class="dot"></span>SHORT POSTS</p>
+      <h1 class="page-title">Notes</h1>
+      <p class="lede">
+        Short notes on things I find worth sharing.
+      </p>
+    </header>
+
+    <div class="list">
+      {rendered.map(({ note, Content }) => (
+        <article class="entry note">
+          <a href={notePath(note.data.date, note.slug)} class="mono date">{moment(note.data.date).utcOffset('+03:00').format('YYYY · MMM DD · HH:mm')}</a>
+          <div class="body">
+            <h2 class="title">
+              {note.data.link ? (
+                <a href={note.data.link} target="_blank" rel="noopener noreferrer">
+                  {note.data.title}
+                  <span class="mono host">&nbsp;↗ {linkHost(note.data.link)}</span>
+                </a>
+              ) : (
+                <a href={notePath(note.data.date, note.slug)}>{note.data.title}</a>
+              )}
+            </h2>
+            {(note.data.author || note.data.via) && (
+              <p class="mono byline">
+                {note.data.author && (
+                  note.data.author_url
+                    ? <>by <a href={note.data.author_url} target="_blank" rel="noopener noreferrer">{note.data.author}</a></>
+                    : <>by {note.data.author}</>
+                )}
+                {note.data.author && note.data.via && ' · '}
+                {note.data.via && (
+                  note.data.via_url
+                    ? <>via <a href={note.data.via_url} target="_blank" rel="noopener noreferrer">{note.data.via}</a></>
+                    : <>via {note.data.via}</>
+                )}
+              </p>
+            )}
+            <div class="prose max-w-none note-body">
+              <Content />
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</IndexLayout>
+
+<style>
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .masthead .lede { margin-top: 6px; }
+  .list { margin-top: 40px; }
+
+  .note {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 6px 32px;
+    padding: 26px 0;
+  }
+  .date {
+    color: var(--color-text-tertiary);
+    padding-top: 4px;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .date:hover { color: var(--color-text); }
+  .title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .title a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .title a:hover { color: var(--color-text-secondary); }
+  .host {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--color-text-tertiary);
+    white-space: nowrap;
+  }
+  .byline {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+  }
+  .byline a {
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .byline a:hover { color: var(--color-text); }
+  .note-body { margin-top: 10px; }
+
+  @media (max-width: 640px) {
+    .note { grid-template-columns: 1fr; gap: 8px; }
+    .date { padding-top: 0; }
+  }
+</style>
