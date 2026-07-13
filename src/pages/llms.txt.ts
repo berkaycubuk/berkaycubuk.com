@@ -1,6 +1,6 @@
 import { getCollection } from 'astro:content';
 import moment from 'moment';
-import { SITE, notePath } from '../data/site';
+import { SITE, notePath, noteFallbackTitle } from '../data/site';
 
 // llms.txt per https://llmstxt.org — a curated entry point for AI assistants.
 export async function GET() {
@@ -45,7 +45,7 @@ ${posts.slice(0, 12).map(postLine).join('\n')}
 
 ## Recent notes
 
-${notes.slice(0, 12).map((n) => `- [${n.data.title}](${SITE.url}${notePath(n.data.date, n.slug)}/)`).join('\n')}
+${notes.slice(0, 12).map((n) => `- [${n.data.title || noteFallbackTitle(n.data.date)}](${SITE.url}${notePath(n.data.date, n.slug)}/)`).join('\n')}
 
 ## Contact
 

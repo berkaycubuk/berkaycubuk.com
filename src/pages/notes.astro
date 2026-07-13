@@ -30,16 +30,21 @@ const linkHost = (url: string) => new URL(url).hostname.replace(/^www\./, '');
         <article class="entry note">
           <a href={notePath(note.data.date, note.slug)} class="mono date">{moment(note.data.date).utcOffset('+03:00').format('YYYY · MMM DD · HH:mm')}</a>
           <div class="body">
-            <h2 class="title">
-              {note.data.link ? (
-                <a href={note.data.link} target="_blank" rel="noopener noreferrer">
-                  {note.data.title}
-                  <span class="mono host">&nbsp;↗ {linkHost(note.data.link)}</span>
-                </a>
-              ) : (
-                <a href={notePath(note.data.date, note.slug)}>{note.data.title}</a>
-              )}
-            </h2>
+            {note.data.title && (
+              <h2 class="title">
+                {note.data.link ? (
+                  <a href={note.data.link} target="_blank" rel="noopener noreferrer">
+                    {note.data.title}
+                    <span class="mono host">&nbsp;↗ {linkHost(note.data.link)}</span>
+                  </a>
+                ) : (
+                  <a href={notePath(note.data.date, note.slug)}>{note.data.title}</a>
+                )}
+              </h2>
+            )}
+            {!note.data.title && note.data.link && (
+              <a href={note.data.link} target="_blank" rel="noopener noreferrer" class="mono host">↗ {linkHost(note.data.link)}</a>
+            )}
             {(note.data.author || note.data.via) && (
               <p class="mono byline">
                 {note.data.author && (

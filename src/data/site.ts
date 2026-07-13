@@ -44,3 +44,8 @@ export function pageTitle(title: string): string {
 export function notePath(date: Date, slug: string): string {
   return `/notes/${moment(date).utcOffset('+03:00').format('YYYY/MM/DD')}/${slug}`;
 }
+
+// Notes may omit a title; feeds, meta tags and JSON-LD still need one.
+export function noteFallbackTitle(date: Date): string {
+  return `Note — ${moment(date).utcOffset('+03:00').format('MMM DD, YYYY')}`;
+}

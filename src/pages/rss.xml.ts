@@ -2,7 +2,7 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import moment from 'moment';
-import { SITE, notePath } from '../data/site';
+import { SITE, notePath, noteFallbackTitle } from '../data/site';
 
 export async function GET(context: any) {
   const posts = [
@@ -26,7 +26,7 @@ export async function GET(context: any) {
           : `/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/`;
 
       return {
-        title: post.data.title,
+        title: post.data.title || noteFallbackTitle(post.data.date),
         pubDate: new Date(post.data.date),
         description: post.data.description || '',
         content,

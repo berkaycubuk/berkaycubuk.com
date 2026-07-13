@@ -2,7 +2,7 @@
 import { CollectionEntry, getCollection } from 'astro:content';
 import IndexLayout from '../../layouts/IndexLayout.astro';
 import moment from 'moment';
-import { SITE, pageTitle, notePath } from '../../data/site';
+import { SITE, pageTitle, notePath, noteFallbackTitle } from '../../data/site';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes');
@@ -16,7 +16,14 @@ type Props = CollectionEntry<'notes'>;
 const note = Astro.props;
 const { Content } = await note.render();
 
-const description = (note.body || '').split('\n').find(line => line.trim().length > 0)?.substring(0, 160) || note.data.title;
+const title = note.data.title || noteFallbackTitle(note.data.date);
+// Plain-text excerpt: drop HTML tags and blockquote markers before truncating.
+const plainBody = (note.body || '')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/^>\s?/gm, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+const description = plainBody.substring(0, 160) || title;
 // Times display in Europe/Istanbul regardless of the build machine's timezone.
 const formattedDate = moment(note.data.date).utcOffset('+03:00').format('MMM DD, YYYY · HH:mm');
 const isoDate = moment(note.data.date).toISOString();
@@ -26,7 +33,7 @@ const linkHost = note.data.link ? new URL(note.data.link).hostname.replace(/^www
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": note.data.title,
+  "headline": title,
   "description": description,
   "datePublished": isoDate,
   "dateModified": isoDate,
@@ -43,13 +50,13 @@ const jsonLd = {
   }
 };
 ---
-<IndexLayout title={pageTitle(note.data.title)} description={description} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={isoDate}>
+<IndexLayout title={pageTitle(title)} description={description} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={isoDate}>
   <article class="py-14 measure">
     <a href="/notes" class="mono ulink back">&larr; Notes</a>
 
     <header class="note-head">
       <time datetime={isoDate} class="mono date">{formattedDate}</time>
-      <h1 class="note-title">{note.data.title}</h1>
+      {note.data.title && <h1 class="note-title">{note.data.title}</h1>}
       {(note.data.author || note.data.via) && (
         <p class="mono byline">
           {note.data.author && (

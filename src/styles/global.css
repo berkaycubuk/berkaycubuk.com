@@ -250,6 +250,23 @@ a {
   content: none;
 }
 
+/* Quote attribution — <figure><blockquote/><figcaption/></figure> in note bodies. */
+.prose :where(figure > blockquote) {
+  margin-bottom: 0.6em;
+}
+
+.prose :where(figure > blockquote + figcaption) {
+  margin-top: 0;
+  padding-left: 1.1em;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+.prose :where(figure > blockquote + figcaption cite) {
+  font-style: normal;
+}
+
 .prose :where(a) {
   text-decoration-color: var(--color-prose-links);
   text-underline-offset: 2px;
