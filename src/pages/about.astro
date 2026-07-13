@@ -5,25 +5,20 @@ import { pageTitle } from '../data/site';
 <IndexLayout title={pageTitle('About')} description="IoT and custom software engineer. I help companies design and ship software for connected products.">
   <div class="py-14">
     <header class="masthead">
-      <p class="eyebrow mono"><span class="dot"></span>ABOUT</p>
-      <h1 class="page-title">About me</h1>
-      <p class="lede">Hi, I'm Berkay — I help companies design and ship software for connected products.</p>
+      <div class="masthead-text">
+        <p class="eyebrow mono"><span class="dot"></span>ABOUT</p>
+        <h1 class="page-title">About me</h1>
+        <p class="lede">Hi, I'm Berkay and I solve problems.</p>
+      </div>
+      <img src="/images/berkay.png" alt="Berkay Çubuk" class="avatar" width="320" height="320" />
     </header>
 
     <div class="prose prose-lg measure mt-10">
-      <p>
-        I'm a problem solver. I design and build custom software — with a focus on
-        IoT and connected products — and I write and tinker along the way.
-      </p>
-      <p>
-        I work independently, solving real problems for people and businesses
-        mostly through software, and sometimes hardware.
-      </p>
-      <p>What I build:</p>
+      <p>What I do:</p>
       <ul>
-        <li>Custom IoT dashboards & device software</li>
-        <li>Web platforms and internal tools</li>
-        <li>LLM integrations (Claude, GPT, DeepSeek, etc.)</li>
+        <li>Develop custom dashboards and internal tools</li>
+        <li>Lightweight and cross platform tools to get the job done</li>
+        <li>LLM integrations (Claude, GPT, DeepSeek, GLM, etc.)</li>
         <li>Blockchain applications</li>
       </ul>
     </div>
@@ -42,8 +37,26 @@ import { pageTitle } from '../data/site';
 </IndexLayout>
 
 <style>
-  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+  .masthead-text { display: flex; flex-direction: column; gap: 14px; }
   .masthead .lede { margin-top: 6px; }
+  .avatar {
+    flex-shrink: 0;
+    width: 320px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+    border-radius: 50%;
+  }
+  @media (max-width: 560px) {
+    .masthead { flex-direction: column-reverse; align-items: flex-start; }
+    .avatar { width: 220px; }
+  }
 
   .block {
     margin-top: 44px;
