@@ -19,19 +19,11 @@ export const SITE = {
   ],
 
   // Site identity: RSS feed, og:site_name and the fallback <title>/description
-  title: "Berkay Çubuk — Internal Tools, Dashboards & Automations",
+  title: "Berkay Çubuk — Monitoring & Internal Software",
   description:
-    "I build internal tools, dashboards and automations. You work directly with me, and what I hand off keeps running without me.",
+    "Monitoring and internal software for companies with machines in the field. Fixed price, delivered in two weeks, and it keeps running without me.",
 
-  // Homepage SEO
-  home: {
-    title: 'Berkay Çubuk — Internal Tools, Dashboards & Automations',
-    description:
-      'I build internal tools, dashboards and automations. You work directly with me, and what I hand off keeps running without me.',
-    // Third-person variant for the WebSite JSON-LD block
-    jsonLdDescription:
-      'I build internal tools, dashboards and automations. You work directly with me, and what I hand off keeps running without me.',
-  },
+  // Homepage copy and metadata live in src/i18n/home.ts, one entry per language.
 } as const;
 
 // "About — Berkay Çubuk"-style titles for inner pages
