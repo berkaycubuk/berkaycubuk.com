@@ -3,92 +3,85 @@
 
 @variant dark (&:where(.dark, .dark *));
 
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
-}
+/* ---- Fonts: self-hosted, latin + latin-ext (Turkish) subsets only ------- */
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-ext-400-normal.woff2') format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-400-italic.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-ext-400-italic.woff2') format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fonts/inter-tight-latin-wght-normal.woff2') format('woff2-variations'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fonts/inter-tight-latin-ext-wght-normal.woff2') format('woff2-variations'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 100 800; font-display: swap; src: url('/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 100 800; font-display: swap; src: url('/fonts/jetbrains-mono-latin-ext-wght-normal.woff2') format('woff2-variations'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
 
 /* ============================================================================
-   Design system — "Swiss editorial × halftone". See /design.md.
-   Warm paper + ink, one red accent, hairline rules, mono labels.
+   Design system — "Editorial workshop". See /design.md.
+   Quiet off-white paper, big serif display, mono figure labels, one
+   red-orange accent. The work photos supply the colour.
    ========================================================================== */
 
 :root {
   /* Core palette */
-  --paper: #e9e5db;
-  --ink: #16130f;
-  --ink-dim: #6f6a5f;
-  --line: #d7d1c3;
-  --accent-red: #bf1b1b;
+  --paper: #f5f3ee;
+  --ink: #121211;
+  --ink-dim: #6f6c65;
+  --line: #dedad1;
+  --print: #ffffff;
+  --accent: #d23a1f;
+  --ok: #1f9d55;
 
   /* Type roles */
-  --font-display: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
-  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Menlo', monospace;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Page gutter, shared by every full-width section */
+  --pad: clamp(16px, 3vw, 40px);
 
   /* Semantic tokens (consumed across the site + Tailwind arbitrary values) */
   --color-bg: var(--paper);
-  --color-bg-secondary: #e2ddd0;
+  --color-bg-secondary: #ece9e2;
   --color-text: var(--ink);
   --color-text-secondary: var(--ink-dim);
-  --color-text-tertiary: #8f8a7c;
+  --color-text-tertiary: #8f8c84;
   --color-border: var(--line);
-  --color-accent: var(--ink);
+  --color-accent: var(--accent);
   --color-accent-hover: var(--ink-dim);
-  --color-card-bg: transparent;
+  --color-card-bg: var(--print);
   --color-card-border: var(--line);
-  --color-card-hover: #e2ddd0;
+  --color-card-hover: #ece9e2;
   --color-selection-bg: var(--ink);
   --color-selection-text: var(--paper);
 
   /* Prose */
-  --color-prose-body: #46423a;
+  --color-prose-body: #3d3b37;
   --color-prose-headings: var(--ink);
   --color-prose-links: var(--ink);
   --color-prose-bold: var(--ink);
   --color-prose-code: var(--ink);
-  --color-prose-code-bg: #ded8ca;
-  --color-prose-pre-bg: #16130f;
-  --color-prose-pre-text: #eae6db;
+  --color-prose-code-bg: #e9e6de;
+  --color-prose-pre-bg: #121211;
+  --color-prose-pre-text: #f0eee8;
   --color-prose-hr: var(--line);
-  --color-prose-quote-border: var(--ink);
-  --color-prose-quote-text: #555046;
+  --color-prose-quote-border: var(--accent);
+  --color-prose-quote-text: #55524c;
 }
 
 .dark {
-  --paper: #131210;
-  --ink: #e7e3d8;
-  --ink-dim: #8b8578;
-  --line: #2b2823;
-  --accent-red: #e5433c;
+  --paper: #0e0e0d;
+  --ink: #f0eee8;
+  --ink-dim: #8f8c84;
+  --line: #2a2926;
+  --print: #1c1c1a;
+  --accent: #ef5a3c;
 
-  --color-bg: var(--paper);
-  --color-bg-secondary: #1b1916;
-  --color-text: var(--ink);
-  --color-text-secondary: var(--ink-dim);
-  --color-text-tertiary: #6f6a5f;
-  --color-border: var(--line);
-  --color-accent: var(--ink);
-  --color-accent-hover: var(--ink-dim);
-  --color-card-bg: transparent;
-  --color-card-border: var(--line);
-  --color-card-hover: #1b1916;
-  --color-selection-bg: var(--ink);
-  --color-selection-text: var(--paper);
+  --color-bg-secondary: #171716;
+  --color-text-tertiary: #6f6c65;
+  --color-card-hover: #171716;
 
-  --color-prose-body: #b8b3a6;
-  --color-prose-headings: var(--ink);
-  --color-prose-links: var(--ink);
-  --color-prose-bold: var(--ink);
-  --color-prose-code: var(--ink);
-  --color-prose-code-bg: #211e1a;
-  --color-prose-pre-bg: #0c0b0a;
-  --color-prose-pre-text: #eae6db;
-  --color-prose-hr: var(--line);
-  --color-prose-quote-border: var(--ink);
-  --color-prose-quote-text: #a09a8c;
+  --color-prose-body: #bdbab2;
+  --color-prose-code-bg: #1f1f1d;
+  --color-prose-pre-bg: #050505;
+  --color-prose-quote-text: #a3a098;
 }
 
 ::selection {
@@ -96,17 +89,21 @@
   color: var(--color-selection-text);
 }
 
+html {
+  background-color: var(--color-bg);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
-  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
   background-color: var(--color-bg);
   color: var(--color-text);
-  transition: background-color 0.2s ease, color 0.2s ease;
   overflow-x: clip;
-  /* Riso / newsprint grain across the whole surface. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
-  background-blend-mode: multiply;
+  -webkit-font-smoothing: antialiased;
 }
-.dark body { background-blend-mode: screen; }
 
 .full-bleed {
   width: 100vw;
@@ -114,14 +111,14 @@ body {
   margin-right: calc(50% - 50vw);
 }
 
-/* Shared page frame — matches the homepage: 1120px column with fluid gutters. */
+/* Shared page frame for inner pages. */
 .shell {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(16px, 4vw, 44px);
-  padding-right: clamp(16px, 4vw, 44px);
+  padding-left: var(--pad);
+  padding-right: var(--pad);
 }
 
 /* Comfortable reading measure for long-form prose inside the wide frame. */
@@ -129,10 +126,11 @@ body {
 
 /* ---- Shared design-system classes ------------------------------------- */
 
+/* Figure-label voice: small uppercase mono. */
 .mono {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.22em;
+  font-size: 12px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -141,31 +139,34 @@ body {
   align-items: center;
   gap: 9px;
   margin: 0;
-  color: var(--color-text);
+  color: var(--color-text-secondary);
 }
 .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent-red);
+  background: var(--accent);
   display: inline-block;
   flex-shrink: 0;
 }
 
+/* Serif display heading. Instrument Serif ships one weight — never bold it. */
 .page-title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(48px, 11vw, 128px);
-  line-height: 0.92;
+  font-weight: 400;
+  font-size: clamp(64px, 13vw, 180px);
+  line-height: 0.85;
   letter-spacing: -0.035em;
   color: var(--color-text);
   overflow-wrap: break-word;
+  /* Room for descenders (g, j, p) at the tight line-height. */
+  padding-bottom: 0.14em;
 }
 
 .lede {
   margin: 0;
-  font-size: clamp(16px, 2vw, 20px);
+  font-size: clamp(17px, 2vw, 21px);
   line-height: 1.5;
   color: var(--color-text-secondary);
   max-width: 46ch;
@@ -191,21 +192,47 @@ body {
 }
 .ulink:hover::after { transform: scaleX(1); }
 
-/* Solid CTA button (ink fill, paper text) — the one loud element. */
+/* Solid pill CTA (ink fill, paper text) — the one loud element. */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 11px 18px;
+  padding: 14px 22px;
   background: var(--ink);
   color: var(--paper);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  border-radius: 3px;
+  border-radius: 99px;
   text-decoration: none;
-  transition: opacity 0.15s ease;
+  transition: transform 0.2s ease;
 }
-.btn:hover { opacity: 0.85; }
+.btn:hover { transform: translateY(-2px); }
+
+/* Outline pill — secondary actions and the header "Email me". */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--ink);
+  border-radius: 99px;
+  padding: 6px 16px;
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.pill:hover { background: var(--ink); color: var(--paper); }
+
+/* A photo shown as a print: white border, soft shadow, mono caption. */
+.print {
+  background: var(--print);
+  padding: 8px 8px 30px;
+  margin: 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 14px 34px -16px rgba(0,0,0,.35);
+  position: relative;
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+}
+.print img, .print video { display: block; width: 100%; height: auto; }
+.print > figcaption { position: absolute; left: 10px; right: 10px; bottom: 9px; font-size: 10px; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* Editorial index row — hairline-separated list entry (no filled cards). */
 .entry {
@@ -216,6 +243,25 @@ body {
   color: var(--color-text);
 }
 .entry:last-child { border-bottom: 1px solid var(--color-border); }
+
+/* Touch screens: small mono/text links get a ~44px tap area without moving
+   anything (padding grows the hit box, the negative margin cancels it). */
+@media (pointer: coarse) {
+  a.mono, .ulink, .site-header .brand, .langs a {
+    display: inline-block;
+    padding-block: 12px;
+    margin-block: -12px;
+  }
+}
+
+/* Hover-only effects shouldn't stick after a tap on touch screens. */
+@media (hover: none) {
+  .btn:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
 
 a {
   transition: color 0.15s ease;
@@ -286,4 +332,19 @@ a {
   cursor: pointer;
   transition: background-color 0.1s ease;
   flex-shrink: 0;
+}
+
+/* Prose headings speak in the display serif, like the rest of the site. */
+.prose :where(h1, h2, h3):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+.prose :where(h2):not(:where([class~="not-prose"] *)) { font-size: 1.9em; }
+.prose :where(h3):not(:where([class~="not-prose"] *)) { font-size: 1.45em; }
+.prose :where(img):not(:where([class~="not-prose"] *)) {
+  background: var(--print);
+  padding: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 14px 34px -16px rgba(0,0,0,.35);
 }

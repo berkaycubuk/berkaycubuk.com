@@ -1,8 +1,25 @@
 ---
+// Homepage, shared by every language. Copy lives in src/i18n/home.ts.
+// Layout: giant serif name + pinned prints, full-bleed photo, services row,
+// numbered case-study chapters, process, client quotes, apps index, contact.
+import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
 import Footer from './Footer.astro';
 import { SITE } from '../data/site';
-import { HOME, LOCALES, type Locale } from '../i18n/home';
+import { HOME, LOCALES, QUOTES, type Locale } from '../i18n/home';
+import { projects } from '../data/projects';
+
+import device from '../assets/work/isbusy_co_photo.jpg';
+import internals from '../assets/work/isbusy_co_latest_version_internals.jpg';
+import occupied from '../assets/work/isbusy_co_occupied_mode.jpg';
+import evolution from '../assets/work/isbusy_co_evolution.jpg';
+import shells from '../assets/work/isbusy_co_shells.jpg';
+import updating from '../assets/work/isbusy_co_software_update.jpg';
+import remotePoster from '../assets/work/isbusy_remote_poster.jpg';
+import mqttShot from '../assets/work/mqtt_studio_screenshot.png';
+import fabrikaShot from '../assets/work/fabrika_ai_screenshot.png';
+import tarifShot from '../assets/work/tarif_ist_screenshot.webp';
 
 interface Props {
   lang: Locale;
@@ -12,6 +29,7 @@ const { lang } = Astro.props;
 const t = HOME[lang];
 const here = LOCALES.find((l) => l.code === lang)!;
 const canonical = new URL(here.path, SITE.url).href;
+const EMAIL = 'berkay@berkaycubuk.com';
 
 // Every language version points at every other one, plus itself, so search
 // engines serve the right page per visitor instead of picking one and
@@ -23,10 +41,23 @@ const alternates = [
   })),
   { hrefLang: 'x-default', href: new URL('/', SITE.url).href },
 ];
+const languages = LOCALES.map((l) => ({ code: l.code, label: l.label, href: l.path, hrefLang: l.htmlLang }));
 
 // Display headings look wrong when the last line is a single word. Bind the
 // final space so the last two words wrap together, whatever the language.
 const noWidow = (s: string) => s.replace(/ (\S+)$/, ' $1');
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+
+const poster = await getImage({ src: remotePoster, width: 480, format: 'webp' });
+
+// Apps & tools index: the three shown on the homepage, hrefs from data/projects.
+const SHOTS = { 'MQTT Studio': mqttShot, Fabrika: fabrikaShot, 'tarif.ist': tarifShot } as const;
+const products = (Object.keys(SHOTS) as (keyof typeof SHOTS)[]).map((name) => ({
+  name,
+  desc: t.products[name],
+  href: projects.find((p) => p.title === name)?.links[0]?.href ?? '/projects',
+  img: SHOTS[name],
+}));
 
 const jsonLd = [
   {
@@ -49,7 +80,7 @@ const jsonLd = [
     "url": SITE.url,
     "jobTitle": t.jobTitle,
     "description": t.jsonLdDescription,
-    "email": "mailto:berkay@berkaycubuk.com",
+    "email": `mailto:${EMAIL}`,
     "sameAs": SITE.socials
   },
 ];
@@ -62,492 +93,277 @@ const jsonLd = [
   alternates={alternates}
   jsonLd={jsonLd}
 >
-  <main id="welcome" class="flex-1">
+  <Header lang={lang} languages={languages} />
+
+  <main class="home">
     <p class="sr-only">{t.srIntro}</p>
 
-    <div class="frame">
-      <!-- Top rule -->
-      <header class="topbar">
-        <span class="mono">BERKAY ÇUBUK</span>
-        <nav class="langs" aria-label="Language">
-          {LOCALES.map((l) => (
-            l.code === lang
-              ? <span class="mono lang is-current" aria-current="true">{l.label}</span>
-              : <a class="mono lang" href={l.path} hreflang={l.htmlLang} lang={l.htmlLang}>{l.label}</a>
-          ))}
-        </nav>
-      </header>
-
-      <!-- Masthead -->
-      <div class="masthead">
-        <p class="eyebrow mono"><span class="dot"></span>{t.availability}</p>
-        <h1 class="title">{noWidow(t.heroTitle)}</h1>
-        <p class="lede">{t.heroLede}</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="https://cal.com/berkaycubuk/discovery-call" data-cal-link="berkaycubuk/discovery-call" target="_blank" rel="noopener noreferrer">{t.bookCta}</a>
+    <!-- Masthead -->
+    <section class="mast">
+      <div class="mast-grid">
+        <h1>Berkay<br/><span>Çubuk</span></h1>
+        <div class="prints" aria-hidden="true">
+          <figure class="print p1">
+            <Image src={device} alt="" widths={[260, 520]} sizes="190px" format="webp" quality={70} loading="eager" />
+            <figcaption class="mono">{t.figA}</figcaption>
+          </figure>
+          <figure class="print p2">
+            <Image src={internals} alt="" widths={[260, 520]} sizes="210px" format="webp" quality={70} loading="eager" />
+            <figcaption class="mono">{t.figB}</figcaption>
+          </figure>
         </div>
-        <p class="cta-note mono dim">{t.heroNote}</p>
       </div>
-
-      <!-- What clients say: proof sits directly under the masthead -->
-      <section class="section" aria-labelledby="clients-title">
-        <header class="sec-head">
-          <span class="mono" id="clients-title">{t.clientsLabel}</span>
-          <span class="mono dim">{t.clientsNote}</span>
-        </header>
-        <ul class="quotes">
-          {t.quotes.map((q) => (
-            <li class="quote">
-              <div class="quote-head">
-                <p class="quote-by mono dim">{q.by}</p>
-                <p class="stars" aria-label={t.starsAria}>&starf;&starf;&starf;&starf;&starf;</p>
-              </div>
-              <blockquote class="quote-text" lang="en">{q.text}</blockquote>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <!-- Services: the offer -->
-      <section class="section" id="services" aria-labelledby="services-title">
-        <header class="sec-head">
-          <span class="mono">{t.servicesLabel}</span>
-          <span class="mono dim">{t.servicesNote}</span>
-        </header>
-        <h2 id="services-title" class="sec-title">{noWidow(t.servicesTitle)}</h2>
-        <p class="sec-lede">{t.servicesLede}</p>
-        <ol class="svc-list">
-          {t.services.map((s, i) => (
-            <li class="svc">
-              <span class="svc-no mono">{String(i + 1).padStart(2, '0')}</span>
-              <h3 class="svc-name">{s.name}</h3>
-              <p class="svc-desc">{s.desc}</p>
-            </li>
-          ))}
-        </ol>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="https://cal.com/berkaycubuk/discovery-call" data-cal-link="berkaycubuk/discovery-call" target="_blank" rel="noopener noreferrer">{t.bookCta}</a>
+      <div class="mast-row">
+        <p class="role">{t.role[0]}<br/>{t.role[1]}<br/><span>{t.place}</span></p>
+        <div>
+          <p class="intro">{noWidow(t.heroTitle)}</p>
+          <div class="cta-row">
+            <a class="btn" href={`mailto:${EMAIL}`}>{t.heroCta} →</a>
+            <span class="mono status"><i></i>{t.status}</span>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- How it works: substantiate "two weeks, fixed price" -->
-      <section class="section" aria-labelledby="process-title">
-        <header class="sec-head">
-          <span class="mono" id="process-title">{t.processLabel}</span>
-          <span class="mono dim">{t.processNote}</span>
-        </header>
-        <ol class="steps">
-          {t.steps.map((s, i) => (
-            <li class="step">
-              <span class="step-no mono">{String(i + 1).padStart(2, '0')}</span>
-              <h3 class="step-name">{s.name}</h3>
-              <p class="step-desc">{s.desc}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
+    <figure class="bleed">
+      <Image src={occupied} alt={t.bleedAlt} widths={[640, 1024, 1440, 1920]} sizes="100vw" format="webp" quality={65} loading="eager" fetchpriority="high" />
+      <figcaption class="mono">{t.bleedCaption}</figcaption>
+    </figure>
 
-      <!-- Who you're hiring -->
-      <section class="section" aria-labelledby="who-title">
-        <header class="sec-head">
-          <span class="mono" id="who-title">{t.whoLabel}</span>
-          <span class="mono dim">{t.whoNote}</span>
-        </header>
-        <h2 class="sec-title">{noWidow(t.whoTitle)}</h2>
-        <p class="sec-lede">{t.whoLedeBefore}<a class="body-link" href="https://mqtt.studio" target="_blank" rel="noopener noreferrer">MQTT Studio</a>{t.whoLedeAfter}</p>
-      </section>
-
-      <!-- Start a project -->
-      <section class="section" aria-labelledby="cta-title">
-        <header class="sec-head">
-          <span class="mono">{t.ctaLabel}</span>
-          <span class="mono dim">{t.ctaNote}</span>
-        </header>
-        <h2 id="cta-title" class="cta-title">{noWidow(t.ctaTitle)}</h2>
-        <p class="sec-lede">{t.ctaLede}</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="https://cal.com/berkaycubuk/discovery-call" data-cal-link="berkaycubuk/discovery-call" target="_blank" rel="noopener noreferrer">{t.bookCta}</a>
-          <a class="btn" href="mailto:berkay@berkaycubuk.com">berkay@berkaycubuk.com</a>
+    <!-- Services -->
+    <section class="services">
+      {t.services.map((s, i) => (
+        <div class="svc">
+          <span class="num">{pad(i)}</span>
+          <h2>{s.name}</h2>
+          <p>{s.desc}</p>
         </div>
-        <p class="cta-note mono dim">{t.ctaFootnote}</p>
-      </section>
+      ))}
+    </section>
 
+    <!-- Case 01 -->
+    <section id="work" class="chapter">
+      <aside class="ch-head">
+        <span class="no" aria-hidden="true">01</span>
+        <p class="mono meta">{t.isbusy.client}<br/>{t.isbusy.tags.join(' · ')}</p>
+      </aside>
+      <div class="ch-body">
+        <h2>{noWidow(t.isbusy.title)}</h2>
+        <dl>
+          <dt class="mono">{t.labels.problem}</dt><dd>{t.isbusy.problem}</dd>
+          <dt class="mono">{t.labels.built}</dt><dd>{t.isbusy.built}</dd>
+          <dt class="mono">{t.labels.result}</dt><dd class="res">{t.isbusy.result}</dd>
+        </dl>
+      </div>
+    </section>
+
+    <figure class="annotated">
+      <div class="print wide">
+        <Image src={evolution} alt={t.isbusy.evolutionAlt} widths={[640, 1000, 1400]} sizes="(max-width: 1000px) 100vw, 920px" format="webp" quality={70} />
+        {t.isbusy.marks.map((m, i) => <span class={`mark m${i + 1}`}><b>v{i + 1}</b><span class="mark-text"> {m}</span></span>)}
+      </div>
+      <figcaption class="mono">{t.isbusy.evolutionCaption}</figcaption>
+    </figure>
+
+    <div class="strip" tabindex="0" role="region" aria-label={t.isbusy.stripLabel}>
+      <figure><Image src={shells} alt={t.isbusy.stripAlts[0]} widths={[420, 840]} sizes="(max-width: 700px) 78vw, 420px" format="webp" quality={65} /><figcaption class="mono">{t.isbusy.strip[0]}</figcaption></figure>
+      <figure class="tall"><video src="/media/isbusy-remote.mp4" poster={poster.src} muted loop playsinline autoplay preload="none" aria-label={t.isbusy.stripAlts[1]}></video><figcaption class="mono">{t.isbusy.strip[1]}</figcaption></figure>
+      <figure><Image src={device} alt={t.isbusy.stripAlts[2]} widths={[420, 840]} sizes="(max-width: 700px) 78vw, 420px" format="webp" quality={65} /><figcaption class="mono">{t.isbusy.strip[2]}</figcaption></figure>
+      <figure><Image src={updating} alt={t.isbusy.stripAlts[3]} widths={[420, 840]} sizes="(max-width: 700px) 78vw, 420px" format="webp" quality={65} /><figcaption class="mono">{t.isbusy.strip[3]}</figcaption></figure>
     </div>
 
-    <Footer />
+    <!-- Case 02 -->
+    <section class="chapter">
+      <aside class="ch-head">
+        <span class="no" aria-hidden="true">02</span>
+        <p class="mono meta">{t.art.client}<br/>{t.art.tags.join(' · ')}</p>
+      </aside>
+      <div class="ch-body">
+        <h2>{noWidow(t.art.title)}</h2>
+        <dl>
+          <dt class="mono">{t.labels.problem}</dt><dd>{t.art.problem}</dd>
+          <dt class="mono">{t.labels.built}</dt><dd>{t.art.built}</dd>
+          <dt class="mono">{t.labels.result}</dt><dd class="res">{t.art.result}</dd>
+        </dl>
+        <a class="arrow" href="https://artresearch.tech/work/symbiosis/" target="_blank" rel="noopener noreferrer">{t.art.link} ↗</a>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process">
+      <h2 class="mono eyebrow">{t.processLabel}</h2>
+      <ol>
+        {t.steps.map((s, i) => (
+          <li><span class="num">{pad(i)}</span><h3>{s.name}</h3><p>{s.desc}</p></li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- Quotes -->
+    <section class="words">
+      <h2 class="mono eyebrow">{t.wordsLabel}</h2>
+      {QUOTES.map((q) => (
+        <blockquote lang="en"><p>“{q.text}”</p><cite class="mono"><a href={q.href} target="_blank" rel="noopener noreferrer">{q.by}</a></cite></blockquote>
+      ))}
+    </section>
+
+    <!-- Apps & tools -->
+    <section class="index">
+      <h2 class="mono eyebrow">{t.alsoLabel}</h2>
+      <ul>
+        {products.map((p, i) => (
+          <li>
+            <a href={p.href} target="_blank" rel="noopener noreferrer">
+              <span class="mono n">{pad(i)}</span><span class="t">{p.name}</span><span class="d">{p.desc}</span>
+              <Image class="peek" src={p.img} alt="" widths={[420]} sizes="300px" format="webp" quality={65} />
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a class="arrow all" href="/projects">{t.allProjects} →</a>
+    </section>
+
+    <!-- Contact -->
+    <section class="end">
+      <p class="mono eyebrow">{t.endAsk}</p>
+      <a class="write" href={`mailto:${EMAIL}`}>{t.endWrite}</a>
+      <p class="addr"><a href={`mailto:${EMAIL}`}>{EMAIL}</a> — {t.endNote}</p>
+    </section>
   </main>
+
+  <Footer lang={lang} plain />
 </BaseLayout>
 
-
-<!-- Cal.com popup embed: booking opens in an overlay instead of leaving the page.
-     Buttons keep their href so booking still works if this script is blocked. -->
-<script is:inline>
-  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-  Cal("init", { origin: "https://cal.com" });
-  Cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
-
-  // Cal's own click listener opens the overlay but doesn't preventDefault on
-  // anchors, so the href would also navigate. Suppress navigation only once
-  // the embed is actually loaded; with the script blocked, links work as-is.
-  document.querySelectorAll("a[data-cal-link]").forEach(function (el) {
-    el.addEventListener("click", function (e) {
-      if (window.Cal && window.Cal.loaded) e.preventDefault();
-    });
-  });
-</script>
-
 <style>
-  /* --- Palette: warm paper + ink, single red accent (inverts in dark) --- */
-  #welcome {
-    --paper: #e9e5db;
-    --ink: #16130f;
-    --ink-dim: #6f6a5f;
-    --line: rgba(22, 19, 15, 0.14);
-    --accent: #bf1b1b;
-
-    color: var(--ink);
-    background-color: var(--paper);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow-x: hidden;
-    /* Riso / newsprint grain */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-    background-blend-mode: multiply;
-  }
-  :global(html.dark) #welcome {
-    --paper: #131210;
-    --ink: #e7e3d8;
-    --ink-dim: #8b8578;
-    --line: rgba(231, 227, 216, 0.16);
-    --accent: #e5433c;
-    background-blend-mode: screen;
-  }
-  :global(html body) { background-color: #e9e5db; }
-  :global(html.dark body) { background-color: #131210; }
-
-  .frame {
-    flex: 1;
-    width: 100%;
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: clamp(16px, 4vw, 44px);
-    display: flex;
-    flex-direction: column;
-    gap: clamp(20px, 3.5vw, 40px);
-  }
-
-  .mono {
-    font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Menlo', monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
-  .dim { color: var(--ink-dim); }
-
-  /* --- Top rule --- */
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--ink);
-  }
-
-  /* Language switcher — sits where the old portfolio label was. */
-  .langs {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .lang {
-    color: var(--ink-dim);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-  .lang:hover { color: var(--ink); }
-  .lang.is-current {
-    color: var(--ink);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
-  }
+  .home { overflow-x: clip; }
+  .eyebrow { margin: 0 0 28px; font-weight: 400; }
+  .num { font-family: var(--font-display); font-style: italic; font-size: 28px; color: var(--accent); }
 
   /* --- Masthead --- */
-  .masthead { display: flex; flex-direction: column; gap: 14px; }
-  .title + .lede { margin-top: clamp(10px, 1.6vw, 20px); }
+  .mast { padding: 2vw var(--pad) 70px; }
+  .mast-grid { display: grid; grid-template-columns: 1fr auto; align-items: center; }
+  h1 { font-family: var(--font-display); font-weight: 400; font-size: 19vw; line-height: .78; letter-spacing: -0.04em; margin: 0; }
+  h1 span { display: block; padding-left: 10vw; font-style: italic; }
+  .prints { position: relative; width: 320px; height: 420px; margin-right: 1vw; }
+  .p1 { position: absolute; width: 190px; top: 0; left: 0; transform: rotate(-4deg); z-index: 2; }
+  .p2 { position: absolute; width: 210px; bottom: 0; right: 0; transform: rotate(3deg); }
 
-  .eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    margin: 0;
-    color: var(--ink);
-  }
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    display: inline-block;
-  }
+  .mast-row { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; margin-top: 48px; align-items: end; }
+  .role { margin: 0; font-size: 15px; line-height: 1.4; }
+  .role span { color: var(--ink-dim); }
+  .intro { margin: 0; font-family: var(--font-display); font-size: clamp(28px, 3.2vw, 46px); line-height: 1.08; }
+  .cta-row { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin-top: 28px; }
+  .status { color: var(--ink-dim); display: inline-flex; gap: 8px; align-items: center; font-size: 11px; }
+  .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 20%, transparent); }
 
-  .title {
-    margin: 0;
-    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    /* Sized for the three-line positioning sentence: at 148px it wrapped to
-       six lines and pushed the CTA off the first screen. */
-    font-size: clamp(30px, 6.2vw, 78px);
-    line-height: 0.98;
-    max-width: 22ch;
-    letter-spacing: -0.035em;
-    color: var(--ink);
-    overflow-wrap: break-word;
-  }
+  .bleed { margin: 0; position: relative; }
+  .bleed img { display: block; width: 100%; height: min(78vh, 56vw); object-fit: cover; object-position: center 40%; }
+  .bleed figcaption { position: absolute; left: var(--pad); right: var(--pad); bottom: 18px; color: #fff; font-size: 11px; text-shadow: 0 1px 10px rgba(0,0,0,.7); }
 
-  .lede {
-    margin: 0;
-    max-width: 44ch;
-    font-size: clamp(16px, 2vw, 21px);
-    line-height: 1.45;
-    color: var(--ink-dim);
-  }
-  .masthead .cta-row { margin-top: clamp(6px, 1.2vw, 14px); }
-  .masthead .cta-note { margin-top: -4px; }
+  /* --- Services --- */
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
+  .svc { padding: 40px var(--pad); border-right: 1px solid var(--line); }
+  .svc:last-child { border-right: 0; }
+  .svc h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 2.6vw, 38px); line-height: 1; margin: 8px 0 10px; }
+  .svc p { margin: 0; color: var(--ink-dim); }
 
-  /* --- Editorial sections below the masthead --- */
-  .section {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(18px, 2.6vw, 30px);
-    /* Generous air above each section — the frame gap alone reads cramped. */
-    padding-top: clamp(64px, 11vw, 160px);
-  }
-  .sec-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 6px 16px;
-    padding-top: 12px;
-    border-top: 1px solid var(--ink);
-    color: var(--ink);
-  }
-  .sec-title {
-    margin: 0;
-    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: clamp(26px, 4.6vw, 56px);
-    line-height: 1.02;
-    letter-spacing: -0.025em;
-    max-width: 24ch;
-    color: var(--ink);
-  }
-  .sec-lede {
-    margin: 0;
-    max-width: 58ch;
-    font-size: clamp(15px, 1.6vw, 18px);
-    line-height: 1.55;
-    color: var(--ink-dim);
-  }
+  /* --- Case chapters --- */
+  .chapter { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; padding: 130px var(--pad) 60px; scroll-margin-top: 20px; }
+  .ch-head { position: sticky; top: 30px; align-self: start; }
+  .no { font-family: var(--font-display); font-size: clamp(100px, 16vw, 240px); line-height: .8; display: block; }
+  .meta { color: var(--ink-dim); margin-top: 18px; line-height: 1.7; font-size: 11px; }
+  .ch-body { max-width: 42em; }
+  .ch-body h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(40px, 6vw, 88px); line-height: .95; letter-spacing: -0.02em; margin: 0 0 40px; }
+  dl { margin: 0; display: grid; grid-template-columns: 130px 1fr; gap: 0 24px; }
+  dt { color: var(--ink-dim); padding: 18px 0; border-top: 1px solid var(--line); font-size: 11px; line-height: 1.9; }
+  dd { margin: 0; padding: 14px 0; border-top: 1px solid var(--line); font-size: 19px; }
+  dd.res { font-family: var(--font-display); font-size: clamp(26px, 2.8vw, 36px); line-height: 1.1; font-style: italic; }
+  .arrow { display: inline-block; margin-top: 26px; font-weight: 600; color: var(--ink); }
 
-  /* Services index */
-  .svc-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .svc {
-    display: grid;
-    grid-template-columns: 56px minmax(180px, 260px) 1fr;
-    gap: 10px clamp(16px, 3vw, 48px);
-    align-items: baseline;
-    padding: clamp(16px, 2.4vw, 26px) 0;
-    border-top: 1px solid var(--line);
-  }
-  .svc:first-child { border-top: none; padding-top: 4px; }
-  .svc-no { color: var(--accent); }
-  .svc-name {
-    margin: 0;
-    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: clamp(19px, 2.2vw, 26px);
-    letter-spacing: -0.02em;
-    color: var(--ink);
-  }
-  .svc-desc {
-    margin: 0;
-    font-size: clamp(14px, 1.5vw, 16px);
-    line-height: 1.55;
-    color: var(--ink-dim);
-    max-width: 52ch;
+  .annotated { margin: 30px auto 90px; padding: 0 var(--pad); max-width: 1000px; }
+  .wide { transform: rotate(-1deg); padding-bottom: 8px; }
+  .mark { position: absolute; top: -14px; font-family: var(--font-mono); font-size: 11px; background: var(--ink); color: var(--paper); padding: 4px 8px; white-space: nowrap; }
+  .mark b { color: var(--accent); }
+  .mark::after { content: ''; position: absolute; left: 14px; top: 100%; width: 1px; height: 40px; background: var(--ink); }
+  .m1 { left: 8%; } .m2 { left: 40%; } .m3 { left: 70%; }
+  .annotated > figcaption { margin-top: 22px; color: var(--ink-dim); font-size: 11px; }
+
+  .strip { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--pad) 16px; scrollbar-width: thin; }
+  .strip figure { flex: 0 0 min(420px, 78vw); margin: 0; scroll-snap-align: start; }
+  .strip figure.tall { flex-basis: min(240px, 48vw); }
+  .strip img, .strip video { display: block; width: 100%; height: 400px; object-fit: cover; background: #111; }
+  .strip figcaption { margin-top: 10px; color: var(--ink-dim); font-size: 11px; }
+
+  /* --- Process --- */
+  .process { padding: 110px var(--pad); border-top: 1px solid var(--line); margin-top: 40px; }
+  .process ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+  .process h3 { font-family: var(--font-display); font-weight: 400; font-size: 30px; line-height: 1; margin: 8px 0; }
+  .process p { margin: 0; color: var(--ink-dim); font-size: 16px; }
+
+  /* --- Quotes --- */
+  .words { padding: 110px var(--pad); border-top: 1px solid var(--line); }
+  .words blockquote { margin: 0; padding: 36px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 3fr 1fr; gap: 30px; align-items: end; }
+  .words p { margin: 0; font-family: var(--font-display); font-size: clamp(26px, 3.6vw, 50px); line-height: 1.08; }
+  .words cite { font-style: normal; text-align: right; }
+  .words cite a { color: var(--ink); }
+
+  /* --- Apps index --- */
+  .index { padding: 0 var(--pad) 110px; }
+  .index ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+  .index li a { display: grid; grid-template-columns: 60px 1fr 1.4fr; gap: 20px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; position: relative; transition: padding .3s; }
+  .n { color: var(--ink-dim); }
+  .t { font-family: var(--font-display); font-size: clamp(30px, 4vw, 54px); line-height: 1; }
+  .d { color: var(--ink-dim); }
+  .peek { position: absolute; right: 4%; top: 50%; width: 300px; height: auto; transform: translateY(-50%) rotate(3deg) scale(.9); opacity: 0; pointer-events: none; transition: opacity .25s, transform .35s; box-shadow: 0 20px 50px -20px rgba(0,0,0,.5); border: 6px solid var(--print); z-index: 2; }
+  .all { margin-top: 22px; }
+  @media (pointer: coarse) { .arrow { padding-block: 10px; margin-top: 16px; } }
+
+  /* --- Contact --- */
+  .end { padding: 100px var(--pad) 20px; border-top: 1px solid var(--line); }
+  .write { display: block; font-family: var(--font-display); font-size: clamp(64px, 15vw, 240px); line-height: .85; letter-spacing: -0.03em; color: var(--ink); text-decoration: none; font-style: italic; transition: letter-spacing .4s; }
+  .addr { color: var(--ink-dim); margin-top: 30px; font-size: 15px; }
+  .addr a { color: var(--ink); }
+
+  /* Hover effects only where there's a real pointer, so they don't stick after a tap. */
+  @media (hover: hover) {
+    .print:hover { transform: rotate(0) translateY(-4px); z-index: 3; }
+    .index li a:hover { padding-left: 14px; }
+    .index li a:hover .peek { opacity: 1; transform: translateY(-50%) rotate(-2deg) scale(1); }
+    .write:hover { letter-spacing: -0.01em; }
   }
 
-  /* Process steps */
-  .steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: clamp(20px, 3vw, 40px);
-  }
-  .step {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 14px;
-    border-top: 1px solid var(--line);
-  }
-  .step-no { color: var(--accent); }
-  .step-name {
-    margin: 0;
-    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: clamp(17px, 1.8vw, 21px);
-    letter-spacing: -0.02em;
-    color: var(--ink);
-  }
-  .step-desc {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--ink-dim);
-  }
-
-  /* Testimonials */
-  .quotes {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(20px, 3vw, 40px);
-  }
-  .quote {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: clamp(16px, 2vw, 22px);
-    border: 1px solid var(--line);
-    border-radius: 2px;
-  }
-  .quote-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 4px 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--line);
-  }
-  .stars {
-    margin: 0;
-    color: var(--accent);
-    font-size: 13px;
-    letter-spacing: 0.2em;
-  }
-  .quote-text {
-    margin: 0;
-    flex: 1;
-    font-size: clamp(15px, 1.6vw, 17px);
-    line-height: 1.55;
-    color: var(--ink);
-  }
-  .quote-by { margin: 0; font-size: 10px; }
-
-  .body-link {
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-color: var(--line);
-    text-underline-offset: 3px;
-    transition: text-decoration-color 0.15s ease;
-  }
-  .body-link:hover { text-decoration-color: var(--ink); }
-
-  .cta-note { margin: 0; font-size: 10px; }
-
-  /* CTA */
-  .cta-title {
-    margin: 0;
-    font-family: 'Helvetica Neue', 'DM Sans', Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: clamp(34px, 7.5vw, 96px);
-    line-height: 0.95;
-    letter-spacing: -0.035em;
-    color: var(--ink);
-    overflow-wrap: break-word;
-  }
-  .cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 14px;
-    padding-bottom: clamp(8px, 2vw, 20px);
-  }
-  .btn {
-    font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Menlo', monospace;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
-    background: none;
-    border: 1px solid var(--ink);
-    border-radius: 2px;
-    padding: 14px 22px;
-    text-decoration: none;
-    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  }
-  .btn:hover { background: var(--ink); color: var(--paper); }
-  .btn-primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #f5f2ea;
-  }
-  .btn-primary:hover {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: var(--paper);
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px; height: 1px;
-    padding: 0; margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  @media (max-width: 820px) {
-    .svc {
-      grid-template-columns: 40px 1fr;
-      grid-template-areas: "no name" "no desc";
+  /* Scroll reveal: CSS-only, skipped where unsupported or motion is reduced. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .ch-body dl > *, .ch-body h2, .words blockquote, .process li { animation: fade linear both; animation-timeline: view(); animation-range: entry 0% entry 50%; }
+      @keyframes fade { from { opacity: 0; transform: translateY(20px); } }
     }
-    .svc-no { grid-area: no; }
-    .svc-name { grid-area: name; }
-    .svc-desc { grid-area: desc; }
-    .steps { grid-template-columns: 1fr 1fr; }
-    .quotes { grid-template-columns: 1fr; }
   }
 
-  @media (max-width: 640px) {
-    .lede { font-size: 17px; }
-    .btn { width: 100%; text-align: center; box-sizing: border-box; }
-    .steps { grid-template-columns: 1fr; }
+  /* Tablet: name and prints stay side by side, prints shrink. */
+  @media (max-width: 900px) {
+    .prints { width: 250px; height: 330px; }
+    .p1 { width: 150px; } .p2 { width: 165px; }
+  }
+  /* Phone: prints drop below the name. Height tracks the width so the
+     portrait print never spills onto the text below. */
+  @media (max-width: 600px) {
+    .mast-grid { grid-template-columns: 1fr; }
+    .prints { width: 100%; height: min(calc(58vw + 34px), 300px); margin: 24px 0 0; }
+    .p1 { width: min(42%, 190px); left: 4%; } .p2 { width: min(44%, 220px); right: 4%; }
+    .print > figcaption { font-size: 9px; letter-spacing: 0; }
   }
 
-  /* Very narrow screens (down to ~260px): tighten mono tracking and let the
-     top bar + bottom bar stack so nothing overflows. */
-  @media (max-width: 400px) {
-    .mono { font-size: 10px; letter-spacing: 0.12em; }
-    .eyebrow { flex-wrap: wrap; }
-    .topbar {
-      flex-wrap: wrap;
-      gap: 6px 12px;
-    }
+  @media (max-width: 900px) {
+    .mast-row, .chapter, .services, .words blockquote { grid-template-columns: 1fr; }
+    .svc { border-right: 0; border-top: 1px solid var(--line); }
+    .ch-head { position: static; }
+    .process ol { grid-template-columns: 1fr 1fr; }
+    dl { grid-template-columns: 1fr; } dd { border-top: 0; padding-top: 0; } dt { padding-bottom: 6px; }
+    /* Too narrow for the notes: keep just the v1/v2/v3 chips over each board. */
+    .mark-text { display: none; } .mark b { margin: 0; } .m1 { left: 12%; } .m2 { left: 45%; } .m3 { left: 78%; }
+    .index li a { grid-template-columns: 40px 1fr; } .d { grid-column: 2; } .peek { display: none; }
+    .strip img, .strip video { height: 320px; }
+    .words cite { text-align: left; }
   }
 </style>

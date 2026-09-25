@@ -88,12 +88,14 @@ const linkHost = (url: string) => new URL(url).hostname.replace(/^www\./, '');
     transition: color 0.15s ease;
   }
   .date:hover { color: var(--color-text); }
+  @media (pointer: coarse) { .note .date { padding-block: 12px; margin-block: -12px; } }
   .title {
     margin: 0;
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
   }
   .title a {
     color: var(--color-text);

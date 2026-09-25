@@ -22,13 +22,13 @@ export async function GET() {
 
 > ${SITE.description}
 
-Independent software engineer. Projects are fixed-price, scoped on a free
-20-minute call, delivered in two weeks, and handed off documented so they keep
-running without ongoing involvement.
+Independent hardware and software engineer based in Istanbul. Builds custom
+devices, sensors and automation software for factories and workshops, from the
+first conversation to installation on site. Contact is by email.
 
 ## Key pages
 
-- [Home](${SITE.url}/): services, process, selected work, client FAQ
+- [Home](${SITE.url}/): services, case studies, process, client quotes
 - [About](${SITE.url}/about/): background and ways of working
 - [Projects](${SITE.url}/projects/): things I've built
 - [Writings](${SITE.url}/writings/): all posts

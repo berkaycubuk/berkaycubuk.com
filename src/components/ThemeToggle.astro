@@ -30,6 +30,7 @@
     flex-shrink: 0;
   }
   .theme-toggle:hover { border-color: var(--color-text); }
+  @media (pointer: coarse) { .theme-toggle { width: 44px; height: 44px; } }
   /* Only the active icon renders; `:not(.hidden)` keeps this from overriding the
      `.hidden` utility the toggle script uses to swap sun/moon. */
   .theme-toggle svg:not(.hidden) { display: block; }

@@ -52,10 +52,11 @@ const sortedPosts = blogPosts.sort((a, b) => moment(b.data.date).valueOf() - mom
   .date { color: var(--color-text-tertiary); padding-top: 6px; }
   .title {
     margin: 0;
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
     color: var(--color-text);
     transition: color 0.15s ease;
   }

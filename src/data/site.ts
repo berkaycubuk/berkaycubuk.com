@@ -19,9 +19,9 @@ export const SITE = {
   ],
 
   // Site identity: RSS feed, og:site_name and the fallback <title>/description
-  title: "Berkay Çubuk — Monitoring & Internal Software",
+  title: "Berkay Çubuk — Custom Devices & Automation for Factories and Workshops",
   description:
-    "Monitoring and internal software for companies with machines in the field. Fixed price, delivered in two weeks, and it keeps running without me.",
+    "Custom devices, sensors and the software behind them for factories and workshops. Designed, built and installed by one person.",
 
   // Homepage copy and metadata live in src/i18n/home.ts, one entry per language.
 } as const;

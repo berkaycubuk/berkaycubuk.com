@@ -2,7 +2,7 @@
 import IndexLayout from '../layouts/IndexLayout.astro';
 import { pageTitle } from '../data/site';
 ---
-<IndexLayout title={pageTitle('About')} description="IoT and custom software engineer. I help companies design and ship software for connected products.">
+<IndexLayout title={pageTitle('About')} description="Hardware and software engineer in Istanbul. I build custom devices, sensors and automation software for factories and workshops.">
   <div class="py-14">
     <header class="masthead">
       <div class="masthead-text">
@@ -16,21 +16,21 @@ import { pageTitle } from '../data/site';
     <div class="prose prose-lg measure mt-10">
       <p>What I do:</p>
       <ul>
-        <li>Develop custom dashboards and internal tools</li>
-        <li>Lightweight and cross platform tools to get the job done</li>
-        <li>LLM integrations (Claude, GPT, DeepSeek, GLM, etc.)</li>
-        <li>Blockchain applications</li>
+        <li>Custom devices — indicators, controllers and small machines built for a specific floor</li>
+        <li>Sensors and monitoring, so you can see what your machines are doing without walking over</li>
+        <li>Automation software and internal tools that connect equipment, screens and people</li>
+        <li>Remote configuration and updates over MQTT, so what I install keeps working without me on site</li>
       </ul>
     </div>
 
     <section class="block">
       <h2 class="mono block-label"><span class="dot"></span>WORKING TOGETHER</h2>
       <p class="lede">
-        If you have a problem worth a 20-minute conversation, grab a free slot on
-        my calendar.
+        Tell me what's wasting your team's time, in plain words. I reply within a
+        day.
       </p>
-      <a href="https://cal.com/berkaycubuk/discovery-call" target="_blank" rel="noopener noreferrer" class="btn">
-        Book a call &rarr;
+      <a href="mailto:berkay@berkaycubuk.com" class="btn">
+        Email me &rarr;
       </a>
     </section>
   </div>
@@ -49,9 +49,11 @@ import { pageTitle } from '../data/site';
     flex-shrink: 0;
     width: 320px;
     height: auto;
-    aspect-ratio: 1 / 1;
-    max-width: 100%;
-    border-radius: 50%;
+        max-width: 100%;
+    background: var(--print);
+    padding: 8px 8px 30px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 14px 34px -16px rgba(0,0,0,.35);
+    transform: rotate(3deg);
   }
   @media (max-width: 560px) {
     .masthead { flex-direction: column-reverse; align-items: flex-start; }
