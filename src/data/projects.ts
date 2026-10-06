@@ -7,6 +7,27 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "isbusy",
+    description: "A round status sign for meeting-room doors. It reads the room's Google Workspace or Microsoft 365 calendar and shows green for free, red for busy and yellow for booked but empty, readable from across the corridor. Hardware, firmware and cloud, designed and sold by me.",
+    tags: ["Hardware", "Firmware", "Product"],
+    links: [{ label: "Visit", href: "https://isbusy.co" }],
+  },
+  {
+    title: "isbusy code",
+    description: "A status light for Claude Code. Three lights on your desk follow every session you have open: green when it's ready for your next prompt, yellow while it works, red when it needs you.",
+    tags: ["Hardware", "Claude Code", "Plugin"],
+    links: [
+      { label: "Visit", href: "https://code.isbusy.co" },
+      { label: "Plugin source", href: "https://github.com/berkaycubuk/isbusy-code" },
+    ],
+  },
+  {
+    title: "Boardless",
+    description: "Build your entire device digitally first, then build it once. Schematic, 3D-printed enclosure and firmware in one project, cross-checked for hardware bugs before anything is made. In development, with a waitlist open.",
+    tags: ["Hardware", "Dev tools", "Waitlist"],
+    links: [{ label: "Join the waitlist", href: "https://useboardless.com" }],
+  },
+  {
     title: "MQTT Studio",
     description: "Hosted MQTT dashboards with a broker included. Build read-only monitoring dashboards and automation for IoT fleets — no infrastructure to run yourself. A commercial SaaS I design, build and operate solo.",
     tags: ["Go", "SaaS", "IoT", "MQTT"],
