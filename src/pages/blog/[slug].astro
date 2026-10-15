@@ -1,0 +1,15 @@
+---
+// Old /blog/<slug>/ URLs still get search and link traffic; send them to the dated post URL.
+import { getCollection } from 'astro:content';
+import moment from 'moment';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writings');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { target: `/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/` },
+  }));
+}
+
+return Astro.redirect(Astro.props.target, 301);
+---
