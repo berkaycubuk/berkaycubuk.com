@@ -43,6 +43,12 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "pouch",
+    description: "A phone-first web UI for running and steering Claude Code sessions on your own dev box. Start a task from your phone, approve tool calls from a notification, read the diff, and pick the same session up later in a terminal.",
+    tags: ["TypeScript", "Claude Code", "PWA"],
+    links: [{ label: "Source", href: "https://github.com/berkaycubuk/pouch" }],
+  },
+  {
     title: "tarif.ist",
     description: "Open-source multi-modal transit directions for Istanbul — metro, Marmaray, tram, funicular and İETT buses on a single map, with live disruption info and shareable routes.",
     tags: ["TypeScript", "Vite", "Leaflet", "Tailwind CSS"],
