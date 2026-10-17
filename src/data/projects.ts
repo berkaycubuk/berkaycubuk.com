@@ -26,19 +26,31 @@ export const projects: Project[] = [
   },
   {
     title: "isbusy",
-    description: "A meeting-room status light that mounts on the glass and reads from the far end of the corridor — green when free, red when busy, yellow when booked but empty. Driven by your calendar, or by anything that can make an HTTP request.",
-    tags: ["Hardware", "ESP32", "IoT"],
-    links: [{ label: "Visit", href: "https://isbusy.co/en/" }],
+    description: "A round status sign for meeting-room doors. It reads the room's Google Workspace or Microsoft 365 calendar and shows green for free, red for busy and yellow for booked but empty, readable from across the corridor. Hardware, firmware and cloud, designed and sold by me.",
+    tags: ["Hardware", "Firmware", "Product"],
+    links: [{ label: "Visit", href: "https://isbusy.co" }],
     group: 'products',
     icon: "/images/projects/isbusy.svg",
   },
   {
     title: "isbusy code",
-    description: "A free Android app that brings Claude Code's permission prompts to your phone and Wear OS watch, with Allow and Deny right on the notification, sealed end to end. Plus an optional status light for your desk.",
-    tags: ["Android", "Wear OS", "Claude Code"],
-    links: [{ label: "Visit", href: "https://isbusy.co/en/code/" }],
+    description: "A status light for Claude Code. Three lights on your desk follow every session you have open: green when it's ready for your next prompt, yellow while it works, red when it needs you.",
+    tags: ["Hardware", "Claude Code", "Plugin"],
+    links: [
+      { label: "Visit", href: "https://code.isbusy.co" },
+      { label: "Android app", href: "https://isbusy.co/en/code/" },
+      { label: "Plugin source", href: "https://github.com/berkaycubuk/isbusy-code" },
+    ],
     group: 'products',
     icon: "/images/projects/isbusy.svg",
+  },
+  {
+    title: "Boardless",
+    description: "Build your entire device digitally first, then build it once. Schematic, 3D-printed enclosure and firmware in one project, cross-checked for hardware bugs before anything is made. In development, with a waitlist open.",
+    tags: ["Hardware", "Dev tools", "Waitlist"],
+    links: [{ label: "Join the waitlist", href: "https://useboardless.com" }],
+    group: 'products',
+    icon: "/images/projects/boardless.svg",
   },
   {
     title: "MQTT Studio",
@@ -117,8 +129,8 @@ export const projects: Project[] = [
   },
   {
     title: "pouch",
-    description: "Run Claude Code from your phone. A self-hosted, phone-first web app for the sessions on your own machine — start tasks, approve tool calls from a notification, review diffs, and resume in a terminal.",
-    tags: ["TypeScript", "Agent SDK", "PWA"],
+    description: "A phone-first web UI for running and steering Claude Code sessions on your own dev box. Start a task from your phone, approve tool calls from a notification, read the diff, and pick the same session up later in a terminal.",
+    tags: ["TypeScript", "Claude Code", "PWA"],
     links: [
       { label: "Try it", href: "https://pouch.berkay.tools" },
       { label: "Details", href: "/tools/pouch" },
