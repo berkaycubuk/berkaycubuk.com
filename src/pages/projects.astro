@@ -1,32 +1,45 @@
 ---
 import IndexLayout from '../layouts/IndexLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { projects } from '../data/projects';
+import { projects, groups } from '../data/projects';
 import { pageTitle } from '../data/site';
 ---
-<IndexLayout title={pageTitle('Projects')} description="Projects and things I've built — IoT, custom software, web and blockchain.">
+<IndexLayout title={pageTitle('Projects')} description="Products, tools and experiments I've built — IoT, AI agents, browser tools and more.">
   <div class="py-14">
     <header class="masthead">
       <p class="eyebrow mono"><span class="dot"></span>SELECTED WORK</p>
       <h1 class="page-title">Projects</h1>
-      <p class="lede">Things I've built and am working on.</p>
+      <p class="lede">Products, tools and experiments I've built and am working on.</p>
     </header>
 
-    <div class="list">
-      {projects.map(project => (
-        <ProjectCard
-          title={project.title}
-          description={project.description}
-          tags={project.tags}
-          links={project.links}
-        />
-      ))}
-    </div>
+    {groups.map(group => (
+      <section class="group">
+        <h2 class="mono group-label"><span class="dot"></span>{group.label}</h2>
+        <div class="list">
+          {projects.filter(p => p.group === group.id).map(project => (
+            <ProjectCard
+              title={project.title}
+              description={project.description}
+              tags={project.tags}
+              links={project.links}
+              icon={project.icon}
+            />
+          ))}
+        </div>
+      </section>
+    ))}
   </div>
 </IndexLayout>
 
 <style>
   .masthead { display: flex; flex-direction: column; gap: 14px; }
   .masthead .lede { margin-top: 6px; }
-  .list { margin-top: 40px; }
+  .group { margin-top: 56px; }
+  .group-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 14px;
+    color: var(--color-text);
+  }
 </style>

@@ -20,6 +20,7 @@ import remotePoster from '../assets/work/isbusy_remote_poster.jpg';
 import mqttShot from '../assets/work/mqtt_studio_screenshot.png';
 import fabrikaShot from '../assets/work/fabrika_ai_screenshot.png';
 import tarifShot from '../assets/work/tarif_ist_screenshot.webp';
+import { symbiosisPhotos } from '../data/symbiosis';
 
 interface Props {
   lang: Locale;
@@ -188,6 +189,12 @@ const jsonLd = [
         <a class="arrow" href="https://artresearch.tech/work/symbiosis/" target="_blank" rel="noopener noreferrer">{t.art.link} ↗</a>
       </div>
     </section>
+
+    <div class="strip" tabindex="0" role="region" aria-label={t.art.stripLabel}>
+      {symbiosisPhotos.map((src, i) => (
+        <figure><Image src={src} alt={t.art.stripAlts[i]} widths={[420, 840]} sizes="(max-width: 700px) 78vw, 420px" format="webp" quality={65} /><figcaption class="mono">{t.art.strip[i]}</figcaption></figure>
+      ))}
+    </div>
 
     <!-- Process -->
     <section class="process">

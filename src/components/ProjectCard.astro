@@ -4,9 +4,10 @@ interface Props {
   description: string;
   tags?: string[];
   links?: { label: string; href: string }[];
+  icon?: string;
 }
 
-const { title, description, tags = [], links = [] } = Astro.props;
+const { title, description, tags = [], links = [], icon } = Astro.props;
 ---
 <article class="entry project">
   <div class="meta">
@@ -17,7 +18,10 @@ const { title, description, tags = [], links = [] } = Astro.props;
     )}
   </div>
   <div class="body">
-    <h3 class="title">{title}</h3>
+    <div class="head">
+      {icon && <img src={icon} alt={`${title} icon`} class="icon" loading="lazy" />}
+      <h3 class="title">{title}</h3>
+    </div>
     <p class="desc">{description}</p>
     {links.length > 0 && (
       <div class="links">
@@ -46,6 +50,14 @@ const { title, description, tags = [], links = [] } = Astro.props;
     font-size: 10px;
     padding-top: 6px;
   }
+  .head { display: flex; align-items: center; gap: 16px; }
+  .icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+  }
   .title {
     margin: 0;
     font-family: var(--font-display);
@@ -69,5 +81,6 @@ const { title, description, tags = [], links = [] } = Astro.props;
     .project { grid-template-columns: 1fr; gap: 12px; }
     .tags { padding-top: 0; order: 2; margin-top: 4px; }
     .body { order: 1; }
+    .icon { width: 44px; height: 44px; }
   }
 </style>

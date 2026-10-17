@@ -6,6 +6,9 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: 'https://berkaycubuk.com',
   integrations: [sitemap()],
+  redirects: {
+    '/tools': '/projects',
+  },
   vite: {
     plugins: [tailwindcss()]
   }

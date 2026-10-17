@@ -1,12 +1,17 @@
 ---
-// Site header: mono wordmark, centred nav, "Email me" pill. The homepage
-// passes `lang` + `languages` so it can show the EN/TR switcher and Turkish
-// labels; inner pages are English-only and use the defaults.
+// Site header: mono wordmark, centred nav, EN/TR switcher, "Email me" pill.
+// The homepage passes `lang` for Turkish labels; inner pages are English-only,
+// so their switcher sends Turkish readers to the Turkish homepage.
+import { LOCALES } from '../i18n/home';
+
 interface Props {
   lang?: 'en' | 'tr';
   languages?: { code: string; label: string; href: string; hrefLang: string }[];
 }
-const { lang = 'en', languages } = Astro.props;
+const {
+  lang = 'en',
+  languages = LOCALES.map((l) => ({ code: l.code, label: l.label, href: l.path, hrefLang: l.htmlLang })),
+} = Astro.props;
 
 const LABELS = {
   en: { work: 'Work', writings: 'Writings', notes: 'Notes', projects: 'Projects', about: 'About', email: 'Email me', menu: 'Open menu', home: '/' },
@@ -14,7 +19,7 @@ const LABELS = {
 }[lang];
 
 const nav = [
-  { label: LABELS.work, href: `${LABELS.home}#work` },
+  { label: LABELS.work, href: lang === 'tr' ? '/tr/work' : '/work' },
   { label: LABELS.writings, href: '/writings' },
   { label: LABELS.notes, href: '/notes' },
   { label: LABELS.projects, href: '/projects' },
@@ -29,15 +34,13 @@ const nav = [
   </nav>
 
   <div class="right">
-    {languages && (
-      <span class="langs mono">
-        {languages.map((l) =>
-          l.code === lang
-            ? <span aria-current="true">{l.label}</span>
-            : <a href={l.href} hreflang={l.hrefLang} lang={l.hrefLang}>{l.label}</a>
-        )}
-      </span>
-    )}
+    <span class="langs mono">
+      {languages.map((l) =>
+        l.code === lang
+          ? <span aria-current="true">{l.label}</span>
+          : <a href={l.href} hreflang={l.hrefLang} lang={l.hrefLang}>{l.label}</a>
+      )}
+    </span>
     <a class="pill" href="mailto:berkay@berkaycubuk.com">{LABELS.email} ↗</a>
     <button id="menu-btn" class="menu-btn" type="button" aria-label={LABELS.menu} aria-expanded="false" aria-controls="mobile-menu">
       <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" d="M4 8h16M4 16h16" /></svg>

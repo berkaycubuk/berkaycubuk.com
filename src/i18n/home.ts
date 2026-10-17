@@ -86,6 +86,14 @@ export const HOME = {
       built: 'Remote configuration over the internet using MQTT, so the studio could adjust the artwork from wherever they were.',
       result: 'Fewer trips to the venue, and changes made in minutes instead of days.',
       link: 'See Symbiosis',
+      strip: ['i. The mechanism', 'ii. In the room', 'iii. Behind the sculpture', 'iv. Bubbles and mist'],
+      stripAlts: [
+        'Close-up of the Symbiosis mechanism: a lit fluid reservoir and tubing on a steel frame beside the blue sculpture',
+        'The Symbiosis sculpture lit blue in a dark exhibition room at Contemporary Istanbul',
+        'The steel frame and tubing behind the sculpture, with a glowing bubble on its surface',
+        'Bubbles and mist drifting across the sculpture under blue light',
+      ],
+      stripLabel: 'Photos of the Symbiosis installation',
     },
 
     processLabel: "How we'd work together",
@@ -163,6 +171,14 @@ export const HOME = {
       built: 'MQTT ile internet üzerinden uzaktan ayar yönetimi. Stüdyo eseri bulunduğu yerden ayarlayabildi.',
       result: 'Mekâna daha az gidiş; değişiklikler günler yerine dakikalar içinde.',
       link: "Symbiosis'i inceleyin",
+      strip: ['i. Mekanizma', 'ii. Sergi odasında', 'iii. Heykelin arkası', 'iv. Baloncuk ve sis'],
+      stripAlts: [
+        'Symbiosis mekanizmasına yakından bakış: mavi heykelin yanında çelik bir çerçeve üzerinde ışıklı sıvı haznesi ve hortumlar',
+        "Contemporary Istanbul'da karanlık bir sergi odasında mavi ışıkla aydınlatılmış Symbiosis heykeli",
+        'Heykelin arkasındaki çelik çerçeve ve hortumlar; yüzeyinde parlayan bir baloncuk',
+        'Mavi ışık altında heykelin üzerinde süzülen baloncuklar ve sis',
+      ],
+      stripLabel: 'Symbiosis enstalasyonundan fotoğraflar',
     },
 
     processLabel: 'Birlikte nasıl çalışırız',

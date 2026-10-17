@@ -1,0 +1,108 @@
+---
+// Client work page, shared by every language. Copy lives in src/data/work.ts.
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { CASES, WORK } from '../data/work';
+import { HOME, LOCALES, type Locale } from '../i18n/home';
+import { SITE, pageTitle } from '../data/site';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = WORK[lang];
+const cases = CASES[lang];
+const { labels } = HOME[lang];
+const here = LOCALES.find((l) => l.code === lang)!;
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+
+// Each language version points at the others, like the homepage does.
+const alternates = [
+  ...LOCALES.map((l) => ({ hrefLang: l.htmlLang, href: new URL(WORK[l.code].path, SITE.url).href })),
+  { hrefLang: 'x-default', href: new URL(WORK.en.path, SITE.url).href },
+];
+const languages = LOCALES.map((l) => ({ code: l.code, label: l.label, href: WORK[l.code].path, hrefLang: l.htmlLang }));
+---
+<BaseLayout title={pageTitle(t.title)} description={t.description} lang={here.htmlLang} ogLocale={here.ogLocale} alternates={alternates}>
+  <Header lang={lang} languages={languages} />
+  <main class="flex-1 shell">
+  <div class="py-14">
+    <header class="masthead">
+      <p class="eyebrow mono"><span class="dot"></span>{t.eyebrow}</p>
+      <h1 class="page-title">{t.title}</h1>
+      <p class="lede">{t.lede}</p>
+    </header>
+
+    {cases.map((c, i) => (
+      <section class="case">
+        <aside class="head">
+          <span class="no" aria-hidden="true">{pad(i)}</span>
+          <p class="mono meta">{c.client}<br />{c.tags.join(' · ')}</p>
+        </aside>
+        <div class="body">
+          <h2>{c.title}</h2>
+          <dl>
+            <dt class="mono">{labels.problem}</dt><dd>{c.problem}</dd>
+            <dt class="mono">{labels.built}</dt><dd>{c.built}</dd>
+            <dt class="mono">{labels.result}</dt><dd class="res">{c.result}</dd>
+          </dl>
+          {c.images && (
+            <div class="shots">
+              {c.images.map((img, j) => (
+                <Image class:list={['shot', { lead: j === 0 }]} src={img.src} alt={img.alt} widths={j === 0 ? [640, 1000, 1400] : [420, 640]} sizes={j === 0 ? '(max-width: 900px) 100vw, 760px' : '(max-width: 900px) 50vw, 380px'} format="webp" quality={70} />
+              ))}
+            </div>
+          )}
+          {c.link && (
+            <a class="arrow" href={c.link.href} target="_blank" rel="noopener noreferrer">{c.link.label} ↗</a>
+          )}
+        </div>
+      </section>
+    ))}
+  </div>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .masthead .lede { margin-top: 6px; }
+  /* The tight display line-height clips the dot of a capital İ ("İşler"). */
+  .page-title:lang(tr) { padding-top: 0.14em; }
+
+  .case {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    padding: 72px 0;
+    border-top: 1px solid var(--line);
+    margin-top: 56px;
+  }
+  .case + .case { margin-top: 0; }
+  .case:last-of-type { border-bottom: 1px solid var(--line); }
+  .head { position: sticky; top: 30px; align-self: start; }
+  .no { font-family: var(--font-display); font-size: clamp(90px, 13vw, 200px); line-height: .8; display: block; }
+  .meta { color: var(--ink-dim); margin-top: 18px; line-height: 1.7; font-size: 11px; }
+  .body { max-width: 42em; }
+  .body h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(40px, 5.4vw, 76px); line-height: .95; letter-spacing: -0.02em; margin: 0 0 40px; }
+  dl { margin: 0; display: grid; grid-template-columns: 130px 1fr; gap: 0 24px; }
+  dt { color: var(--ink-dim); padding: 18px 0; border-top: 1px solid var(--line); font-size: 11px; line-height: 1.9; }
+  dd { margin: 0; padding: 14px 0; border-top: 1px solid var(--line); font-size: 19px; }
+  dd.res { font-family: var(--font-display); font-size: clamp(26px, 2.8vw, 36px); line-height: 1.1; font-style: italic; }
+  .shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 32px; }
+  .shot { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .shot.lead { grid-column: 1 / -1; height: auto; aspect-ratio: auto; max-height: 520px; }
+  /* An odd one out at the end spans the row instead of leaving a hole. */
+  .shot:not(.lead):last-child:nth-child(even) { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+  .arrow { display: inline-block; margin-top: 26px; font-weight: 600; color: var(--ink); }
+
+  @media (pointer: coarse) { .arrow { padding-block: 10px; margin-top: 16px; } }
+  @media (max-width: 900px) {
+    .case { grid-template-columns: 1fr; gap: 24px; padding: 56px 0; }
+    .head { position: static; }
+    dl { grid-template-columns: 1fr; } dd { border-top: 0; padding-top: 0; } dt { padding-bottom: 6px; }
+  }
+</style>
