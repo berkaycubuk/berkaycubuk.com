@@ -22,13 +22,18 @@ export async function GET() {
 
 > ${SITE.description}
 
-Independent hardware and software engineer based in Istanbul. Builds custom
-devices, sensors and automation software for factories and workshops, from the
-first conversation to installation on site. Contact is by email.
+Independent AI engineer based in Istanbul, working worldwide, with 5+ years of
+software experience. Builds AI agents and LLM automations that run in
+production, with guardrails enforced in code: confirmation before payments,
+bookings or messages, allow-listed sites, and web content treated as data.
+Most recently AI Engineer at Paribu, a crypto exchange. Own work includes Tamo
+(a personal assistant with its own browser and terminal) and Fabrika (multi-agent
+coding orchestration with review gates). Contact is by email.
 
 ## Key pages
 
-- [Home](${SITE.url}/): services, case studies, process, client quotes
+- [Home](${SITE.url}/): principles, case studies, process, client quotes
+- [Work](${SITE.url}/work/): AI and client case studies
 - [About](${SITE.url}/about/): background and ways of working
 - [Projects](${SITE.url}/projects/): things I've built
 - [Writings](${SITE.url}/writings/): all posts

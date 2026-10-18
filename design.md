@@ -12,12 +12,15 @@ things: a giant serif name, full-bleed photography of the work, numbered
 chapters for case studies, and small mono labels like figure captions in an
 engineer's notebook. Quiet off-white paper — the photos supply the colour.
 
-Audience: operations managers at factories and workshops, not engineers. It
-should read as confident and trustworthy first, a little technical second.
+Audience: people who need AI to do real work: agency founders, team leads and
+operations owners, not AI researchers. It should read as confident and
+trustworthy first, a little technical second. Lead with what runs in
+production, then how it stays safe.
 
 **Principles**
-- **Photos carry the page.** Show the device, the wiring, the install. Real
-  workshop photos beat illustrations.
+- **Real work carries the page.** Screenshots of real tools and photos of
+  real installs beat stock art. Small HTML-drawn figures (like the homepage
+  chat) are fine when labelled as illustrations.
 - **Type does the rest.** Big serif display, plain sans body, tiny mono labels.
   Contrast comes from scale, never from bold.
 - **Photos as prints.** Small supporting photos sit in a white frame with a soft

@@ -19,9 +19,9 @@ export const SITE = {
   ],
 
   // Site identity: RSS feed, og:site_name and the fallback <title>/description
-  title: "Berkay Çubuk — Custom Devices & Automation for Factories and Workshops",
+  title: "Berkay Çubuk — AI Engineer",
   description:
-    "Custom devices, sensors and the software behind them for factories and workshops. Designed, built and installed by one person.",
+    "AI agents and LLM automations that do real work in production, with guardrails in code, not prompts. Independent AI engineer in Istanbul, working worldwide.",
 
   // Homepage copy and metadata live in src/i18n/home.ts, one entry per language.
 } as const;

@@ -2,32 +2,49 @@
 import IndexLayout from '../layouts/IndexLayout.astro';
 import { pageTitle } from '../data/site';
 ---
-<IndexLayout title={pageTitle('About')} description="Hardware and software engineer in Istanbul. I build custom devices, sensors and automation software for factories and workshops.">
+<IndexLayout title={pageTitle('About')} description="AI engineer in Istanbul with 5+ years of software experience. I build AI agents and LLM automations that run in production, with guardrails in code.">
   <div class="py-14">
     <header class="masthead">
       <div class="masthead-text">
         <p class="eyebrow mono"><span class="dot"></span>ABOUT</p>
         <h1 class="page-title">About me</h1>
-        <p class="lede">Hi, I'm Berkay and I solve problems.</p>
+        <p class="lede">Hi, I'm Berkay. I build AI agents that do real work, safely.</p>
       </div>
       <img src="/images/berkay.png" alt="Berkay Çubuk" class="avatar" width="320" height="320" />
     </header>
 
     <div class="prose prose-lg measure mt-10">
+      <p>
+        I'm an AI engineer with 5+ years of software experience, based in
+        Istanbul and working with teams anywhere. Most recently at Paribu, a
+        crypto exchange, I helped engineering teams adopt AI tools and
+        workflows, then built production systems end to end: a ticketing
+        platform that sold thousands of tickets, and before that a Travel Rule
+        compliance system now used by multiple exchanges.
+      </p>
+      <p>
+        Today I build AI agents and LLM automations that take repetitive work
+        off a team, with the guardrails that make them safe to point at real
+        accounts and tools. The guardrails live in code, not in the prompt.
+      </p>
+
       <p>What I do:</p>
       <ul>
-        <li>Custom devices — indicators, controllers and small machines built for a specific floor</li>
-        <li>Sensors and monitoring, so you can see what your machines are doing without walking over</li>
-        <li>Automation software and internal tools that connect equipment, screens and people</li>
-        <li>Remote configuration and updates over MQTT, so what I install keeps working without me on site</li>
+        <li>AI agents that use real tools: browsers, terminals, APIs and your internal systems</li>
+        <li>LLM automations for the repetitive work your team does by hand today</li>
+        <li>Guardrails: confirmation before payments and messages, allow-listed sites, untrusted input kept as data</li>
+        <li>Multi-agent setups for coding and operations, with review before anything lands</li>
+        <li>Helping engineering teams adopt AI tools and workflows that stick</li>
       </ul>
+
+      <p>Before AI, I spent years shipping ordinary software that had to keep working: client systems at Bizmovo, an enterprise Angular platform at ICRON, and a few pieces of <a href="/work">hardware and IoT work</a> for a factory and an art studio. I studied computer engineering at Bursa Uludağ University.</p>
     </div>
 
     <section class="block">
       <h2 class="mono block-label"><span class="dot"></span>WORKING TOGETHER</h2>
       <p class="lede">
-        Tell me what's wasting your team's time, in plain words. I reply within a
-        day.
+        Tell me what work your team keeps doing by hand, in plain words. I take
+        on a few projects at a time and reply within a day.
       </p>
       <a href="mailto:berkay@berkaycubuk.com" class="btn">
         Email me &rarr;

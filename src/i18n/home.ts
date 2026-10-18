@@ -3,9 +3,11 @@
 // English lives at "/", Turkish at "/tr/". Adding a language means adding a key
 // here, a page under src/pages/<lang>/index.astro, and an entry in LOCALES.
 //
-// Voice: one person talking, not a company. First person, plain words, written
-// for an operations manager, not an engineer. Client quotes stay in the
-// language they were given in.
+// Voice: one person talking, not a company. First person, plain words. Written
+// for someone who needs AI to do real work (an agency founder, a team lead, an
+// operations owner), not for an AI researcher. Lead with what runs in
+// production, then how it stays safe. Client quotes stay in the language they
+// were given in.
 
 export const LOCALES = [
   { code: 'en', label: 'EN', htmlLang: 'en', ogLocale: 'en_US', path: '/' },
@@ -33,174 +35,208 @@ export const QUOTES = [
   },
 ];
 
+// Companies and clients for the logo strip under the masthead. Logos are each
+// company's own mark, flattened to one ink colour that follows the theme; `h` is the
+// display height in px so marks of different shapes look the same size.
+// Without a logo, the name renders as a serif wordmark.
+export const COMPANIES: { name: string; href?: string; logo?: string; h?: number }[] = [
+  { name: 'Paribu', href: 'https://www.paribu.com', logo: '/images/logos/paribu.svg', h: 24 },
+  { name: 'A.R.T.', href: 'https://artresearch.tech', logo: '/images/logos/art.svg', h: 40 },
+  { name: 'Molde Biljardklubb', href: 'https://moldebiljardklubb.no/', logo: '/images/logos/molde-biljardklubb.png', h: 20 },
+  { name: 'ICRON', href: 'https://www.icrontech.com', logo: '/images/logos/icron.svg', h: 30 },
+  { name: 'Bizmovo' },
+  { name: 'Star Holden', href: 'https://starholden.com' },
+  { name: 'Remmsoft', href: 'https://www.remmsoft.com', logo: '/images/logos/remmsoft.png', h: 28 },
+];
+
 export const HOME = {
   en: {
     // <head>
-    title: 'Berkay Çubuk — Custom Devices & Automation for Factories and Workshops',
+    title: 'Berkay Çubuk — AI Engineer · AI agents that do real work, safely',
     description:
-      'I build custom devices, sensors and the software behind them for factories and workshops. Designed, built and installed by one person.',
+      'I build AI agents and LLM automations that run in production, with guardrails in code, not prompts. Independent AI engineer in Istanbul, working worldwide.',
     jsonLdDescription:
-      'Berkay Çubuk builds custom devices, sensors and automation software for factories and workshops, from the first idea to installation on site.',
-    jobTitle: 'Hardware & Software Engineer',
+      'Berkay Çubuk is an AI engineer with 5+ years of software experience. He builds AI agents and LLM automations that run in production, with the guardrails that make them safe to use on real accounts and tools.',
+    jobTitle: 'AI Engineer',
     srIntro:
-      "Hi, I'm Berkay Çubuk. I build the small machines and software that make factory and workshop floors simpler: custom devices, sensors and the software behind them. Email me about your problem.",
+      "Hi, I'm Berkay Çubuk, an AI engineer. I build AI agents that take repetitive work off your team and run safely on real accounts and tools. Email me about your project.",
 
     // Masthead
-    role: ['Hardware & software', 'for factories & workshops'],
+    role: ['AI Engineer', 'Agents & LLM automations in production'],
     place: 'Istanbul · working worldwide',
-    heroTitle: 'I build the small machines and software that make your shop floor simpler.',
-    heroCta: 'Email me about your problem',
+    heroTitle: 'I build AI agents that do real work, safely.',
+    heroCta: 'Email me about your project',
     status: 'Open for new projects',
-    figA: 'Fig. A — Available',
-    figB: 'Fig. B — Inside',
-    bleedAlt: 'A custom status light glowing red, mounted by a factory staircase',
-    bleedCaption: 'A status light I built for a factory — red means the manager is busy.',
+    companiesLabel: 'Worked with',
 
-    services: [
-      { name: 'Custom devices', desc: 'Indicators, controllers and small machines built for your floor — not bought off a shelf.' },
-      { name: 'Sensors & monitoring', desc: 'Temperature, air, power, status. See what your machines are doing without walking over.' },
-      { name: 'Automation software', desc: 'The glue between your equipment, your screens and your people.' },
+    // Fig. A: an illustrated chat with Tamo, stopping to ask before it pays.
+    chat: {
+      label: 'Illustration: an AI assistant asking for confirmation before it pays',
+      ask: 'Book a table for four, Friday 8pm.',
+      reply: 'Found one at 20:00. It needs a ₺500 card hold.',
+      confirm: 'Confirm before I pay?',
+      yes: 'Confirm',
+      no: 'Cancel',
+    },
+    figA: 'Fig. A — Asks before it pays',
+    figB: 'Fig. B — Agents, reviewed',
+
+    principles: [
+      { name: 'Agents in production', desc: 'Agents that work on real accounts and tools every day, not demos that break on the second try.' },
+      { name: 'Guardrails in code, not prompts', desc: 'Payments, bookings and messages wait for a yes. Enforced in code, so no clever prompt can talk its way past them.' },
+      { name: 'Fits the tools you already use', desc: 'It plugs into your APIs, inboxes, spreadsheets and internal systems. Nothing new for your team to learn.' },
     ],
 
     // Case studies
-    labels: { problem: 'The problem', built: 'What I built', result: 'The result' },
-    isbusy: {
-      client: 'A factory in Türkiye',
-      tags: ['Custom hardware', 'Wireless remote', 'Installed on site'],
-      title: 'A light that saves the stairs',
-      problem: "The manager's office sat upstairs, out of sight. Engineers and workers climbed up just to find the door closed.",
-      built: 'A custom status light by the stairs, with a handheld remote for the manager. Green means come up, red means busy.',
-      result: 'Nobody climbs the stairs for nothing anymore.',
-      marks: ['hand-wired prototype', 'LED ring added', 'custom board, screw terminals'],
-      evolutionAlt: "Three generations of the device's insides, from messy wiring to a clean circuit board",
-      evolutionCaption: 'Fig. 01 — Three versions of the same device. Each one easier to repair than the last.',
-      strip: ['i. Printed shells', 'ii. Testing the remote', 'iii. Finished', 'iv. Updated remotely'],
-      stripAlts: ['Empty 3D-printed shells on the workbench', 'Testing the remote', 'Finished device glowing green', 'Over-the-air update in progress'],
-      stripLabel: 'How the device was built, step by step',
-    },
-    art: {
-      client: 'A.R.T. — Art Research Tech',
-      tags: ['MQTT', 'Remote config', 'Live installation'],
-      title: 'Managing an artwork from another city',
-      problem: "A.R.T.'s Symbiosis installation ran at Contemporary Istanbul. Every config change meant sending someone to the venue.",
-      built: 'Remote configuration over the internet using MQTT, so the studio could adjust the artwork from wherever they were.',
-      result: 'Fewer trips to the venue, and changes made in minutes instead of days.',
-      link: 'See Symbiosis',
-      strip: ['i. The mechanism', 'ii. In the room', 'iii. Behind the sculpture', 'iv. Bubbles and mist'],
-      stripAlts: [
-        'Close-up of the Symbiosis mechanism: a lit fluid reservoir and tubing on a steel frame beside the blue sculpture',
-        'The Symbiosis sculpture lit blue in a dark exhibition room at Contemporary Istanbul',
-        'The steel frame and tubing behind the sculpture, with a glowing bubble on its surface',
-        'Bubbles and mist drifting across the sculpture under blue light',
-      ],
-      stripLabel: 'Photos of the Symbiosis installation',
+    labels: { problem: 'The situation', built: 'What I built', result: 'The result' },
+    cases: {
+      paribu: {
+        client: 'Paribu — crypto exchange',
+        tags: ['AI Engineer', 'AI enablement', 'Production'],
+        title: 'Shipping where real money moves',
+        problem: 'A crypto exchange: software handles real money, and compliance is not optional.',
+        built: 'A ticketing platform from scratch, plus the admin tools the operations team runs it with. Dictation tooling for writing prompts, and hands-on help moving engineering teams onto AI tools and workflows. Before that, a Travel Rule compliance system.',
+        result: 'Thousands of tickets sold in production. The compliance system runs at multiple exchanges.',
+      },
+      tamo: {
+        client: 'Tamo — my own product',
+        tags: ['Agents', 'Browser & terminal', 'Guardrails'],
+        title: 'An assistant you can trust with your accounts',
+        problem: 'A useful assistant needs real access: a browser, a terminal, your accounts. That same access is what makes it dangerous.',
+        built: 'A personal assistant in Telegram with its own browser, Linux terminal and memory. It confirms before any payment, booking or message, only uses approved sites, treats web page text as data, and you type passwords and 2FA yourself.',
+        result: 'An agent that acts for you, and never spends without asking.',
+        link: { label: 'Join the Tamo waitlist', href: 'https://heytamo.com' },
+        shotAlt: 'Tamo website: a Telegram chat where Tamo asks for permission before completing a restaurant reservation, and the user allows it',
+        shotCaption: 'Fig. 01 — Tamo stops before the final click and waits for a yes.',
+      },
+      fabrika: {
+        client: 'Fabrika — open source',
+        tags: ['Multi-agent', 'Git worktrees', 'Review gates'],
+        title: 'Coding agents that check each other’s work',
+        problem: 'One coding agent is a helper. Several running at once turn into a mess without structure.',
+        built: 'Planning agents split the task, execution agents each work in an isolated git worktree, and review agents gate every merge. A mobile app reaches the desktop over an end-to-end encrypted link.',
+        result: 'Many agents in parallel, and nothing lands without review.',
+        link: { label: 'See Fabrika', href: 'https://fabrika-ai.com' },
+        shotAlt: 'Fabrika website: a task board with plan, build, verify and ship columns, and one high-risk task waiting for a human',
+        shotCaption: 'Fig. 02 — Work flows through plan, build and verify. High-risk changes wait for a person.',
+      },
     },
 
     processLabel: "How we'd work together",
     steps: [
-      { name: 'You email me', desc: 'Describe the problem in plain words. No specs needed.' },
-      { name: 'I visit or we talk', desc: 'I look at your floor and work out what to build.' },
-      { name: 'I build & install', desc: 'Hardware and software, tested before it reaches you.' },
-      { name: 'It keeps working', desc: "Updated remotely. You don't need me on site." },
+      { name: 'You email me', desc: 'Describe the work that eats your team’s time. No spec needed.' },
+      { name: 'We scope it', desc: 'The workflow, the tools it touches, and what the agent must never do on its own.' },
+      { name: 'I build & ship', desc: 'A working agent on your real systems, in paid milestones, with logs you can read.' },
+      { name: 'It keeps running', desc: 'I watch it after launch and fix what breaks, or hand it over to your team.' },
     ],
 
     wordsLabel: 'In their words',
 
-    alsoLabel: 'Also made — apps & tools',
+    alsoLabel: 'Also made — tools & hardware',
     allProjects: 'All projects',
     products: {
-      'MQTT Studio': 'Live dashboards for sensors and devices.',
-      Fabrika: 'A software factory that runs on your computer.',
-      'tarif.ist': 'Transit directions for Istanbul.',
+      pouch: 'Run and steer Claude Code sessions from your phone.',
+      'isbusy code': 'Desk lights that show what your coding agents are doing.',
+      'MQTT Studio': 'Hosted IoT dashboards. A SaaS I run solo.',
+      isbusy: 'A custom status light, built and installed at a factory.',
     },
 
-    endAsk: 'Something on your floor wasting time?',
+    endAsk: 'Work your team keeps doing by hand?',
     endWrite: 'Write to me.',
-    endNote: 'No forms, no calls unless you want one. I reply within a day.',
+    endNote: 'I take on a few projects at a time and reply within a day.',
   },
 
   tr: {
     // <head>
-    title: 'Berkay Çubuk — Fabrika ve Atölyeler için Özel Cihaz ve Otomasyon',
+    title: 'Berkay Çubuk — Yapay Zekâ Mühendisi · Gerçek iş yapan yapay zekâ ajanları',
     description:
-      'Fabrikalar ve atölyeler için özel cihazlar, sensörler ve bunların yazılımını geliştiriyorum. Tek kişi tasarlar, üretir ve kurar.',
+      'Canlı ortamda çalışan yapay zekâ ajanları ve LLM otomasyonları geliştiriyorum. Güvenlik kuralları prompt’ta değil, kodda. İstanbul’dan, her yere.',
     jsonLdDescription:
-      'Berkay Çubuk, fabrikalar ve atölyeler için ilk fikirden yerinde kuruluma kadar özel cihazlar, sensörler ve otomasyon yazılımı geliştirir.',
-    jobTitle: 'Donanım ve Yazılım Mühendisi',
+      'Berkay Çubuk, 5 yılı aşkın yazılım deneyimine sahip bir yapay zekâ mühendisi. Gerçek hesaplar ve araçlar üzerinde güvenle çalışan yapay zekâ ajanları ve LLM otomasyonları geliştiriyor.',
+    jobTitle: 'Yapay Zekâ Mühendisi',
     srIntro:
-      'Merhaba, ben Berkay Çubuk. Fabrika ve atölyelerde işi kolaylaştıran küçük makineleri ve yazılımları yapıyorum: özel cihazlar, sensörler ve bunların yazılımı. Sorununuzu bana e-postayla anlatın.',
+      'Merhaba, ben Berkay Çubuk, yapay zekâ mühendisiyim. Ekibinizin tekrar eden işlerini üstlenen ve gerçek hesaplar ile araçlar üzerinde güvenle çalışan yapay zekâ ajanları geliştiriyorum. Projenizi bana e-postayla anlatın.',
 
     // Masthead
-    role: ['Donanım ve yazılım', 'fabrikalar ve atölyeler için'],
+    role: ['Yapay Zekâ Mühendisi', 'Canlı ortamda ajanlar ve LLM otomasyonları'],
     place: 'İstanbul · her yerden çalışıyorum',
-    heroTitle: 'Atölyenizde işleri kolaylaştıran küçük makineleri ve yazılımları yapıyorum.',
-    heroCta: 'Sorununuzu e-postayla anlatın',
+    heroTitle: 'Gerçek işi güvenle yapan yapay zekâ ajanları geliştiriyorum.',
+    heroCta: 'Projenizi e-postayla anlatın',
     status: 'Yeni projelere açığım',
-    figA: 'Şekil A — Müsait',
-    figB: 'Şekil B — İçi',
-    bleedAlt: 'Bir fabrikada merdiven başına takılmış, kırmızı yanan özel durum lambası',
-    bleedCaption: 'Bir fabrika için yaptığım durum lambası — kırmızı, yöneticinin meşgul olduğunu gösteriyor.',
+    companiesLabel: 'Birlikte çalıştıklarım',
 
-    services: [
-      { name: 'Özel cihazlar', desc: 'Raftan alınmamış; sizin atölyeniz için yapılmış göstergeler, kontrol üniteleri ve küçük makineler.' },
-      { name: 'Sensörler ve izleme', desc: 'Sıcaklık, hava, enerji, durum. Makinelerinizin ne yaptığını yanına gitmeden görün.' },
-      { name: 'Otomasyon yazılımı', desc: 'Ekipmanlarınız, ekranlarınız ve ekibiniz arasındaki bağlantı.' },
+    chat: {
+      label: 'Çizim: ödeme yapmadan önce onay isteyen bir yapay zekâ asistanı',
+      ask: 'Cuma 20:00 için dört kişilik masa ayırt.',
+      reply: '20:00’de yer var. ₺500 kart provizyonu istiyor.',
+      confirm: 'Ödemeden önce onaylıyor musun?',
+      yes: 'Onayla',
+      no: 'İptal',
+    },
+    figA: 'Şekil A — Ödemeden önce sorar',
+    figB: 'Şekil B — Denetlenen ajanlar',
+
+    principles: [
+      { name: 'Canlı ortamda ajanlar', desc: 'Her gün gerçek hesaplar ve araçlar üzerinde çalışan ajanlar; ikinci denemede bozulan demolar değil.' },
+      { name: 'Kurallar prompt’ta değil, kodda', desc: 'Ödeme, rezervasyon ve mesaj onayınızı bekler. Kuralı kod koyar; hiçbir akıllı prompt onu aşamaz.' },
+      { name: 'Mevcut araçlarınızla çalışır', desc: 'API’lerinize, e-postanıza, tablolarınıza ve iç sistemlerinize bağlanır. Ekibinizin yeni bir şey öğrenmesi gerekmez.' },
     ],
 
-    // Case studies
-    labels: { problem: 'Sorun', built: 'Ne yaptım', result: 'Sonuç' },
-    isbusy: {
-      client: "Türkiye'de bir fabrika",
-      tags: ['Özel donanım', 'Kablosuz kumanda', 'Yerinde kurulum'],
-      title: 'Merdiveni boşuna çıkartmayan lamba',
-      problem: 'Yöneticinin odası üst katta, gözden uzaktaydı. Mühendisler ve çalışanlar yukarı çıkıp kapıyı kapalı buluyordu.',
-      built: 'Merdiven başına özel bir durum lambası, yöneticiye de elde taşınan bir kumanda. Yeşil “gelebilirsiniz”, kırmızı “meşgulüm” demek.',
-      result: 'Artık kimse merdiveni boşuna çıkmıyor.',
-      marks: ['elle kablolanmış prototip', 'LED halka eklendi', 'özel kart, vidalı klemens'],
-      evolutionAlt: 'Cihazın içinin üç nesli: dağınık kablolardan düzenli bir devre kartına',
-      evolutionCaption: 'Şekil 01 — Aynı cihazın üç versiyonu. Her biri bir öncekinden daha kolay tamir ediliyor.',
-      strip: ['i. Basılmış kasalar', 'ii. Kumanda testi', 'iii. Bitmiş hali', 'iv. Uzaktan güncelleme'],
-      stripAlts: ['Tezgâhta boş 3D baskı kasalar', 'Kumandanın test edilmesi', 'Yeşil yanan bitmiş cihaz', 'Uzaktan güncelleme sürüyor'],
-      stripLabel: 'Cihazın adım adım yapılışı',
-    },
-    art: {
-      client: 'A.R.T. — Art Research Tech',
-      tags: ['MQTT', 'Uzaktan ayar', 'Canlı enstalasyon'],
-      title: 'Başka bir şehirden bir sanat eserini yönetmek',
-      problem: "A.R.T.'nin Symbiosis enstalasyonu Contemporary Istanbul'da sergilendi. Her ayar değişikliği için birinin mekâna gitmesi gerekiyordu.",
-      built: 'MQTT ile internet üzerinden uzaktan ayar yönetimi. Stüdyo eseri bulunduğu yerden ayarlayabildi.',
-      result: 'Mekâna daha az gidiş; değişiklikler günler yerine dakikalar içinde.',
-      link: "Symbiosis'i inceleyin",
-      strip: ['i. Mekanizma', 'ii. Sergi odasında', 'iii. Heykelin arkası', 'iv. Baloncuk ve sis'],
-      stripAlts: [
-        'Symbiosis mekanizmasına yakından bakış: mavi heykelin yanında çelik bir çerçeve üzerinde ışıklı sıvı haznesi ve hortumlar',
-        "Contemporary Istanbul'da karanlık bir sergi odasında mavi ışıkla aydınlatılmış Symbiosis heykeli",
-        'Heykelin arkasındaki çelik çerçeve ve hortumlar; yüzeyinde parlayan bir baloncuk',
-        'Mavi ışık altında heykelin üzerinde süzülen baloncuklar ve sis',
-      ],
-      stripLabel: 'Symbiosis enstalasyonundan fotoğraflar',
+    labels: { problem: 'Durum', built: 'Ne yaptım', result: 'Sonuç' },
+    cases: {
+      paribu: {
+        client: 'Paribu — kripto para borsası',
+        tags: ['Yapay Zekâ Mühendisi', 'Yapay zekâ dönüşümü', 'Canlı ortam'],
+        title: 'Gerçek paranın döndüğü yerde üretmek',
+        problem: 'Bir kripto para borsası: yazılım gerçek parayı yönetiyor, regülasyona uymak seçenek değil.',
+        built: 'Sıfırdan bir biletleme platformu ve operasyon ekibinin onu yönettiği yönetim araçları. Prompt yazmak için dikte aracı; mühendislik ekiplerinin yapay zekâ araçlarına ve iş akışlarına geçişine birebir destek. Öncesinde, bir Travel Rule uyumluluk sistemi.',
+        result: 'Canlı ortamda binlerce bilet satıldı. Uyumluluk sistemi birden fazla borsada çalışıyor.',
+      },
+      tamo: {
+        client: 'Tamo — kendi ürünüm',
+        tags: ['Ajanlar', 'Tarayıcı ve terminal', 'Güvenlik kuralları'],
+        title: 'Hesaplarınızı emanet edebileceğiniz bir asistan',
+        problem: 'İşe yarayan bir asistanın gerçek erişime ihtiyacı var: tarayıcı, terminal, hesaplarınız. Onu tehlikeli yapan da aynı erişim.',
+        built: 'Telegram’da yaşayan; kendi tarayıcısı, Linux terminali ve hafızası olan kişisel bir asistan. Her ödeme, rezervasyon ve mesajdan önce onay ister, yalnızca izin verilen sitelere girer, web sayfasındaki metni talimat değil veri olarak görür; şifre ve 2FA’yı siz girersiniz.',
+        result: 'Sizin yerinize iş yapan, ama sormadan tek kuruş harcamayan bir ajan.',
+        link: { label: 'Tamo bekleme listesine katılın', href: 'https://heytamo.com' },
+        shotAlt: 'Tamo web sitesi: Tamo’nun bir restoran rezervasyonunu tamamlamadan önce izin istediği ve kullanıcının izin verdiği bir Telegram sohbeti',
+        shotCaption: 'Şekil 01 — Tamo son tıklamadan önce durur ve onayınızı bekler.',
+      },
+      fabrika: {
+        client: 'Fabrika — açık kaynak',
+        tags: ['Çoklu ajan', 'Git worktree', 'İnceleme kapıları'],
+        title: 'Birbirinin işini kontrol eden kodlama ajanları',
+        problem: 'Tek bir kodlama ajanı yardımcıdır. Aynı anda birkaç tanesi, düzen olmadan karmaşaya döner.',
+        built: 'Planlama ajanları işi böler, uygulama ajanları her biri ayrı bir git worktree’de çalışır, inceleme ajanları her birleştirmeyi denetler. Mobil uygulama masaüstüne uçtan uca şifreli bir bağlantıyla ulaşır.',
+        result: 'Paralel çalışan birçok ajan; incelenmeden hiçbir şey birleşmiyor.',
+        link: { label: 'Fabrika’yı inceleyin', href: 'https://fabrika-ai.com' },
+        shotAlt: 'Fabrika web sitesi: planlama, geliştirme, doğrulama ve yayın sütunları olan bir görev panosu ve insan onayı bekleyen yüksek riskli bir görev',
+        shotCaption: 'Şekil 02 — İş planlama, geliştirme ve doğrulamadan geçer. Riskli değişiklikler bir insanı bekler.',
+      },
     },
 
     processLabel: 'Birlikte nasıl çalışırız',
     steps: [
-      { name: 'Bana yazın', desc: 'Sorunu sade bir dille anlatın. Teknik şartname gerekmez.' },
-      { name: 'Yerinde bakalım', desc: 'Atölyenize bakıp neyin yapılacağına karar veriyorum.' },
-      { name: 'Üretip kuruyorum', desc: 'Donanım ve yazılım, size ulaşmadan önce test edilmiş olarak.' },
-      { name: 'Çalışmaya devam eder', desc: 'Uzaktan güncellenir. Benim yerinde olmam gerekmez.' },
+      { name: 'Bana yazın', desc: 'Ekibinizin vaktini yiyen işi anlatın. Teknik şartname gerekmez.' },
+      { name: 'Kapsamı çıkaralım', desc: 'İş akışı, dokunacağı araçlar ve ajanın kendi başına asla yapmaması gerekenler.' },
+      { name: 'Geliştirip yayına alıyorum', desc: 'Gerçek sistemlerinizde çalışan bir ajan; ödemeli aşamalarla, okunabilir kayıtlarla.' },
+      { name: 'Çalışmaya devam eder', desc: 'Yayından sonra izliyor, bozulanı düzeltiyorum ya da ekibinize devrediyorum.' },
     ],
 
     wordsLabel: 'Müşterilerimin sözleriyle',
 
-    alsoLabel: 'Ayrıca yaptıklarım — uygulamalar ve araçlar',
+    alsoLabel: 'Ayrıca yaptıklarım — araçlar ve donanım',
     allProjects: 'Tüm projeler',
     products: {
-      'MQTT Studio': 'Sensörler ve cihazlar için canlı paneller.',
-      Fabrika: 'Bilgisayarınızda çalışan bir yazılım fabrikası.',
-      'tarif.ist': 'İstanbul için toplu taşıma yol tarifi.',
+      pouch: 'Claude Code oturumlarını telefonunuzdan yönetin.',
+      'isbusy code': 'Kodlama ajanlarınızın ne yaptığını gösteren masa ışıkları.',
+      'MQTT Studio': 'Barındırılan IoT panelleri. Tek başıma işlettiğim bir SaaS.',
+      isbusy: 'Bir fabrika için yapıp kurduğum özel durum lambası.',
     },
 
-    endAsk: 'Atölyenizde vakit kaybettiren bir şey mi var?',
+    endAsk: 'Ekibiniz hâlâ elle mi yapıyor?',
     endWrite: 'Bana yazın.',
-    endNote: 'Form yok, istemezseniz telefon da yok. Bir gün içinde dönerim.',
+    endNote: 'Aynı anda az sayıda proje alıyorum ve bir gün içinde dönüyorum.',
   },
 } as const;

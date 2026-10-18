@@ -25,6 +25,17 @@ export const projects: Project[] = [
     icon: "/images/projects/tamo.svg",
   },
   {
+    title: "Fabrika",
+    description: "A software factory that runs on your computer. Orchestrates coding agents through a task board so work gets planned, built and reviewed on a loop — an operating system for shipping with AI.",
+    tags: ["Go", "AI", "Agents"],
+    links: [
+      { label: "Visit", href: "https://fabrika-ai.com" },
+      { label: "Source", href: "https://github.com/berkaycubuk/fabrika" },
+    ],
+    group: 'products',
+    icon: "/images/projects/fabrika.png",
+  },
+  {
     title: "isbusy",
     description: "A round status sign for meeting-room doors. It reads the room's Google Workspace or Microsoft 365 calendar and shows green for free, red for busy and yellow for booked but empty, readable from across the corridor. Hardware, firmware and cloud, designed and sold by me.",
     tags: ["Hardware", "Firmware", "Product"],
@@ -59,17 +70,6 @@ export const projects: Project[] = [
     links: [{ label: "Visit", href: "https://mqtt.studio" }],
     group: 'products',
     icon: "/images/projects/mqtt-studio.png",
-  },
-  {
-    title: "Fabrika",
-    description: "A software factory that runs on your computer. Orchestrates coding agents through a task board so work gets planned, built and reviewed on a loop — an operating system for shipping with AI.",
-    tags: ["Go", "AI", "Agents"],
-    links: [
-      { label: "Visit", href: "https://fabrika-ai.com" },
-      { label: "Source", href: "https://github.com/berkaycubuk/fabrika" },
-    ],
-    group: 'products',
-    icon: "/images/projects/fabrika.png",
   },
   {
     title: "tarif.ist",

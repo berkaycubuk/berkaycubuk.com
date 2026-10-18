@@ -8,8 +8,8 @@ const { lang = 'en', plain = false } = Astro.props;
 const currentYear = new Date().getFullYear();
 
 const T = {
-  en: { ask: 'Something on your floor wasting time?', write: 'Write to me', nav: ['Work', 'Writings', 'Notes', 'Projects', 'About'] },
-  tr: { ask: 'Atölyenizde vakit kaybettiren bir şey mi var?', write: 'Bana yazın', nav: ['İşler', 'Yazılar', 'Notlar', 'Projeler', 'Hakkımda'] },
+  en: { ask: 'Work your team keeps doing by hand?', write: 'Write to me', nav: ['Work', 'Writings', 'Notes', 'Projects', 'About'] },
+  tr: { ask: 'Ekibiniz hâlâ elle mi yapıyor?', write: 'Bana yazın', nav: ['İşler', 'Yazılar', 'Notlar', 'Projeler', 'Hakkımda'] },
 }[lang];
 
 const nav = [lang === 'tr' ? '/tr/work' : '/work', '/writings', '/notes', '/projects', '/about'].map((href, i) => ({ label: T.nav[i], href }));
