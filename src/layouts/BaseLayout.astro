@@ -70,7 +70,7 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
 
     <title>{siteTitle}</title>
 
-    {import.meta.env.PROD && <script defer src="https://analytics.zambak.page/script.js" data-website-id="a48bf524-e96a-4e3d-9496-49f9ef6e4563" data-domains="berkaycubuk.com"></script>}
+    {import.meta.env.PROD && <script defer src="https://stats.berkay.tools/script.js" data-website-id="c1368084-3e68-458e-beec-90f723b87ce2" data-domains="berkaycubuk.com"></script>}
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
