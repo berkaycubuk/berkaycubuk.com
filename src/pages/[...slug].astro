@@ -1,6 +1,7 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content';
 import IndexLayout from '../layouts/IndexLayout.astro';
+import Newsletter from '../components/Newsletter.astro';
 import moment from 'moment';
 import { SITE, pageTitle } from '../data/site';
 
@@ -57,6 +58,8 @@ const jsonLd = {
     <div class="prose prose-lg max-w-none">
       <Content />
     </div>
+
+    <Newsletter />
 
     <div class="foot">
       <a href="/writings" class="mono ulink">&larr; All writings</a>

@@ -1,5 +1,6 @@
 ---
 import IndexLayout from '../layouts/IndexLayout.astro';
+import Newsletter from '../components/Newsletter.astro';
 import { pageTitle } from '../data/site';
 import { getCollection } from 'astro:content';
 import moment from 'moment';
@@ -35,6 +36,8 @@ const sortedPosts = blogPosts.sort((a, b) => moment(b.data.date).valueOf() - mom
         </a>
       ))}
     </div>
+
+    <div class="measure"><Newsletter /></div>
   </div>
 </IndexLayout>
 

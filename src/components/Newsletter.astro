@@ -1,0 +1,67 @@
+---
+// Buttondown subscribe form, restyled to the site's hairline/mono/serif system.
+---
+<form
+  action="https://buttondown.com/api/emails/embed-subscribe/cubuk"
+  method="post"
+  class="newsletter"
+>
+  <p class="eyebrow mono"><span class="dot"></span>NEWSLETTER</p>
+  <h2 class="heading">New writing, <em>by email.</em></h2>
+  <p class="note">No spam. Unsubscribe any time.</p>
+
+  <div class="row">
+    <label for="bd-email" class="sr-only">Email address</label>
+    <input type="email" name="email" id="bd-email" placeholder="you@example.com" autocomplete="email" required />
+    <input type="submit" value="Subscribe" class="btn" />
+  </div>
+
+  <a href="https://buttondown.com/refer/cubuk" target="_blank" rel="noopener" class="mono ulink powered">
+    Powered by Buttondown
+  </a>
+</form>
+
+<style>
+  .newsletter {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-border);
+  }
+  .heading {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4.5vw, 48px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+  .note { margin: 0; font-size: 15px; color: var(--color-text-secondary); }
+  .row { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+  input[type="email"] {
+    flex: 1 1 240px;
+    min-width: 0;
+    padding: 13px 20px;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    background: var(--print);
+    color: var(--ink);
+    font: inherit;
+    font-size: 16px;
+  }
+  input[type="email"]::placeholder { color: var(--color-text-tertiary); }
+  input[type="email"]:focus { outline: none; border-color: var(--ink); }
+  .btn { border: 0; cursor: pointer; font-family: inherit; }
+  .powered { align-self: flex-start; font-size: 10px; color: var(--color-text-tertiary); }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>
