@@ -30,6 +30,9 @@ const sortedPosts = blogPosts.sort((a, b) => moment(b.data.date).valueOf() - mom
         >
           <time class="mono date">{moment(post.data.date).format('YYYY · MMM DD')}</time>
           <div class="body">
+            {post.data.cover && (
+              <img src={post.data.cover} alt={post.data.cover_alt || ''} class="cover" width="1408" height="768" loading="lazy" />
+            )}
             <h2 class="title">{post.data.title}</h2>
             {post.data.description && <p class="desc">{post.data.description}</p>}
           </div>
@@ -52,6 +55,16 @@ const sortedPosts = blogPosts.sort((a, b) => moment(b.data.date).valueOf() - mom
     gap: 6px 32px;
     padding: 26px 0;
   }
+  .cover {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    margin: 0 0 18px;
+    border: 1px solid var(--color-border);
+    transition: opacity 0.15s ease;
+  }
+  .post:hover .cover { opacity: 0.85; }
   .date { color: var(--color-text-tertiary); padding-top: 6px; }
   .title {
     margin: 0;

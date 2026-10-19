@@ -39,6 +39,7 @@ const jsonLd = {
     "url": `${SITE.url}/about`,
     "sameAs": SITE.socials
   },
+  ...(post.data.cover && { "image": new URL(post.data.cover, SITE.url).href }),
   "url": `${SITE.url}/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}/`,
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -46,33 +47,49 @@ const jsonLd = {
   }
 };
 ---
-<IndexLayout title={pageTitle(post.data.title)} description={description} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={updatedIsoDate}>
-  <article class="py-14 measure">
-    <a href="/writings" class="mono ulink back">&larr; Writings</a>
+<IndexLayout title={pageTitle(post.data.title)} description={description} image={post.data.cover} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={updatedIsoDate}>
+  <article class="py-14 post">
+    <div class="column">
+      <a href="/writings" class="mono ulink back">&larr; Writings</a>
+    </div>
 
     <header class="post-head">
       <time datetime={isoDate} class="mono date">{formattedDate}</time>
       <h1 class="post-title">{post.data.title}</h1>
     </header>
 
-    <div class="prose prose-lg max-w-none">
-      <Content />
-    </div>
+    {post.data.cover && (
+      <img src={post.data.cover} alt={post.data.cover_alt || ''} class="cover" width="1408" height="768" />
+    )}
 
-    <Newsletter />
+    <div class="column">
+      <div class="prose prose-lg max-w-none reading">
+        <Content />
+      </div>
 
-    <div class="foot">
-      <a href="/writings" class="mono ulink">&larr; All writings</a>
+      <Newsletter />
+
+      <div class="foot">
+        <a href="/writings" class="mono ulink">&larr; All writings</a>
+      </div>
     </div>
   </article>
 </IndexLayout>
 
 <style>
+  /* Wide, centered frame for the header and cover; text sits in a narrower column. */
+  .post { max-width: 1040px; margin-inline: auto; }
+  .column { max-width: 68ch; margin-inline: auto; }
+
   .back { display: inline-block; color: var(--color-text-secondary); text-decoration: none; }
-  .post-head { margin: 28px 0 32px; }
+  .post-head {
+    margin: 40px auto 48px;
+    max-width: 900px;
+    text-align: center;
+  }
   .date { color: var(--color-text-tertiary); }
   .post-title {
-    margin: 12px 0 0;
+    margin: 16px 0 0;
     font-family: var(--font-display);
     font-size: clamp(40px, 7vw, 88px);
     font-weight: 400;
@@ -80,11 +97,35 @@ const jsonLd = {
     letter-spacing: -0.025em;
     color: var(--color-text);
     overflow-wrap: break-word;
+    text-wrap: balance;
   }
+  .cover {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 0 56px;
+    border: 1px solid var(--color-border);
+  }
+
+  /* Readability: slightly larger text, airy leading, no orphaned last words. */
+  .reading {
+    font-size: 1.1875rem;
+    line-height: 1.75;
+  }
+  .reading :global(p) { text-wrap: pretty; }
+  .reading :global(h2),
+  .reading :global(h3) { text-wrap: balance; }
+
   .foot {
     margin-top: 56px;
     padding-top: 24px;
     border-top: 1px solid var(--color-border);
   }
   .foot a { color: var(--color-text); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .post-head { margin: 28px 0 32px; text-align: left; }
+    .cover { margin-bottom: 36px; }
+    .reading { font-size: 1.0625rem; line-height: 1.7; }
+  }
 </style>

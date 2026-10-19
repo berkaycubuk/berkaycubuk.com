@@ -2,6 +2,8 @@
 title: Give computers to agents
 date: 2026-10-19
 description: "Why agents need their own computers: my experiment running a small-model agent on a VPS with a browser, memory, nightly reflections and Telegram."
+cover: /images/give-computers-to-agents/cover.jpg
+cover_alt: "A glowing CRT monitor and computer tower on a desk in a dark room"
 ---
 
 I think the magic of coding agents comes from their ability to use tools, especially terminal tools. They're okay at writing and using terminal. With a terminal, they can reach almost any tool. So the next step will be giving them their own computers so they can do real work behind the scenes and as the owners of agents we can focus on what really matters for our craft. People are amazed by what agents like [Instinct](https://instinct.com), [Muse](https://muse.ai) and [dots](https://openai.com/index/introducing-dots) can do, because they run proactively in the background on their own computers.
