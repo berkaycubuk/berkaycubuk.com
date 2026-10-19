@@ -2,6 +2,8 @@
 title: Loving the physical world again
 date: 2026-07-25
 description: Loving the physical world again
+cover: /images/loving-the-physical-world-again/cover.jpg
+cover_alt: "A typewriter under a glowing desk lamp on a workbench, surrounded by tools"
 ---
 
 Everyone's world is changed due to AI no matter what they do. From artists, programmers, teachers, politicians, video producers, writers, wood workers and janitors; everyone 
