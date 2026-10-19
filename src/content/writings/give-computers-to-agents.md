@@ -12,6 +12,11 @@ I use Linux on VPS machines for my professional work so I'm pretty familiar with
 
 With the current state of models, they're pretty good at understanding intention, images and computers. When we combine all these, things start to get interesting. This agent can use the browser (chromium to be explicit) and visit sites, fill forms etc.. If it gets stuck, it hands the session over to me so I can fill in forms and solve captchas manually. It can also write scripts, that means it can learn sites and then write its own automations for each specific site. This way it can notify me when a headphone I'm looking for gets discounted.
 
+<figure class="video">
+  <video src="/media/tamo-demo.mp4" poster="/images/give-computers-to-agents/tamo-demo-poster.jpg" width="706" height="900" controls muted loop playsinline preload="none"></video>
+  <figcaption>I ask my agent to join the <a href="https://useboardless.com">useboardless.com</a> waitlist, and it does it for me using its own browser.</figcaption>
+</figure>
+
 With the free model I'm using it performs surprisingly well and looks like the bottleneck is not the LLM anymore, it is the systems they live on. It can be slow, but it isn't stupid. I like its replies, even when they take a few minutes. I set up a Telegram bot and we communicate over Telegram.
 
 Agents can do almost anything on their own computers, so we need guardrails and sandboxes. But just like parenting, you cannot block all the features, you need to give the agent some freedom to experiment and fail.
