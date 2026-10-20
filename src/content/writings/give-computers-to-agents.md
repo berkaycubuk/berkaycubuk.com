@@ -19,6 +19,11 @@ With the current state of models, they're pretty good at understanding intention
 
 With the free model I'm using it performs surprisingly well and looks like the bottleneck is not the LLM anymore, it is the systems they live on. It can be slow, but it isn't stupid. I like its replies, even when they take a few minutes. I set up a Telegram bot and we communicate over Telegram.
 
+<figure class="video">
+  <video src="/media/tamo-real-work.mp4" poster="/images/give-computers-to-agents/tamo-real-work-poster.jpg" width="710" height="900" controls muted playsinline preload="none"></video>
+  <figcaption>I ask my agent to source 500 ESP32-C3 boards for a client batch. It compares suppliers, adds the cheapest one to the cart, hands the browser over to me when Gmail gets stuck, emails me a summary and sets up a weekday price check.</figcaption>
+</figure>
+
 Agents can do almost anything on their own computers, so we need guardrails and sandboxes. But just like parenting, you cannot block all the features, you need to give the agent some freedom to experiment and fail.
 
 With my new project I'm testing exactly that. I'm inviting my friends and family to test this new agent and we're experimenting. Good thing about testing it with other people is everyone interested in with different things. Some like to be reminded of what needs to be done and some wants to discover Wikipedia articles every day.
