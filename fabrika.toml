@@ -5,14 +5,14 @@
 name = "my-app"
 
 [verbs]                       # abstract verb -> concrete command, run in the repo
-# setup     = "npm install"
-# build     = "npm run build"
-# test      = "npm test"
-# lint      = "npm run lint -- --max-warnings 0"
+# setup     = "pnpm install"
+# build     = "pnpm run build"
+# test      = "pnpm test"
+# lint      = "pnpm run lint -- --max-warnings 0"
 # typecheck = "tsc --noEmit"
-# verify    = "npm run test:acceptance"
-# e2e       = "npx playwright test"
-# run       = "npm run dev"
+# verify    = "pnpm run test:acceptance"
+# e2e       = "pnpm exec playwright test"
+# run       = "pnpm run dev"
 
 [risk]                        # path globs -> tier; anything unmatched = low
 high   = ["**/auth/**", "**/payments/**", "migrations/**", "**/*.sql"]

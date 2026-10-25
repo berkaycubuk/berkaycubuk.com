@@ -12,6 +12,6 @@ echo "Deploying $SITE..."
 
 git push
 
-ssh $VPS_HOST "cd $REMOTE_PATH && git pull && rm -rf dist && npm run build && sudo rm -rf /var/www/html/$SITE && sudo cp -r dist /var/www/html/$SITE"
+ssh $VPS_HOST "cd $REMOTE_PATH && git pull && pnpm install --frozen-lockfile && rm -rf dist && pnpm run build && sudo rm -rf /var/www/html/$SITE && sudo cp -r dist /var/www/html/$SITE"
 
 echo "Done! $SITE deployed."
