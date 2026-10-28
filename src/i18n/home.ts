@@ -52,61 +52,79 @@ export const COMPANIES: { name: string; href?: string; logo?: string; h?: number
 export const HOME = {
   en: {
     // <head>
-    title: 'Berkay Çubuk — I automate your team’s repetitive work with AI',
+    title: 'Berkay Çubuk — Get €20,000 a year of team time back with AI',
     description:
-      'I turn one repetitive task your team does every week into an AI agent that runs in your tools and asks before anything important. Fixed price, live in 3 weeks.',
+      'Your team is losing €20,000 a year to repetitive work. I find it and hand it to an AI employee in 3 weeks. My launch clients pay nothing until it delivers.',
     jsonLdDescription:
-      'Berkay Çubuk is an AI engineer with 5+ years of software experience. He turns repetitive team tasks into AI agents that run in your existing tools, with approval before anything important. Fixed scope, fixed price, live in 3 weeks.',
+      'Berkay Çubuk is an AI engineer with 5+ years of software experience. He finds the repetitive work costing a team €20,000+ a year and hands it to an AI agent that runs in their existing tools. Fixed price, live in 3 weeks, paid only after it delivers.',
     jobTitle: 'AI Engineer',
     srIntro:
-      "Hi, I'm Berkay Çubuk, an AI engineer. I automate one repetitive task your team does every week with an AI agent that works in your tools and asks before anything important. Fixed price, live in 3 weeks. Book a free 20-minute call.",
+      "Hi, I'm Berkay Çubuk, an AI engineer. Your team is likely losing €20,000 a year to repetitive work. I find it and hand it to an AI employee in 3 weeks. Fixed price, and you pay only after it saves the hours we agreed. Book a free 20-minute call.",
     mailSubject: 'Intro call',
 
-    // Hero
+    // Hero: the outcome first, then the risk reversal.
     eyebrow: 'Berkay Çubuk · AI Engineer',
-    heroTitle: 'I automate your team’s repetitive work with AI.',
-    heroPoints: ['One task', 'Fixed price', 'Live in 3 weeks'],
-    heroSub: 'I build an AI agent that does the work in the tools you already use. It asks you before anything important.',
+    heroTitle: 'Your team is losing €20,000 a year to repetitive work.',
+    heroSub: 'I find it and hand it to an AI employee in 3 weeks. It works in your tools and asks before anything important. You pay only after it saves the hours we agree on.',
+    heroPoints: ['€20k+ a year back', 'Live in 3 weeks', 'Pay only after it works'],
     heroCta: 'Book a free 20-min call',
-    heroNote: 'No commitment. If it’s not a fit, I’ll tell you.',
-    status: '2 launch spots left this quarter',
+    calcCta: 'What is it costing you?',
+    heroNote: 'No commitment. If I can’t find €20k of work to automate, I’ll tell you.',
+    status: '2 launch spots left',
     companiesLabel: 'Worked with',
 
-    examplesLabel: 'What I can automate',
+    examplesLabel: 'Where the €20k usually hides',
     examples: [
       { title: 'Portal data entry', desc: 'Copying data from supplier or government portals into your spreadsheet or ERP.' },
       { title: 'Inbox and tickets', desc: 'Sorting incoming emails or tickets and drafting replies for you to approve.' },
       { title: 'Double typing', desc: 'Entering the same information into several systems.' },
       { title: 'Weekly reports', desc: 'Pulling numbers from 3–4 tools into one report.' },
     ],
-    examplesNote: 'If it happens every week and follows the same steps, it can probably be automated.',
+    examplesNote: '8–10 hours a week on one of these is about €20,000 a year.',
+
+    // Savings calculator: hours/week × hourly cost × 48 working weeks.
+    calc: {
+      label: 'What is it costing you?',
+      intro: 'Pick one repetitive task your team does every week.',
+      hours: 'Hours per week on it',
+      rate: 'Hourly cost of the people doing it',
+      result: 'This task costs you',
+      perYear: 'a year',
+      paybackBefore: 'At the launch price, it pays for itself in',
+      paybackAfter: 'weeks.',
+      currency: 'EUR',
+      locale: 'en-IE',
+      hoursDefault: 10,
+      rateDefault: 45,
+      rateMax: 150,
+      price: 2000,
+    },
 
     processLabel: 'How it works',
     steps: [
       { name: 'Free call', meta: '20 minutes', desc: 'Tell me which task eats your team’s time. I’ll tell you if it’s a fit.' },
-      { name: 'Free Discovery Day', meta: '1 day', desc: 'I spend a day with your team, then send a one-page plan with a fixed price.' },
+      { name: 'Free Discovery Day', meta: '1 day', desc: 'I spend a day with your team and find the €20k. Then you get a one-page plan with the hours it saves and a fixed price.' },
       { name: 'Build and launch', meta: '3 weeks', desc: 'I build it, test it on your real work and put it live. You spend about 3 hours.' },
     ],
 
-    includedLabel: 'What you get',
-    included: [
-      'One task automated from start to finish',
-      'Works with up to 3 of your tools',
-      'Asks you before sending, paying or deleting',
-      'Never sees your passwords',
-      'Training for your team',
-      '30 days of fixes after launch',
+    offerLabel: 'Everything you get',
+    stack: [
+      { item: 'An AI employee that does one task end to end, built and live', value: '€4,000' },
+      { item: 'Connected to up to 3 of your tools', value: 'Included' },
+      { item: 'Asks before it sends, pays or deletes. Never sees your passwords.', value: 'Included' },
+      { item: '2-hour training for your team', value: '€500' },
+      { item: 'Handover doc and walkthrough video', value: '€300' },
+      { item: '30 days of fixes after launch', value: '€400' },
     ],
-    guaranteeLabel: 'Guarantee',
-    guarantee: 'We agree in writing what “done” means. If it doesn’t get there, I keep working for free until it does.',
-
-    pricingLabel: 'Price',
+    totalLabel: 'Total value',
+    total: '€5,200',
     priceLead: 'Launch price',
-    price: 'from €2,000',
-    priceWas: 'normally €4,000',
-    priceNote: 'For my first 2 clients this quarter.',
-    payback: 'Most of these tasks cost a team €8,000+ a year in hours. The project usually pays for itself in 2–3 months.',
-    careNote: 'Optional monthly support after launch.',
+    price: '€2,000',
+    priceNote: 'For my 2 launch clients, in exchange for a testimonial.',
+    payTerms: 'You pay nothing up front. You pay once it saves the hours we agreed.',
+
+    guaranteeLabel: 'The guarantee',
+    guarantee: 'We agree in the plan how many hours a week it saves. You pay only when it’s saving them. If it never does, you pay nothing.',
 
     proofLabel: 'Who builds it',
     proofIntro: 'I’m Berkay, an AI engineer in Istanbul with 5+ years of building software that runs in production.',
@@ -154,74 +172,93 @@ export const HOME = {
 
     faqLabel: 'Questions',
     faq: [
-      { q: 'What if my task isn’t a good fit?', a: 'I’ll tell you on the call. It costs you nothing.' },
+      { q: 'How do you know it’s €20,000?', a: 'On the Discovery Day we count how many hours the task takes and multiply by your team’s hourly cost. That number goes in the plan, and the guarantee is tied to it.' },
+      { q: 'What if you can’t find €20k?', a: 'I’ll tell you at the end of the Discovery Day. You’ve paid nothing.' },
+      { q: 'Why work before getting paid?', a: 'You’d be one of my first two clients on this offer. I’d rather earn your trust and your testimonial with results than ask you to pay up front.' },
       { q: 'Is it safe?', a: 'It only uses the tools you approve, asks before anything important and logs every action. You log in yourself, so it never sees your passwords.' },
       { q: 'Are there running costs?', a: 'Yes, a small monthly AI and hosting bill, paid on your own account. I estimate it in the plan.' },
       { q: 'What happens after launch?', a: 'You own it. Optional monthly support keeps it working when your tools change.' },
       { q: 'Do you work with agencies?', a: 'Yes, white-label. Email me and I’ll send the details.' },
     ],
 
-    endAsk: 'Which task should go first?',
+    endAsk: 'Where is your €20k hiding?',
     endNote: 'Book a free 20-minute call. I reply within a day.',
   },
 
   tr: {
     // <head>
-    title: 'Berkay Çubuk — Ekibinizin tekrar eden işini yapay zekâyla otomatikleştiriyorum',
+    title: 'Berkay Çubuk — Ekibinizin tekrar eden işini yapay zekâya devredin',
     description:
-      'Ekibinizin her hafta yaptığı tekrar eden bir işi, araçlarınızda çalışan ve önemli her adımdan önce soran bir yapay zekâ ajanına dönüştürüyorum. Sabit fiyat, 3 haftada canlıda.',
+      'Ekibiniz her hafta saatlerini tekrar eden işlere harcıyor. O işi bulup 3 haftada bir yapay zekâ çalışanına devrediyorum. Lansman müşterilerim, sonuç görene kadar hiçbir şey ödemez.',
     jsonLdDescription:
-      'Berkay Çubuk, 5 yılı aşkın yazılım deneyimine sahip bir yapay zekâ mühendisi. Ekiplerin tekrar eden işlerini, mevcut araçlarda çalışan ve önemli adımlardan önce onay isteyen yapay zekâ ajanlarına dönüştürüyor. Sabit kapsam, sabit fiyat, 3 haftada canlıda.',
+      'Berkay Çubuk, 5 yılı aşkın yazılım deneyimine sahip bir yapay zekâ mühendisi. Ekiplerin her hafta saatlerini alan tekrar eden işleri bulup mevcut araçlarda çalışan yapay zekâ ajanlarına devrediyor. Sabit fiyat, 3 haftada canlıda, ödeme ancak sonuç verdikten sonra.',
     jobTitle: 'Yapay Zekâ Mühendisi',
     srIntro:
-      'Merhaba, ben Berkay Çubuk, yapay zekâ mühendisiyim. Ekibinizin her hafta yaptığı tekrar eden bir işi, araçlarınızda çalışan ve önemli her adımdan önce soran bir yapay zekâ ajanıyla otomatikleştiriyorum. Sabit fiyat, 3 haftada canlıda. Ücretsiz 20 dakikalık görüşme ayarlayın.',
+      'Merhaba, ben Berkay Çubuk, yapay zekâ mühendisiyim. Ekibinizin her hafta saatlerini alan tekrar eden işi bulup 3 haftada bir yapay zekâ çalışanına devrediyorum. Sabit fiyat; ödemeyi ancak söz verdiğim saati kazandırdıktan sonra yaparsınız. Ücretsiz 20 dakikalık görüşme ayarlayın.',
     mailSubject: 'Tanışma görüşmesi',
 
-    // Hero
+    // Hero: hours instead of a euro figure; Turkish wages make €20k a much bigger task.
     eyebrow: 'Berkay Çubuk · Yapay Zekâ Mühendisi',
-    heroTitle: 'Ekibinizin tekrar eden işini yapay zekâyla otomatikleştiriyorum.',
-    heroPoints: ['Tek iş', 'Sabit fiyat', '3 haftada canlıda'],
-    heroSub: 'İşi zaten kullandığınız araçlarda yapan bir yapay zekâ ajanı geliştiriyorum. Önemli her adımdan önce size sorar.',
+    heroTitle: 'Ekibiniz her hafta 10 saatini tekrar eden işlere harcıyor.',
+    heroSub: 'O işi bulup 3 haftada bir yapay zekâ çalışanına devrediyorum. Araçlarınızda çalışır, önemli her adımdan önce sorar. Ödemeyi ancak söz verdiğimiz saati kazandırdıktan sonra yaparsınız.',
+    heroPoints: ['Haftada 8+ saat geri', '3 haftada canlıda', 'Ödeme sonuçtan sonra'],
     heroCta: 'Ücretsiz 20 dk görüşme',
-    heroNote: 'Taahhüt yok. Uygun değilse söylerim.',
-    status: 'Bu çeyrek 2 lansman yeri kaldı',
+    calcCta: 'Size maliyeti ne?',
+    heroNote: 'Taahhüt yok. Otomatikleştirmeye değer bir iş bulamazsam söylerim.',
+    status: '2 lansman yeri kaldı',
     companiesLabel: 'Birlikte çalıştıklarım',
 
-    examplesLabel: 'Neleri otomatikleştirebilirim',
+    examplesLabel: 'Kayıp saatler genelde nerede',
     examples: [
       { title: 'Portaldan veri girişi', desc: 'Tedarikçi ya da devlet portallarındaki verileri tablonuza ya da ERP’nize aktarmak.' },
       { title: 'E-posta ve talepler', desc: 'Gelen e-postaları ya da talepleri ayıklamak, onayınıza sunulacak yanıtları hazırlamak.' },
       { title: 'Çift giriş', desc: 'Aynı bilgiyi birkaç farklı sisteme girmek.' },
       { title: 'Haftalık raporlar', desc: '3–4 araçtaki rakamları tek bir raporda toplamak.' },
     ],
-    examplesNote: 'Her hafta tekrarlanıyor ve hep aynı adımları izliyorsa, büyük ihtimalle otomatikleştirilebilir.',
+    examplesNote: 'Bunlardan birine haftada 8–10 saat, yılda 400 saatten fazla demek.',
+
+    calc: {
+      label: 'Size maliyeti ne?',
+      intro: 'Ekibinizin her hafta yaptığı tekrar eden bir işi düşünün.',
+      hours: 'Haftada bu işe giden saat',
+      rate: 'Bu işi yapanların saatlik maliyeti',
+      result: 'Bu iş size',
+      perYear: 'yıllık maliyet',
+      paybackBefore: '',
+      paybackAfter: '',
+      currency: 'TRY',
+      locale: 'tr-TR',
+      hoursDefault: 10,
+      rateDefault: 400,
+      rateMax: 2000,
+      price: 0,
+    },
 
     processLabel: 'Nasıl çalışıyor',
     steps: [
       { name: 'Ücretsiz görüşme', meta: '20 dakika', desc: 'Ekibinizin vaktini yiyen işi anlatın. Uygun olup olmadığını söylerim.' },
-      { name: 'Ücretsiz Keşif Günü', meta: '1 gün', desc: 'Bir günü ekibinizle geçiririm, ardından sabit fiyatlı tek sayfalık bir plan gönderirim.' },
+      { name: 'Ücretsiz Keşif Günü', meta: '1 gün', desc: 'Bir günü ekibinizle geçirip kayıp saatleri bulurum. Ardından kazandıracağı saati ve sabit fiyatı yazan tek sayfalık bir plan gönderirim.' },
       { name: 'Geliştirme ve yayın', meta: '3 hafta', desc: 'Geliştirir, gerçek işinizle test eder ve canlıya alırım. Size düşen yaklaşık 3 saat.' },
     ],
 
-    includedLabel: 'Neler dahil',
-    included: [
-      'Bir işin baştan sona otomatikleşmesi',
-      'Araçlarınızdan 3 tanesine kadar bağlantı',
-      'Göndermeden, ödemeden ya da silmeden önce onay',
-      'Şifrelerinizi asla görmez',
-      'Ekibiniz için eğitim',
-      'Yayından sonra 30 gün düzeltme',
+    offerLabel: 'Neler dahil',
+    stack: [
+      { item: 'Bir işi baştan sona yapan, kurulup canlıya alınmış bir yapay zekâ çalışanı', value: '€4.000' },
+      { item: 'Araçlarınızdan 3 tanesine kadar bağlantı', value: 'Dahil' },
+      { item: 'Göndermeden, ödemeden ya da silmeden önce sorar. Şifrelerinizi asla görmez.', value: 'Dahil' },
+      { item: 'Ekibiniz için 2 saatlik eğitim', value: '€500' },
+      { item: 'Devir teslim dokümanı ve anlatım videosu', value: '€300' },
+      { item: 'Yayından sonra 30 gün düzeltme', value: '€400' },
     ],
-    guaranteeLabel: 'Garanti',
-    guarantee: '“Bitti”nin ne demek olduğunu yazılı olarak belirleriz. Oraya ulaşmazsa, ulaşana kadar ücretsiz çalışmaya devam ederim.',
-
-    pricingLabel: 'Fiyat',
+    totalLabel: 'Toplam değer',
+    total: '€5.200',
     priceLead: 'Lansman fiyatı',
-    price: '€2.000’den başlayan',
-    priceWas: 'normalde €4.000',
-    priceNote: 'Bu çeyrekteki ilk 2 müşterim için.',
-    payback: 'Bu işler bir ekibe genelde yılda €8.000’den fazla mesaiye mal oluyor. Proje çoğunlukla 2–3 ayda kendini çıkarıyor.',
-    careNote: 'Yayından sonra isteğe bağlı aylık destek.',
+    price: '€2.000',
+    priceNote: '2 lansman müşterim için, bir referans yorumu karşılığında.',
+    payTerms: 'Peşin hiçbir şey ödemezsiniz. Söz verdiğimiz saati kazandırdığında ödersiniz.',
+
+    guaranteeLabel: 'Garanti',
+    guarantee: 'Haftada kaç saat kazandıracağını planda birlikte belirleriz. Ancak bu saati kazandırdığında ödersiniz. Hiç kazandırmazsa hiçbir şey ödemezsiniz.',
 
     proofLabel: 'Kim geliştiriyor',
     proofIntro: 'Ben Berkay, İstanbul’da yapay zekâ mühendisiyim. 5 yılı aşkın süredir canlı ortamda çalışan yazılımlar geliştiriyorum.',
@@ -268,14 +305,16 @@ export const HOME = {
 
     faqLabel: 'Sorular',
     faq: [
-      { q: 'Ya işim uygun değilse?', a: 'Görüşmede söylerim. Size hiçbir maliyeti olmaz.' },
+      { q: 'Kazancı nasıl ölçüyorsunuz?', a: 'Keşif Günü’nde işin haftada kaç saat aldığını sayar, ekibinizin saatlik maliyetiyle çarparız. Bu rakam plana girer ve garanti ona bağlıdır.' },
+      { q: 'Ya değecek bir iş bulamazsanız?', a: 'Keşif Günü’nün sonunda söylerim. Hiçbir şey ödemezsiniz.' },
+      { q: 'Neden ödeme almadan çalışıyorsunuz?', a: 'Bu teklifteki ilk iki müşterimden biri olacaksınız. Peşin ödeme istemek yerine güveninizi ve referansınızı sonuçla kazanmayı tercih ediyorum.' },
       { q: 'Güvenli mi?', a: 'Yalnızca onayladığınız araçları kullanır, önemli her adımdan önce sorar ve her işlemi kaydeder. Girişi siz yaparsınız; şifrelerinizi hiç görmez.' },
       { q: 'İşletme maliyeti var mı?', a: 'Evet, kendi hesabınızdan ödenen küçük bir aylık yapay zekâ ve sunucu maliyeti. Planda tahminini veririm.' },
       { q: 'Yayından sonra ne oluyor?', a: 'Sistem sizin. İsteğe bağlı aylık destek, araçlarınız değiştiğinde çalışmaya devam etmesini sağlar.' },
       { q: 'Ajanslarla çalışıyor musunuz?', a: 'Evet, beyaz etiketle. Bana yazın, detayları göndereyim.' },
     ],
 
-    endAsk: 'Hangi işle başlayalım?',
+    endAsk: 'Ekibinizin kayıp saatleri nerede?',
     endNote: 'Ücretsiz 20 dakikalık görüşme ayarlayın. Bir gün içinde dönüyorum.',
   },
 } as const;

@@ -23,6 +23,11 @@ const EMAIL = 'berkay@berkaycubuk.com';
 const BOOK = `mailto:${EMAIL}?subject=${encodeURIComponent(t.mailSubject)}`;
 const workPath = lang === 'en' ? '/work' : `/${lang}/work`;
 
+// Calculator helpers, mirrored in the script below for live updates.
+const money = new Intl.NumberFormat(t.calc.locale, { style: 'currency', currency: t.calc.currency, maximumFractionDigits: 0 });
+const fmt = (n: number) => money.format(n);
+const payback = (hours: number, rate: number) => Math.max(1, Math.ceil(t.calc.price / (hours * rate)));
+
 // Every language version points at every other one, plus itself, so search
 // engines serve the right page per visitor instead of picking one and
 // treating the other as duplicate content.
@@ -92,7 +97,10 @@ const jsonLd = [
         {t.heroPoints.map((p) => <li>{p}</li>)}
       </ul>
       <p class="sub">{t.heroSub}</p>
-      <a class="go big" href={BOOK}>{t.heroCta} →</a>
+      <div class="ctas">
+        <a class="go big" href={BOOK}>{t.heroCta} →</a>
+        <a class="ghost" href="#calc">{t.calcCta} ↓</a>
+      </div>
       <p class="small">{t.heroNote} <span class="status"><i></i>{t.status}</span></p>
     </section>
 
@@ -131,6 +139,30 @@ const jsonLd = [
       <p class="small center">{t.examplesNote}</p>
     </section>
 
+    <!-- Savings calculator: hours/week × hourly cost × 48 weeks. Server-renders the
+         default result so it reads right before (or without) the script. -->
+    <section id="calc">
+      <div class="card calc" data-calc={JSON.stringify(t.calc)}>
+        <h2>{t.calc.label}</h2>
+        <p class="small">{t.calc.intro}</p>
+        <label>
+          <span>{t.calc.hours} <b data-out="hours">{t.calc.hoursDefault}</b></span>
+          <input type="range" min="1" max="40" step="1" value={t.calc.hoursDefault} data-in="hours" />
+        </label>
+        <label>
+          <span>{t.calc.rate} <b data-out="rate">{fmt(t.calc.rateDefault)}</b></span>
+          <input type="range" min="5" max={t.calc.rateMax} step="5" value={t.calc.rateDefault} data-in="rate" />
+        </label>
+        <div class="result">
+          <p>{t.calc.result}</p>
+          <p class="big-num"><span data-out="year">{fmt(t.calc.hoursDefault * t.calc.rateDefault * 48)}</span> <small>{t.calc.perYear}</small></p>
+          {t.calc.price > 0 && (
+            <p>{t.calc.paybackBefore} <b data-out="weeks">{payback(t.calc.hoursDefault, t.calc.rateDefault)}</b> {t.calc.paybackAfter}</p>
+          )}
+        </div>
+      </div>
+    </section>
+
     <section>
       <h2>{t.processLabel}</h2>
       <ol class="grid g3">
@@ -145,26 +177,22 @@ const jsonLd = [
       </ol>
     </section>
 
-    <section>
-      <h2>{t.includedLabel}</h2>
-      <ul class="checks">
-        {t.included.map((item) => <li>{item}</li>)}
-      </ul>
+    <!-- Value stack: what's included and what each part is worth, then the price. -->
+    <section id="pricing">
+      <h2>{t.offerLabel}</h2>
+      <div class="card price">
+        <ul class="stack">
+          {t.stack.map((s) => <li><span>{s.item}</span><b>{s.value}</b></li>)}
+        </ul>
+        <p class="total"><span>{t.totalLabel}</span><s>{t.total}</s></p>
+        <p class="total now"><span>{t.priceLead}</span><b>{t.price}</b></p>
+        <p class="small">{t.priceNote}</p>
+        <p class="terms">{t.payTerms}</p>
+        <a class="go" href={BOOK}>{t.heroCta} →</a>
+      </div>
       <div class="card strong">
         <h3>{t.guaranteeLabel}</h3>
         <p>{t.guarantee}</p>
-      </div>
-    </section>
-
-    <section id="pricing">
-      <h2>{t.pricingLabel}</h2>
-      <div class="card price">
-        <p class="tag">{t.priceLead}</p>
-        <p class="amount">{t.price}</p>
-        <p class="was"><s>{t.priceWas}</s> · {t.priceNote}</p>
-        <p>{t.payback}</p>
-        <p class="small">{t.careNote}</p>
-        <a class="go" href={BOOK}>{t.heroCta} →</a>
       </div>
     </section>
 
@@ -201,6 +229,24 @@ const jsonLd = [
 </BaseLayout>
 
 <script>
+  // Savings calculator: hours/week × hourly cost × 48 weeks, and weeks to pay back the launch price.
+  document.querySelectorAll<HTMLElement>('[data-calc]').forEach((box) => {
+    const c = JSON.parse(box.dataset.calc!);
+    const money = new Intl.NumberFormat(c.locale, { style: 'currency', currency: c.currency, maximumFractionDigits: 0 });
+    const input = (k: string) => box.querySelector<HTMLInputElement>(`[data-in="${k}"]`)!;
+    const out = (k: string) => box.querySelector<HTMLElement>(`[data-out="${k}"]`);
+    const update = () => {
+      const hours = +input('hours').value;
+      const rate = +input('rate').value;
+      out('hours')!.textContent = String(hours);
+      out('rate')!.textContent = money.format(rate);
+      out('year')!.textContent = money.format(hours * rate * 48);
+      const weeks = out('weeks');
+      if (weeks) weeks.textContent = String(Math.max(1, Math.ceil(c.price / (hours * rate))));
+    };
+    box.addEventListener('input', update);
+  });
+
   // Company slider: drives the scroll from JS so it can also be dragged with the
   // mouse or a finger. Without JS the CSS animation runs instead; with reduced
   // motion the logos sit still in a wrapped row (see CSS) and this does nothing.
@@ -290,7 +336,9 @@ const jsonLd = [
 
   /* The one loud element on the page. */
   .go { display: inline-block; padding: 14px 24px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 600; font-size: 17px; text-decoration: none; transition: transform .15s, filter .15s; }
-  .go.big { padding: 18px 32px; font-size: 19px; margin-bottom: 16px; }
+  .go.big { padding: 18px 32px; font-size: 19px; }
+  .ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-bottom: 16px; }
+  .ghost { font-weight: 600; font-size: 17px; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
   @media (hover: hover) { .go:hover { transform: translateY(-2px); filter: brightness(1.08); } }
 
   /* --- Company slider --- */
@@ -328,7 +376,7 @@ const jsonLd = [
   .card p { color: var(--ink-dim); font-size: 17px; }
   .n { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: var(--paper); font-weight: 700; margin-bottom: 16px; }
   .card .tag { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 10px; }
-  .strong { border: 2px solid var(--ok); margin-top: 24px; }
+  .strong { border: 2px solid var(--ok); margin-top: 16px; }
   .strong p { color: var(--ink); font-size: 19px; }
 
   .checks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 32px; }
@@ -336,11 +384,28 @@ const jsonLd = [
   .checks li::before { content: '✓'; position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: #fff; background: var(--ok); }
   #work .checks { grid-template-columns: 1fr; }
 
-  /* --- Price --- */
+  /* --- Calculator --- */
+  .calc { border: 2px solid var(--ink); padding: clamp(24px, 4vw, 40px); }
+  .calc h2 { margin-bottom: 8px; }
+  .calc label { display: block; margin-top: 24px; }
+  .calc label span { display: flex; justify-content: space-between; gap: 16px; font-weight: 600; margin-bottom: 10px; }
+  .calc label b { color: var(--accent); }
+  .calc input[type=range] { width: 100%; accent-color: var(--accent); height: 28px; cursor: pointer; }
+  .result { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .card .result p { color: var(--ink); margin-bottom: 6px; }
+  .card .result .big-num { font-size: clamp(44px, 7vw, 64px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; color: var(--accent); margin-bottom: 12px; }
+  .big-num small { font-size: 20px; font-weight: 600; color: var(--ink-dim); letter-spacing: 0; }
+
+  /* --- Value stack + price --- */
   .price { border: 2px solid var(--accent); padding: clamp(24px, 4vw, 40px); }
-  .price .amount { font-size: clamp(40px, 6vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--ink); margin-bottom: 12px; }
-  .price .was { font-size: 16px; }
-  .price p:nth-last-of-type(2) { color: var(--ink); }
+  .stack { list-style: none; margin: 0 0 8px; padding: 0; }
+  .stack li { display: flex; justify-content: space-between; gap: 24px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .stack b { white-space: nowrap; font-weight: 600; }
+  .card .total { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin: 16px 0 0; color: var(--ink-dim); font-weight: 600; }
+  .total s { font-size: 22px; }
+  .card .total.now { color: var(--ink); margin: 8px 0 12px; }
+  .total.now b { font-size: clamp(40px, 6vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--accent); }
+  .card .terms { color: var(--ink); font-weight: 600; }
   .price .go { margin-top: 12px; }
 
   .more { display: inline-block; margin-top: 24px; font-weight: 600; color: var(--ink); }
@@ -356,7 +421,7 @@ const jsonLd = [
 
   .end { text-align: center; padding: 80px 0 112px; }
   .end p { font-size: 20px; color: var(--ink-dim); }
-  .end .go { margin-top: 12px; }
+  .end .go { margin: 12px 0 24px; }
   .end a:not(.go) { color: var(--ink-dim); }
 
   @media (max-width: 760px) {
