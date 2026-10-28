@@ -14,14 +14,13 @@ const {
 } = Astro.props;
 
 const LABELS = {
-  en: { work: 'Work', writings: 'Writings', notes: 'Notes', projects: 'Projects', about: 'About', email: 'Email me', menu: 'Open menu', home: '/' },
-  tr: { work: 'İşler', writings: 'Yazılar', notes: 'Notlar', projects: 'Projeler', about: 'Hakkımda', email: 'Bana yazın', menu: 'Menüyü aç', home: '/tr/' },
+  en: { work: 'Work', writings: 'Writings', projects: 'Projects', about: 'About', email: 'Email me', menu: 'Open menu', home: '/' },
+  tr: { work: 'İşler', writings: 'Yazılar', projects: 'Projeler', about: 'Hakkımda', email: 'Bana yazın', menu: 'Menüyü aç', home: '/tr/' },
 }[lang];
 
 const nav = [
   { label: LABELS.work, href: lang === 'tr' ? '/tr/work' : '/work' },
   { label: LABELS.writings, href: '/writings' },
-  { label: LABELS.notes, href: '/notes' },
   { label: LABELS.projects, href: '/projects' },
   { label: LABELS.about, href: '/about' },
 ];
