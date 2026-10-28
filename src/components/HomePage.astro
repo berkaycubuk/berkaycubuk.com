@@ -98,8 +98,8 @@ const jsonLd = [
       </ul>
       <p class="sub">{t.heroSub}</p>
       <div class="ctas">
-        <a class="go big" href={BOOK}>{t.heroCta} →</a>
-        <a class="ghost" href="#calc">{t.calcCta} ↓</a>
+        <a class="go big" href={BOOK} data-umami-event="Book call" data-umami-event-location="hero" data-umami-event-lang={lang}>{t.heroCta} →</a>
+        <a class="ghost" href="#calc" data-umami-event="Calculator link" data-umami-event-lang={lang}>{t.calcCta} ↓</a>
       </div>
       <p class="small">{t.heroNote} <span class="status"><i></i>{t.status}</span></p>
     </section>
@@ -116,7 +116,7 @@ const jsonLd = [
               return (
                 <li>
                   {c.href
-                    ? <a href={c.href} target="_blank" rel="noopener noreferrer" tabindex={copy === 1 ? -1 : undefined}>{mark}</a>
+                    ? <a href={c.href} target="_blank" rel="noopener noreferrer" tabindex={copy === 1 ? -1 : undefined} data-umami-event="Client logo" data-umami-event-company={c.name}>{mark}</a>
                     : <span>{mark}</span>}
                 </li>
               );
@@ -188,7 +188,7 @@ const jsonLd = [
         <p class="total now"><span>{t.priceLead}</span><b>{t.price}</b></p>
         <p class="small">{t.priceNote}</p>
         <p class="terms">{t.payTerms}</p>
-        <a class="go" href={BOOK}>{t.heroCta} →</a>
+        <a class="go" href={BOOK} data-umami-event="Book call" data-umami-event-location="pricing" data-umami-event-lang={lang}>{t.heroCta} →</a>
       </div>
       <div class="card strong">
         <h3>{t.guaranteeLabel}</h3>
@@ -202,14 +202,14 @@ const jsonLd = [
       <ul class="checks">
         {t.proof.map((p) => <li>{p}</li>)}
       </ul>
-      <a class="more" href={workPath}>{t.allWork} →</a>
+      <a class="more" href={workPath} data-umami-event="See work" data-umami-event-lang={lang}>{t.allWork} →</a>
     </section>
 
     <section>
       <h2>{t.faqLabel}</h2>
       <div class="faq">
         {t.faq.map((f) => (
-          <details>
+          <details data-faq={f.q}>
             <summary>{f.q}</summary>
             <p>{f.a}</p>
           </details>
@@ -220,8 +220,8 @@ const jsonLd = [
     <section class="end">
       <h2>{t.endAsk}</h2>
       <p>{t.endNote}</p>
-      <a class="go big" href={BOOK}>{t.heroCta} →</a>
-      <p class="small"><a href={BOOK}>{EMAIL}</a></p>
+      <a class="go big" href={BOOK} data-umami-event="Book call" data-umami-event-location="end" data-umami-event-lang={lang}>{t.heroCta} →</a>
+      <p class="small"><a href={BOOK} data-umami-event="Email click" data-umami-event-location="end" data-umami-event-lang={lang}>{EMAIL}</a></p>
     </section>
   </main>
 
@@ -229,6 +229,17 @@ const jsonLd = [
 </BaseLayout>
 
 <script>
+  // Analytics: PicoStat exposes Umami's window.umami.track(); it's only loaded in
+  // production, so every call is guarded. Clicks use data-umami-event attributes.
+  const track = (name: string, data?: Record<string, unknown>) => {
+    (window as any).umami?.track(name, { lang: document.documentElement.lang, ...data });
+  };
+
+  // FAQ: which questions people open.
+  document.querySelectorAll<HTMLDetailsElement>('details[data-faq]').forEach((d) => {
+    d.addEventListener('toggle', () => { if (d.open) track('FAQ open', { question: d.dataset.faq }); });
+  });
+
   // Savings calculator: hours/week × hourly cost × 48 weeks, and weeks to pay back the launch price.
   document.querySelectorAll<HTMLElement>('[data-calc]').forEach((box) => {
     const c = JSON.parse(box.dataset.calc!);
@@ -245,6 +256,12 @@ const jsonLd = [
       if (weeks) weeks.textContent = String(Math.max(1, Math.ceil(c.price / (hours * rate))));
     };
     box.addEventListener('input', update);
+    // 'change' fires once per slider release, so this is one event per adjustment, not per pixel.
+    box.addEventListener('change', () => {
+      const hours = +input('hours').value;
+      const rate = +input('rate').value;
+      track('Calculator used', { hours, rate, yearly: hours * rate * 48, currency: c.currency });
+    });
   });
 
   // Company slider: drives the scroll from JS so it can also be dragged with the
@@ -265,6 +282,7 @@ const jsonLd = [
     let startX = 0;
     let startPos = 0;
     let moved = 0;
+    let dragged = false;
 
     // Two identical tracks: wrapping by one track's width loops without a seam.
     const tick = (now: number) => {
@@ -292,6 +310,7 @@ const jsonLd = [
       if (moved <= 5 && Math.abs(dx) > 5) {
         m.setPointerCapture(e.pointerId);
         m.classList.add('dragging');
+        if (!dragged) { dragged = true; track('Logo slider drag'); }
       }
       moved = Math.max(moved, Math.abs(dx));
       x = startPos - dx;
