@@ -52,42 +52,72 @@ export const COMPANIES: { name: string; href?: string; logo?: string; h?: number
 export const HOME = {
   en: {
     // <head>
-    title: 'Berkay Çubuk — AI Engineer · AI agents that do real work, safely',
+    title: 'Berkay Çubuk — I automate your team’s repetitive work with AI',
     description:
-      'I build AI agents and LLM automations that run in production, with guardrails in code, not prompts. Independent AI engineer in Istanbul, working worldwide.',
+      'I turn one repetitive task your team does every week into an AI agent that runs in your tools and asks before anything important. Fixed price, live in 3 weeks.',
     jsonLdDescription:
-      'Berkay Çubuk is an AI engineer with 5+ years of software experience. He builds AI agents and LLM automations that run in production, with the guardrails that make them safe to use on real accounts and tools.',
+      'Berkay Çubuk is an AI engineer with 5+ years of software experience. He turns repetitive team tasks into AI agents that run in your existing tools, with approval before anything important. Fixed scope, fixed price, live in 3 weeks.',
     jobTitle: 'AI Engineer',
     srIntro:
-      "Hi, I'm Berkay Çubuk, an AI engineer. I build AI agents that take repetitive work off your team and run safely on real accounts and tools. Email me about your project.",
+      "Hi, I'm Berkay Çubuk, an AI engineer. I automate one repetitive task your team does every week with an AI agent that works in your tools and asks before anything important. Fixed price, live in 3 weeks. Book a free 20-minute call.",
+    mailSubject: 'Intro call',
 
-    // Masthead
-    role: ['AI Engineer', 'Agents & LLM automations in production'],
-    place: 'Istanbul · working worldwide',
-    heroTitle: 'I build AI agents that do real work, safely.',
-    heroCta: 'Email me about your project',
-    status: 'Open for new projects',
+    // Hero
+    eyebrow: 'Berkay Çubuk · AI Engineer',
+    heroTitle: 'I automate your team’s repetitive work with AI.',
+    heroPoints: ['One task', 'Fixed price', 'Live in 3 weeks'],
+    heroSub: 'I build an AI agent that does the work in the tools you already use. It asks you before anything important.',
+    heroCta: 'Book a free 20-min call',
+    heroNote: 'No commitment. If it’s not a fit, I’ll tell you.',
+    status: '2 launch spots left this quarter',
     companiesLabel: 'Worked with',
 
-    // Fig. A: an illustrated chat with Tamo, stopping to ask before it pays.
-    chat: {
-      label: 'Illustration: an AI assistant asking for confirmation before it pays',
-      ask: 'Book a table for four, Friday 8pm.',
-      reply: 'Found one at 20:00. It needs a ₺500 card hold.',
-      confirm: 'Confirm before I pay?',
-      yes: 'Confirm',
-      no: 'Cancel',
-    },
-    figA: 'Fig. A — Asks before it pays',
-    figB: 'Fig. B — Agents, reviewed',
+    examplesLabel: 'What I can automate',
+    examples: [
+      { title: 'Portal data entry', desc: 'Copying data from supplier or government portals into your spreadsheet or ERP.' },
+      { title: 'Inbox and tickets', desc: 'Sorting incoming emails or tickets and drafting replies for you to approve.' },
+      { title: 'Double typing', desc: 'Entering the same information into several systems.' },
+      { title: 'Weekly reports', desc: 'Pulling numbers from 3–4 tools into one report.' },
+    ],
+    examplesNote: 'If it happens every week and follows the same steps, it can probably be automated.',
 
-    principles: [
-      { name: 'Agents in production', desc: 'Agents that work on real accounts and tools every day, not demos that break on the second try.' },
-      { name: 'Guardrails in code, not prompts', desc: 'Payments, bookings and messages wait for a yes. Enforced in code, so no clever prompt can talk its way past them.' },
-      { name: 'Fits the tools you already use', desc: 'It plugs into your APIs, inboxes, spreadsheets and internal systems. Nothing new for your team to learn.' },
+    processLabel: 'How it works',
+    steps: [
+      { name: 'Free call', meta: '20 minutes', desc: 'Tell me which task eats your team’s time. I’ll tell you if it’s a fit.' },
+      { name: 'Free Discovery Day', meta: '1 day', desc: 'I spend a day with your team, then send a one-page plan with a fixed price.' },
+      { name: 'Build and launch', meta: '3 weeks', desc: 'I build it, test it on your real work and put it live. You spend about 3 hours.' },
     ],
 
-    // Case studies
+    includedLabel: 'What you get',
+    included: [
+      'One task automated from start to finish',
+      'Works with up to 3 of your tools',
+      'Asks you before sending, paying or deleting',
+      'Never sees your passwords',
+      'Training for your team',
+      '30 days of fixes after launch',
+    ],
+    guaranteeLabel: 'Guarantee',
+    guarantee: 'We agree in writing what “done” means. If it doesn’t get there, I keep working for free until it does.',
+
+    pricingLabel: 'Price',
+    priceLead: 'Launch price',
+    price: 'from €2,000',
+    priceWas: 'normally €4,000',
+    priceNote: 'For my first 2 clients this quarter.',
+    payback: 'Most of these tasks cost a team €8,000+ a year in hours. The project usually pays for itself in 2–3 months.',
+    careNote: 'Optional monthly support after launch.',
+
+    proofLabel: 'Who builds it',
+    proofIntro: 'I’m Berkay, an AI engineer in Istanbul with 5+ years of building software that runs in production.',
+    proof: [
+      'Built a ticketing platform and a compliance system at Paribu, a crypto exchange.',
+      'Built Tamo, an AI assistant that asks before every payment or message.',
+      'Built Fabrika, open-source tooling where AI agents review each other’s work.',
+    ],
+    allWork: 'See my work',
+
+    // Case studies (also shown on /work)
     labels: { problem: 'The situation', built: 'What I built', result: 'The result' },
     cases: {
       paribu: {
@@ -122,65 +152,85 @@ export const HOME = {
       },
     },
 
-    processLabel: "How we'd work together",
-    steps: [
-      { name: 'You email me', desc: 'Describe the work that eats your team’s time. No spec needed.' },
-      { name: 'We scope it', desc: 'The workflow, the tools it touches, and what the agent must never do on its own.' },
-      { name: 'I build & ship', desc: 'A working agent on your real systems, in paid milestones, with logs you can read.' },
-      { name: 'It keeps running', desc: 'I watch it after launch and fix what breaks, or hand it over to your team.' },
+    faqLabel: 'Questions',
+    faq: [
+      { q: 'What if my task isn’t a good fit?', a: 'I’ll tell you on the call. It costs you nothing.' },
+      { q: 'Is it safe?', a: 'It only uses the tools you approve, asks before anything important and logs every action. You log in yourself, so it never sees your passwords.' },
+      { q: 'Are there running costs?', a: 'Yes, a small monthly AI and hosting bill, paid on your own account. I estimate it in the plan.' },
+      { q: 'What happens after launch?', a: 'You own it. Optional monthly support keeps it working when your tools change.' },
+      { q: 'Do you work with agencies?', a: 'Yes, white-label. Email me and I’ll send the details.' },
     ],
 
-    wordsLabel: 'In their words',
-
-    alsoLabel: 'Also made — tools & hardware',
-    allProjects: 'All projects',
-    products: {
-      pouch: 'Run and steer Claude Code sessions from your phone.',
-      'isbusy code': 'Desk lights that show what your coding agents are doing.',
-      'MQTT Studio': 'Hosted IoT dashboards. A SaaS I run solo.',
-      isbusy: 'A custom status light, built and installed at a factory.',
-    },
-
-    endAsk: 'Work your team keeps doing by hand?',
-    endWrite: 'Write to me.',
-    endNote: 'I take on a few projects at a time and reply within a day.',
+    endAsk: 'Which task should go first?',
+    endNote: 'Book a free 20-minute call. I reply within a day.',
   },
 
   tr: {
     // <head>
-    title: 'Berkay Çubuk — Yapay Zekâ Mühendisi · Gerçek iş yapan yapay zekâ ajanları',
+    title: 'Berkay Çubuk — Ekibinizin tekrar eden işini yapay zekâyla otomatikleştiriyorum',
     description:
-      'Canlı ortamda çalışan yapay zekâ ajanları ve LLM otomasyonları geliştiriyorum. Güvenlik kuralları prompt’ta değil, kodda. İstanbul’dan, her yere.',
+      'Ekibinizin her hafta yaptığı tekrar eden bir işi, araçlarınızda çalışan ve önemli her adımdan önce soran bir yapay zekâ ajanına dönüştürüyorum. Sabit fiyat, 3 haftada canlıda.',
     jsonLdDescription:
-      'Berkay Çubuk, 5 yılı aşkın yazılım deneyimine sahip bir yapay zekâ mühendisi. Gerçek hesaplar ve araçlar üzerinde güvenle çalışan yapay zekâ ajanları ve LLM otomasyonları geliştiriyor.',
+      'Berkay Çubuk, 5 yılı aşkın yazılım deneyimine sahip bir yapay zekâ mühendisi. Ekiplerin tekrar eden işlerini, mevcut araçlarda çalışan ve önemli adımlardan önce onay isteyen yapay zekâ ajanlarına dönüştürüyor. Sabit kapsam, sabit fiyat, 3 haftada canlıda.',
     jobTitle: 'Yapay Zekâ Mühendisi',
     srIntro:
-      'Merhaba, ben Berkay Çubuk, yapay zekâ mühendisiyim. Ekibinizin tekrar eden işlerini üstlenen ve gerçek hesaplar ile araçlar üzerinde güvenle çalışan yapay zekâ ajanları geliştiriyorum. Projenizi bana e-postayla anlatın.',
+      'Merhaba, ben Berkay Çubuk, yapay zekâ mühendisiyim. Ekibinizin her hafta yaptığı tekrar eden bir işi, araçlarınızda çalışan ve önemli her adımdan önce soran bir yapay zekâ ajanıyla otomatikleştiriyorum. Sabit fiyat, 3 haftada canlıda. Ücretsiz 20 dakikalık görüşme ayarlayın.',
+    mailSubject: 'Tanışma görüşmesi',
 
-    // Masthead
-    role: ['Yapay Zekâ Mühendisi', 'Canlı ortamda ajanlar ve LLM otomasyonları'],
-    place: 'İstanbul · her yerden çalışıyorum',
-    heroTitle: 'Gerçek işi güvenle yapan yapay zekâ ajanları geliştiriyorum.',
-    heroCta: 'Projenizi e-postayla anlatın',
-    status: 'Yeni projelere açığım',
+    // Hero
+    eyebrow: 'Berkay Çubuk · Yapay Zekâ Mühendisi',
+    heroTitle: 'Ekibinizin tekrar eden işini yapay zekâyla otomatikleştiriyorum.',
+    heroPoints: ['Tek iş', 'Sabit fiyat', '3 haftada canlıda'],
+    heroSub: 'İşi zaten kullandığınız araçlarda yapan bir yapay zekâ ajanı geliştiriyorum. Önemli her adımdan önce size sorar.',
+    heroCta: 'Ücretsiz 20 dk görüşme',
+    heroNote: 'Taahhüt yok. Uygun değilse söylerim.',
+    status: 'Bu çeyrek 2 lansman yeri kaldı',
     companiesLabel: 'Birlikte çalıştıklarım',
 
-    chat: {
-      label: 'Çizim: ödeme yapmadan önce onay isteyen bir yapay zekâ asistanı',
-      ask: 'Cuma 20:00 için dört kişilik masa ayırt.',
-      reply: '20:00’de yer var. ₺500 kart provizyonu istiyor.',
-      confirm: 'Ödemeden önce onaylıyor musun?',
-      yes: 'Onayla',
-      no: 'İptal',
-    },
-    figA: 'Şekil A — Ödemeden önce sorar',
-    figB: 'Şekil B — Denetlenen ajanlar',
-
-    principles: [
-      { name: 'Canlı ortamda ajanlar', desc: 'Her gün gerçek hesaplar ve araçlar üzerinde çalışan ajanlar; ikinci denemede bozulan demolar değil.' },
-      { name: 'Kurallar prompt’ta değil, kodda', desc: 'Ödeme, rezervasyon ve mesaj onayınızı bekler. Kuralı kod koyar; hiçbir akıllı prompt onu aşamaz.' },
-      { name: 'Mevcut araçlarınızla çalışır', desc: 'API’lerinize, e-postanıza, tablolarınıza ve iç sistemlerinize bağlanır. Ekibinizin yeni bir şey öğrenmesi gerekmez.' },
+    examplesLabel: 'Neleri otomatikleştirebilirim',
+    examples: [
+      { title: 'Portaldan veri girişi', desc: 'Tedarikçi ya da devlet portallarındaki verileri tablonuza ya da ERP’nize aktarmak.' },
+      { title: 'E-posta ve talepler', desc: 'Gelen e-postaları ya da talepleri ayıklamak, onayınıza sunulacak yanıtları hazırlamak.' },
+      { title: 'Çift giriş', desc: 'Aynı bilgiyi birkaç farklı sisteme girmek.' },
+      { title: 'Haftalık raporlar', desc: '3–4 araçtaki rakamları tek bir raporda toplamak.' },
     ],
+    examplesNote: 'Her hafta tekrarlanıyor ve hep aynı adımları izliyorsa, büyük ihtimalle otomatikleştirilebilir.',
+
+    processLabel: 'Nasıl çalışıyor',
+    steps: [
+      { name: 'Ücretsiz görüşme', meta: '20 dakika', desc: 'Ekibinizin vaktini yiyen işi anlatın. Uygun olup olmadığını söylerim.' },
+      { name: 'Ücretsiz Keşif Günü', meta: '1 gün', desc: 'Bir günü ekibinizle geçiririm, ardından sabit fiyatlı tek sayfalık bir plan gönderirim.' },
+      { name: 'Geliştirme ve yayın', meta: '3 hafta', desc: 'Geliştirir, gerçek işinizle test eder ve canlıya alırım. Size düşen yaklaşık 3 saat.' },
+    ],
+
+    includedLabel: 'Neler dahil',
+    included: [
+      'Bir işin baştan sona otomatikleşmesi',
+      'Araçlarınızdan 3 tanesine kadar bağlantı',
+      'Göndermeden, ödemeden ya da silmeden önce onay',
+      'Şifrelerinizi asla görmez',
+      'Ekibiniz için eğitim',
+      'Yayından sonra 30 gün düzeltme',
+    ],
+    guaranteeLabel: 'Garanti',
+    guarantee: '“Bitti”nin ne demek olduğunu yazılı olarak belirleriz. Oraya ulaşmazsa, ulaşana kadar ücretsiz çalışmaya devam ederim.',
+
+    pricingLabel: 'Fiyat',
+    priceLead: 'Lansman fiyatı',
+    price: '€2.000’den başlayan',
+    priceWas: 'normalde €4.000',
+    priceNote: 'Bu çeyrekteki ilk 2 müşterim için.',
+    payback: 'Bu işler bir ekibe genelde yılda €8.000’den fazla mesaiye mal oluyor. Proje çoğunlukla 2–3 ayda kendini çıkarıyor.',
+    careNote: 'Yayından sonra isteğe bağlı aylık destek.',
+
+    proofLabel: 'Kim geliştiriyor',
+    proofIntro: 'Ben Berkay, İstanbul’da yapay zekâ mühendisiyim. 5 yılı aşkın süredir canlı ortamda çalışan yazılımlar geliştiriyorum.',
+    proof: [
+      'Kripto borsası Paribu’da bir biletleme platformu ve bir uyumluluk sistemi geliştirdim.',
+      'Her ödeme ve mesajdan önce soran yapay zekâ asistanı Tamo’yu geliştirdim.',
+      'Yapay zekâ ajanlarının birbirinin işini denetlediği açık kaynak araç Fabrika’yı geliştirdim.',
+    ],
+    allWork: 'İşlerimi görün',
 
     labels: { problem: 'Durum', built: 'Ne yaptım', result: 'Sonuç' },
     cases: {
@@ -216,27 +266,16 @@ export const HOME = {
       },
     },
 
-    processLabel: 'Birlikte nasıl çalışırız',
-    steps: [
-      { name: 'Bana yazın', desc: 'Ekibinizin vaktini yiyen işi anlatın. Teknik şartname gerekmez.' },
-      { name: 'Kapsamı çıkaralım', desc: 'İş akışı, dokunacağı araçlar ve ajanın kendi başına asla yapmaması gerekenler.' },
-      { name: 'Geliştirip yayına alıyorum', desc: 'Gerçek sistemlerinizde çalışan bir ajan; ödemeli aşamalarla, okunabilir kayıtlarla.' },
-      { name: 'Çalışmaya devam eder', desc: 'Yayından sonra izliyor, bozulanı düzeltiyorum ya da ekibinize devrediyorum.' },
+    faqLabel: 'Sorular',
+    faq: [
+      { q: 'Ya işim uygun değilse?', a: 'Görüşmede söylerim. Size hiçbir maliyeti olmaz.' },
+      { q: 'Güvenli mi?', a: 'Yalnızca onayladığınız araçları kullanır, önemli her adımdan önce sorar ve her işlemi kaydeder. Girişi siz yaparsınız; şifrelerinizi hiç görmez.' },
+      { q: 'İşletme maliyeti var mı?', a: 'Evet, kendi hesabınızdan ödenen küçük bir aylık yapay zekâ ve sunucu maliyeti. Planda tahminini veririm.' },
+      { q: 'Yayından sonra ne oluyor?', a: 'Sistem sizin. İsteğe bağlı aylık destek, araçlarınız değiştiğinde çalışmaya devam etmesini sağlar.' },
+      { q: 'Ajanslarla çalışıyor musunuz?', a: 'Evet, beyaz etiketle. Bana yazın, detayları göndereyim.' },
     ],
 
-    wordsLabel: 'Müşterilerimin sözleriyle',
-
-    alsoLabel: 'Ayrıca yaptıklarım — araçlar ve donanım',
-    allProjects: 'Tüm projeler',
-    products: {
-      pouch: 'Claude Code oturumlarını telefonunuzdan yönetin.',
-      'isbusy code': 'Kodlama ajanlarınızın ne yaptığını gösteren masa ışıkları.',
-      'MQTT Studio': 'Barındırılan IoT panelleri. Tek başıma işlettiğim bir SaaS.',
-      isbusy: 'Bir fabrika için yapıp kurduğum özel durum lambası.',
-    },
-
-    endAsk: 'Ekibiniz hâlâ elle mi yapıyor?',
-    endWrite: 'Bana yazın.',
-    endNote: 'Aynı anda az sayıda proje alıyorum ve bir gün içinde dönüyorum.',
+    endAsk: 'Hangi işle başlayalım?',
+    endNote: 'Ücretsiz 20 dakikalık görüşme ayarlayın. Bir gün içinde dönüyorum.',
   },
 } as const;

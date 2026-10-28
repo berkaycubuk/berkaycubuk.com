@@ -1,21 +1,14 @@
 ---
 // Homepage, shared by every language. Copy lives in src/i18n/home.ts.
-// Layout: giant serif name + pinned prints, company strip, principles row, numbered
-// case-study chapters, process, client quotes, also-made index, contact.
-import { Image } from 'astro:assets';
+// Built to be understood in a few seconds: bold sans headline, short lines, content
+// in cards, one bright button repeated. It deliberately departs from the editorial
+// serif look of the inner pages; colours still come from the site tokens so the
+// theme toggle keeps working.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import { SITE } from '../data/site';
-import { COMPANIES, HOME, LOCALES, QUOTES, type Locale } from '../i18n/home';
-import { projects } from '../data/projects';
-
-import fabrikaShot from '../assets/work/fabrika_ai_screenshot.png';
-import tamoShot from '../assets/work/tamo_screenshot.png';
-import mqttShot from '../assets/work/mqtt_studio_screenshot.png';
-import isbusyPhoto from '../assets/work/isbusy_co_photo.jpg';
-import pouchShot from '../assets/work/pouch_screenshot.png';
-import isbusyCodeShot from '../assets/work/isbusy_code_screenshot.png';
+import { COMPANIES, HOME, LOCALES, type Locale } from '../i18n/home';
 
 interface Props {
   lang: Locale;
@@ -26,6 +19,9 @@ const t = HOME[lang];
 const here = LOCALES.find((l) => l.code === lang)!;
 const canonical = new URL(here.path, SITE.url).href;
 const EMAIL = 'berkay@berkaycubuk.com';
+// Every CTA opens an email with the subject filled in, so intro-call requests are easy to spot.
+const BOOK = `mailto:${EMAIL}?subject=${encodeURIComponent(t.mailSubject)}`;
+const workPath = lang === 'en' ? '/work' : `/${lang}/work`;
 
 // Every language version points at every other one, plus itself, so search
 // engines serve the right page per visitor instead of picking one and
@@ -38,25 +34,6 @@ const alternates = [
   { hrefLang: 'x-default', href: new URL('/', SITE.url).href },
 ];
 const languages = LOCALES.map((l) => ({ code: l.code, label: l.label, href: l.path, hrefLang: l.htmlLang }));
-
-// Display headings look wrong when the last line is a single word. Bind the
-// final space so the last two words wrap together, whatever the language.
-const noWidow = (s: string) => s.replace(/ (\S+)$/, ' $1');
-const pad = (i: number) => String(i + 1).padStart(2, '0');
-
-const { paribu, tamo, fabrika } = t.cases;
-const cases = [paribu, tamo, fabrika];
-// Screenshot shown under each case that has one, by position in `cases`.
-const SHOTS_BY_CASE = [undefined, tamoShot, fabrikaShot];
-
-// Also-made index: names and hrefs from data/projects, a peek image where we have one.
-const SHOTS = { pouch: pouchShot, 'isbusy code': isbusyCodeShot, 'MQTT Studio': mqttShot, isbusy: isbusyPhoto } as const;
-const products = (Object.keys(t.products) as (keyof typeof t.products)[]).map((name) => ({
-  name,
-  desc: t.products[name],
-  href: projects.find((p) => p.title === name)?.links[0]?.href ?? '/projects',
-  img: SHOTS[name as keyof typeof SHOTS],
-}));
 
 const jsonLd = [
   {
@@ -83,6 +60,16 @@ const jsonLd = [
     "knowsAbout": ["AI agents", "Large language models", "LLM automation", "Agent guardrails", "Multi-agent orchestration"],
     "sameAs": SITE.socials
   },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "inLanguage": here.htmlLang,
+    "mainEntity": t.faq.map((f) => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  },
 ];
 ---
 <BaseLayout
@@ -98,289 +85,283 @@ const jsonLd = [
   <main class="home">
     <p class="sr-only">{t.srIntro}</p>
 
-    <!-- Masthead -->
-    <section class="mast">
-      <div class="mast-grid">
-        <h1>Berkay<br/><span>Çubuk</span></h1>
-        <div class="prints">
-          <figure class="print p1" role="img" aria-label={t.chat.label}>
-            <div class="chat" aria-hidden="true">
-              <p class="msg me">{t.chat.ask}</p>
-              <p class="msg bot">{t.chat.reply}<br/><b>{t.chat.confirm}</b></p>
-              <p class="acts"><span class="yes">{t.chat.yes}</span><span>{t.chat.no}</span></p>
-            </div>
-            <figcaption class="mono" aria-hidden="true">{t.figA}</figcaption>
-          </figure>
-          <figure class="print p2" aria-hidden="true">
-            <Image src={fabrikaShot} alt="" widths={[300, 600]} sizes="280px" format="webp" quality={70} loading="eager" />
-            <figcaption class="mono">{t.figB}</figcaption>
-          </figure>
-        </div>
-      </div>
-      <div class="mast-row">
-        <p class="role">{t.role[0]}<br/>{t.role[1]}<br/><span>{t.place}</span></p>
-        <div>
-          <p class="intro">{noWidow(t.heroTitle)}</p>
-          <div class="cta-row">
-            <a class="btn" href={`mailto:${EMAIL}`}>{t.heroCta} →</a>
-            <span class="mono status"><i></i>{t.status}</span>
-          </div>
-        </div>
-      </div>
+    <section class="hero">
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h1>{t.heroTitle}</h1>
+      <ul class="points">
+        {t.heroPoints.map((p) => <li>{p}</li>)}
+      </ul>
+      <p class="sub">{t.heroSub}</p>
+      <a class="go big" href={BOOK}>{t.heroCta} →</a>
+      <p class="small">{t.heroNote} <span class="status"><i></i>{t.status}</span></p>
     </section>
 
-    <!-- Companies: the list is rendered twice so the marquee loops seamlessly;
+    <!-- Companies: the list is rendered twice so the slider loops seamlessly;
          the copy is hidden from screen readers and keyboard. -->
-    <section class="logos" aria-label={t.companiesLabel}>
-      <p class="mono logos-label">{t.companiesLabel}</p>
+    <section class="clients" aria-label={t.companiesLabel}>
+      <p class="clients-label">{t.companiesLabel}</p>
       <div class="marquee">
         {[0, 1].map((copy) => (
           <ul class="track" aria-hidden={copy === 1 ? 'true' : undefined}>
-            {COMPANIES.map((c) => (
-              <li>
-                {c.href
-                  ? <a href={c.href} target="_blank" rel="noopener noreferrer" tabindex={copy === 1 ? -1 : undefined}>{c.logo ? <img src={c.logo} alt={c.name} style={`height:${c.h ?? 28}px`} /> : c.name}</a>
-                  : <span>{c.logo ? <img src={c.logo} alt={c.name} style={`height:${c.h ?? 28}px`} /> : c.name}</span>}
-              </li>
-            ))}
+            {COMPANIES.map((c) => {
+              const mark = c.logo ? <img src={c.logo} alt={c.name} draggable="false" style={`height:${c.h ?? 28}px`} /> : c.name;
+              return (
+                <li>
+                  {c.href
+                    ? <a href={c.href} target="_blank" rel="noopener noreferrer" tabindex={copy === 1 ? -1 : undefined}>{mark}</a>
+                    : <span>{mark}</span>}
+                </li>
+              );
+            })}
           </ul>
         ))}
       </div>
     </section>
 
-    <!-- Principles -->
-    <section class="principles">
-      {t.principles.map((s, i) => (
-        <div class="pr">
-          <span class="num">{pad(i)}</span>
-          <h2>{s.name}</h2>
-          <p>{s.desc}</p>
-        </div>
-      ))}
+    <section>
+      <h2>{t.examplesLabel}</h2>
+      <div class="grid g2">
+        {t.examples.map((e) => (
+          <div class="card">
+            <h3>{e.title}</h3>
+            <p>{e.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="small center">{t.examplesNote}</p>
     </section>
 
-    <!-- Cases -->
-    {cases.map((c, i) => (
-      <Fragment>
-      <section id={i === 0 ? 'work' : undefined} class="chapter">
-        <aside class="ch-head">
-          <span class="no" aria-hidden="true">{pad(i)}</span>
-          <p class="mono meta">{c.client}<br/>{c.tags.join(' · ')}</p>
-        </aside>
-        <div class="ch-body">
-          <h2>{noWidow(c.title)}</h2>
-          <dl>
-            <dt class="mono">{t.labels.problem}</dt><dd>{c.problem}</dd>
-            <dt class="mono">{t.labels.built}</dt><dd>{c.built}</dd>
-            <dt class="mono">{t.labels.result}</dt><dd class="res">{c.result}</dd>
-          </dl>
-          {'link' in c && (
-            <a class="arrow" href={c.link.href} target="_blank" rel="noopener noreferrer">{c.link.label} ↗</a>
-          )}
-        </div>
-      </section>
-      {'shotAlt' in c && (
-        <figure class="annotated">
-          <div class="print wide">
-            <Image src={SHOTS_BY_CASE[i]!} alt={c.shotAlt} widths={[640, 1000, 1400]} sizes="(max-width: 1000px) 100vw, 920px" format="webp" quality={70} />
-          </div>
-          <figcaption class="mono">{c.shotCaption}</figcaption>
-        </figure>
-      )}
-      </Fragment>
-    ))}
-
-    <!-- Process -->
-    <section class="process">
-      <h2 class="mono eyebrow">{t.processLabel}</h2>
-      <ol>
+    <section>
+      <h2>{t.processLabel}</h2>
+      <ol class="grid g3">
         {t.steps.map((s, i) => (
-          <li><span class="num">{pad(i)}</span><h3>{s.name}</h3><p>{s.desc}</p></li>
+          <li class="card">
+            <span class="n">{i + 1}</span>
+            <h3>{s.name}</h3>
+            <p class="tag">{s.meta}</p>
+            <p>{s.desc}</p>
+          </li>
         ))}
       </ol>
     </section>
 
-    <!-- Quotes -->
-    <section class="words">
-      <h2 class="mono eyebrow">{t.wordsLabel}</h2>
-      {QUOTES.map((q) => (
-        <blockquote lang="en"><p>“{q.text}”</p><cite class="mono"><a href={q.href} target="_blank" rel="noopener noreferrer">{q.by}</a></cite></blockquote>
-      ))}
-    </section>
-
-    <!-- Also made -->
-    <section class="index">
-      <h2 class="mono eyebrow">{t.alsoLabel}</h2>
-      <ul>
-        {products.map((p, i) => (
-          <li>
-            <a href={p.href} target="_blank" rel="noopener noreferrer">
-              <span class="mono n">{pad(i)}</span><span class="t">{p.name}</span><span class="d">{p.desc}</span>
-              {p.img && <Image class="peek" src={p.img} alt="" widths={[420]} sizes="300px" format="webp" quality={65} />}
-            </a>
-          </li>
-        ))}
+    <section>
+      <h2>{t.includedLabel}</h2>
+      <ul class="checks">
+        {t.included.map((item) => <li>{item}</li>)}
       </ul>
-      <a class="arrow all" href="/projects">{t.allProjects} →</a>
+      <div class="card strong">
+        <h3>{t.guaranteeLabel}</h3>
+        <p>{t.guarantee}</p>
+      </div>
     </section>
 
-    <!-- Contact -->
+    <section id="pricing">
+      <h2>{t.pricingLabel}</h2>
+      <div class="card price">
+        <p class="tag">{t.priceLead}</p>
+        <p class="amount">{t.price}</p>
+        <p class="was"><s>{t.priceWas}</s> · {t.priceNote}</p>
+        <p>{t.payback}</p>
+        <p class="small">{t.careNote}</p>
+        <a class="go" href={BOOK}>{t.heroCta} →</a>
+      </div>
+    </section>
+
+    <section id="work">
+      <h2>{t.proofLabel}</h2>
+      <p class="lead">{t.proofIntro}</p>
+      <ul class="checks">
+        {t.proof.map((p) => <li>{p}</li>)}
+      </ul>
+      <a class="more" href={workPath}>{t.allWork} →</a>
+    </section>
+
+    <section>
+      <h2>{t.faqLabel}</h2>
+      <div class="faq">
+        {t.faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
     <section class="end">
-      <p class="mono eyebrow">{t.endAsk}</p>
-      <a class="write" href={`mailto:${EMAIL}`}>{t.endWrite}</a>
-      <p class="addr"><a href={`mailto:${EMAIL}`}>{EMAIL}</a> — {t.endNote}</p>
+      <h2>{t.endAsk}</h2>
+      <p>{t.endNote}</p>
+      <a class="go big" href={BOOK}>{t.heroCta} →</a>
+      <p class="small"><a href={BOOK}>{EMAIL}</a></p>
     </section>
   </main>
 
   <Footer lang={lang} plain />
 </BaseLayout>
 
+<script>
+  // Company slider: drives the scroll from JS so it can also be dragged with the
+  // mouse or a finger. Without JS the CSS animation runs instead; with reduced
+  // motion the logos sit still in a wrapped row (see CSS) and this does nothing.
+  const SPEED = 40; // px per second
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('.marquee').forEach((m) => {
+    const first = m.querySelector<HTMLElement>('.track');
+    if (reduce || !first) return;
+    m.classList.add('is-js');
+
+    let x = 0;
+    let last = performance.now();
+    let hover = false;
+    let dragging = false;
+    let startX = 0;
+    let startPos = 0;
+    let moved = 0;
+
+    // Two identical tracks: wrapping by one track's width loops without a seam.
+    const tick = (now: number) => {
+      if (!dragging && !hover) x += (SPEED * (now - last)) / 1000;
+      last = now;
+      const w = first.offsetWidth;
+      if (w) x = ((x % w) + w) % w;
+      m.scrollLeft = x;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+
+    m.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
+    m.addEventListener('pointerleave', () => { hover = false; });
+    m.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      moved = 0;
+      startX = e.clientX;
+      startPos = x;
+    });
+    m.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - startX;
+      // Capture only once it's clearly a drag, so a plain click still opens the logo's link.
+      if (moved <= 5 && Math.abs(dx) > 5) {
+        m.setPointerCapture(e.pointerId);
+        m.classList.add('dragging');
+      }
+      moved = Math.max(moved, Math.abs(dx));
+      x = startPos - dx;
+    });
+    const end = () => {
+      dragging = false;
+      m.classList.remove('dragging');
+    };
+    m.addEventListener('pointerup', end);
+    m.addEventListener('pointercancel', end);
+    // A drag that ends on a logo shouldn't also follow its link.
+    m.addEventListener('click', (e) => {
+      if (moved > 5) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+  });
+</script>
+
 <style>
-  /* One vertical rhythm for every section, so the page reads as a single system. */
-  .home { overflow-x: clip; --space: clamp(80px, 10vw, 160px); }
-  .eyebrow { margin: 0 0 clamp(32px, 4vw, 56px); font-weight: 400; }
-  .num { font-family: var(--font-display); font-style: italic; font-size: 28px; color: var(--accent); }
+  /* min-width: 0 stops the logo track from stretching the page inside the layout's flex body. */
+  .home { width: 100%; min-width: 0; box-sizing: border-box; max-width: calc(960px + 2 * var(--pad)); margin: 0 auto; padding: 0 var(--pad); font-family: var(--font-body); font-size: 18px; line-height: 1.55; }
+  section { padding: 64px 0; }
+  /* Zero specificity, so the class rules below can set their own margins. */
+  :where(.home p) { margin: 0 0 14px; }
 
-  /* --- Masthead --- */
-  .mast { padding: 2vw var(--pad) clamp(72px, 8vw, 128px); }
-  .mast-grid { display: grid; grid-template-columns: 1fr auto; align-items: center; }
-  h1 { font-family: var(--font-display); font-weight: 400; font-size: 19vw; line-height: .78; letter-spacing: -0.04em; margin: 0; }
-  h1 span { display: block; padding-left: 10vw; font-style: italic; }
-  .prints { position: relative; width: 340px; height: 400px; margin-right: 1vw; }
-  .p1 { position: absolute; width: 230px; top: 0; left: 0; transform: rotate(-4deg); z-index: 2; }
-  .p2 { position: absolute; width: 280px; bottom: 0; right: 0; transform: rotate(3deg); }
+  h1, h2, h3 { font-family: var(--font-body); color: var(--ink); margin: 0; }
+  h1 { font-size: clamp(40px, 6.2vw, 68px); font-weight: 700; line-height: 1.05; letter-spacing: -0.035em; max-width: 13em; margin-bottom: 28px; }
+  h2 { font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 28px; }
+  h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
 
-  /* Fig. A: a chat drawn in HTML, so it stays sharp and follows the theme. */
-  .chat { display: flex; flex-direction: column; gap: 8px; padding: 12px 10px 6px; background: var(--paper); font-size: 13px; line-height: 1.35; }
-  .msg { margin: 0; padding: 8px 11px; border-radius: 14px; max-width: 88%; }
-  .me { align-self: flex-end; background: var(--ink); color: var(--paper); border-bottom-right-radius: 4px; }
-  .bot { align-self: flex-start; background: var(--print); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
-  .bot b { font-weight: 600; }
-  .acts { margin: 0; display: flex; gap: 6px; }
-  .acts span { flex: 1; text-align: center; padding: 6px 0; border: 1px solid var(--line); border-radius: 8px; font-size: 12px; font-weight: 600; }
-  .acts .yes { border-color: var(--ok); color: var(--ok); }
+  .small { font-size: 15px; color: var(--ink-dim); }
+  .center { text-align: center; margin-top: 24px; }
+  .lead { font-size: 20px; margin-bottom: 20px; }
 
-  .mast-row { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; margin-top: 64px; align-items: end; }
-  .role { margin: 0; font-size: 15px; line-height: 1.4; }
-  .role span { color: var(--ink-dim); }
-  .intro { margin: 0; font-family: var(--font-display); font-size: clamp(28px, 3.2vw, 46px); line-height: 1.08; }
-  .cta-row { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin-top: 28px; }
-  .status { color: var(--ink-dim); display: inline-flex; gap: 8px; align-items: center; font-size: 11px; }
-  .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 20%, transparent); }
+  /* --- Hero --- */
+  .hero { padding: clamp(48px, 9vw, 112px) 0 48px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 20px; }
+  .points { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .points li { padding: 8px 16px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); font-weight: 600; font-size: 16px; }
+  .sub { font-size: 21px; color: var(--ink-dim); max-width: 32em; margin-bottom: 32px; }
+  .status { display: inline-flex; align-items: center; gap: 8px; margin-left: 12px; color: var(--ink); }
+  .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
 
-  /* --- Company strip --- */
-  .logos { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: clamp(40px, 6vw, 96px); padding: clamp(56px, 6vw, 96px) 0 clamp(56px, 6vw, 96px) var(--pad); border-top: 1px solid var(--line); }
-  .logos-label { margin: 0; color: var(--ink-dim); font-size: 11px; white-space: nowrap; }
-  .marquee { display: flex; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .track { display: flex; flex-shrink: 0; align-items: center; gap: clamp(64px, 7vw, 112px); margin: 0; padding: 0 clamp(64px, 7vw, 112px) 0 0; list-style: none; animation: marquee 40s linear infinite; }
-  .track a, .track span { font-family: var(--font-display); font-size: clamp(24px, 2.4vw, 34px); line-height: 1; color: var(--ink-dim); text-decoration: none; white-space: nowrap; transition: color .2s; }
+  /* The one loud element on the page. */
+  .go { display: inline-block; padding: 14px 24px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 600; font-size: 17px; text-decoration: none; transition: transform .15s, filter .15s; }
+  .go.big { padding: 18px 32px; font-size: 19px; margin-bottom: 16px; }
+  @media (hover: hover) { .go:hover { transform: translateY(-2px); filter: brightness(1.08); } }
+
+  /* --- Company slider --- */
+  .clients { padding: 32px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .clients-label { margin: 0 0 20px; font-size: 15px; font-weight: 600; text-align: center; color: var(--ink-dim); }
+  .marquee { display: flex; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+  .track { display: flex; flex-shrink: 0; align-items: center; gap: 72px; margin: 0; padding: 0 72px 0 0; list-style: none; animation: marquee 30s linear infinite; }
+  .track li { display: flex; align-items: center; height: 44px; }
+  .track a, .track span { font-weight: 600; font-size: 22px; letter-spacing: -0.01em; color: var(--ink-dim); text-decoration: none; white-space: nowrap; transition: color .2s; }
   .track a:hover, .track a:focus-visible { color: var(--ink); }
-  /* Every mark flattened to one ink colour, dimmed to match the wordmarks. Logo
+  /* Every mark flattened to one ink colour so mixed logos look like one set. Logo
      files must have transparent backgrounds (knock-outs as transparency). */
-  .track img { display: block; width: auto; filter: brightness(0); opacity: .55; transition: opacity .2s; }
-  :global(.dark) .track img { filter: brightness(0) invert(1); opacity: .6; }
+  .track img { display: block; width: auto; filter: brightness(0); opacity: .6; transition: opacity .2s; }
+  :global(.dark) .track img { filter: brightness(0) invert(1); opacity: .7; }
   .track a:hover img, .track a:focus-visible img { opacity: 1; }
   .marquee:hover .track, .marquee:focus-within .track { animation-play-state: paused; }
+  /* With JS the script moves the slider and lets you drag it. */
+  .marquee.is-js { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+  .marquee.is-js .track { animation: none; }
+  .marquee.dragging { cursor: grabbing; }
+  .marquee.dragging a { pointer-events: none; }
   @keyframes marquee { to { transform: translateX(-100%); } }
   @media (prefers-reduced-motion: reduce) {
-    .track { animation: none; flex-wrap: wrap; row-gap: 14px; }
+    .track { animation: none; flex-wrap: wrap; justify-content: center; row-gap: 16px; padding: 0; }
     .track[aria-hidden] { display: none; }
-    .marquee { mask-image: none; }
+    .marquee { mask-image: none; justify-content: center; }
   }
 
-  /* --- Principles --- */
-  .principles { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .pr { padding: clamp(64px, 7vw, 112px) var(--pad); border-right: 1px solid var(--line); }
-  .pr:last-child { border-right: 0; }
-  .pr h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 2.6vw, 38px); line-height: 1; margin: 20px 0 20px; }
-  .pr p { margin: 0; color: var(--ink-dim); max-width: 30em; }
+  /* --- Cards --- */
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .card { background: var(--print); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+  .card p:last-child { margin-bottom: 0; }
+  .card p { color: var(--ink-dim); font-size: 17px; }
+  .n { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: var(--paper); font-weight: 700; margin-bottom: 16px; }
+  .card .tag { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 10px; }
+  .strong { border: 2px solid var(--ok); margin-top: 24px; }
+  .strong p { color: var(--ink); font-size: 19px; }
 
-  /* --- Case chapters --- */
-  .chapter { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; padding: var(--space) var(--pad) calc(var(--space) * .4); scroll-margin-top: 20px; }
-  .ch-head { position: sticky; top: 30px; align-self: start; }
-  .no { font-family: var(--font-display); font-size: clamp(100px, 16vw, 240px); line-height: .8; display: block; }
-  .meta { color: var(--ink-dim); margin-top: 18px; line-height: 1.7; font-size: 11px; }
-  .ch-body { max-width: 42em; }
-  .ch-body h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(40px, 6vw, 88px); line-height: .95; letter-spacing: -0.02em; margin: 0 0 56px; }
-  dl { margin: 0; display: grid; grid-template-columns: 130px 1fr; gap: 0 24px; }
-  dt { color: var(--ink-dim); padding: 24px 0; border-top: 1px solid var(--line); font-size: 11px; line-height: 1.9; }
-  dd { margin: 0; padding: 20px 0; border-top: 1px solid var(--line); font-size: 19px; }
-  dd.res { font-family: var(--font-display); font-size: clamp(26px, 2.8vw, 36px); line-height: 1.1; font-style: italic; }
-  .arrow { display: inline-block; margin-top: 36px; font-weight: 600; color: var(--ink); }
+  .checks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 32px; }
+  .checks li { padding-left: 32px; position: relative; }
+  .checks li::before { content: '✓'; position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: #fff; background: var(--ok); }
+  #work .checks { grid-template-columns: 1fr; }
 
-  .annotated { margin: calc(var(--space) * .3) auto var(--space); padding: 0 var(--pad); max-width: 1000px; }
-  .wide { transform: rotate(-1deg); padding-bottom: 8px; }
-  .annotated > figcaption { margin-top: 28px; color: var(--ink-dim); font-size: 11px; }
+  /* --- Price --- */
+  .price { border: 2px solid var(--accent); padding: clamp(24px, 4vw, 40px); }
+  .price .amount { font-size: clamp(40px, 6vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--ink); margin-bottom: 12px; }
+  .price .was { font-size: 16px; }
+  .price p:nth-last-of-type(2) { color: var(--ink); }
+  .price .go { margin-top: 12px; }
 
-  /* --- Process --- */
-  .process { padding: var(--space) var(--pad); border-top: 1px solid var(--line); }
-  .process ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; }
-  .process h3 { font-family: var(--font-display); font-weight: 400; font-size: 30px; line-height: 1; margin: 12px 0; }
-  .process p { margin: 0; color: var(--ink-dim); font-size: 16px; }
+  .more { display: inline-block; margin-top: 24px; font-weight: 600; color: var(--ink); }
 
-  /* --- Quotes --- */
-  .words { padding: var(--space) var(--pad); border-top: 1px solid var(--line); }
-  .words blockquote { margin: 0; padding: 48px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 3fr 1fr; gap: 30px; align-items: end; }
-  .words p { margin: 0; font-family: var(--font-display); font-size: clamp(26px, 3.6vw, 50px); line-height: 1.08; }
-  .words cite { font-style: normal; text-align: right; }
-  .words cite a { color: var(--ink); }
+  /* --- FAQ --- */
+  .faq { display: grid; gap: 10px; }
+  .faq details { background: var(--print); border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; }
+  .faq summary { cursor: pointer; list-style: none; padding: 18px 28px 18px 0; position: relative; font-weight: 600; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; position: absolute; right: 0; top: 14px; font-size: 22px; color: var(--ink-dim); }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { color: var(--ink-dim); margin-bottom: 18px; }
 
-  /* --- Also-made index --- */
-  .index { padding: 0 var(--pad) var(--space); }
-  .index ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
-  .index li a { display: grid; grid-template-columns: 60px 1fr 1.4fr; gap: 20px; align-items: baseline; padding: 28px 0; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; position: relative; transition: padding .3s; }
-  .n { color: var(--ink-dim); }
-  .t { font-family: var(--font-display); font-size: clamp(30px, 4vw, 54px); line-height: 1; }
-  .d { color: var(--ink-dim); }
-  .peek { position: absolute; right: 4%; top: 50%; width: 300px; height: auto; transform: translateY(-50%) rotate(3deg) scale(.9); opacity: 0; pointer-events: none; transition: opacity .25s, transform .35s; box-shadow: 0 20px 50px -20px rgba(0,0,0,.5); border: 6px solid var(--print); z-index: 2; }
-  .all { margin-top: 32px; }
-  @media (pointer: coarse) { .arrow { padding-block: 10px; margin-top: 16px; } }
+  .end { text-align: center; padding: 80px 0 112px; }
+  .end p { font-size: 20px; color: var(--ink-dim); }
+  .end .go { margin-top: 12px; }
+  .end a:not(.go) { color: var(--ink-dim); }
 
-  /* --- Contact --- */
-  .end { padding: var(--space) var(--pad) 40px; border-top: 1px solid var(--line); }
-  .write { display: block; font-family: var(--font-display); font-size: clamp(64px, 15vw, 240px); line-height: .85; letter-spacing: -0.03em; color: var(--ink); text-decoration: none; font-style: italic; transition: letter-spacing .4s; }
-  .addr { color: var(--ink-dim); margin-top: 40px; font-size: 15px; }
-  .addr a { color: var(--ink); }
-
-  /* Hover effects only where there's a real pointer, so they don't stick after a tap. */
-  @media (hover: hover) {
-    .print:hover { transform: rotate(0) translateY(-4px); z-index: 3; }
-    .index li a:hover { padding-left: 14px; }
-    .index li a:hover .peek { opacity: 1; transform: translateY(-50%) rotate(-2deg) scale(1); }
-    .write:hover { letter-spacing: -0.01em; }
-  }
-
-  /* Scroll reveal: CSS-only, skipped where unsupported or motion is reduced. */
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      .ch-body dl > *, .ch-body h2, .words blockquote, .process li { animation: fade linear both; animation-timeline: view(); animation-range: entry 0% entry 50%; }
-      @keyframes fade { from { opacity: 0; transform: translateY(20px); } }
-    }
-  }
-
-  /* Tablet: name and prints stay side by side, prints shrink. */
-  @media (max-width: 900px) {
-    .prints { width: 260px; height: 330px; }
-    .p1 { width: 190px; } .p2 { width: 210px; }
-    .chat { font-size: 11px; gap: 6px; }
-  }
-  /* Phone: prints drop below the name, side by side. */
-  @media (max-width: 600px) {
-    .mast-grid { grid-template-columns: 1fr; }
-    .prints { width: 100%; height: 250px; margin: 24px 0 0; }
-    .p1 { width: min(54%, 220px); left: 2%; } .p2 { width: min(52%, 240px); right: 2%; }
-    .print > figcaption { font-size: 9px; letter-spacing: 0; }
-  }
-
-  @media (max-width: 900px) {
-    .mast-row, .chapter, .principles, .words blockquote { grid-template-columns: 1fr; }
-    .pr { border-right: 0; border-top: 1px solid var(--line); }
-    .pr:first-child { border-top: 0; }
-    .logos { grid-template-columns: 1fr; gap: 14px; }
-    .ch-head { position: static; }
-    .process ol { grid-template-columns: 1fr 1fr; gap: 40px 28px; }
-    dl { grid-template-columns: 1fr; } dd { border-top: 0; padding-top: 0; } dt { padding-bottom: 6px; }
-    .index li a { grid-template-columns: 40px 1fr; } .d { grid-column: 2; } .peek { display: none; }
-    .words cite { text-align: left; }
+  @media (max-width: 760px) {
+    .g2, .g3, .checks { grid-template-columns: 1fr; }
+    .status { display: flex; margin: 10px 0 0; }
+    section { padding: 48px 0; }
   }
 </style>
