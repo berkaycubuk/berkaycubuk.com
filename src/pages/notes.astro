@@ -33,7 +33,7 @@ const linkHost = (url: string) => new URL(url).hostname.replace(/^www\./, '');
             {note.data.title && (
               <h2 class="title">
                 {note.data.link ? (
-                  <a href={note.data.link} target="_blank" rel="noopener noreferrer">
+                  <a href={note.data.link} target="_blank" rel="noopener">
                     {note.data.title}
                     <span class="mono host">&nbsp;↗ {linkHost(note.data.link)}</span>
                   </a>
@@ -43,19 +43,19 @@ const linkHost = (url: string) => new URL(url).hostname.replace(/^www\./, '');
               </h2>
             )}
             {!note.data.title && note.data.link && (
-              <a href={note.data.link} target="_blank" rel="noopener noreferrer" class="mono host">↗ {linkHost(note.data.link)}</a>
+              <a href={note.data.link} target="_blank" rel="noopener" class="mono host">↗ {linkHost(note.data.link)}</a>
             )}
             {(note.data.author || note.data.via) && (
               <p class="mono byline">
                 {note.data.author && (
                   note.data.author_url
-                    ? <>by <a href={note.data.author_url} target="_blank" rel="noopener noreferrer">{note.data.author}</a></>
+                    ? <>by <a href={note.data.author_url} target="_blank" rel="noopener">{note.data.author}</a></>
                     : <>by {note.data.author}</>
                 )}
                 {note.data.author && note.data.via && ' · '}
                 {note.data.via && (
                   note.data.via_url
-                    ? <>via <a href={note.data.via_url} target="_blank" rel="noopener noreferrer">{note.data.via}</a></>
+                    ? <>via <a href={note.data.via_url} target="_blank" rel="noopener">{note.data.via}</a></>
                     : <>via {note.data.via}</>
                 )}
               </p>

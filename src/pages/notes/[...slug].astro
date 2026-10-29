@@ -61,19 +61,19 @@ const jsonLd = {
         <p class="mono byline">
           {note.data.author && (
             note.data.author_url
-              ? <>by <a href={note.data.author_url} target="_blank" rel="noopener noreferrer">{note.data.author}</a></>
+              ? <>by <a href={note.data.author_url} target="_blank" rel="noopener">{note.data.author}</a></>
               : <>by {note.data.author}</>
           )}
           {note.data.author && note.data.via && ' · '}
           {note.data.via && (
             note.data.via_url
-              ? <>via <a href={note.data.via_url} target="_blank" rel="noopener noreferrer">{note.data.via}</a></>
+              ? <>via <a href={note.data.via_url} target="_blank" rel="noopener">{note.data.via}</a></>
               : <>via {note.data.via}</>
           )}
         </p>
       )}
       {note.data.link && (
-        <a href={note.data.link} target="_blank" rel="noopener noreferrer" class="mono ulink ext">
+        <a href={note.data.link} target="_blank" rel="noopener" class="mono ulink ext">
           ↗ {linkHost}
         </a>
       )}

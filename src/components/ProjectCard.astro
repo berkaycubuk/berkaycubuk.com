@@ -26,7 +26,7 @@ const { title, description, tags = [], links = [], icon } = Astro.props;
     {links.length > 0 && (
       <div class="links">
         {links.map(link => (
-          <a href={link.href} {...(link.href.startsWith('/') ? {} : { target: "_blank", rel: "noopener noreferrer" })} class="mono ulink" data-umami-event="Project link" data-umami-event-project={title} data-umami-event-link={link.label}>
+          <a href={link.href} {...(link.href.startsWith('/') ? {} : { target: "_blank", rel: "noopener" })} class="mono ulink" data-umami-event="Project link" data-umami-event-project={title} data-umami-event-link={link.label}>
             {link.label} &rarr;
           </a>
         ))}

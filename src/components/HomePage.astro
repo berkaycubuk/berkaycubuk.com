@@ -116,7 +116,7 @@ const jsonLd = [
               return (
                 <li>
                   {c.href
-                    ? <a href={c.href} target="_blank" rel="noopener noreferrer" tabindex={copy === 1 ? -1 : undefined} data-umami-event="Client logo" data-umami-event-company={c.name}>{mark}</a>
+                    ? <a href={c.href} target="_blank" rel="noopener" tabindex={copy === 1 ? -1 : undefined} data-umami-event="Client logo" data-umami-event-company={c.name}>{mark}</a>
                     : <span>{mark}</span>}
                 </li>
               );

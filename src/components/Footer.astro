@@ -58,7 +58,7 @@ const socials = [
           class="social"
           href={s.href}
           aria-label={s.label}
-          {...(s.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          {...(s.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d={s.path} />
