@@ -22,7 +22,7 @@ Percentages are easy to ignore, so let's put a number on it. Say your workshop b
 
 The first thing I'd do is find out what is still recorded on paper. Paper records drift from reality, and nobody notices until the stock doesn't add up. Moving those records into a digital system is the first step.
 
-Before changing anything, I'd also measure where you stand today. For a few weeks, we compare how much fabric comes in with how much ends up in finished garments and known scrap. The gap is your real loss. That number matters for two reasons: it shows us where the fabric is going, and it's how I get paid. You don't pay up front. I take a percentage of the savings we measure against that starting point, so if nothing improves, you owe nothing.
+Before changing anything, I'd also measure where you stand today. For a few weeks, we compare how much fabric comes in with how much ends up in finished garments and known scrap. The gap is your real loss. That number matters for two reasons: it shows us where the fabric is going, and it's how we'll know the system works. You don't pay up front. Together we agree on a target against that starting point, such as cutting the hidden loss in half, and you pay a fixed fee only once the system reaches it. If it doesn't, you owe nothing.
 
 To make the process digital, we attach an RFID label to each fabric roll as it arrives at the workshop. These labels cost a few cents each, which is tiny next to the value of a single roll. Unlike a printed barcode, an RFID label can be read without lining up a scanner, even through plastic wrap or with several rolls at once. Then we enter the roll's details into the system: fabric type, supplier, length, weight and color. It takes some time, but it only happens once per roll.
 
