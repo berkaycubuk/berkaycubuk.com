@@ -3,6 +3,7 @@ import { CollectionEntry, getCollection } from 'astro:content';
 import IndexLayout from '../../layouts/IndexLayout.astro';
 import moment from 'moment';
 import { SITE, pageTitle, notePath, noteFallbackTitle } from '../../data/site';
+import { markdownPath } from '../../data/markdown';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes');
@@ -50,7 +51,7 @@ const jsonLd = {
   }
 };
 ---
-<IndexLayout title={pageTitle(title)} description={description} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={isoDate}>
+<IndexLayout title={pageTitle(title)} description={description} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={isoDate} markdown={markdownPath(notePath(note.data.date, note.slug))}>
   <article class="py-14 measure">
     <a href="/notes" class="mono ulink back">&larr; Notes</a>
 

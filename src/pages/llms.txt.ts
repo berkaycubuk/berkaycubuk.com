@@ -30,6 +30,9 @@ Most recently AI Engineer at Paribu, a crypto exchange. Own work includes Tamo
 (a personal assistant with its own browser and terminal) and Fabrika (multi-agent
 coding orchestration with review gates). Contact is by email.
 
+Every writing, note and tool page has a Markdown version: replace the
+trailing slash with .md (e.g. /2026/10/30/some-post/ -> /2026/10/30/some-post.md).
+
 ## Key pages
 
 - [Home](${SITE.url}/): principles, case studies, process, client quotes

@@ -4,6 +4,7 @@ import IndexLayout from '../layouts/IndexLayout.astro';
 import Newsletter from '../components/Newsletter.astro';
 import moment from 'moment';
 import { SITE, pageTitle } from '../data/site';
+import { markdownPath } from '../data/markdown';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('writings');
@@ -47,7 +48,7 @@ const jsonLd = {
   }
 };
 ---
-<IndexLayout title={pageTitle(post.data.title)} description={description} image={post.data.cover} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={updatedIsoDate}>
+<IndexLayout title={pageTitle(post.data.title)} description={description} image={post.data.cover} type="article" jsonLd={jsonLd} publishDate={isoDate} updateDate={updatedIsoDate} markdown={markdownPath(`/${moment(post.data.date).format('YYYY/MM/DD')}/${post.slug}`)}>
   <article class="py-14 post">
     <div class="column">
       <a href="/writings" class="mono ulink back">&larr; Writings</a>

@@ -15,6 +15,8 @@ const {
   lang = 'en',
   ogLocale = 'en_US',
   alternates,
+  // Path to the page's Markdown version, for AI agents (see data/markdown.ts).
+  markdown,
 } = Astro.props;
 
 // Default values
@@ -39,6 +41,7 @@ const socialImage = image ? new URL(image, siteUrl).href : `${siteUrl}/og-image.
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    {markdown && <link rel="alternate" type="text/markdown" href={`${siteUrl}${markdown}`} />}
     <link rel="alternate" type="application/rss+xml" title={SITE.title} href={`${siteUrl}/rss.xml`} />
 
     <!-- Self-hosted fonts (see global.css). Preload the two every page paints
