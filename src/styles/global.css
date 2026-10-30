@@ -313,6 +313,18 @@ a {
   font-style: normal;
 }
 
+/* Mermaid diagrams, rendered to inline SVG at build time. */
+.prose :where(figure.mermaid) {
+  overflow-x: auto;
+  text-align: center;
+}
+
+.prose :where(figure.mermaid svg) {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
 .prose :where(a) {
   text-decoration-color: var(--color-prose-links);
   text-underline-offset: 2px;
