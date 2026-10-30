@@ -2,6 +2,8 @@
 title: Finding the fabric you're losing
 date: 2026-10-30
 description: "How small clothing workshops can uncover hidden fabric loss by tracking every roll with RFID labels and quick scans."
+cover: /images/finding-the-fabric-youre-losing/cover.jpg
+cover_alt: "A dark clothing workshop at night, one fabric roll on the shelf glowing orange from its RFID label, with a scale, scissors and measuring tape on the cutting table"
 ---
 
 Imagine that you're the owner of a factory that manufactures clothing. Fabric is your main material. Every meter of fabric you lose eats into your competitive advantage.
