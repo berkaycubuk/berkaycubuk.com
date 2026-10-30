@@ -55,4 +55,4 @@ A system like this has to hold up on a busy day, so here's where I'd expect it t
 
 ## Where to start
 
-If you run a workshop and you're not sure how much fabric you lose, that's normal. Most owners don't know until they measure. Get in touch, and we'll start by measuring. If we find savings, I'm paid from them. If we don't, you've lost nothing and you'll know your numbers.
+If you run a workshop and you're not sure how much fabric you lose, that's normal. Most owners don't know until they measure. Get in touch, and we'll start by measuring. You pay only once the system hits the target we agree on. If it doesn't, you've lost nothing and you'll know your numbers.
